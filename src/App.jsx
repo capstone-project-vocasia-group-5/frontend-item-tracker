@@ -1,10 +1,15 @@
 import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePageDefault from "./pages/HomePageDefault";
 
 function App() {
   return (
-    <>
-      <div className="text-rose-500">test</div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePageDefault />} />
+      </Routes>
+    </Router>
   );
 }
 
