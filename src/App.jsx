@@ -1,13 +1,13 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePageDefault from "./pages/HomePageDefault";
+import UpdateProfileUser from "./pages/UpdateProfileUser";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePageDefault />} />
+        <Route path="/" element={<UpdateProfileUser />} />
       </Routes>
     </Router>
   );
