@@ -117,13 +117,4 @@ const ReportTable = () => {
   );
 };
 
-const App = () => {
-  return (
-    <div>
-      <ReportTable />
-      <Footer />
-    </div>
-  );
-};
-
 export default App;
