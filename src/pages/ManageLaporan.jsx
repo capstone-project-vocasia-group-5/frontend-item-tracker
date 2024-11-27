@@ -117,4 +117,4 @@ const ReportTable = () => {
   );
 };
 
-export default App;
+export default ReportTable;
