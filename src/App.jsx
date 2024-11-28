@@ -31,6 +31,7 @@ function App() {
         <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
 
         {/* ADMIN Routes */}
+        <Route path="/manage-akun-list" element={<ManageAkunList />} />
       </Routes>
     </Router>
   );
