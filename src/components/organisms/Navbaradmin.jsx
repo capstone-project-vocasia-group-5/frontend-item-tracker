@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export const Navbar = () => {
+export const NavbarAfterLogin = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -31,25 +30,15 @@ export const Navbar = () => {
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {isLoggedIn ? (
-            <div className="lg:mr-4 md:mr-4">
-              <Avatar onClick={() => navigate("/updateprofile")}>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </div>
-          ) : (
-            <button
-              onClick={() => navigate("/login")}
-              type="button"
-              className="text-white bg-primaryBlack hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Login
-            </button>
-          )}
+          <button
+            type="button"
+            className="text-white bg-primaryBlack hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </button>
           <button
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-full md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -85,7 +74,9 @@ export const Navbar = () => {
             <li>
               <a
                 href="/"
-                className={`block py-1 px-3 rounded-full ${isActive("/")}`}
+                className={`block py-1 px-3 rounded-full hover:bg-gray-100 md:hover:bg-transparent md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${isActive(
+                  "/"
+                )}`}
               >
                 Home
               </a>
@@ -93,7 +84,7 @@ export const Navbar = () => {
             <li>
               <a
                 href="/notifikasi"
-                className={`block py-1 px-3 rounded-full ${isActive(
+                className={`block py-1 px-3 rounded-full hover:bg-gray-100 md:hover:bg-transparent md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${isActive(
                   "/notifikasi"
                 )}`}
               >
@@ -103,7 +94,9 @@ export const Navbar = () => {
             <li>
               <a
                 href="/lost"
-                className={`block py-1 px-3 rounded-full ${isActive("/lost")}`}
+                className={`block py-1 px-3 rounded-full hover:bg-gray-100 md:hover:bg-transparent md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${isActive(
+                  "/lost"
+                )}`}
               >
                 Lost
               </a>
@@ -111,7 +104,9 @@ export const Navbar = () => {
             <li>
               <a
                 href="/found"
-                className={`block py-1 px-3 rounded-full ${isActive("/found")}`}
+                className={`block py-1 px-3 rounded-full hover:bg-gray-100 md:hover:bg-transparent md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${isActive(
+                  "/found"
+                )}`}
               >
                 Found
               </a>

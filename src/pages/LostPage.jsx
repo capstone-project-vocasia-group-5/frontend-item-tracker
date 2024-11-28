@@ -3,6 +3,7 @@ import { Footer } from "../components/organisms/Footer.jsx";
 import { LostList } from "../components/organisms/LostList.jsx";
 import { SearchBar } from "../components/molecules/searchBar.jsx";
 import { Separator } from "@/components/ui/separator";
+import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 
 const LostPage = () => {
   return (
@@ -14,16 +15,15 @@ const LostPage = () => {
       {/* Lost Section */}
       <div id="LostSection">
         <h1 class="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
-          Temukan dan Laporkan{" "}
-          <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
-            Barang Anda !
-          </span>
+          Barang Hilang
         </h1>
 
         <LostList />
         <LostList />
         <LostList />
       </div>
+
+      <PaginationDisplay />
       <Separator />
 
       {/* Footer */}
