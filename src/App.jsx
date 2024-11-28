@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePageDefault from "./pages/HomePageDefault";
@@ -34,6 +35,16 @@ function App() {
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
       </Routes>
     </Router>
+=======
+import React from "react";
+import LoginForm from "./components/LoginForm";
+
+function App() {
+  return (
+    <div className="flex items-center justify-center h-screen w-screen bg-gray-200">
+      <LoginForm />
+    </div>
+>>>>>>> Stashed changes
   );
 }
 
