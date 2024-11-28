@@ -7,25 +7,37 @@ import { Navbar } from "@/components/organisms/Navbar";
 import { Footer } from "@/components/organisms/Footer";
 
 const ReportPage = () => {
-  const [files, setFiles] = useState([]); // State untuk menyimpan gambar
-  const [selectedImage, setSelectedImage] = useState(null); // Gambar utama yang dipilih
+  const [files, setFiles] = useState([]); 
+  const [selectedImage, setSelectedImage] = useState(null); 
 
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]); // Tambahkan gambar baru
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]); 
     if (!selectedImage && newFiles.length > 0) {
-      setSelectedImage(newFiles[0]); // Set gambar utama jika belum ada
+      setSelectedImage(newFiles[0]); 
     }
   };
 
+  const handleNextImage = () => {
+    const currentIndex = files.indexOf(selectedImage);
+    const nextIndex = (currentIndex + 1) % files.length;
+    setSelectedImage(files[nextIndex]);
+  };
+
+  const handlePrevImage = () => {
+    const currentIndex = files.indexOf(selectedImage);
+    const prevIndex = (currentIndex - 1 + files.length) % files.length;
+    setSelectedImage(files[prevIndex]);
+  };
+
   const handleSelectImage = (image) => {
-    setSelectedImage(image); // Ganti gambar utama
+    setSelectedImage(image); 
   };
 
   const handleRemoveImage = (image) => {
     setFiles((prevFiles) => prevFiles.filter((file) => file !== image));
     if (selectedImage === image) {
-      setSelectedImage(files[0] || null); // Set gambar utama ke gambar pertama atau null jika kosong
+      setSelectedImage(files[0] || null); 
     }
   };
 
@@ -38,30 +50,56 @@ const ReportPage = () => {
 
       {/* Content */}
       <main className="flex-1 container mx-auto py-10 px-4 overflow-y-auto mt-20">
-        <h2 className="text-2xl font-semibold text-center mb-16">Laporan Kehilangan Barang</h2>
+        <h2 className="text-2xl font-semibold text-center mb-16">Buat Laporan</h2>
 
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
           {/* Upload Foto */}
           <div className="flex flex-col items-center">
-            <div
-              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center w-full sm:w-96 h-96 rounded-lg cursor-pointer"
-              onClick={() => document.getElementById("fileInput").click()}
-            >
-              {selectedImage ? (
-                <img src={selectedImage} alt="Uploaded" className="object-cover w-full h-full rounded-lg" />
-              ) : (
-                <p className="text-gray-500">Klik untuk upload foto barang</p>
-              )}
-              <input
-                type="file"
-                id="fileInput"
-                className="hidden"
-                multiple
-                accept="image/*"
-                onChange={handleFileChange}
-              />
-            </div>
+          <div
+            className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center w-full sm:w-96 h-96 rounded-lg relative"
+            onClick={() => document.getElementById("fileInput").click()}
+          >
+            {selectedImage ? (
+              <img src={selectedImage} alt="Uploaded" className="object-cover w-full h-full rounded-lg" />
+            ) : (
+              <p className="text-gray-500">Klik untuk upload foto barang</p>
+            )}
+            <input
+              type="file"
+              id="fileInput"
+              className="hidden"
+              multiple
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+
+            {/* Icon Prev dan Next */}
+            {files.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevImage();
+                  }}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                >
+                  ←
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextImage();
+                  }}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                >
+                  →
+                </button>
+              </>
+            )}
+
+          </div>
+
 
             {/* Thumbnail Preview */}
             {files.length > 0 && (
@@ -76,13 +114,15 @@ const ReportPage = () => {
                       }`}
                       onClick={() => handleSelectImage(file)}
                     />
-                    {/* Icon Trash */}
+                    {/* Icon Delete (x) */}
                     <button
-                      className="absolute top-1 right-1 p-1 bg-white text-gray-600 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-1 right-1 text-white text-sm w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       onClick={() => handleRemoveImage(file)}
                     >
-                      ×
+                      X
                     </button>
+
+
                   </div>
                 ))}
               </div>
@@ -94,6 +134,19 @@ const ReportPage = () => {
             <div>
               <label htmlFor="itemName" className="block text-sm font-medium mb-2 ml-2">Nama Barang</label>
               <Input id="itemName" placeholder="Masukkan nama barang" className="w-full h-12" />
+            </div>
+
+            <div className="text-left">
+              <label htmlFor="category" className="block text-sm font-medium mb-2 ml-2">Jenis Laporan</label>
+              <Select>
+                <SelectTrigger id="category" className="w-full h-12">
+                  <SelectValue placeholder="Pilih Jenis Laporan" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="elektronik">Penemuan Barang</SelectItem>
+                  <SelectItem value="pakaian">Kehilangan Barang</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="text-left">

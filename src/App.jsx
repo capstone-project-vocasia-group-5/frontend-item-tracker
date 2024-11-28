@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePageDefault from "./pages/HomePageDefault";
@@ -6,6 +6,8 @@ import React from "react";
 import DonationForm from "./pages/DonatePage";
 // CLIENT Pages
 import LostPage from "./pages/LostPage";
+import LoginForm from "./pages/LoginForm";
+import RegisterForm from "./pages/RegisterForm";
 import FoundPage from "./pages/FoundPage";
 import UpdateProfileUser from "./pages/UpdateProfileUser";
 import ReportPage from "./pages/ReportPage";
@@ -22,6 +24,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePageDefault />} />
         {/* CLIENT Routes */}
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
         <Route path="/found" element={<FoundPage />} />
         <Route path="/lost" element={<LostPage />} />
         <Route path="/update-profile" element={<UpdateProfileUser />} />
@@ -35,16 +39,9 @@ function App() {
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
       </Routes>
     </Router>
-=======
-import React from "react";
-import LoginForm from "./components/LoginForm";
 
-function App() {
-  return (
-    <div className="flex items-center justify-center h-screen w-screen bg-gray-200">
-      <LoginForm />
-    </div>
->>>>>>> Stashed changes
+
+
   );
 }
 
