@@ -1,7 +1,5 @@
 import "../App.css";
 import React, { useState } from "react";
-import Footer from "../components/organisms/Footer";
-import { Navbar } from "../components/organisms/Navbar";
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,10 +14,8 @@ const ManageCategory = () => {
   };
 
   return (
-    <div>
-      <Navbar />
-
-      <div className="p-6 sm:p-8 lg:p-24">
+    <div className="min-h-screen flex flex-col">
+      <div className="p-4">
         <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
           <h1 className="text-xl font-bold">Manajemen Kategori</h1>
         </header>
@@ -86,8 +82,8 @@ const ManageCategory = () => {
                   <td className="px-4 py-4 sm:px-8">Perhiasan</td>
                   <td className="px-4 py-4 sm:px-8">Elektronik</td>
                   <td className="px-4 py-4 sm:px-8">20/09/2024</td>
-                  <td className="px-4 py-4 sm:px-8 space-x-2 text-center">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                  <td className="px-4 py-4 sm:px-8 space-x-2 text-center flex">
+                    <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -98,7 +94,7 @@ const ManageCategory = () => {
                         <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                       </svg>
                     </button>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                    <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -119,7 +115,6 @@ const ManageCategory = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

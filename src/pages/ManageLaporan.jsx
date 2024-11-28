@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Footer from "../components/organisms/Footer";
-import { Navbar } from "../components/organisms/Navbar";
 
 const ReportTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,10 +13,9 @@ const ReportTable = () => {
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="p-4 sm:pt-10 sm:px-40 mt-[80px]">
-        <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
+    <div className="min-h-screen flex flex-col">
+      <div className="p-4">
+        <header className="bg-white shadow-sm p-4  flex justify-between">
           <h1 className="text-xl font-bold">Manajemen Laporan</h1>
         </header>
 
@@ -65,17 +62,15 @@ const ReportTable = () => {
             <table className="w-full bg-white rounded-full">
               <thead className="bg-black text-white rounded-full">
                 <tr className="">
-                  <th className="px-4 sm:px-16 py-4 text-center ">Gambar</th>
-                  <th className="px-4 sm:px-16 py-4 text-center">
-                    Nama Barang
-                  </th>
-                  <th className="px-4 sm:px-16 py-4 text-center">Kategori</th>
-                  <th className="px-4 sm:px-16 py-4 text-center">Aksi</th>
+                  <th className="p-4 text-center ">Gambar</th>
+                  <th className="p-4 text-center">Nama Barang</th>
+                  <th className="p-4 text-center">Kategori</th>
+                  <th className="p-4 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-500 text-center">
                 <tr>
-                  <td className="px-4 sm:px-16 py-4">
+                  <td className="p-4">
                     <div className="bg-gray-200 rounded p-2">
                       <img
                         src="https://s3-alpha-sig.figma.com/img/a3c4/d7a8/8ae3782c58628580e16637eaf8be662f?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Op3W5GV6R~OZ9wecvWsf8QBZWrEWNVXVSHDpgO9THUqsXfIO8sIEQG0HNiJZ7Jja09vrkj-vnKXmruTy1Ba8KYbOIpkNyQHscGBq3O32Yik36oc5WvFMoIgwPm4mW8ONq~ME2I4V2v8FonO6rmnnTSZgfu7d5h0Z53NuQJ-5YPXYnhqdtKDxIbJd6e55bhK4lhGu8To67LQE1elkmGTLZX0ouelD11GbB-Hk1b0SpNcHLPHJdusZZjuoz0DCnSTQXZBxfKWyA2mIKVMVHJ~482I8kghLCeyQCQ4Z1yGV5V15K~3wS0A6of4r5RJSiWVR4-p8fs6Qr0qW4WLMmAlYQQ__"
@@ -84,11 +79,11 @@ const ReportTable = () => {
                       />
                     </div>
                   </td>
-                  <td className="px-4 sm:px-16 py-4">Kucing</td>
-                  <td className="px-4 sm:px-16 py-4">Binatang</td>
+                  <td className="p-4">Kucing</td>
+                  <td className="p-4">Binatang</td>
                   <td className="px-4 sm:px-15 py-4 space-x-2">
                     <div className="flex flex-wrap sm:flex-nowrap justify-center sm:justify-start gap-2">
-                      <button className="px-3 py-2 bg-gray-800 text-white rounded hover:bg-gray-600 flex items-center justify-center">
+                      <button className="p-1 bg-gray-800 text-white rounded hover:bg-gray-600 flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -103,7 +98,7 @@ const ReportTable = () => {
                           />
                         </svg>
                       </button>
-                      <button className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center justify-center">
+                      <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -114,7 +109,7 @@ const ReportTable = () => {
                           <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                         </svg>
                       </button>
-                      <button className="px-3 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center">
+                      <button className="p-1 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -128,7 +123,7 @@ const ReportTable = () => {
                           />
                         </svg>
                       </button>
-                      <button className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
+                      <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -150,7 +145,6 @@ const ReportTable = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
