@@ -16,6 +16,7 @@ import SyaratKetentuan from "./pages/SyaratKetentuan";
 import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 // ADMIN Pages
 import ManageAkunList from "./pages/ManageAkunList";
+import Notifikasi from "./pages/Notifikasi";
 import ManageCategory from "./pages/ManageCategory";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/sidebar" element={<ProfileBase />} />
         <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
         <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
+        <Route path="/notifikasi" element={<Notifikasi />} />
 
         {/* ADMIN Routes */}
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
