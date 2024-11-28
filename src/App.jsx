@@ -8,7 +8,9 @@ import LostPage from "./pages/LostPage";
 import FoundPage from "./pages/FoundPage";
 import UpdateProfileUser from "./pages/UpdateProfileUser";
 import ReportPage from "./pages/ReportPage";
-import ManageCategory from "./pages/ManageCategory";
+import ProfileBase from "./pages/ProfileBase";
+import SyaratKetentuan from "./pages/SyaratKetentuan";
+import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 // ADMIN Pages
 
 function App() {
@@ -16,13 +18,15 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePageDefault />} />
-        <Route path="/Manage-category" element={<ManageCategory />} />
         {/* CLIENT Routes */}
         <Route path="/found" element={<FoundPage />} />
         <Route path="/lost" element={<LostPage />} />
         <Route path="/update-profile" element={<UpdateProfileUser />} />
         <Route path="/report" element={<ReportPage />} />
         <Route path="/donasi" element={<DonationForm />} />
+        <Route path="/sidebar" element={<ProfileBase />} />
+        <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
+        <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
 
         {/* ADMIN Routes */}
       </Routes>

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Navbar } from "@/components/organisms/Navbar";
-import { Footer } from "@/components/organisms/Footer";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { FaAt, FaEyeSlash, FaEye } from "react-icons/fa";
@@ -11,20 +9,21 @@ const UpdateProfileUser = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <Navbar />
-
       {/* Main Content */}
-      <main className="flex-grow mt-24">
+      <main className="flex-grow ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Judul Halaman */}
-          <h1 className="text-center text-2xl sm:text-3xl font-semibold mb-12">Update Profile</h1>
+          <h1 className="text-center text-2xl sm:text-3xl font-semibold mb-12">
+            Update Profile
+          </h1>
 
           {/* Form */}
           <form className="w-full max-w-lg mx-auto bg-black p-6 rounded-md shadow-md">
             {/* Full Name */}
             <div className="mb-4">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Full Name</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Full Name
+              </label>
               <Input
                 type="text"
                 placeholder="Full Name"
@@ -34,7 +33,9 @@ const UpdateProfileUser = () => {
 
             {/* Username */}
             <div className="mb-4 relative">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Username</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Username
+              </label>
               <Input
                 type="text"
                 placeholder="Username"
@@ -45,7 +46,9 @@ const UpdateProfileUser = () => {
 
             {/* Email */}
             <div className="mb-4">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Email</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Email
+              </label>
               <Input
                 type="email"
                 placeholder="Email"
@@ -55,7 +58,9 @@ const UpdateProfileUser = () => {
 
             {/* Phone Number */}
             <div className="mb-4">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Phone Number</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Phone Number
+              </label>
               <Input
                 type="text"
                 placeholder="Phone Number"
@@ -65,7 +70,9 @@ const UpdateProfileUser = () => {
 
             {/* Password */}
             <div className="mb-4 relative">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Password</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Password
+              </label>
               <Input
                 type={showPassword ? "text" : "password"} // Gunakan state untuk tipe input
                 placeholder="Password"
@@ -97,11 +104,6 @@ const UpdateProfileUser = () => {
           </form>
         </div>
       </main>
-
-      {/* Footer */}
-      <div className="mt-24">
-        <Footer />
-      </div>
     </div>
   );
 };
