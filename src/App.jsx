@@ -17,6 +17,7 @@ import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 import ManageAkunList from "./pages/ManageAkunList";
 import Notifikasi from "./pages/Notifikasi";
 import ManageCategory from "./pages/ManageCategory";
+import VerifikasiLaporan from "./pages/VerifikasiLaporan";
 
 function App() {
   return (
@@ -38,8 +39,11 @@ function App() {
 
         {/* ADMIN Routes */}
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
+        <Route path="/manage-category" element={<ManageCategory />} />
+        <Route path="/verif-laporan" element={<VerifikasiLaporan />} />
       </Routes>
     </Router>
   );
 }
 
+export default App;
