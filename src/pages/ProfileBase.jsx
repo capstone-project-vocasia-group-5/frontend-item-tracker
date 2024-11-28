@@ -35,29 +35,31 @@ function ProfileBase() {
   const [activeItem, setActiveItem] = useState(menuItems[0].id);
   const navigate = useNavigate();
 
+  // Fungsi untuk render konten aktif
   const renderContent = () => {
     const activeMenu = menuItems.find((item) => item.id === activeItem);
     return activeMenu && activeMenu.content ? activeMenu.content : null;
   };
 
+  // Fungsi handle klik pada menu sidebar
   const handleMenuClick = (id, action) => {
     if (action === "logout") {
-      navigate("/");
+      navigate("/"); // Arahkan ke halaman login atau beranda
     } else {
       setActiveItem(id);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 mt-28 ">
       {/* Navbar */}
       <Navbar />
 
       {/* Layout utama */}
-      <div className="flex justify-center my-[100px]">
-        <div className="grid grid-cols-3 max-w-5xl gap-4">
+      <div className="flex justify-center my-8 sm:my-12 md:my-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl gap-4">
           {/* Sidebar */}
-          <div className="w-64 bg-white border border-gray-300 shadow rounded-lg">
+          <div className="w-full md:w-64 bg-white border border-gray-300 shadow rounded-lg ">
             <div className="p-4 text-center border-b border-gray-300 bg-gray-100">
               <h4 className="text-lg font-semibold text-gray-800">
                 AGUS HERYANTO
@@ -66,13 +68,13 @@ function ProfileBase() {
                 Universitas Amikom Yogyakarta
               </p>
             </div>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 space-y-4 p-4 text-center">
               {menuItems.map((item) => (
                 <li
                   key={item.id}
-                  className={`p-4 cursor-pointer rounded-lg ${
+                  className={`p-4 cursor-pointer rounded-full ${
                     item.id === activeItem
-                      ? "bg-blue-500 text-white"
+                      ? "bg-black text-white"
                       : "hover:bg-gray-200 text-gray-700"
                   }`}
                   onClick={() => handleMenuClick(item.id, item.action)}
@@ -84,7 +86,7 @@ function ProfileBase() {
           </div>
 
           {/* Konten */}
-          <div className="col-span-2 bg-white border border-gray-300 shadow rounded-lg">
+          <div className="col-span-1 md:col-span-2 bg-white border border-gray-300 shadow rounded-lg p-4">
             {renderContent()}
           </div>
         </div>
