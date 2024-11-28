@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePageDefault from "./pages/HomePageDefault";
@@ -41,10 +40,6 @@ function App() {
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
       </Routes>
     </Router>
-
-
-
   );
 }
 
-export default App;
