@@ -12,6 +12,8 @@ import ProfileBase from "./pages/ProfileBase";
 import SyaratKetentuan from "./pages/SyaratKetentuan";
 import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 // ADMIN Pages
+import ManageAkunList from "./pages/ManageAkunList";
+import ManageCategory from "./pages/ManageCategory";
 
 function App() {
   return (
