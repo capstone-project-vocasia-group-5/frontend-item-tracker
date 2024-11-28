@@ -200,5 +200,3 @@ const VerifikasiLaporan = () => {
     </div>
   );
 };
-
-export default VerifikasiLaporan;

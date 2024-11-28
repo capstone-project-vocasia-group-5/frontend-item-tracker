@@ -17,5 +17,35 @@ import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 import ManageAkunList from "./pages/ManageAkunList";
 import Notifikasi from "./pages/Notifikasi";
 import ManageCategory from "./pages/ManageCategory";
+import VerifikasiLaporan from "./pages/VerifikasiLaporan";
+import ManageLaporanAdmin from "./pages/ManageLaporanforAdmin";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePageDefault />} />
+        {/* CLIENT Routes */}
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/found" element={<FoundPage />} />
+        <Route path="/lost" element={<LostPage />} />
+        <Route path="/update-profile" element={<UpdateProfileUser />} />
+        <Route path="/report" element={<ReportPage />} />
+        <Route path="/donasi" element={<DonationForm />} />
+        <Route path="/sidebar" element={<ProfileBase />} />
+        <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
+        <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
+        <Route path="/notifikasi" element={<Notifikasi />} />
+
+        {/* ADMIN Routes */}
+        <Route path="/manage-akun-list" element={<ManageAkunList />} />
+        <Route path="/manage-category" element={<ManageCategory />} />
+        <Route path="/manage-verif-laporan" element={<VerifikasiLaporan />} />
+        <Route path="/manage-laporan-admin" element={<ManageLaporanAdmin />} />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
