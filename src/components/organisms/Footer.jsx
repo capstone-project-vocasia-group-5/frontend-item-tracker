@@ -25,22 +25,22 @@ export const Footer = () => {
               </h2>
               <ul class="text-gray-500 dark:text-gray-400 font-medium">
                 <li class="mb-4">
-                  <a href="#" class="hover:underline">
+                  <a href="/" class="hover:underline">
                     Home
                   </a>
                 </li>
                 <li class="mb-4">
-                  <a href="#" class="hover:underline">
+                  <a href="/notifikasi" class="hover:underline">
                     Notifikasi
                   </a>
                 </li>
                 <li class="mb-4">
-                  <a href="#" class="hover:underline">
+                  <a href="/lost" class="hover:underline">
                     Lost
                   </a>
                 </li>
                 <li class="mb-4">
-                  <a href="#" class="hover:underline">
+                  <a href="/found" class="hover:underline">
                     Found
                   </a>
                 </li>
