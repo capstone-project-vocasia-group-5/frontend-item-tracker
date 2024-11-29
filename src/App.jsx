@@ -13,9 +13,10 @@ import ReportPage from "./pages/ReportPage";
 import ProfileBase from "./pages/ProfileBase";
 import SyaratKetentuan from "./pages/SyaratKetentuan";
 import KebijakanPrivasi from "./pages/KebijakanPrivasi";
+import Notifikasi from "./pages/Notifikasi";
+import DetailItem from "./pages/DetailItem";
 // ADMIN Pages
 import ManageAkunList from "./pages/ManageAkunList";
-import Notifikasi from "./pages/Notifikasi";
 import ManageCategory from "./pages/ManageCategory";
 import VerifikasiLaporan from "./pages/VerifikasiLaporan";
 import ManageLaporanAdmin from "./pages/ManageLaporanforAdmin";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
         <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
         <Route path="/notifikasi" element={<Notifikasi />} />
+        <Route path="/detail-item" element={<DetailItem />} />
 
         {/* ADMIN Routes */}
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
