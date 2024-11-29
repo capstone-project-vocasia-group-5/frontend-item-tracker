@@ -31,7 +31,7 @@ const Notifikasi = () => {
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen mt-[110px]">
+    <div className="bg-gray-100 min-h-screen">
       {/* Navbar */}
       <Navbar></Navbar>
 

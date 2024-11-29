@@ -51,16 +51,18 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-10">
       <div className="w-96 p-8 bg-black text-white rounded-lg shadow-lg">
         {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
           <img
             src="/image/Logo.png"
             alt="ItemTrack Logo"
-            className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+            className="w-10 h-10 sm:w-8 sm:h-8 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            ItemTrack
+          </h1>
         </div>
 
         {/* Form */}

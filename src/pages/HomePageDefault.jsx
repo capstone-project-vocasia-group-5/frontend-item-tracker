@@ -12,7 +12,7 @@ const HomePageDefault = () => {
     <div>
       <Navbar />
       {/* Fitur Utama */}
-      <div className="mt-[70px]" id="header">
+      <div className="" id="header">
         <HeaderFix />
       </div>
       {/* SearchBar */}
