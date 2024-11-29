@@ -19,15 +19,14 @@ const VerifikasiLaporan = () => {
       <Navbar />
       <div className="flex-grow container mx-auto px-4 py-6">
         <header className="bg-white shadow-sm p-4 mb-6 rounded-lg">
-          <h1 className="text-xl md:text-2xl font-bold text-gray-800">Verifikasi Laporan</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+            Verifikasi Laporan
+          </h1>
         </header>
 
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
           {/* Search Bar */}
-          <form 
-            onSubmit={handleSearch} 
-            className="max-w-xl mx-auto my-6 px-4"
-          >
+          <form onSubmit={handleSearch} className="max-w-xl mx-auto my-6 px-4">
             <div className="flex">
               <input
                 type="search"
@@ -85,9 +84,15 @@ const VerifikasiLaporan = () => {
             <table className="w-full border-collapse">
               <thead className="bg-black text-white">
                 <tr>
-                  <th className="p-3 text-center text-sm md:text-base">Gambar</th>
-                  <th className="p-3 text-center text-sm md:text-base">Nama Barang</th>
-                  <th className="p-3 text-center text-sm md:text-base">Kategori</th>
+                  <th className="p-3 text-center text-sm md:text-base">
+                    Gambar
+                  </th>
+                  <th className="p-3 text-center text-sm md:text-base">
+                    Nama Barang
+                  </th>
+                  <th className="p-3 text-center text-sm md:text-base">
+                    Kategori
+                  </th>
                   <th className="p-3 text-center text-sm md:text-base">Aksi</th>
                 </tr>
               </thead>
@@ -102,11 +107,15 @@ const VerifikasiLaporan = () => {
                       />
                     </div>
                   </td>
-                  <td className="p-3 text-center text-sm md:text-base">Kucing</td>
-                  <td className="p-3 text-center text-sm md:text-base">Binatang</td>
+                  <td className="p-3 text-center text-sm md:text-base">
+                    Kucing
+                  </td>
+                  <td className="p-3 text-center text-sm md:text-base">
+                    Binatang
+                  </td>
                   <td className="p-3">
                     <div className="flex justify-center space-x-2">
-                      <button 
+                      <button
                         className="
                           p-2 
                           bg-gray-800 
@@ -134,7 +143,7 @@ const VerifikasiLaporan = () => {
                           />
                         </svg>
                       </button>
-                      <button 
+                      <button
                         className="
                           p-2 
                           bg-green-500 
@@ -161,7 +170,7 @@ const VerifikasiLaporan = () => {
                           />
                         </svg>
                       </button>
-                      <button 
+                      <button
                         className="
                           p-2 
                           bg-red-500 
@@ -200,3 +209,5 @@ const VerifikasiLaporan = () => {
     </div>
   );
 };
+
+export default VerifikasiLaporan;

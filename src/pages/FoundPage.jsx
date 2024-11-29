@@ -2,14 +2,18 @@ import { Navbar } from "../components/organisms/Navbar.jsx";
 import { Footer } from "../components/organisms/Footer.jsx";
 import { FoundList } from "../components/organisms/FoundList.jsx";
 import { SearchBar } from "../components/molecules/searchBar.jsx";
-import { Separator } from "@/components/ui/separator";
+import { PaginationDisplay } from "../components/molecules/pagination.jsx";
+import ReportButton from "../components/organisms/UploadSection.jsx";
 
 const FoundPage = () => {
   return (
-    <div className="mt-[120px]">
+    <div className="">
       <Navbar />
       {/* SearchBar */}
       <SearchBar />
+      <div className="md:max-w-2xl lg:max-w-5xl sm:max-w-xl max-w-sm mx-auto mt-10">
+        <ReportButton />
+      </div>
 
       {/* Lost Section */}
       <div id="LostSection">
@@ -18,11 +22,8 @@ const FoundPage = () => {
         </h1>
 
         <FoundList />
-        <FoundList />
-        <FoundList />
       </div>
-      <Separator />
-
+      <PaginationDisplay />
       {/* Footer */}
       <Footer />
     </div>
