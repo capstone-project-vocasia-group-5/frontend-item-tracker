@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import hook navigasi
 
 function SendOTP() {
+  const navigate = useNavigate(); // Inisialisasi navigasi
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Logika pengiriman OTP bisa ditambahkan di sini
+    navigate("/verifikasi-otp"); // Arahkan ke halaman verifikasi OTP
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-10">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-5">
       {/* Card Container */}
       <div className="w-96 p-8 bg-black text-white rounded-lg shadow-lg">
         {/* Logo */}
@@ -16,7 +25,7 @@ function SendOTP() {
         </div>
 
         {/* Form */}
-        <form className="flex flex-col space-y-4">
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           {/* Email Input */}
           <div className="text-left">
             <label htmlFor="email" className="block text-sm mb-1">

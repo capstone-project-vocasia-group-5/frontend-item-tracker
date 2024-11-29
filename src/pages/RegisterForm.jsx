@@ -51,7 +51,7 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-10">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-5">
       <div className="w-96 p-8 bg-black text-white rounded-lg shadow-lg">
         {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
