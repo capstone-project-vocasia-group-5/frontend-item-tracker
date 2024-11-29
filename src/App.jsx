@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePageDefault from "./pages/HomePageDefault";
 import React from "react";
 import DonationForm from "./pages/DonatePage";
+import SendOTP from "./pages/SendOTP";
 // CLIENT Pages
 import LostPage from "./pages/LostPage";
 import LoginForm from "./pages/LoginForm";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
         <Route path="/notifikasi" element={<Notifikasi />} />
         <Route path="/detail-item" element={<DetailItem />} />
+        <Route path="/send-otp" element={<SendOTP />} />
 
         {/* ADMIN Routes */}
         <Route path="/login-admin" element={<LoginAdmin />} />

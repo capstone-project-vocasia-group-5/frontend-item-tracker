@@ -37,7 +37,7 @@ function LoginAdmin() {
 
       // Berhasil login 
       alert("Login berhasil!");
-      console.log("Token:", data.token); // Simpan token jika diperlukan
+      console.log("Token:", data.token); 
     } catch (error) {
       setErrorMessage(error.message);
     } finally {

@@ -37,7 +37,7 @@ function LoginForm() {
 
       // Berhasil login 
       alert("Login berhasil!");
-      console.log("Token:", data.token); // Simpan token jika diperlukan
+      console.log("Token:", data.token); 
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -46,7 +46,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-10">
       <div className="w-full max-w-sm lg:max-w-md p-6 sm:p-8 bg-black text-white rounded-lg shadow-lg">
         {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
