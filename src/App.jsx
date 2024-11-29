@@ -16,6 +16,7 @@ import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 import Notifikasi from "./pages/Notifikasi";
 import DetailItem from "./pages/DetailItem";
 // ADMIN Pages
+import LoginAdmin from "./pages/LoginAdmin";
 import ManageAkunList from "./pages/ManageAkunList";
 import ManageCategory from "./pages/ManageCategory";
 import VerifikasiLaporan from "./pages/VerifikasiLaporan";
@@ -41,6 +42,7 @@ function App() {
         <Route path="/detail-item" element={<DetailItem />} />
 
         {/* ADMIN Routes */}
+        <Route path="/login-admin" element={<LoginAdmin />} />
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
         <Route path="/manage-category" element={<ManageCategory />} />
         <Route path="/manage-verif-laporan" element={<VerifikasiLaporan />} />
