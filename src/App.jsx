@@ -17,6 +17,7 @@ import KebijakanPrivasi from "./pages/KebijakanPrivasi";
 import Notifikasi from "./pages/Notifikasi";
 import DetailItem from "./pages/DetailItem";
 import VerifikasiOTP from "./pages/VerifikasiOTP";
+import BuktiPengajuan from "./pages/BuktiPengajuan";
 // ADMIN Pages
 import LoginAdmin from "./pages/LoginAdmin";
 import ManageAkunList from "./pages/ManageAkunList";
@@ -44,6 +45,7 @@ function App() {
         <Route path="/detail-item" element={<DetailItem />} />
         <Route path="/send-otp" element={<SendOTP />} />
         <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
+        <Route path="/bukti-pengajuan" element={<BuktiPengajuan />} />
 
         {/* ADMIN Routes */}
         <Route path="/login-admin" element={<LoginAdmin />} />
