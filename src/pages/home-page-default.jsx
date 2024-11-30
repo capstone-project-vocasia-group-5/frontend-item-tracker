@@ -1,10 +1,10 @@
-import { Navbar } from "../components/organisms/Navbar.jsx";
-import { Footer } from "../components/organisms/Footer.jsx";
-import { LostList } from "../components/organisms/LostList.jsx";
-import { FoundList } from "../components/organisms/FoundList.jsx";
-import { HeaderFix } from "../components/organisms/HeaderFix.jsx";
-import { SearchBar } from "../components/molecules/searchBar.jsx";
-import { FiturUtama } from "../components/organisms/FiturUtama.jsx";
+import { Navbar } from "../components/organisms/navbar.jsx";
+import { Footer } from "../components/organisms/footer.jsx";
+import { LostList } from "../components/organisms/lost-list.jsx";
+import { FoundList } from "../components/organisms/found-list.jsx";
+import { HeaderFix } from "../components/organisms/header-fix.jsx";
+import { SearchBar } from "../components/molecules/search-bar.jsx";
+import { FiturUtama } from "../components/organisms/fitur-utama.jsx";
 import { Separator } from "@/components/ui/separator";
 
 const HomePageDefault = () => {

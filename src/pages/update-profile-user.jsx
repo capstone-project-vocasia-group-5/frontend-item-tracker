@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Navbar } from "@/components/organisms/Navbar";
-import { Footer } from "@/components/organisms/Footer";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Navbar } from "@/components/organisms/navbar";
+import { Footer } from "@/components/organisms/footer";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { FaAt, FaEyeSlash, FaEye, FaUserCircle } from "react-icons/fa";
 
 const UpdateProfileUser = () => {
@@ -81,7 +81,9 @@ const UpdateProfileUser = () => {
             onSubmit={handleSubmit}
             className="w-full max-w-lg mx-auto bg-black p-6 rounded-md shadow-md"
           >
-            <h1 className="text-2xl sm:text-3xl font-semibold text-white mt-4 mb-8">Update Profile</h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-white mt-4 mb-8">
+              Update Profile
+            </h1>
             {/* Icon Foto Profile */}
             <div className="relative inline-block">
               <label htmlFor="profileImage" className="cursor-pointer relative">
@@ -106,10 +108,11 @@ const UpdateProfileUser = () => {
               />
             </div>
 
-
             {/* Full Name */}
             <div className="mb-4 mt-4">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Full Name</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Full Name
+              </label>
               <Input
                 type="text"
                 name="fullName"
@@ -122,7 +125,9 @@ const UpdateProfileUser = () => {
 
             {/* Username */}
             <div className="mb-4 relative">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Username</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Username
+              </label>
               <Input
                 type="text"
                 name="username"
@@ -135,7 +140,9 @@ const UpdateProfileUser = () => {
 
             {/* Email */}
             <div className="mb-4">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Email</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Email
+              </label>
               <Input
                 type="email"
                 name="email"
@@ -148,7 +155,9 @@ const UpdateProfileUser = () => {
 
             {/* Phone Number */}
             <div className="mb-4">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Phone Number</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Phone Number
+              </label>
               <div className="flex items-center">
                 <Input
                   type="tel"
@@ -168,10 +177,11 @@ const UpdateProfileUser = () => {
               </div>
             </div>
 
-
             {/* Password */}
             <div className="mb-4 relative">
-              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">Password</label>
+              <label className="block text-sm sm:text-base text-white font-medium mb-2 text-left">
+                Password
+              </label>
               <Input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -208,7 +218,13 @@ const UpdateProfileUser = () => {
               </Button>
             </div>
             {message && (
-              <p className={`text-center mt-4 ${message.includes("success") ? "text-green-500" : "text-red-500"}`}>
+              <p
+                className={`text-center mt-4 ${
+                  message.includes("success")
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
                 {message}
               </p>
             )}

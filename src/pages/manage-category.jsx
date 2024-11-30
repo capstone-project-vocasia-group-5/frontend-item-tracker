@@ -1,7 +1,7 @@
 import "../App.css";
 import React, { useState } from "react";
-import { Navbar } from "../components/organisms/Navbar.jsx";
-import { Footer } from "../components/organisms/Footer.jsx";
+import { Navbar } from "../components/organisms/navbar.jsx";
+import { Footer } from "../components/organisms/footer.jsx";
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -121,7 +121,7 @@ const ManageCategory = () => {
         </div>
       </div>
       <Footer></Footer>
-    </div>      
+    </div>
   );
 };
 
