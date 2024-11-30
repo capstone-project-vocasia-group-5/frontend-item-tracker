@@ -9,8 +9,8 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { Navbar } from "@/components/organisms/Navbar";
-import { Footer } from "@/components/organisms/Footer";
+import { Navbar } from "@/components/organisms/navbar";
+import { Footer } from "@/components/organisms/footer";
 
 const ReportPage = () => {
   const [files, setFiles] = useState([]);

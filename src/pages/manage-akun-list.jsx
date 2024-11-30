@@ -1,7 +1,7 @@
 import "../App.css";
 import React, { useState } from "react";
-import { Navbar } from "../components/organisms/Navbar.jsx";
-import { Footer } from "../components/organisms/Footer.jsx";
+import { Navbar } from "../components/organisms/navbar.jsx";
+import { Footer } from "../components/organisms/footer.jsx";
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -68,7 +68,7 @@ const ManageAkunList = () => {
                 <thead className="bg-black text-white rounded-t-lg">
                   <tr>
                     <th className="px-4 py-4 text-center text-sm sm:px-8">
-                      Nama 
+                      Nama
                     </th>
                     <th className="px-4 py-4 text-center text-sm sm:px-8">
                       Email

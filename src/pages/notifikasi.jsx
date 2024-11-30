@@ -1,6 +1,6 @@
 import React from "react";
-import { Navbar } from "../components/organisms/Navbar";
-import { Footer } from "../components/organisms/Footer";
+import { Navbar } from "../components/organisms/navbar";
+import { Footer } from "../components/organisms/footer";
 
 const Notifikasi = () => {
   const notifications = [

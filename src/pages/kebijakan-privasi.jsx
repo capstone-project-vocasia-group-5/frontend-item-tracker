@@ -1,5 +1,5 @@
-import { Navbar } from "../components/organisms/Navbar.jsx";
-import { Footer } from "../components/organisms/Footer.jsx";
+import { Navbar } from "../components/organisms/navbar.jsx";
+import { Footer } from "../components/organisms/footer.jsx";
 import { ScrollArea } from "../components/ui/scroll-area.jsx";
 
 const KebijakanPrivasi = () => {

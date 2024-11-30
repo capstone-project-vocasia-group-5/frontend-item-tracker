@@ -1,9 +1,9 @@
-import { Navbar } from "../components/organisms/Navbar.jsx";
-import { Footer } from "../components/organisms/Footer.jsx";
-import { FoundList } from "../components/organisms/FoundList.jsx";
-import { SearchBar } from "../components/molecules/searchBar.jsx";
+import { Navbar } from "../components/organisms/navbar.jsx";
+import { Footer } from "../components/organisms/footer.jsx";
+import { FoundList } from "../components/organisms/found-list.jsx";
+import { SearchBar } from "../components/molecules/search-bar.jsx";
 import { PaginationDisplay } from "../components/molecules/pagination.jsx";
-import ReportButton from "../components/organisms/UploadSection.jsx";
+import ReportButton from "../components/organisms/upload-section.jsx";
 
 const FoundPage = () => {
   return (

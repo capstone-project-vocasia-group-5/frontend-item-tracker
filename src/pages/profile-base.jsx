@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Untuk navigasi
-import { Navbar } from "@/components/organisms/Navbar";
-import { Footer } from "@/components/organisms/Footer";
-import ManageCategory from "./ManageCategory";
-import ManageLaporan from "./ManageLaporan";
-import UpdateProfileUser from "./UpdateProfileUser";
-import HomePageDefault from "./HomePageDefault";
+import { Navbar } from "@/components/organisms/navbar";
+import { Footer } from "@/components/organisms/footer";
+import ManageCategory from "./manage-category";
+import ManageLaporan from "./manage-laporan";
+import UpdateProfileUser from "./update-profile-user";
+import HomePageDefault from "./home-page-default";
 
 // Data untuk menu sidebar
 const menuItems = [
