@@ -1,5 +1,5 @@
-import { Navbar } from "../components/organisms/Navbar.jsx";
-import { Footer } from "../components/organisms/Footer.jsx";
+import { Navbar } from "../components/organisms/navbar.jsx";
+import { Footer } from "../components/organisms/footer.jsx";
 import { Button } from "../components/ui/button.jsx";
 
 const DetailItem = () => {

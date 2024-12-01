@@ -1,7 +1,7 @@
 import "../App.css";
 import React, { useState } from "react";
-import { Navbar } from "../components/organisms/Navbar";
-import { Footer } from "../components/organisms/Footer";
+import { Navbar } from "../components/organisms/navbar";
+import { Footer } from "../components/organisms/footer";
 
 const ManageLaporanAdmin = () => {
   const [searchQuery, setSearchQuery] = useState("");

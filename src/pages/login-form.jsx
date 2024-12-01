@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import hook navigasi
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -7,12 +8,13 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const navigate = useNavigate(); // Hook navigasi
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(""); 
     setLoading(true); 
 
-    // Validasi sederhana
     if (!email || !password) {
       setErrorMessage("Email dan Password harus diisi");
       setLoading(false);
@@ -20,7 +22,6 @@ function LoginForm() {
     }
 
     try {
-      // Kirim data ke API
       const response = await fetch("https://your-api-endpoint.com/login", {
         method: "POST",
         headers: {
@@ -35,20 +36,19 @@ function LoginForm() {
         throw new Error(data.message || "Login gagal");
       }
 
-      // Berhasil login 
+      // Berhasil login, arahkan ke halaman HomePageDefault
       alert("Login berhasil!");
-      console.log("Token:", data.token); // Simpan token jika diperlukan
+      navigate("/homepage"); 
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-5">
       <div className="w-full max-w-sm lg:max-w-md p-6 sm:p-8 bg-black text-white rounded-lg shadow-lg">
-        {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
           <img
             src="/image/Logo.png"
@@ -57,10 +57,7 @@ function LoginForm() {
           />
           <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
         </div>
-  
-        {/* Form */}
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-          {/* Email Input */}
           <div className="text-left">
             <label htmlFor="email" className="block text-sm mb-1">
               Email
@@ -74,8 +71,6 @@ function LoginForm() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-  
-          {/* Password Input */}
           <div className="text-left">
             <label htmlFor="password" className="block text-sm mb-1">
               Password
@@ -89,27 +84,35 @@ function LoginForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="flex items-center mt-2">
-                <input
-                  type="checkbox"
-                  id="showPassword"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                  className="mr-2"
-                />
-                <label htmlFor="showPassword" className="text-sm">
-                  Show Password
-                </label>
+              <div className="flex items-center justify-between mt-2">
+                {/* Checkbox Tampilkan Password */}
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showPassword"
+                    checked={showPassword}
+                    onChange={() => setShowPassword(!showPassword)}
+                    className="mr-2"
+                  />
+                  <label htmlFor="showPassword" className="text-sm">
+                    Tampilkan Password
+                  </label>
+                </div>
+
+                {/* Hyperlink Lupa Password */}
+                <a
+                  href="/send-otp"
+                  className="text-sm text-blue-400 hover:underline"
+                >
+                  Lupa Password?
+                </a>
               </div>
             </div>
           </div>
-  
-          {/* Error Message */}
+
           {errorMessage && (
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
-  
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
@@ -118,8 +121,6 @@ function LoginForm() {
             {loading ? "Memuat..." : "Masuk"}
           </button>
         </form>
-  
-        {/* Footer */}
         <div className="text-center mt-4">
           <p className="text-xs sm:text-sm">
             Tidak punya akun?{" "}
@@ -131,7 +132,6 @@ function LoginForm() {
       </div>
     </div>
   );
-  
 }
 
 export default LoginForm;
