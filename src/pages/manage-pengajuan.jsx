@@ -15,13 +15,9 @@ const ManagePengajuan = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="p-4">
-<<<<<<< Updated upstream
         <header className="bg-white shadow-sm p-4 flex justify-between">
           <h1 className="text-xl font-bold">Manajemen Pengajuan Barang</h1>
-=======
-        <header className="bg-white shadow-sm p-4  flex justify-between">
-          <h1 className="text-xl font-bold">Manajemen Pengajuan</h1>
->>>>>>> Stashed changes
+
         </header>
 
         <div className="bg-white shadow-md rounded-md overflow-hidden">
