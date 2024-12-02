@@ -1,0 +1,41 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Frontend Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "🚀 Deploying frontend to server..."
+
+            echo "📁 Changing directory..."
+            cd /var/repositories/capstone-vocasia/fe-capstone
+
+            echo "⬇️ Pulling latest changes..."
+            git pull origin dev
+
+            echo "📦 Installing dependencies..."
+            npm install
+
+            echo "🏗️ Building frontend..."
+            npm run build
+
+            echo "🔄 Restarting frontend preview..."
+            pm2 restart fe-capstone || pm2 start npm --name "fe-capstone" -- run preview
+
+            echo "💾 Saving PM2 configuration..."
+            pm2 save
+
+            echo "✅ Frontend deployment completed!"
+
+            echo "📊 Current PM2 status:"
+            pm2 list
