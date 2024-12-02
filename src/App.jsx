@@ -24,12 +24,14 @@ import ManageAkunList from "./pages/manage-akun-list";
 import ManageCategory from "./pages/manage-category";
 import VerifikasiLaporan from "./pages/verifikasi-laporan";
 import ManageLaporanAdmin from "./pages/manage-laporan-for-admin";
+import HomepageAfterLogin from "./pages/homepage-after-login";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePageDefault />} />
+        <Route path="/after" element={<HomepageAfterLogin />} />
         {/* CLIENT Routes */}
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />

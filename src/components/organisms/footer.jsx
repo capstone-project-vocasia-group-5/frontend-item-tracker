@@ -56,6 +56,16 @@ export const Footer = () => {
                     Donasi Sekarang
                   </Link>
                 </li>
+                <li class="mb-4">
+                  <Link to="/tentang-kami" className="hover:underline">
+                    Tentang Kami
+                  </Link>
+                </li>
+                <li class="mb-4">
+                  <Link to="/kontak-kami" className="hover:underline">
+                    Kontak Kami
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
