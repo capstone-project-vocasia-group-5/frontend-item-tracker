@@ -84,9 +84,9 @@ const ManageCategory = () => {
                 <tbody className="divide-y divide-gray-500 text-center">
                   <tr>
                     <td className="px-4 py-4 sm:px-8">Perhiasan</td>
-                    <td className="px-4 py-4 sm:px-8">Elektronik</td>
+                    <td className="px-4 py-4 sm:px-8">20</td>
                     <td className="px-4 py-4 sm:px-8">20/09/2024</td>
-                    <td className="px-4 py-4 sm:px-8 space-x-2 text-center flex">
+                    <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
                       <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ const ManageCategory = () => {
                         </svg>
                       </button>
                       <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                        <svg
+                          <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
@@ -113,6 +113,7 @@ const ManageCategory = () => {
                         </svg>
                       </button>
                     </td>
+
                   </tr>
                 </tbody>
               </table>

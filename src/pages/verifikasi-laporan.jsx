@@ -17,9 +17,9 @@ const VerifikasiLaporan = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="flex-grow container mx-auto px-4 py-6">
+      <div className="flex-grow w-full px-4 py-6">
         <header className="bg-white shadow-sm p-4 mb-6 rounded-lg">
-          <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800 text-left">
             Verifikasi Laporan
           </h1>
         </header>
@@ -114,7 +114,7 @@ const VerifikasiLaporan = () => {
                     Binatang
                   </td>
                   <td className="p-3">
-                    <div className="flex justify-center space-x-2">
+                    <div className="flex justify-center flex-wrap space-x-2 sm:space-x-3">
                       <button
                         className="
                           p-2 

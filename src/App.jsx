@@ -18,6 +18,8 @@ import Notifikasi from "./pages/notifikasi";
 import DetailItem from "./pages/detail-item";
 import VerifikasiOTP from "./pages/verifikasi-otp";
 import BuktiPengajuan from "./pages/bukti-pengajuan";
+import ManageLaporanUser from "./pages/manage-laporan";
+import ManagePengajuan from "./pages/manage-pengajuan";
 // ADMIN Pages
 import LoginAdmin from "./pages/login-admin";
 import ManageAkunList from "./pages/manage-akun-list";
@@ -52,6 +54,8 @@ function App() {
         <Route path="/send-otp" element={<SendOTP />} />
         <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
         <Route path="/bukti-pengajuan" element={<BuktiPengajuan />} />
+        <Route path="/manage-laporan" element={<ManageLaporanUser />} />
+        <Route path="/manage-pengajuan" element={<ManagePengajuan />} />
 
         {/* ADMIN Routes */}
         <Route path="/login-admin" element={<LoginAdmin />} />
