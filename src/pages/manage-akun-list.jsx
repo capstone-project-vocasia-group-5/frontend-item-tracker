@@ -86,7 +86,7 @@ const ManageAkunList = () => {
                     <td className="px-4 py-4 sm:px-8">Ade Irawan</td>
                     <td className="px-4 py-4 sm:px-8">adeirawan@gmail.com</td>
                     <td className="px-4 py-4 sm:px-8">0812333109</td>
-                    <td className="px-4 py-4 sm:px-8 space-x-2 text-center flex">
+                    <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
                       <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
