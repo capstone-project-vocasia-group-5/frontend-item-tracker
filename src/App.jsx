@@ -26,6 +26,7 @@ import VerifikasiLaporan from "./pages/verifikasi-laporan";
 import ManageLaporanAdmin from "./pages/manage-laporan-for-admin";
 import HomepageAfterLogin from "./pages/homepage-after-login";
 import TentangKami from "./pages/tentang-kami";
+import KontakKami from "./pages/kontak-kami";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/" element={<HomePageDefault />} />
         <Route path="/after" element={<HomepageAfterLogin />} />
         <Route path="/tentang-kami" element={<TentangKami />} />
+        <Route path="/kontak-kami" element={<KontakKami />} />
         {/* CLIENT Routes */}
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
