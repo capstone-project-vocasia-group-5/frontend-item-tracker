@@ -36,9 +36,9 @@ const BuktiPengajuan = () => {
 
       {/* Content */}
       <main className="flex-1 container mx-auto py-10 px-4 overflow-y-auto">
-        <h2 className="text-2xl font-semibold text-center mb-16">
+        <h1 className="text-2xl font-bold text-center mb-6">
           Upload Bukti Kepemilikan
-        </h2>
+        </h1>
 
         {/* Form Layout */}
         <div className="flex flex-col items-center gap-6 justify-center">
