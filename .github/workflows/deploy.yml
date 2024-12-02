@@ -35,7 +35,7 @@ jobs:
             echo "💾 Saving PM2 configuration..."
             pm2 save
 
-            echo "✅ Frontend deployment completed! >_<"
+            echo "✅ Frontend deployment completed!"
 
             echo "📊 Current PM2 status:"
             pm2 list
