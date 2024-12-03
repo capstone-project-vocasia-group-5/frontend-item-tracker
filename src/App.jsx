@@ -21,6 +21,7 @@ import VerifikasiOTP from "./pages/verifikasi-otp";
 import BuktiPengajuan from "./pages/bukti-pengajuan";
 import ManageLaporanUser from "./pages/manage-laporan";
 import ManagePengajuan from "./pages/manage-pengajuan";
+import ThankYou from "./pages/ucapan-terimakasih";
 // ADMIN Pages
 import LoginAdmin from "./pages/login-admin";
 import ManageAkunList from "./pages/manage-akun-list";
@@ -59,6 +60,7 @@ function App() {
         <Route path="/manage-laporan" element={<ManageLaporanUser />} />
         <Route path="/manage-pengajuan" element={<ManagePengajuan />} />
         <Route path="/list-donatur" element={<Donatur />} />
+        <Route path="/ucapan-terimakasih" element={<ThankYou />} />
         {/* ADMIN Routes */}
         <Route path="/admin" element={<HomePageAdmin />} />
         <Route path="/login-admin" element={<LoginAdmin />} />
