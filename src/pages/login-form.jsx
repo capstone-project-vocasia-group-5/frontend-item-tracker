@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import hook navigasi
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ function LoginForm() {
     }
 
     try {
-      const response = await fetch("https://your-api-endpoint.com/login", {
+      const response = await fetch("https://api.sukisushi.works/api/v1/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

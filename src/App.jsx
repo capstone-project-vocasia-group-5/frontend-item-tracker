@@ -4,6 +4,7 @@ import HomePageDefault from "./pages/home-page-default";
 import React from "react";
 import DonationForm from "./pages/donate-page";
 import SendOTP from "./pages/send-otp";
+import Donatur from "./pages/list-donatur";
 // CLIENT Pages
 import LostPage from "./pages/lost-page";
 import LoginForm from "./pages/login-form";
@@ -57,7 +58,7 @@ function App() {
         <Route path="/bukti-pengajuan" element={<BuktiPengajuan />} />
         <Route path="/manage-laporan" element={<ManageLaporanUser />} />
         <Route path="/manage-pengajuan" element={<ManagePengajuan />} />
-
+        <Route path="/list-donatur" element={<Donatur />} />
         {/* ADMIN Routes */}
         <Route path="/admin" element={<HomePageAdmin />} />
         <Route path="/login-admin" element={<LoginAdmin />} />
