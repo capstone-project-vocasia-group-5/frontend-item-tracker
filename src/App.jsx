@@ -29,6 +29,7 @@ import ManageLaporanAdmin from "./pages/manage-laporan-for-admin";
 import HomepageAfterLogin from "./pages/homepage-after-login";
 import TentangKami from "./pages/tentang-kami";
 import KontakKami from "./pages/kontak-kami";
+import HomePageAdmin from "./pages/homepage-admin";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         <Route path="/manage-pengajuan" element={<ManagePengajuan />} />
 
         {/* ADMIN Routes */}
+        <Route path="/admin" element={<HomePageAdmin />} />
         <Route path="/login-admin" element={<LoginAdmin />} />
         <Route path="/manage-akun-list" element={<ManageAkunList />} />
         <Route path="/manage-category" element={<ManageCategory />} />

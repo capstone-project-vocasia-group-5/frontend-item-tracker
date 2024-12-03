@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Navbar } from "../components/organisms/navbar.jsx";
-import { Footer } from "../components/organisms/footer.jsx";
 
 const VerifikasiLaporan = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,7 +14,6 @@ const VerifikasiLaporan = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <div className="flex-grow w-full px-4 py-6">
         <header className="bg-white shadow-sm p-4 mb-6 rounded-lg">
           <h1 className="text-xl md:text-2xl font-bold text-gray-800 text-left">
@@ -205,7 +202,6 @@ const VerifikasiLaporan = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,8 +1,5 @@
 import "../App.css";
 import React, { useState } from "react";
-import { Navbar } from "../components/organisms/navbar.jsx";
-import { Footer } from "../components/organisms/footer.jsx";
-
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -17,7 +14,6 @@ const ManageCategory = () => {
 
   return (
     <div>
-      <Navbar></Navbar>{" "}
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
@@ -99,7 +95,7 @@ const ManageCategory = () => {
                         </svg>
                       </button>
                       <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                          <svg
+                        <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
@@ -113,7 +109,6 @@ const ManageCategory = () => {
                         </svg>
                       </button>
                     </td>
-
                   </tr>
                 </tbody>
               </table>
@@ -121,7 +116,6 @@ const ManageCategory = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

@@ -1,7 +1,5 @@
 import "../App.css";
 import React, { useState } from "react";
-import { Navbar } from "../components/organisms/navbar.jsx";
-import { Footer } from "../components/organisms/footer.jsx";
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,7 +15,6 @@ const ManageAkunList = () => {
 
   return (
     <div>
-      <Navbar></Navbar>{" "}
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
@@ -109,7 +106,6 @@ const ManageAkunList = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };
