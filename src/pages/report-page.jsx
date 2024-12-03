@@ -15,17 +15,30 @@ import { Footer } from "@/components/organisms/footer";
 const ReportPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("+62"); // Menyimpan nomor telepon
 
   const handleFileChange = (event) => {
-    const newFiles = Array.from(event.target.files).map((file) =>
-      URL.createObjectURL(file)
-    );
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
-    if (!selectedImage && newFiles.length > 0) {
-      setSelectedImage(newFiles[0]);
+    const newFiles = Array.from(event.target.files).filter((file) => {
+      if (file.size > 10 * 1024 * 1024) { // 10 MB dalam byte
+        alert(`File ${file.name} melebihi batas ukuran maksimal 10 MB.`);
+        return false;
+      }
+      return true;
+    });
+  
+    if (files.length + newFiles.length > 5) {
+      alert("Maksimal hanya dapat mengunggah 5 file.");
+      return;
+    }
+  
+    const newFileURLs = newFiles.map((file) => URL.createObjectURL(file));
+    setFiles((prevFiles) => [...prevFiles, ...newFileURLs]);
+  
+    if (!selectedImage && newFileURLs.length > 0) {
+      setSelectedImage(newFileURLs[0]);
     }
   };
-
+  
   const handleNextImage = () => {
     const currentIndex = files.indexOf(selectedImage);
     const nextIndex = (currentIndex + 1) % files.length;
@@ -49,16 +62,26 @@ const ReportPage = () => {
     }
   };
 
+  // Fungsi untuk menangani perubahan nomor telepon
+  const handlePhoneNumberChange = (event) => {
+    const value = event.target.value;
+
+    // Hanya izinkan angka setelah +62
+    if (/^\+62\d*$/.test(value)) {
+      setPhoneNumber(value);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/* Header */}
-      <header className="bg-black text-white">
+      <header className="bg-black text-white fixed top-0 z-50 w-full">
         <Navbar />
       </header>
 
       {/* Content */}
       <main className="flex-1 container mx-auto py-10 px-4 overflow-y-auto ">
-        <h2 className="text-2xl font-semibold text-center mb-16">
+        <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
           Buat Laporan
         </h2>
 
@@ -205,6 +228,8 @@ const ReportPage = () => {
                 id="phoneNumber"
                 placeholder="Masukkan nomor telepon"
                 className="w-full h-12"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
               />
             </div>
 
