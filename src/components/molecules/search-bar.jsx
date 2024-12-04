@@ -225,6 +225,22 @@ export const SearchBar = () => {
                   ))}
                 </select>
               </div>
+              <div>
+                <Label htmlFor="village">Kelurahan</Label>
+                <select
+                  id="village"
+                  value={selectedVillage}
+                  onChange={handleVillageChange}
+                  className="block w-full mt-1 border rounded-md p-2 text-white"
+                >
+                  <option value="">Pilih Kecamatan</option>
+                  {villages.map((village) => (
+                    <option key={village.id} value={village.id}>
+                      {village.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               <div className="grid grid-cols-3 items-center gap-2">
                 <Label htmlFor="postalCode">Kode Pos</Label>
@@ -237,7 +253,7 @@ export const SearchBar = () => {
               </div>
 
               {/* Buttons */}
-              <div className="flex items-center space-x-2 mt-4">
+              <div className="flex items-center space-x-2 mt-4 justify-end">
                 {/* Reset Button */}
                 <Button
                   variant="outline"
