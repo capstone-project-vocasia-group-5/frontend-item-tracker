@@ -450,7 +450,7 @@ const ReportPage = () => {
                   id="district"
                   value={selectedVillage}
                   onChange={handleVillageChange}
-                  className="block w-full text-sm font-medium  mt-1 border rounded-md p-2 text-black bg-white"
+                  className="block w-full text-sm font-medium mt-1 border rounded-md p-2 text-black bg-white"
                 >
                   <option value="">Pilih Kelurahan</option>
                   {villages.map((village) => (
