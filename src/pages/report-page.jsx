@@ -75,13 +75,11 @@ const ReportPage = () => {
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const [villages, setVillages] = useState([]);
   const [postalCode, setPostalCode] = useState("");
 
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedVillage, setSelectedVillage] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -134,21 +132,6 @@ const ReportPage = () => {
     }
   };
 
-  // Fetch villages based on selected district
-  const fetchVillages = async (districtId) => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(
-        `https://alamat.thecloudalert.com/api/kelurahan/get/?d_kecamatan_id=${districtId}`
-      );
-      setVillages(response.data.result);
-    } catch (error) {
-      console.error("Error fetching villages:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   // Fetch postal code based on selected city and district
   const fetchPostalCode = async (cityId, districtId) => {
     setIsLoading(true);
@@ -195,11 +178,6 @@ const ReportPage = () => {
   };
 
   // Handle village change
-  const handleVillageChange = (e) => {
-    const villageId = e.target.value;
-    setSelectedVillage(villageId);
-    if (villageId) fetchPostalCode(selectedCity, selectedDistrict);
-  };
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
@@ -439,27 +417,6 @@ const ReportPage = () => {
               </div>
 
               {/* Kelurahan */}
-              <div>
-                <label
-                  className="block text-sm font-medium mb-2 ml-2"
-                  htmlFor="district"
-                >
-                  Kelurahan
-                </label>
-                <select
-                  id="district"
-                  value={selectedVillage}
-                  onChange={handleVillageChange}
-                  className="block w-full text-sm font-medium  mt-1 border rounded-md p-2 text-black bg-white"
-                >
-                  <option value="">Pilih Kelurahan</option>
-                  {villages.map((village) => (
-                    <option key={village.id} value={village.id}>
-                      {village.text}
-                    </option>
-                  ))}
-                </select>
-              </div>
 
               {/* Kode Pos */}
               <div>
