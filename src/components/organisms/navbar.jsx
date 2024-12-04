@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import LogoItemTracker from "../atoms/logo-item-tracker";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,15 +21,13 @@ export const Navbar = () => {
   return (
     <nav className="bg-white dark:bg-primaryBlack sticky w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" className="flex items-center  rtl:space-x-reverse">
           <img
             src="https://s3-alpha-sig.figma.com/img/7244/2569/3c21baf51f584cca614cb242c632a483?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=fx62FutnSfy0Dt0y~1qovptM1O5~qVnn6JQwvmDVor-GbXkYNPtJRsQGM1tN2IuUenEsbsxx8vgSifwL27rACpszWlg-yE9gcOUHY-XKWvdcc6R8j6YBBgLiRvw3Ht2-fQct~ciJfLi7I3d5WOn-UAyCy7HoSI0~O3GOo-UGBaUgqDxTY6y2y3qBsauy6EGdkH8aqG~K7G3qw9WtVMh4heGgR7pdNArYHVlfwE8f-i7u3PuX~ySFYKyyjnWnkAoYQnSYeyGWsuHbGC0Aj1c4tlaYPKgJRDhN2pOHrbxU3-j1-c6FkWv4POY4YO7Ezbc3KktiJYRjmAUztI9zMu2IMA__"
             className="h-12"
             alt="Logo"
           />
-          <span className="text-black self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            ItemTrack
-          </span>
+          <LogoItemTracker className="text-black" />
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {isLoggedIn ? (
