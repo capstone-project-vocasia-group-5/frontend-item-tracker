@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoItemTracker from "../atoms/logo-item-tracker";
 
 export const Footer = () => {
   return (
@@ -13,9 +14,7 @@ export const Footer = () => {
                 class="h-8 me-3"
                 alt="ItemTrack Logo"
               />
-              <span class="text-white self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                ItemTrack
-              </span>
+              <LogoItemTracker className="" />
             </a>
           </div>
           <div class="grid grid-cols-3 gap-8 sm:gap-6 sm:grid-cols-3">
