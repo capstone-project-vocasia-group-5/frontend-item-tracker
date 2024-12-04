@@ -13,11 +13,12 @@ export const SearchBar = () => {
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const [zipCodes, setZipCodes] = useState([]);
+  const [villages, setVillages] = useState([]);
 
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedVillage, setSelectedVillage] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -60,6 +61,17 @@ export const SearchBar = () => {
     }
   };
 
+  const fetchVillages = async (districtId) => {
+    try {
+      const response = await axios.get(
+        `https://alamat.thecloudalert.com/api/kelurahan/get/?d_kecamatan_id=${districtId}`
+      );
+      setVillages(response.data.result);
+    } catch (error) {
+      console.error("Error fetching villages:", error);
+    }
+  };
+
   const fetchZipCodes = async (cityId, districtId) => {
     try {
       const response = await axios.get(
@@ -80,6 +92,7 @@ export const SearchBar = () => {
     setSelectedProvince(provinceId);
     setSelectedCity("");
     setSelectedDistrict("");
+    setSelectedVillage("");
     setPostalCode("");
     if (provinceId) fetchCities(provinceId);
   };
@@ -88,6 +101,7 @@ export const SearchBar = () => {
     const cityId = e.target.value;
     setSelectedCity(cityId);
     setSelectedDistrict("");
+    setSelectedVillage("");
     setPostalCode("");
     if (cityId) fetchDistricts(cityId);
   };
@@ -95,7 +109,16 @@ export const SearchBar = () => {
   const handleDistrictChange = (e) => {
     const districtId = e.target.value;
     setSelectedDistrict(districtId);
-    if (districtId) fetchZipCodes(selectedCity, districtId);
+    setSelectedVillage("");
+    setPostalCode("");
+    if (districtId) fetchVillages(districtId);
+  };
+
+  const handleVillageChange = (e) => {
+    const districtId = selectedDistrict;
+    const cityId = selectedCity;
+    setSelectedVillage(e.target.value);
+    fetchZipCodes(cityId, districtId);
   };
 
   const handleSearchChange = (e) => {
@@ -109,6 +132,7 @@ export const SearchBar = () => {
       selectedProvince,
       selectedCity,
       selectedDistrict,
+      selectedVillage,
       postalCode,
     });
     setOpen(false);
