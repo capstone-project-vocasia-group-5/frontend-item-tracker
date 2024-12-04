@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import {
   Select,
   SelectTrigger,
@@ -15,30 +16,30 @@ import { Footer } from "@/components/organisms/footer";
 const ReportPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState("+62"); // Menyimpan nomor telepon
+  const [phoneNumber, setPhoneNumber] = useState("+62");
 
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files).filter((file) => {
-      if (file.size > 10 * 1024 * 1024) { // 10 MB dalam byte
+      if (file.size > 10 * 1024 * 1024) {
         alert(`File ${file.name} melebihi batas ukuran maksimal 10 MB.`);
         return false;
       }
       return true;
     });
-  
+
     if (files.length + newFiles.length > 5) {
       alert("Maksimal hanya dapat mengunggah 5 file.");
       return;
     }
-  
+
     const newFileURLs = newFiles.map((file) => URL.createObjectURL(file));
     setFiles((prevFiles) => [...prevFiles, ...newFileURLs]);
-  
+
     if (!selectedImage && newFileURLs.length > 0) {
       setSelectedImage(newFileURLs[0]);
     }
   };
-  
+
   const handleNextImage = () => {
     const currentIndex = files.indexOf(selectedImage);
     const nextIndex = (currentIndex + 1) % files.length;
@@ -71,6 +72,134 @@ const ReportPage = () => {
       setPhoneNumber(value);
     }
   };
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [villages, setVillages] = useState([]);
+  const [postalCode, setPostalCode] = useState("");
+
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedVillage, setSelectedVillage] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch provinces on initial render
+  useEffect(() => {
+    const fetchProvinces = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          "https://alamat.thecloudalert.com/api/provinsi/get/"
+        );
+        setProvinces(response.data.result);
+      } catch (error) {
+        console.error("Error fetching provinces:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProvinces();
+  }, []);
+
+  // Fetch cities based on selected province
+  const fetchCities = async (provinceId) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `https://alamat.thecloudalert.com/api/kabkota/get/?d_provinsi_id=${provinceId}`
+      );
+      setCities(response.data.result);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch districts based on selected city
+  const fetchDistricts = async (cityId) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `https://alamat.thecloudalert.com/api/kecamatan/get/?d_kabkota_id=${cityId}`
+      );
+      setDistricts(response.data.result);
+    } catch (error) {
+      console.error("Error fetching districts:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch villages based on selected district
+  const fetchVillages = async (districtId) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `https://alamat.thecloudalert.com/api/kelurahan/get/?d_kecamatan_id=${districtId}`
+      );
+      setVillages(response.data.result);
+    } catch (error) {
+      console.error("Error fetching villages:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch postal code based on selected city and district
+  const fetchPostalCode = async (cityId, districtId) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `https://alamat.thecloudalert.com/api/kodepos/get/?d_kabkota_id=${cityId}&d_kecamatan_id=${districtId}`
+      );
+      setPostalCode(response.data.result[0]?.text || "Belum tersedia");
+    } catch (error) {
+      console.error("Error fetching postal code:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle province change
+  const handleProvinceChange = (e) => {
+    const provinceId = e.target.value;
+    setSelectedProvince(provinceId);
+    setSelectedCity("");
+    setSelectedDistrict("");
+    setSelectedVillage("");
+    setPostalCode("");
+    if (provinceId) fetchCities(provinceId);
+  };
+
+  // Handle city change
+  const handleCityChange = (e) => {
+    const cityId = e.target.value;
+    setSelectedCity(cityId);
+    setSelectedDistrict("");
+    setSelectedVillage("");
+    setPostalCode("");
+    if (cityId) fetchDistricts(cityId);
+  };
+
+  // Handle district change
+  const handleDistrictChange = (e) => {
+    const districtId = e.target.value;
+    setSelectedDistrict(districtId);
+    setSelectedVillage("");
+    setPostalCode("");
+    if (districtId) fetchVillages(districtId);
+  };
+
+  // Handle village change
+  const handleVillageChange = (e) => {
+    const villageId = e.target.value;
+    setSelectedVillage(villageId);
+    if (villageId) fetchPostalCode(selectedCity, selectedDistrict);
+  };
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
@@ -80,7 +209,7 @@ const ReportPage = () => {
       </header>
 
       {/* Content */}
-      <main className="flex-1 container mx-auto py-10 px-4 overflow-y-auto ">
+      <main className="flex-1 container mx-auto p-4 mb-6 overflow-y-auto ">
         <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
           Buat Laporan
         </h2>
@@ -233,23 +362,117 @@ const ReportPage = () => {
               />
             </div>
 
-            <div className="text-left">
-              <label
-                htmlFor="location"
-                className="block text-sm font-medium mb-2 ml-2"
-              >
-                Lokasi
-              </label>
-              <Select>
-                <SelectTrigger id="location" className="w-full h-12">
-                  <SelectValue placeholder="Pilih lokasi" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="jakarta">Jakarta</SelectItem>
-                  <SelectItem value="bandung">Bandung</SelectItem>
-                  <SelectItem value="surabaya">Surabaya</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+              {/* Provinsi */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-2 ml-2"
+                  htmlFor="province"
+                >
+                  Provinsi
+                </label>
+                <select
+                  id="province"
+                  value={selectedProvince}
+                  onChange={handleProvinceChange}
+                  className="block w-full text-sm font-medium border rounded-md p-2 text-black bg-white"
+                >
+                  <option value="">Pilih Provinsi</option>
+                  {provinces.map((prov) => (
+                    <option key={prov.id} value={prov.id}>
+                      {prov.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Kota */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-2 ml-2"
+                  htmlFor="city"
+                >
+                  Kota/Kabupaten
+                </label>
+                <select
+                  id="city"
+                  value={selectedCity}
+                  onChange={handleCityChange}
+                  className="block w-full  text-sm font-medium mt-1 border rounded-md p-2 text-black bg-white"
+                >
+                  <option className="block text-sm  mb-2 ml-2" value="">
+                    Pilih Kota/Kabupaten
+                  </option>
+                  {cities.map((city) => (
+                    <option
+                      className="block text-sm  mb-2 ml-2"
+                      key={city.id}
+                      value={city.id}
+                    >
+                      {city.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Kecamatan */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-2 ml-2"
+                  htmlFor="district"
+                >
+                  Kecamatan
+                </label>
+                <select
+                  id="district"
+                  value={selectedDistrict}
+                  onChange={handleDistrictChange}
+                  className="block w-full text-sm font-medium  mt-1 border rounded-md p-2 text-black bg-white"
+                >
+                  <option value="">Pilih Kecamatan</option>
+                  {districts.map((district) => (
+                    <option key={district.id} value={district.id}>
+                      {district.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Kelurahan */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-2 ml-2"
+                  htmlFor="district"
+                >
+                  Kelurahan
+                </label>
+                <select
+                  id="district"
+                  value={selectedVillage}
+                  onChange={handleVillageChange}
+                  className="block w-full text-sm font-medium  mt-1 border rounded-md p-2 text-black bg-white"
+                >
+                  <option value="">Pilih Kelurahan</option>
+                  {villages.map((village) => (
+                    <option key={village.id} value={village.id}>
+                      {village.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Kode Pos */}
+              <div>
+                <label className="block text-sm font-medium mb-2 ml-2">
+                  Kode Pos
+                </label>
+                <Input
+                  value={postalCode}
+                  disabled
+                  className="w-full h-12"
+                  placeholder="Kode Pos"
+                />
+              </div>
             </div>
           </div>
         </div>

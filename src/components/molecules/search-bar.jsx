@@ -10,20 +10,19 @@ import {
 import { Input } from "@/components/ui/input";
 
 export const SearchBar = () => {
-  // State untuk data dropdown
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [zipCodes, setZipCodes] = useState([]);
 
-  // State pilihan pengguna
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch data provinsi saat pertama kali render
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     fetchProvinces();
   }, []);
@@ -112,6 +111,7 @@ export const SearchBar = () => {
       selectedDistrict,
       postalCode,
     });
+    setOpen(false);
   };
 
   return (
@@ -121,9 +121,33 @@ export const SearchBar = () => {
     >
       <div className="flex items-center space-x-2">
         {/* Filter Button */}
-        <Popover>
+        <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <Button variant="outline">Filter</Button>
+            <Button variant="outline">
+              Filter{" "}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-sliders-horizontal"
+              >
+                <line x1="21" x2="14" y1="4" y2="4" />
+                <line x1="10" x2="3" y1="4" y2="4" />
+                <line x1="21" x2="12" y1="12" y2="12" />
+                <line x1="8" x2="3" y1="12" y2="12" />
+                <line x1="21" x2="16" y1="20" y2="20" />
+                <line x1="12" x2="3" y1="20" y2="20" />
+                <line x1="14" x2="14" y1="2" y2="6" />
+                <line x1="8" x2="8" y1="10" y2="14" />
+                <line x1="16" x2="16" y1="18" y2="22" />
+              </svg>
+            </Button>
           </PopoverTrigger>
           <PopoverContent className="w-full bg-white shadow-lg p-4 rounded-md">
             <div className="space-y-4">
@@ -133,7 +157,7 @@ export const SearchBar = () => {
                   id="province"
                   value={selectedProvince}
                   onChange={handleProvinceChange}
-                  className="block w-full mt-1 border rounded-md p-2  text-white"
+                  className="block w-full mt-1 border rounded-md p-2 text-white"
                 >
                   <option value="">Pilih Provinsi</option>
                   {provinces.map((prov) => (
@@ -177,6 +201,22 @@ export const SearchBar = () => {
                   ))}
                 </select>
               </div>
+              <div>
+                <label htmlFor="district">Kelurahan</label>
+                <select
+                  id="district"
+                  value={selectedVillage}
+                  onChange={handleVillageChange}
+                  className="block w-full mt-1 border rounded-md p-2 text-white"
+                >
+                  <option value="">Pilih Kelurahan</option>
+                  {villages.map((village) => (
+                    <option key={village.id} value={village.id}>
+                      {village.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="grid grid-cols-3 items-center gap-2">
                 <Label htmlFor="postalCode">Kode Pos</Label>
                 <Input
@@ -185,6 +225,31 @@ export const SearchBar = () => {
                   placeholder="Masukkan Kode Pos"
                   className="col-span-2"
                 />
+              </div>
+
+              {/* Buttons */}
+              <div className="flex items-center space-x-2 mt-4">
+                {/* Reset Button */}
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setSelectedProvince("");
+                    setSelectedCity("");
+                    setSelectedDistrict("");
+                    setPostalCode("");
+                    setSearchQuery("");
+                  }}
+                >
+                  Reset
+                </Button>
+
+                {/* Terapkan Button */}
+                <Button
+                  onClick={handleSearch}
+                  className="bg-primaryBlack text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                >
+                  Terapkan
+                </Button>
               </div>
             </div>
           </PopoverContent>
@@ -197,7 +262,7 @@ export const SearchBar = () => {
             id="search-bar"
             value={searchQuery}
             onChange={handleSearchChange}
-            className="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-black"
             placeholder="Cari item..."
             required
           />
