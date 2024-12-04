@@ -417,6 +417,27 @@ const ReportPage = () => {
               </div>
 
               {/* Kelurahan */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-2 ml-2"
+                  htmlFor="district"
+                >
+                  Kelurahan
+                </label>
+                <select
+                  id="district"
+                  value={selectedVillage}
+                  onChange={handleVillageChange}
+                  className="block w-full text-sm font-medium mt-1 border rounded-md p-2 text-black bg-white"
+                >
+                  <option value="">Pilih Kelurahan</option>
+                  {villages.map((village) => (
+                    <option key={village.id} value={village.id}>
+                      {village.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Kode Pos */}
               <div>
