@@ -9,7 +9,7 @@ const KebijakanPrivasi = () => {
       <h1 class="p-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
         Kebijakan Privasi
       </h1>
-      <div className="flex justify-center pb-10">
+      <div className="flex justify-center pb-10 px-4">
         {" "}
         <ScrollArea className="w-[400px] md:w-[550px] lg:w-[850px] h-[450px] bg-primaryBlack rounded-md border p-6 text-white text-justify">
           {" "}

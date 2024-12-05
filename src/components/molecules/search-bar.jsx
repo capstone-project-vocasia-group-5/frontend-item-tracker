@@ -141,7 +141,7 @@ export const SearchBar = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className="md:max-w-2xl lg:max-w-4xl sm:max-w-xl max-w-sm mx-auto mt-10"
+      className="md:max-w-2xl lg:max-w-4xl sm:max-w-xl max-w-sm lg:mx-auto mt-8 mx-3"
     >
       <div className="flex items-center space-x-2">
         {/* Filter Button */}
@@ -247,7 +247,8 @@ export const SearchBar = () => {
                 <Input
                   id="postalCode"
                   value={postalCode}
-                  placeholder="Masukkan Kode Pos"
+                  disabled
+                  placeholder="Kode Pos"
                   className="col-span-2"
                 />
               </div>
