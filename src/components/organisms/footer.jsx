@@ -29,7 +29,7 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li class="mb-4">
-                  <a href="/notifikasi" class="hover:underline">
+                  <a href="/notification" class="hover:underline">
                     Notifikasi
                   </a>
                 </li>
@@ -51,17 +51,17 @@ export const Footer = () => {
               </h2>
               <ul class="text-gray-500 dark:text-gray-400 font-medium">
                 <li class="mb-4">
-                  <Link to="/donasi" className="hover:underline">
+                  <Link to="/donation" className="hover:underline">
                     Donasi Sekarang
                   </Link>
                 </li>
                 <li class="mb-4">
-                  <Link to="/tentang-kami" className="hover:underline">
+                  <Link to="/about" className="hover:underline">
                     Tentang Kami
                   </Link>
                 </li>
                 <li class="mb-4">
-                  <Link to="/kontak-kami" className="hover:underline">
+                  <Link to="/contact" className="hover:underline">
                     Kontak Kami
                   </Link>
                 </li>
@@ -73,14 +73,14 @@ export const Footer = () => {
               </h2>
               <ul class="text-gray-500 dark:text-gray-400 font-medium">
                 <li class="mb-4">
-                  <a href="/kebijakan-privasi" class="hover:underline">
+                  <Link to="/privacy" class="hover:underline">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/syarat-ketentuan" class="hover:underline">
+                  <Link to="/terms" class="hover:underline">
                     Terms &amp; Conditions
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

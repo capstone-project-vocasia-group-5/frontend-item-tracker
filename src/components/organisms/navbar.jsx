@@ -91,7 +91,7 @@ export const Navbar = () => {
             </li>
             <li>
               <a
-                href="/notifikasi"
+                href="/notification"
                 className={`block py-1 px-3 rounded-full ${isActive(
                   "/notifikasi"
                 )}`}
