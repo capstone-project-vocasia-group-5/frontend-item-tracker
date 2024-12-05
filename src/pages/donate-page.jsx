@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { donate } from "../api/api";
 
 const DonationForm = () => {

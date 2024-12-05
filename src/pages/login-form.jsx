@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { loginUser } from "../api/api";
+import { toast } from "sonner";
 import { useAuth } from "../context/auth-context";
 
 function LoginForm() {
@@ -29,12 +29,12 @@ function LoginForm() {
       const response = await loginUser({ email, password });
       const token = response.data.data.token;
       login(token);
-      toast.success(response.data.message);
+      toast.success(response.data?.message || "Login berhasil");
 
       navigate("/after");
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data?.errors);
+        toast.error(error.response.data?.errors || "Terjadi kesalahan");
       } else {
         toast.error("Terjadi kesalahan");
       }
