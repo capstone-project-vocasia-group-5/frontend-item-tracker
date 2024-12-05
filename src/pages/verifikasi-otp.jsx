@@ -1,8 +1,18 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { verifyOTP } from "../api/api";
 
 function VerifikasiOTP() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const inputRefs = useRef([]);
+  const navigate = useNavigate();
+  const email = localStorage.getItem("email");
+  const [loading, setLoading] = useState(false);
+
+  const handleSendOTP = () => {
+    navigate("/send-otp");
+  };
 
   const handleChange = (value, index) => {
     if (!/^\d?$/.test(value)) return; // Hanya angka yang diperbolehkan
@@ -22,9 +32,32 @@ function VerifikasiOTP() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Kode OTP: ${otp.join("")}`);
+
+    if (!otp.join("")) {
+      toast.error("Kode OTP harus diisi");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await verifyOTP({ email, otp: otp.join("") });
+
+      const token = response.data.data.token;
+      localStorage.setItem("token", token);
+      toast.success(response.data?.message || "Verifikasi berhasil");
+      navigate("/after");
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data?.errors || "Terjadi kesalahan");
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,16 +71,16 @@ function VerifikasiOTP() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            ItemTrack
+          </h1>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <div className="text-center mb-4">
             <h2 className="text-lg font-semibold">Masukkan kode 6 digit</h2>
-            <p className="text-sm text-gray-400">
-              Kode Dikirim Ke irawanade142@gmail.com 
-            </p>
+            <p className="text-sm text-gray-400">Kode OTP Dikirim Ke {email}</p>
           </div>
 
           {/* OTP Inputs */}
@@ -71,15 +104,18 @@ function VerifikasiOTP() {
             type="submit"
             className="w-full px-4 py-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
-            Verifikasi OTP
+            {loading ? "Memverifikasi OTP" : "Verifikasi OTP"}
           </button>
         </form>
 
         {/* Footer */}
-        <div className="text-left mt-4 text-center">
+        <div className=" mt-4 text-center">
           <p className="text-sm">
             Belum mendapat pesan?{" "}
-            <a href="/" className="text-blue-400 hover:underline">
+            <a
+              onClick={handleSendOTP}
+              className="text-blue-400 hover:underline cursor-pointer"
+            >
               Kirim ulang kode
             </a>
           </p>
