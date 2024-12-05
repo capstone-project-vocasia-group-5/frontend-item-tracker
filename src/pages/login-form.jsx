@@ -27,17 +27,12 @@ function LoginForm() {
       const response = await loginUser({ email, password });
       const token = response.data.data.token;
       localStorage.setItem("token", token);
-      navigate("/after");
+      toast.success(response.data.message);
 
-      toast.success("Login berhasil!");
+      navigate("/after");
     } catch (error) {
-      if (
-        (error.response && error.response.status === 404) ||
-        error.response.status === 401
-      ) {
-        toast.error("Akun anda tidak ditemukan");
-      } else if (error.response && error.response.status === 400) {
-        toast.error("Email atau password salah");
+      if (error.response) {
+        toast.error(error.response.data?.errors);
       } else {
         toast.error("Terjadi kesalahan");
       }
