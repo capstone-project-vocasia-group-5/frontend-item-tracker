@@ -37,7 +37,7 @@
   background-color: #0160ee;
   opacity: 1;
   filter: blur(12px);
-  animation: blob-bounce 1s infinite ease;
+  animation: blob-bounce 3s infinite ease;
 }
 
 @keyframes blob-bounce {
