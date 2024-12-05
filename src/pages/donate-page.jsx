@@ -1,15 +1,53 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
+import { toast } from "react-toastify";
+import { donate } from "../api/api";
 
 const DonationForm = () => {
   const [amount, setAmount] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log({ amount, isAnonymous });
+
+    if (!amount || !name || !email) {
+      toast.error("Semua kolom harus diisi dengan benar");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await donate({
+        name,
+        email,
+        amount,
+        is_anonymous: isAnonymous,
+      });
+
+      const paymentUrl = response.data.data.paymentUrl;
+      if (paymentUrl) {
+        window.location.href = paymentUrl;
+      } else {
+        toast.error("Gagal mendapatkan URL pembayaran");
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data?.errors || "Terjadi kesalahan");
+      } else if (error.request) {
+        toast.error(
+          "Permintaan tidak dapat dikirim. Cek koneksi internet Anda."
+        );
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,6 +117,9 @@ const DonationForm = () => {
                   type="text"
                   placeholder="Masukkan Nama Akun Anda"
                   className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-sm"
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                 />
               </div>
 
@@ -87,13 +128,16 @@ const DonationForm = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-semibold"
                 >
-                  Email (opsional)
+                  Email
                 </label>
                 <input
                   id="email"
                   type="email"
                   placeholder="Masukkan Email Anda"
                   className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-sm"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
               </div>
 
@@ -113,9 +157,12 @@ const DonationForm = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full py-3 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                  disabled={loading}
+                  className={`w-full py-3 text-sm text-black font-semibold rounded-lg ${
+                    loading ? "bg-gray-300" : "bg-white hover:bg-gray-100"
+                  }`}
                 >
-                  Lanjutkan
+                  {loading ? "Memproses..." : "Lanjutkan"}
                 </button>
               </div>
             </form>

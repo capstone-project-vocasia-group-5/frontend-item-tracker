@@ -23,3 +23,6 @@ export const loginAdmin = (user) => api.post("/auth/admin/signin", user);
 export const sendOTP = (data) => api.post("/auth/send-otp", data);
 export const verifyOTP = (data) => api.post("/auth/verify-otp", data);
 export const registerUser = (user) => api.post("/auth/register", user);
+
+// donate
+export const donate = (data) => api.post("/donations", data);
