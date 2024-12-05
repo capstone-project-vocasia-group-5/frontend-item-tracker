@@ -1,7 +1,5 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
-import { Navbar } from "../components/organisms/navbar.jsx";
-import { Footer } from "../components/organisms/footer.jsx";
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,8 +39,6 @@ const ManageCategory = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar />
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
@@ -152,7 +148,6 @@ const ManageCategory = () => {
                               onClick={() =>
                                     setActiveDropdown(
                                       activeDropdown === category.id ? null : category.id
-                                    
                               )
                                 }
                             >
@@ -200,8 +195,6 @@ const ManageCategory = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
   );
 };
 

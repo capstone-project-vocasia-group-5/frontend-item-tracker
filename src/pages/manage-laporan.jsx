@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Navbar } from "../components/organisms/navbar";
-import Footer from "../components/organisms/footer";
 
 const ManageLaporanUser = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -89,8 +87,6 @@ const ManageLaporanUser = () => {
   }, [openDropdownId]);
 
   return (
-    <div>
-      <Navbar></Navbar>
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 flex justify-between">
@@ -277,8 +273,6 @@ const ManageLaporanUser = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
-    </div>
   );
 };
 

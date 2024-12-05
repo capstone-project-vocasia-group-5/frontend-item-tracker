@@ -27,18 +27,14 @@ const ManageAkunList = () => {
     },
   ];
 
-  // Menggunakan data eksternal atau data sampel
   useEffect(() => {
-    // Simulasi pengambilan data eksternal (gunakan API fetch jika diperlukan)
     setAccounts(sampleData);
   }, []);
 
-  // Fungsi untuk menangani perubahan input pencarian
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Fungsi pencarian
   const filteredAccounts = accounts.filter((account) =>
     account.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
     account.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
