@@ -153,7 +153,7 @@ export function CardDemo({ className, ...props }) {
   ];
 
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div className="flex flex-wrap gap-2 justify-center w-full items-center">
       {cardItem.map((card) => (
         <Card
           className={cn(
@@ -163,7 +163,7 @@ export function CardDemo({ className, ...props }) {
           {...props}
         >
           {/* Konten Hover */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className="cursor-pointer absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             Lihat Detail
           </div>
 
