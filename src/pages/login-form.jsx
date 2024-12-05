@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginUser } from "../api/api";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -8,12 +10,12 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate(); // Hook navigasi
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); 
-    setLoading(true); 
+    setErrorMessage("");
+    setLoading(true);
 
     if (!email || !password) {
       setErrorMessage("Email dan Password harus diisi");
@@ -22,25 +24,23 @@ function LoginForm() {
     }
 
     try {
-      const response = await fetch("https://api.sukisushi.works/api/v1/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await loginUser({ email, password });
+      const token = response.data.data.token;
+      localStorage.setItem("token", token);
+      navigate("/after");
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login gagal");
-      }
-
-      // Berhasil login, arahkan ke halaman HomePageDefault
-      alert("Login berhasil!");
-      navigate("/homepage"); 
+      toast.success("Login berhasil!");
     } catch (error) {
-      setErrorMessage(error.message);
+      if (
+        (error.response && error.response.status === 404) ||
+        error.response.status === 401
+      ) {
+        toast.error("Akun anda tidak ditemukan");
+      } else if (error.response && error.response.status === 400) {
+        toast.error("Email atau password salah");
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,9 @@ function LoginForm() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            ItemTrack
+          </h1>
         </div>
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           <div className="text-left">
@@ -85,7 +87,6 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="flex items-center justify-between mt-2">
-                {/* Checkbox Tampilkan Password */}
                 <div className="flex items-center">
                   <input
                     type="checkbox"
@@ -99,7 +100,6 @@ function LoginForm() {
                   </label>
                 </div>
 
-                {/* Hyperlink Lupa Password */}
                 <a
                   href="/send-otp"
                   className="text-sm text-blue-400 hover:underline"
