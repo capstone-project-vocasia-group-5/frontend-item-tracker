@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { registerUser } from "../api/api";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -9,6 +12,8 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,29 +27,24 @@ function RegisterForm() {
     }
 
     try {
-      const response = await fetch("https://your-api-endpoint.com/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          fullname,
-          email,
-          phoneNumber: `+62${phoneNumber}`,
-          password,
-        }),
+      const response = await registerUser({
+        username,
+        name: fullname,
+        email,
+        phone_number: "+62" + phoneNumber,
+        password,
       });
 
-      const data = await response.json();
+      localStorage.setItem("email", email);
+      toast.success(response.data.message);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Registrasi gagal.");
-      }
-
-      alert("Registrasi berhasil! Silakan masuk.");
+      navigate("/send-otp");
     } catch (error) {
-      setErrorMessage(error.message);
+      if (error.response) {
+        toast.error(error.response.data?.errors);
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
     } finally {
       setLoading(false);
     }
