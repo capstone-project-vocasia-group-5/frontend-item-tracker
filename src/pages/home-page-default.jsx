@@ -33,7 +33,9 @@ const HomePageDefault = () => {
       <div id="FoundSection">
         {" "}
         <h1 class="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
-          Barang Temuan
+          <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
+            Barang Temuan !
+          </span>
         </h1>
         <FoundList />
       </div>

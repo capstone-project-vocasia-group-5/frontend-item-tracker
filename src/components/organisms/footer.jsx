@@ -95,7 +95,7 @@ export const Footer = () => {
             </a>
             . All Rights Reserved.
           </span>
-          <div class="flex mt-4 sm:justify-center sm:mt-0">
+          <div class="flex mt-4 justify-center sm:mt-0">
             <a
               href="#"
               class="text-gray-500 hover:text-gray-900 dark:hover:text-white"

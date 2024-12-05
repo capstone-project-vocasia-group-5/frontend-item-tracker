@@ -52,11 +52,11 @@ const DonationForm = () => {
 
   return (
     <div>
-      <Navbar></Navbar>{" "}
-      <div className=" flex flex-col justify-center items-center min-h-screen bg-gray-100">
-        <div className="w-full max-w-md absolute left-1/2 transform -translate-x-1/2">
-          <div className="bg-black text-white p-6 rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold text-center mb-6">Donasi Yuk</h1>
+      <Navbar></Navbar>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-full max-w-xl absolute left-1/2 transform -translate-x-1/2 px-4">
+          <h1 className="text-2xl font-bold text-center mb-6">Donasi Yuk</h1>
+          <div className="bg-black text-white p-5 rounded-lg shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block mb-2 text-sm font-semibold">

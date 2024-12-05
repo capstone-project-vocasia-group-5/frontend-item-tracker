@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ui/scroll-top";
 import HomePageDefault from "./pages/home-page-default";
 import React from "react";
 import DonationForm from "./pages/donate-page";
@@ -36,6 +37,7 @@ import HomePageAdmin from "./pages/homepage-admin";
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePageDefault />} />
         <Route path="/after" element={<HomepageAfterLogin />} />

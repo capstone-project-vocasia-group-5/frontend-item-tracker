@@ -157,7 +157,7 @@ export function CardDemo({ className, ...props }) {
       {cardItem.map((card) => (
         <Card
           className={cn(
-            "w-[180px] hover:bg-gray-100 relative group overflow-hidden grid sm:w-[160px] md:w-[170px] lg:w-[180px] flex-grow flex-shrink-0 basis-[160px] border rounded-lg shadow-md",
+            "w-[180px] hover:bg-gray-100 relative group overflow-hidden grid sm:w-[160px] md:w-[170px] lg:w-[180px] flex-grow flex-shrink-0 basis-[160px] border rounded-md shadow-md",
             className
           )}
           {...props}
