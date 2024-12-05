@@ -77,7 +77,7 @@ const notifications = [
 export function FiturUtama({ className, ...props }) {
   return (
     <div className="my-10 flex justify-center">
-      <div className="flex flex-wrap gap-4 w-full justify-center p-4">
+      <div className="flex flex-wrap gap-4 w-full justify-center items-center p-4">
         {notifications.map((notification, index) => (
           <Card
             className={cn(

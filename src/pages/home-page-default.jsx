@@ -41,7 +41,7 @@ const HomePageDefault = () => {
       </div>
       <Separator />
       {/* 10 Fitur Utama */}
-      <div id="fiturUtama">
+      <div id="fiturUtama" className="max-w-screen-xl mx-auto">
         <h1 class="mt-12 mb-10 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           10{" "}
           <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
