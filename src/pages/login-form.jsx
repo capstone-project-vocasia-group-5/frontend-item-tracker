@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginUser } from "../api/api";
+import { useAuth } from "../context/auth-context";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ function LoginForm() {
     try {
       const response = await loginUser({ email, password });
       const token = response.data.data.token;
-      localStorage.setItem("token", token);
+      login(token);
       toast.success(response.data.message);
 
       navigate("/after");

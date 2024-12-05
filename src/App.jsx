@@ -1,8 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import ScrollToTop from "./components/ui/scroll-top";
-import HomePageDefault from "./pages/home-page-default";
 import React from "react";
+import HomePageDefault from "./pages/home-page-default";
 import DonationForm from "./pages/donate-page";
 import SendOTP from "./pages/send-otp";
 import Donatur from "./pages/list-donatur";
@@ -34,44 +35,150 @@ import TentangKami from "./pages/tentang-kami";
 import KontakKami from "./pages/kontak-kami";
 import HomePageAdmin from "./pages/homepage-admin";
 
+import { AuthProvider } from "./context/auth-context";
+import ProtectedRoute from "./config/protected-route";
+
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePageDefault />} />
-        <Route path="/after" element={<HomepageAfterLogin />} />
-        <Route path="/tentang-kami" element={<TentangKami />} />
-        <Route path="/kontak-kami" element={<KontakKami />} />
-        {/* CLIENT Routes */}
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/found" element={<FoundPage />} />
-        <Route path="/lost" element={<LostPage />} />
-        <Route path="/update-profile" element={<UpdateProfileUser />} />
-        <Route path="/report" element={<ReportPage />} />
-        <Route path="/donasi" element={<DonationForm />} />
-        <Route path="/sidebar" element={<ProfileBase />} />
-        <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
-        <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
-        <Route path="/notifikasi" element={<Notifikasi />} />
-        <Route path="/detail-item" element={<DetailItem />} />
-        <Route path="/send-otp" element={<SendOTP />} />
-        <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
-        <Route path="/bukti-pengajuan" element={<BuktiPengajuan />} />
-        <Route path="/manage-laporan" element={<ManageLaporanUser />} />
-        <Route path="/manage-pengajuan" element={<ManagePengajuan />} />
-        <Route path="/list-donator" element={<Donatur />} />
-        <Route path="/thanks" element={<ThankYou />} />
-        {/* ADMIN Routes */}
-        <Route path="/admin" element={<HomePageAdmin />} />
-        <Route path="/login-admin" element={<LoginAdmin />} />
-        <Route path="/manage-akun-list" element={<ManageAkunList />} />
-        <Route path="/manage-category" element={<ManageCategory />} />
-        <Route path="/manage-verif-laporan" element={<VerifikasiLaporan />} />
-        <Route path="/manage-laporan-admin" element={<ManageLaporanAdmin />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePageDefault />} />
+          <Route
+            path="/after"
+            element={
+              <ProtectedRoute>
+                <HomepageAfterLogin />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/about" element={<TentangKami />} />
+          <Route path="/contact" element={<KontakKami />} />
+          {/* CLIENT Routes */}
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route
+            path="/found"
+            element={
+              <ProtectedRoute>
+                <FoundPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/lost"
+            element={
+              <ProtectedRoute>
+                <LostPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/update-profile"
+            element={
+              <ProtectedRoute>
+                <UpdateProfileUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/report"
+            element={
+              <ProtectedRoute>
+                <ReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/donation" element={<DonationForm />} />
+          <Route path="/sidebar" element={<ProfileBase />} />
+          <Route path="/terms" element={<SyaratKetentuan />} />
+          <Route path="/privacy" element={<KebijakanPrivasi />} />
+          <Route
+            path="/notification"
+            element={
+              <ProtectedRoute>
+                <Notifikasi />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/detail-item"
+            element={
+              <ProtectedRoute>
+                <DetailItem />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/send-otp" element={<SendOTP />} />
+          <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
+          <Route
+            path="/proof-of-submission"
+            element={
+              <ProtectedRoute>
+                <BuktiPengajuan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/management-report"
+            element={
+              <ProtectedRoute>
+                <ManageLaporanUser />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/management-submission"
+            element={
+              <ProtectedRoute>
+                <ManagePengajuan />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/donatur" element={<Donatur />} />
+          <Route path="/thanks" element={<ThankYou />} />
+          {/* ADMIN Routes */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <HomePageAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login-admin" element={<LoginAdmin />} />
+          <Route
+            path="/admin/management-account"
+            element={
+              <ProtectedRoute>
+                <ManageAkunList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/management-category"
+            element={
+              <ProtectedRoute>
+                <ManageCategory />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/management-verification"
+            element={
+              <ProtectedRoute>
+                <VerifikasiLaporan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/management-report"
+            element={<ManageLaporanAdmin />}
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
