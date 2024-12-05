@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Poppins", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -150,8 +151,8 @@ button:focus-visible {
   }
 }
 
-.anton-sc-regular {
-  font-family: "Anton SC", sans-serif;
+.jaro {
+  font-family: "Jaro", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
