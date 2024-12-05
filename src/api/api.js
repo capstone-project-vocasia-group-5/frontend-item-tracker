@@ -1,10 +1,25 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:9000/api/v1", // URL backend Anda
-  headers: {
-    "Content-Type": "application/json",
-  },
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
-export default axiosInstance;
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// auth
+export const loginUser = (user) => api.post("/auth/signin", user);
+export const loginAdmin = (user) => api.post("/auth/admin/signin", user);
+export const sendOTP = (data) => api.post("/auth/send-otp", data);
+export const verifyOTP = (data) => api.post("/auth/verify-otp", data);
+export const registerUser = (user) => api.post("/auth/register", user);
