@@ -71,9 +71,6 @@ const UpdateProfileUser = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <Navbar />
-
       {/* Main Content */}
       <main className="flex-grow mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -231,11 +228,6 @@ const UpdateProfileUser = () => {
           </form>
         </div>
       </main>
-
-      {/* Footer */}
-      <div className="mt-16">
-        <Footer />
-      </div>
     </div>
   );
 };
