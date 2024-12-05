@@ -32,18 +32,18 @@ function VerifikasiOTP() {
       {/* Card Container */}
       <div className="w-96 p-8 bg-black text-white rounded-lg shadow-lg">
         {/* Logo */}
-        {/* <div className="flex items-center justify-center mb-6 space-x-3">
+        <div className="flex items-center justify-center mb-8 space-x-3">
           <img
             src="/image/Logo.png"
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
           <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
-        </div> */}
+        </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-          <div className="text-left mb-4">
+          <div className="text-center mb-4">
             <h2 className="text-lg font-semibold">Masukkan kode 6 digit</h2>
             <p className="text-sm text-gray-400">
               Kode Dikirim Ke irawanade142@gmail.com 
