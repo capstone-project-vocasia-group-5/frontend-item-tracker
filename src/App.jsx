@@ -59,8 +59,8 @@ function App() {
         <Route path="/bukti-pengajuan" element={<BuktiPengajuan />} />
         <Route path="/manage-laporan" element={<ManageLaporanUser />} />
         <Route path="/manage-pengajuan" element={<ManagePengajuan />} />
-        <Route path="/list-donatur" element={<Donatur />} />
-        <Route path="/ucapan-terimakasih" element={<ThankYou />} />
+        <Route path="/list-donator" element={<Donatur />} />
+        <Route path="/thanks" element={<ThankYou />} />
         {/* ADMIN Routes */}
         <Route path="/admin" element={<HomePageAdmin />} />
         <Route path="/login-admin" element={<LoginAdmin />} />

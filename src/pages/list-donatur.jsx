@@ -21,17 +21,15 @@ const Donatur = () => {
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
-              Angel Investors (&gt; IDR 10 JUTA)
+              Investor (&gt; IDR 10 JUTA)
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
             <ul className="list-none space-y-2 text-left text-gray-600">
-              <li>Elizabeth Sillalah</li>
-              <li>ICBC NISP</li>
-              <li>Karadi Hamam</li>
-              <li>Nico Krisnanto</li>
-              <li>Suradi Hamam</li>
-              <li>Yayasan Pendidikan Mandiri</li>
+              <li>Bambang Pamungkas</li>
+              <li>Boaz Salosa</li>
+              <li>Willie Salim</li>
+              <li>Deny Sumargo</li>
             </ul>
           </CardContent>
         </div>
@@ -40,7 +38,7 @@ const Donatur = () => {
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
-              Relawan & Kontributor (&lt; IDR 10 JUTA)
+              Donatur (&lt; IDR 10 JUTA)
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
