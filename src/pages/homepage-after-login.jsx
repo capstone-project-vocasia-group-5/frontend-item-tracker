@@ -22,9 +22,9 @@ const HomepageAfterLogin = () => {
 
       {/* Lost Section */}
       <div id="LostSection" className="p-10">
-        <h1 class="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+        <h1 className="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
           Temukan dan Laporkan{" "}
-          <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
+          <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
             Barang Anda !
           </span>
         </h1>
@@ -35,7 +35,7 @@ const HomepageAfterLogin = () => {
       {/* Found Section */}
       <div id="FoundSection" className="p-10">
         {" "}
-        <h1 class="pt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+        <h1 className="pt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           Barang Temuan
         </h1>
         <FoundList />
@@ -43,9 +43,9 @@ const HomepageAfterLogin = () => {
       <Separator />
       {/* 10 Fitur Utama */}
       <div id="fiturUtama">
-        <h1 class="mt-12 mb-10 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+        <h1 className="mt-12 mb-10 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           10{" "}
-          <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
+          <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
             Fitur Utama
           </span>{" "}
           ItemTrack
