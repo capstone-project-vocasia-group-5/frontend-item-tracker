@@ -15,7 +15,7 @@ const KontakKami = () => {
       <Navbar />
 
       {/* Konten Utama */}
-      <main className="container mx-auto py-12 px-4">
+      <main className="container mx-auto py-12 px-4 pd-6">
         <h1 className="text-3xl font-bold text-center mb-16">Kontak Kami</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Formulir Kontak */}
@@ -89,7 +89,7 @@ const KontakKami = () => {
           </Card>
 
           {/* Informasi Kontak */}
-          <Card className="p-6 bg-black text-white text-left md:ml-auto w-[600px] h-96">
+          <Card className="p-6 bg-black text-white mr-16 text-left md:ml-auto w-full sm:w-[300px] md:w-[360px] h-96">
             <div className="flex items-center justify-center mb-4 mt-4 space-x-3">
               <img
                 src="/image/Logo.png"
