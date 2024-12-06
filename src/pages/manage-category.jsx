@@ -1,32 +1,93 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
+import { getAllCategories, updateCategory, deleteCategory } from "../api/api.js";
+import { getAllItems } from "../api/api.js";
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [items, setItems] = useState([]);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [editName, setEditName] = useState("");
 
-  const sampleCategories = [
-    { id: 1, name: "Perhiasan", itemCount: 20, createdAt: "20/09/2024" },
-    { id: 2, name: "Elektronik", itemCount: 35, createdAt: "15/08/2024" },
-    { id: 3, name: "Buku", itemCount: 12, createdAt: "10/06/2024" },
-  ];
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
+useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const response = await getAllCategories();
+      setCategories(response.data.data.categories);
+    } catch (error) {
+      console.log("Error fetching categories: ", error);
+    }
+  };
+  fetchCategories();
+}, []);
+
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const response = await getAllItems();
+      setItems(response.data.data.items);
+    } catch (error) {
+      console.error('Error fetching items:', error);
+    }
+  };
+  fetchItems();
+}, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     console.log("Searching for: ", searchQuery);
   };
 
-  const filteredCategories = sampleCategories.filter(
-    (category) =>
-      category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      category.itemCount.toString().includes(searchQuery) ||
-      category.createdAt.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredCategories = categories.filter((category) =>
+    category.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return new Intl.DateTimeFormat('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+  };
+
+  const handleEditClick = (category) => {
+    setEditingCategory(category); 
+    setEditName(category.name); 
+  };
+  
+  const handleSaveEdit = async () => {
+    try {
+      await updateCategory(editingCategory.id, { name: editName }); 
+      setCategories((prevCategories) =>
+        prevCategories.map((cat) =>
+          cat.id === editingCategory.id ? { ...cat, name: editName } : cat
+        )
+      );
+      setEditingCategory(null); 
+    } catch (error) {
+      console.error("Error updating category:", error);
+    }
+  };
+
+  const handleDeleteCategory = async (categoryId) => {
+    if (window.confirm("Apakah Anda yakin ingin menghapus kategori ini?")) {
+      try {
+        await deleteCategory(categoryId);
+        setCategories((prevCategories) =>
+          prevCategories.filter((category) => category.id !== categoryId)
+        );
+        alert("Kategori berhasil dihapus.");
+      } catch (error) {
+        console.error("Error deleting category:", error);
+        alert("Terjadi kesalahan saat menghapus kategori.");
+      }
+    }
+  };
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".dropdown-container")) {
@@ -40,7 +101,6 @@ const ManageCategory = () => {
   }, []);
 
   return (
-    <div>
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
@@ -105,86 +165,119 @@ const ManageCategory = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500 text-center">
-                  {filteredCategories.length > 0 ? (
-                    filteredCategories.map((category) => (
-                      <tr key={category.id}>
-                        <td className="px-4 py-4 sm:px-8">{category.name}</td>
-                        <td className="px-4 py-4 sm:px-8">
-                          {category.itemCount}
-                        </td>
-                        <td className="px-4 py-4 sm:px-8">
-                          {category.createdAt}
-                        </td>
+                    {filteredCategories.length > 0 ? (
+                      filteredCategories.map((category) => (
+                        <tr key={category.id}>
+                          <td className="px-4 py-4 sm:px-8">{category.name}</td>
+                          <td className="px-4 py-4 sm:px-8">
+                              {items.filter((item) => item.category_id === category.id).length} {/*belumkepanggil*/}
+                          </td>
+
+                        <td className="px-4 py-4 sm:px-8">{formatDate(category.created_at)}</td>
                         {/* Responsive Actions Column */}
                         <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
-                          {/* Large Screens */}
-                          <div className="hidden sm:flex space-x-2">
-                            <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="h-6 w-6"
+                            {editingCategory?.id === category.id ? (
+                              <>
+                              <input
+                                type="text"
+                                value={editName}
+                                onChange={(e) => setEditName(e.target.value)}
+                                className="border p-1 rounded tex-sm w-24"
+                              />
+                              <button
+                                onClick={handleSaveEdit}
+                                className="p-1 bg-green-500 text-white rounded hover:bg-green-600"
                               >
-                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                              </svg>
-                            </button>
-                            <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="h-6 w-6"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                          {/* Small Screens */}
-                          <div className="sm:hidden relative dropdown-container">
-                            <button
-                              className="p-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
-                              onClick={() =>
-                                setActiveDropdown(
-                                  activeDropdown === category.id
-                                    ? null
-                                    : category.id
-                                )
-                              }
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="h-6 w-6"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </button>
-                            {activeDropdown === category.id && (
-                              <div
-                                className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
-                                style={{ top: "-4rem" }}
-                              >
-                                <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                  Edit
+                                  Simpan
                                 </button>
-                                <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                  Hapus
+                              <button
+                                onClick={() => setEditingCategory(null)}
+                                className="p-1 bg-red-500 text-white rounded hover:bg-gray-600"
+                              >
+                                  Batal
                                 </button>
+                            </>
+                        ) : (
+                              <>
+                              {/* Large Screens */}
+                              <div className="hidden sm:flex space-x-2">
+                                  <button
+                                  onClick={() => handleEditClick(category)}
+                                  className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                >
+                                  <svg 
+                                  xmlns="http://www.w3.org/2000/svg" 
+                                  viewBox="0 0 24 24" 
+                                  fill="currentColor" 
+                                  class="size-6"
+                                  >
+                                    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                    <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                    </svg>
+                                  </button>
+                                <button 
+                                  onClick={() => handleDeleteCategory(category.id)}
+                                  className="p-1 bg-red-500 text-white rounded hover:bg-red-600"
+                                  >
+                                    <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 24 24" 
+                                    fill="currentColor" 
+                                    class="size-6"
+                                    >
+                                      <path 
+                                      fill-rule="evenodd" 
+                                      d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" 
+                                      clip-rule="evenodd" 
+                                      />
+                                      </svg>
+                                  </button>
                               </div>
-                            )}
-                          </div>
+                              {/* Small Screens */}
+                              <div className="sm:hidden relative dropdown-container">
+                                  <button
+                                  className="p-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
+                                  onClick={() =>
+                                      setActiveDropdown(activeDropdown === category.id ? null : category.id)
+                                  }
+                                >
+                                    <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="h-6 w-6"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </button>
+                                {activeDropdown === category.id && (
+                                    <div
+                                    className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
+                                    style={{ top: "-4rem" }}
+                                  >
+                                      <button
+                                      className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                      onClick={() => handleEditClick(category)}
+                                    >
+                                        Ubah
+                                      </button>
+                                      <button 
+                                        onClick={() => handleDeleteCategory(category.id)}
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        >
+                                        Hapus
+                                      </button>
+                                  </div>
+                              )}
+                              </div>
+                            </>
+                        )}
                         </td>
+
                       </tr>
                     ))
                   ) : (
@@ -200,7 +293,6 @@ const ManageCategory = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

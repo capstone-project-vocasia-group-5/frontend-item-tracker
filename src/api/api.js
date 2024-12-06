@@ -1,4 +1,5 @@
 import axios from "axios";
+import { data } from "react-router-dom";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -44,3 +45,9 @@ export const approveItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
 export const rejectItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
 export const donator = (data) => api.get("/donations", data);
 
+
+//category
+export const getAllCategories = (data) => api.get("/categories", data);
+export const getAllItems = (data) => api.get("/items", data); 
+export const updateCategory = (data) => api.patch(`/admin/categories/:id`, data);
+export const deleteCategory = (data) => api.delete(`/admin/categories/:id`, data)
