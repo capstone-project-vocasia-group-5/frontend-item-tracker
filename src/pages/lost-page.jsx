@@ -12,7 +12,7 @@ const LostPage = () => {
       <Navbar />
       {/* SearchBar */}
       <SearchBar />
-      <div className="md:max-w-2xl lg:max-w-5xl sm:max-w-xl max-w-sm mx-auto mt-10">
+      <div className="mx-auto mt-10">
         <ReportButton />
       </div>
 

@@ -33,7 +33,7 @@ const Notifikasi = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Navbar */}
-      <Navbar></Navbar>
+      <Navbar />
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto my-8 px-4">

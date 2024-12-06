@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Untuk navigasi
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
-import ManageCategory from "./manage-category";
 import ManageLaporan from "./manage-laporan";
 import UpdateProfileUser from "./update-profile-user";
 import HomePageDefault from "./home-page-default";
+import ManagePengajuan from "./manage-pengajuan";
 
-// Data untuk menu sidebar
 const menuItems = [
   {
     id: "profile",
@@ -16,8 +15,8 @@ const menuItems = [
   },
   {
     id: "status",
-    label: "Manajemen Kategori",
-    content: <SectionManageCategory />,
+    label: "Manajemen Pengajuan",
+    content: <SectionManagePengajuan />,
   },
   {
     id: "documents",
@@ -51,16 +50,16 @@ function ProfileBase() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-28 ">
+    <div className="max-w-screen-xl bg-gray-50">
       {/* Navbar */}
       <Navbar />
 
       {/* Layout utama */}
-      <div className="flex justify-center my-8 sm:my-12 md:my-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl gap-4">
+      <div className="flex justify-center m-4 max-w-screen-xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow">
           {/* Sidebar */}
-          <div className="w-full md:w-64 bg-white border border-gray-300 shadow rounded-lg ">
-            <div className="p-4 text-center border-b border-gray-300 bg-gray-100">
+          <div className="w-full bg-white border border-gray-300 shadow rounded-lg ">
+            <div className="p-4 text-center border-gray-300 bg-gray-100 w-full">
               <h4 className="text-lg font-semibold text-gray-800">
                 AGUS HERYANTO
               </h4>
@@ -86,7 +85,7 @@ function ProfileBase() {
           </div>
 
           {/* Konten */}
-          <div className="col-span-1 md:col-span-2 bg-white border border-gray-300 shadow rounded-lg p-4">
+          <div className="col-span-1 md:col-span-2 bg-white border border-gray-300 shadow rounded-lg p-4 w-full">
             {renderContent()}
           </div>
         </div>
@@ -102,8 +101,8 @@ function ProfileBase() {
 function SectionUpdateProfileUser() {
   return <UpdateProfileUser />;
 }
-function SectionManageCategory() {
-  return <ManageCategory />;
+function SectionManagePengajuan() {
+  return <ManagePengajuan />;
 }
 function SectionManageLaporan() {
   return <ManageLaporan />;
