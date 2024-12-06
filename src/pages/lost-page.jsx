@@ -11,23 +11,21 @@ const LostPage = () => {
     <div className="">
       <Navbar />
       {/* SearchBar */}
-      <SearchBar />
-      <div className="mx-auto mt-10">
+      <div className="max-w-screen-xl mx-auto p-4">
+        <SearchBar />
         <ReportButton />
+
+        {/* Lost Section */}
+        <div id="LostSection">
+          <h1 className="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+            Barang Hilang
+          </h1>
+
+          <LostList />
+        </div>
+
+        <PaginationDisplay />
       </div>
-
-      {/* Lost Section */}
-      <div id="LostSection">
-        <h1 className="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
-          Barang Hilang
-        </h1>
-
-        <LostList />
-      </div>
-
-      <PaginationDisplay />
-      <Separator />
-
       {/* Footer */}
       <Footer />
     </div>

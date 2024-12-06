@@ -20,7 +20,9 @@ const Homepage = () => {
         <HeaderFix />
       </div>
       {/* SearchBar */}
-      <SearchBar />
+      <div className="max-w-screen-xl mx-auto mt-10">
+        <SearchBar />
+      </div>
 
       {/* Render ReportButton hanya di route "/after" */}
       {location.pathname === "/after" && (
