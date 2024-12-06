@@ -4,7 +4,7 @@ import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
 import ManageLaporan from "./manage-laporan";
 import UpdateProfileUser from "./update-profile-user";
-import HomePageDefault from "./home-page-default";
+import HomePage from "./homepage-user";
 import ManagePengajuan from "./manage-pengajuan";
 
 const menuItems = [
@@ -43,20 +43,20 @@ function ProfileBase() {
   // Fungsi handle klik pada menu sidebar
   const handleMenuClick = (id, action) => {
     if (action === "logout") {
-      navigate("/"); // Arahkan ke halaman login atau beranda
+      navigate("/");
     } else {
       setActiveItem(id);
     }
   };
 
   return (
-    <div className="max-w-screen-xl bg-gray-50">
+    <div className="bg-gray-50">
       {/* Navbar */}
       <Navbar />
 
       {/* Layout utama */}
-      <div className="flex justify-center m-4 max-w-screen-xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow">
+      <div className="flex justify-center max-w-screen-xl mx-auto p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow w-full">
           {/* Sidebar */}
           <div className="w-full bg-white border border-gray-300 shadow rounded-lg ">
             <div className="p-4 text-center border-gray-300 bg-gray-100 w-full">
@@ -107,8 +107,8 @@ function SectionManagePengajuan() {
 function SectionManageLaporan() {
   return <ManageLaporan />;
 }
-function SectionHomePageDefault() {
-  return <HomePageDefault />;
+function SectionHomePage() {
+  return <HomePage />;
 }
 
 export default ProfileBase;

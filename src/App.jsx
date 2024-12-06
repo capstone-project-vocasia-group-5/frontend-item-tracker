@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import ScrollToTop from "./components/ui/scroll-top";
 import React from "react";
-import HomePageDefault from "./pages/home-page-default";
 import DonationForm from "./pages/donate-page";
 import SendOTP from "./pages/send-otp";
 import Donatur from "./pages/list-donatur";
 // CLIENT Pages
+import HomePage from "./pages/homepage-user";
 import LostPage from "./pages/lost-page";
 import LoginForm from "./pages/login-form";
 import RegisterForm from "./pages/register-form";
@@ -30,7 +30,6 @@ import ManageAkunList from "./pages/manage-akun-list";
 import ManageCategory from "./pages/manage-category";
 import VerifikasiLaporan from "./pages/verifikasi-laporan";
 import ManageLaporanAdmin from "./pages/manage-laporan-for-admin";
-import HomepageAfterLogin from "./pages/homepage-after-login";
 import TentangKami from "./pages/tentang-kami";
 import KontakKami from "./pages/kontak-kami";
 import HomePageAdmin from "./pages/homepage-admin";
@@ -44,12 +43,12 @@ function App() {
       <Router>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<HomePageDefault />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/after"
             element={
               <ProtectedRoute>
-                <HomepageAfterLogin />
+                <HomePage />
               </ProtectedRoute>
             }
           />
