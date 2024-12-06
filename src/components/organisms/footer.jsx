@@ -10,7 +10,7 @@ export const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="https://flowbite.com/" className="flex items-center">
               <img
-                src="/public/image/logo-3-white.svg"
+                src="/image/logo-3-white.svg"
                 className="h-10 me-3"
                 alt="ItemTrack Logo"
               />
