@@ -133,7 +133,7 @@ const ManagePengajuan = () => {
 
             {/* Filter by Pengajuan */}
             <div className="flex justify-between p-4">
-              <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-blue-500 transition [-webkit-tap-highlight-color:_transparent]">
+              <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-500 transition [-webkit-tap-highlight-color:_transparent]">
                 <input
                   className="peer sr-only"
                   type="checkbox"
@@ -142,7 +142,7 @@ const ManagePengajuan = () => {
                     handleFilterChange(filter === "saya" ? "lain" : "saya")
                   }
                 />
-                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-700 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-black peer-checked:ring-transparent"></span>
               </label>
               <span className="ml-2 text-lg">
                 {filter === "saya" ? "Pengajuan Saya" : "Pengajuan Orang Lain"}
