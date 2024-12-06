@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginAdmin } from "../api/api";
+import { toast } from "sonner";
+import { useAuth } from "../context/auth-context";
 
 function LoginAdmin() {
   const [email, setEmail] = useState("");
@@ -7,12 +11,15 @@ function LoginAdmin() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const { login } = useAuth();
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setLoading(true);
 
-    // Validasi sederhana
     if (!email || !password) {
       setErrorMessage("Email dan Password harus diisi");
       setLoading(false);
@@ -20,26 +27,18 @@ function LoginAdmin() {
     }
 
     try {
-      // Kirim data ke API
-      const response = await fetch("https://your-api-endpoint.com/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await loginAdmin({ email, password });
+      const token = response.data.data.token;
+      login(token);
+      toast.success(response.data?.message || "Login berhasil");
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login gagal");
-      }
-
-      // Berhasil login
-      alert("Login berhasil!");
-      console.log("Token:", data.token);
+      navigate("/admin");
     } catch (error) {
-      setErrorMessage(error.message);
+      if (error.response) {
+        toast.error(error.response.data?.errors || "Terjadi kesalahan");
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
     } finally {
       setLoading(false);
     }
