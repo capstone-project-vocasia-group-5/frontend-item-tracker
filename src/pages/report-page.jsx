@@ -207,7 +207,7 @@ const ReportPage = () => {
       </header>
 
       {/* Content */}
-      <main className="flex-1 container mx-auto p-4 mb-6 overflow-y-auto ">
+      <main className="flex-1 container mx-auto w-full max-w-screen-xl p-4 mb-6 overflow-y-auto ">
         <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
           Buat Laporan
         </h2>
@@ -215,7 +215,7 @@ const ReportPage = () => {
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
           {/* Upload Foto */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center ">
             <div
               className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center w-full sm:w-96 h-96 rounded-lg relative"
               onClick={() => document.getElementById("fileInput").click()}

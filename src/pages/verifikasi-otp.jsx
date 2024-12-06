@@ -67,7 +67,7 @@ function VerifikasiOTP() {
         {/* Logo */}
         <div className="flex items-center justify-center mb-8 space-x-3">
           <img
-            src="/image/Logo.png"
+            src="/image/logo-3-white.svg"
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
