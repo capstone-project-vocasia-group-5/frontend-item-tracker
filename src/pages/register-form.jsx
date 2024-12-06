@@ -56,7 +56,7 @@ function RegisterForm() {
         {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
           <img
-            src="/image/Logo.png"
+            src="/image/logo-3-white.svg"
             alt="ItemTrack Logo"
             className="w-10 h-10 sm:w-8 sm:h-8 object-contain"
           />
