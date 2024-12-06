@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import {
   Table,
   TableHeader,
@@ -6,89 +6,113 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Chip,
+  Input,
+  Pagination,
 } from "@nextui-org/react";
 
 const notifications = [
   {
     id: 1,
     image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    description: "Pesanan Anda telah dikirim!",
+    description: "Barang anda sudah disetujui",
     read: false,
   },
   {
     id: 2,
     image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-    description: "Promo menarik untuk Anda hari ini!",
+    description: "Barang Hilang anda sudah ditemukan",
     read: true,
   },
   {
     id: 3,
     image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-    description: "Tagihan bulan ini sudah jatuh tempo.",
+    description: "Ayo berdonatur!",
     read: false,
   },
   {
     id: 4,
     image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    description: "Pesanan Anda telah dikirim!",
+    description: "Barang anda dimana?",
     read: false,
   },
   {
     id: 5,
     image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-    description: "Promo menarik untuk Anda hari ini!",
+    description: "Dimana yh?",
     read: true,
   },
   {
     id: 6,
     image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-    description: "Tagihan bulan ini sudah jatuh tempo.",
+    description: "Es Es apa yang Teh",
     read: false,
   },
 ];
 
 export function Notif() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const filteredNotifications = useMemo(() => {
+    return notifications.filter((notif) =>
+      notif.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
+
+  const totalPages = Math.ceil(filteredNotifications.length / itemsPerPage);
+
+  const currentData = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredNotifications.slice(startIndex, endIndex);
+  }, [currentPage, filteredNotifications]);
+
   return (
     <div className="p-4">
-      <Table
-        aria-label="Tabel Notifikasi"
-        className="w-full"
-        classNames={{
-          table: "border rounded-lg overflow-hidden",
-        }}
-      >
+      <Input
+        placeholder="Cari notifikasi..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="mb-4"
+      />
+
+      <Table aria-label="Tabel Notifikasi">
         <TableHeader>
           <TableColumn>Gambar</TableColumn>
           <TableColumn>Deskripsi</TableColumn>
         </TableHeader>
         <TableBody>
-          {notifications.map((notification) => (
+          {currentData.map((notif) => (
             <TableRow
-              key={notification.id}
-              className={notification.read ? "" : "bg-gray-100"}
+              key={notif.id}
+              style={{
+                backgroundColor: notif.read ? "#e2e8f0" : "white",
+              }}
             >
               <TableCell>
                 <img
-                  src={notification.image}
-                  alt="Avatar"
-                  className="w-10 h-10 rounded-full"
+                  src={notif.image}
+                  alt="Gambar Notifikasi"
+                  style={{ width: 50, height: 50 }}
+                  className="rounded-lg"
                 />
               </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <p>{notification.description}</p>
-                  {!notification.read && (
-                    <Chip color="primary" size="sm">
-                      Baru
-                    </Chip>
-                  )}
-                </div>
-              </TableCell>
+              <TableCell>{notif.description}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      <div className="flex justify-center mt-4">
+        <Pagination
+          total={totalPages}
+          page={currentPage}
+          onChange={(page) => setCurrentPage(page)}
+          siblings={1}
+          boundaries={1}
+        />
+      </div>
     </div>
   );
 }
