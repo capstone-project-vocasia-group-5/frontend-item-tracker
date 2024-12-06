@@ -9,8 +9,8 @@ function LoginAdmin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); 
-    setLoading(true); 
+    setErrorMessage("");
+    setLoading(true);
 
     // Validasi sederhana
     if (!email || !password) {
@@ -35,13 +35,13 @@ function LoginAdmin() {
         throw new Error(data.message || "Login gagal");
       }
 
-      // Berhasil login 
+      // Berhasil login
       alert("Login berhasil!");
-      console.log("Token:", data.token); 
+      console.log("Token:", data.token);
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -55,12 +55,17 @@ function LoginAdmin() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            ItemTrack
+          </h1>
         </div>
-  
+
         {/* Form */}
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-        <h1 className="text-sm sm:text-lg md:text-xl font-semibold"> Selamat Datang Admin!</h1>
+          <h1 className="text-sm sm:text-lg md:text-xl font-semibold">
+            {" "}
+            Selamat Datang Admin!
+          </h1>
           {/* Email Input */}
           <div className="text-left">
             <label htmlFor="email" className="block text-sm mb-1">
@@ -75,7 +80,7 @@ function LoginAdmin() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-  
+
           {/* Password Input */}
           <div className="text-left">
             <label htmlFor="password" className="block text-sm mb-1">
@@ -104,12 +109,12 @@ function LoginAdmin() {
               </div>
             </div>
           </div>
-  
+
           {/* Error Message */}
           {errorMessage && (
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
-  
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -119,7 +124,7 @@ function LoginAdmin() {
             {loading ? "Memuat..." : "Masuk"}
           </button>
         </form>
-  
+
         {/* Footer */}
         {/* <div className="text-center mt-4">
           <p className="text-xs sm:text-sm">
@@ -132,7 +137,6 @@ function LoginAdmin() {
       </div>
     </div>
   );
-  
 }
 
 export default LoginAdmin;
