@@ -17,7 +17,7 @@ const Donatur = () => {
           Donatur Kami
         </h1>
 
-        {/* Angel Investors Section */}
+        {/*Investors Section */}
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
