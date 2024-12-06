@@ -17,7 +17,7 @@ const FoundPage = () => {
 
       {/* Lost Section */}
       <div id="LostSection">
-        <h1 class="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+        <h1 className="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
           Barang temuan
         </h1>
 

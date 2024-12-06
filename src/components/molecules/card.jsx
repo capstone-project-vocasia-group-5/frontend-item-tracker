@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -41,6 +40,7 @@ export function CardDemo({ params, type, className, ...props }) {
         .filter((card) => card.type === type)
         .map((card) => (
           <Card
+            key={card._id}
             className={cn(
               "w-[180px] hover:bg-gray-100 relative group overflow-hidden grid sm:w-[160px] md:w-[170px] lg:w-[180px] flex-grow flex-shrink-0 basis-[160px] border rounded-md shadow-md",
               className
