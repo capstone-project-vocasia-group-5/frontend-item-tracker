@@ -139,8 +139,8 @@ export const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="max-w-screen-xl mt-8 mx-3">
-      <div className="flex items-center space-x-2">
+    <form onSubmit={handleSearch} className="w-full md:w-[40%]">
+      <div className="flex items-center space-x-2 ">
         {/* Filter Button */}
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -285,13 +285,13 @@ export const SearchBar = () => {
             id="search-bar"
             value={searchQuery}
             onChange={handleSearchChange}
-            className="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-black"
+            className="block w-full p-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-black"
             placeholder="Cari item..."
             required
           />
           <button
             type="submit"
-            className="absolute h-full top-0 right-0 p-2.5 text-white bg-primaryBlack rounded-r-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            className="absolute h-full top-0 right-0  text-white bg-primaryBlack rounded-r-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             <svg
               className="w-4 h-4"
