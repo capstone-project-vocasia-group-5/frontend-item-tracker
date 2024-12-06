@@ -6,15 +6,15 @@ const SyaratKetentuan = () => {
   return (
     <div>
       <Navbar />
-      <h1 class="py-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+      <h1 className="py-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
         Syarat dan Ketentuan
       </h1>
       <div className="flex justify-center pb-10 px-4">
         {" "}
         <ScrollArea className=" w-[400px] md:w-[550px] lg:w-[850px] h-[450px] bg-primaryBlack rounded-md border p-6 text-white text-justify">
           {" "}
-          <div class="terms-container">
-            <h5 class="text-xl font-bold dark:text-white">
+          <div className="terms-container">
+            <h5 className="text-xl font-bold dark:text-white">
               Selamat Datang di ItemTrack!
             </h5>
             <p>
@@ -24,7 +24,7 @@ const SyaratKetentuan = () => {
               <br /> <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">Definisi</h5>
+            <h5 className="text-xl font-bold dark:text-white">Definisi</h5>
             <p>
               1. <b>Barang Hilang:</b> Barang yang dilaporkan oleh pengguna
               sebagai hilang.
@@ -41,7 +41,7 @@ const SyaratKetentuan = () => {
               aplikasi ItemTrack. <br /> <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">
+            <h5 className="text-xl font-bold dark:text-white">
               Kewajiban Pengguna
             </h5>
             <p>
@@ -57,7 +57,7 @@ const SyaratKetentuan = () => {
               aplikasi. <br /> <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">
+            <h5 className="text-xl font-bold dark:text-white">
               Hak Akses dan Penggunaan Aplikasi
             </h5>
             <p>
@@ -70,7 +70,7 @@ const SyaratKetentuan = () => {
               <br /> <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">
+            <h5 className="text-xl font-bold dark:text-white">
               Batasan Tanggung Jawab
             </h5>
             <p>
@@ -80,7 +80,7 @@ const SyaratKetentuan = () => {
               <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">
+            <h5 className="text-xl font-bold dark:text-white">
               Pembaruan dan Perubahan
             </h5>
             <p>
@@ -89,7 +89,7 @@ const SyaratKetentuan = () => {
               pembaruan secara berkala. <br /> <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">
+            <h5 className="text-xl font-bold dark:text-white">
               Hukum yang Berlaku
             </h5>
             <p>
@@ -97,7 +97,7 @@ const SyaratKetentuan = () => {
               Indonesia. <br /> <br />
             </p>
 
-            <h5 class="text-xl font-bold dark:text-white">Kontak</h5>
+            <h5 className="text-xl font-bold dark:text-white">Kontak</h5>
             <p>
               Jika ada pertanyaan atau keluhan, silakan hubungi kami di{" "}
               <a href="mailto:ItemTrack@gmail.com">ItemTrack@gmail.com</a>.{" "}

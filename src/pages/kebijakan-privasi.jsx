@@ -6,7 +6,7 @@ const KebijakanPrivasi = () => {
   return (
     <div>
       <Navbar />
-      <h1 class="p-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+      <h1 className="p-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
         Kebijakan Privasi
       </h1>
       <div className="flex justify-center pb-10 px-4">
@@ -17,7 +17,7 @@ const KebijakanPrivasi = () => {
           Privasi Anda penting bagi kami. Kebijakan ini menjelaskan bagaimana
           kami mengumpulkan, menggunakan, dan melindungi data Anda saat
           menggunakan aplikasi ItemTrack. <br /> <br />
-          <h5 class="text-xl font-bold dark:text-white">
+          <h5 className="text-xl font-bold dark:text-white">
             Data yang Dikumpulkan :
           </h5>{" "}
           <p>1. Informasi pribadi seperti nama, email, dan nomor telepon.</p>{" "}
@@ -31,7 +31,7 @@ const KebijakanPrivasi = () => {
             <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">
+          <h5 className="text-xl font-bold dark:text-white">
             Tujuan Penggunaan Data
           </h5>{" "}
           <p>1. Menghubungkan pemilik barang dengan penemu barang.</p>{" "}
@@ -41,14 +41,18 @@ const KebijakanPrivasi = () => {
             <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">Pihak Ketiga</h5>{" "}
+          <h5 className="text-xl font-bold dark:text-white">
+            Pihak Ketiga
+          </h5>{" "}
           <p>
             Kami tidak menjual data Anda kepada pihak ketiga. Namun, data dapat
             dibagikan kepada mitra kami jika diperlukan untuk mendukung layanan.
             <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">Keamanan Data</h5>{" "}
+          <h5 className="text-xl font-bold dark:text-white">
+            Keamanan Data
+          </h5>{" "}
           <p>
             Kami menggunakan langkah-langkah teknis dan organisasi yang sesuai
             untuk melindungi data Anda dari akses tidak sah, kerugian, atau
@@ -56,7 +60,9 @@ const KebijakanPrivasi = () => {
             <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">Hak Pengguna</h5>{" "}
+          <h5 className="text-xl font-bold dark:text-white">
+            Hak Pengguna
+          </h5>{" "}
           <p>
             1. Anda memiliki hak untuk mengakses, memperbarui, atau menghapus
             data Anda kapan saja.
@@ -66,7 +72,7 @@ const KebijakanPrivasi = () => {
             menghubungi kami. <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">
+          <h5 className="text-xl font-bold dark:text-white">
             Penyimpanan Data
           </h5>{" "}
           <p>
@@ -75,7 +81,7 @@ const KebijakanPrivasi = () => {
             lama oleh hukum. <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">
+          <h5 className="text-xl font-bold dark:text-white">
             Pembaruan Kebijakan Privasi
           </h5>{" "}
           <p>
@@ -84,7 +90,7 @@ const KebijakanPrivasi = () => {
             <br />
             <br />
           </p>{" "}
-          <h5 class="text-xl font-bold dark:text-white">Kontak</h5>{" "}
+          <h5 className="text-xl font-bold dark:text-white">Kontak</h5>{" "}
           <p>
             Untuk pertanyaan lebih lanjut terkait privasi, silakan hubungi kami
             di [alamat email atau nomor telepon tim pengembang].

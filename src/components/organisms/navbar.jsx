@@ -50,15 +50,15 @@ export const Navbar = () => {
             </button>
           )}
           <div
-            class="nav_bar"
+            className="nav_bar"
             aria-controls="navbar-sticky"
             aria-expanded={isMenuOpen}
             onClick={toggleMenu}
           >
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3_h"></div>
-            <div class="bar4"></div>
+            <div className="bar1"></div>
+            <div className="bar2"></div>
+            <div className="bar3_h"></div>
+            <div className="bar4"></div>
           </div>
         </div>
         <div

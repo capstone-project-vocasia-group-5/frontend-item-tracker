@@ -1,129 +1,144 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { Navbar } from "../components/organisms/navbar.jsx";
-import { Footer } from "../components/organisms/footer.jsx";
-import emailjs from "emailjs-com";
-import { Button } from "../components/ui/button.jsx";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Navbar } from "@/components/organisms/navbar";
+import { Footer } from "@/components/organisms/footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const KontakKami = () => {
-  const { register, handleSubmit, reset } = useForm();
-
-  const onSubmit = (data) => {
-    emailjs
-      .send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          message: data.message,
-        },
-        "YOUR_USER_ID"
-      )
-      .then(
-        (response) => {
-          alert("Pesan berhasil dikirim!");
-          reset();
-        },
-        (error) => {
-          alert("Gagal mengirim pesan. Coba lagi.");
-        }
-      );
-  };
-
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div>
+      {/* Navbar */}
       <Navbar />
-      <div className="flex sm:flex-row flex-col">
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center bg-black py-10 px-4 text-white">
-          <img
-            src="https://s3-alpha-sig.figma.com/img/1d67/cdcc/05befe3f77b9a8c0ac8d124fe7a9b5b5?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=be0FaleGdPtcinZb7GkNVcrTdBGcmDW~UBXgwZ72TZwipO6cJGepjz25J66CP2IukHE9RujLnJPAjJcX5Wa4n~Wa1EanjCQw27eyW1LwmPuFTKzalZA9R88eVRVFGOGK~YT-SCZfUA8uzy5uP6p~tNzVZY3EexmTmm3TNhnS09V3RoGCZvh-va-u~k~-jO616YEf53IYQTq~DwgxJLvIzDbm4IfKxft-DPqfdHnkZwN-5nUeqc5CAF95otINccY4AWqMRWGGFyo6ggoj5Z0tt0fOs0PdcEShDm2KGdVHKk4Lz2t9G3IqsqwEnnrP9LTLMGRn8A5sBXDzeTwBWBBWtw__"
-            alt="Kontak Kami Icon"
-            className="w-20 h-20 mb-4"
-          />
-          <h1 className="text-4xl font-bold">Kontak Kami</h1>
-          <p className="mt-2 text-lg text-center">
-            Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan
-            atau masukan.
-          </p>
-        </div>
 
-        {/* Form Section */}
-        <div className="container mx-auto py-10 px-4">
-          <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg mx-auto md:max-w-2xl">
-            <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-              Formulir Kontak
-            </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Input Nama */}
+      {/* Konten Utama */}
+      <main className="container mx-auto py-12 px-4 pd-6">
+        <h1 className="text-3xl font-bold text-center mb-16">Kontak Kami</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Formulir Kontak */}
+          <Card className="p-6 md:col-span-2">
+            <form className="space-y-4 text-left">
               <div>
-                <label className="block text-gray-700 mb-2">Nama</label>
-                <input
-                  type="text"
-                  {...register("name", { required: true })}
-                  className="w-full p-3  text-white rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Nama Anda"
-                />
-              </div>
-
-              {/* Input Telepon */}
-              <div>
-                <label className="block text-gray-700 mb-2">
-                  Telepon/WhatsApp
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="name"
+                >
+                  Nama Lengkap <span className="text-red-500">*</span>
                 </label>
-                <input
+                <Input
+                  id="name"
                   type="text"
-                  {...register("phone", { required: true })}
-                  className="w-full p-3 text-white rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Nomor Telepon/WhatsApp"
+                  placeholder="Nama Lengkap Anda"
+                  required
+                  className="h-12 mb-6"
                 />
               </div>
-
-              {/* Input Email */}
               <div>
-                <label className="block text-gray-700 mb-2">Email</label>
-                <input
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="email"
+                >
+                  Alamat Email <span className="text-red-500">*</span>
+                </label>
+                <Input
+                  id="email"
                   type="email"
-                  {...register("email", { required: true })}
-                  className="w-full  text-white p-3 rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Email Anda"
+                  placeholder="Alamat Email Anda"
+                  required
+                  className="h-12 mb-6"
                 />
               </div>
-
-              {/* Input Pesan */}
               <div>
-                <label className="block text-gray-700 mb-2">Pesan</label>
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="subject"
+                >
+                  Subyek Pesan <span className="text-red-500">*</span>
+                </label>
+                <Input
+                  id="subject"
+                  type="text"
+                  placeholder="Subyek Pesan"
+                  required
+                  className="h-12 mb-6"
+                />
+              </div>
+              <div>
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="message"
+                >
+                  Isi Pesan <span className="text-red-500">*</span>
+                </label>
                 <textarea
-                  {...register("message", { required: true })}
-                  className="w-full p-3  text-white rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Tuliskan pesan Anda di sini"
-                  rows="5"
+                  id="message"
+                  rows="4"
+                  className="w-full h-72 border bg-white rounded-md p-2"
+                  placeholder="Tuliskan pesan Anda..."
+                  required
                 ></textarea>
               </div>
 
-              {/* Checkbox */}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  required
-                  className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label className="ml-2 text-gray-700">Saya bukan robot</label>
-              </div>
-
-              {/* Tombol Submit */}
-              <Button
-                type="submit"
-                className="w-full text-white font-semibold py-3 rounded hover:bg-blue-700 transition"
-              >
+              <Button type="submit" className="w-full">
                 Kirim
               </Button>
             </form>
-          </div>
+          </Card>
+
+          {/* Informasi Kontak */}
+          <Card className="p-6 bg-black text-white mr-16 text-left md:ml-auto w-full sm:w-[300px] md:w-[360px] h-96">
+            <div className="flex items-center justify-center mb-4 mt-4 space-x-3">
+              <img
+                src="/image/Logo.png"
+                alt="ItemTrack Logo"
+                className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+              />
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+                ItemTracker
+              </h1>
+            </div>
+            <h2 className="ml-4 mb-8 mt-8 text-2xl font-bold">Sosial Media</h2>
+            <p className="mt-4 ml-4 flex items-center">
+              <FontAwesomeIcon icon={faInstagram} size="2x" className="mr-4" />
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-lg"
+              >
+                @ItemTracker
+              </a>
+            </p>
+            <p className="mt-4 ml-4">
+              <FontAwesomeIcon icon={faEnvelope} size="2x" className="mr-4" />
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=ItemTracker@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-lg"
+              >
+                ItemTracker@gmail.com
+              </a>
+            </p>
+            <p className="mt-4 ml-4">
+              <FontAwesomeIcon icon={faGithub} size="2x" className="mr-4" />
+              <a
+                href="https://github.com/orgs/capstone-project-vocasia-group-5/repositories"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-lg"
+              >
+                ItemTracker
+              </a>
+            </p>
+          </Card>
         </div>
-      </div>
+      </main>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

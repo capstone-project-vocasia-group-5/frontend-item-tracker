@@ -17,7 +17,7 @@ const Donatur = () => {
           Donatur Kami
         </h1>
 
-        {/* Angel Investors Section */}
+        {/*Investors Section */}
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
@@ -65,14 +65,49 @@ const Donatur = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
-            <p className="text-left text-gray-600 mb-2">
-              Berikut pihak-pihak yang telah memberikan bantuan:
+            <p className="text-left text-gray-600 mb-8">
+              Berikut pihak-pihak yang telah terlibat dalam proses pengembangan:
             </p>
-            <ul className="list-none space-y-2 text-left text-gray-600">
-              <li>Vocasia</li>
-            </ul>
+            <div className="flex justify-between items-center gap-4">
+              <div className="flex justify-center">
+                <img
+                  src="/image/logoUnej.png"
+                  alt="Logo Unej"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src="/image/logoAmikom.png"
+                  alt="Logo Amikom"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src="/image/logoVocasia.png"
+                  alt="Logo Vocasia"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src="/image/logoUnsika.png"
+                  alt="Logo Unsika"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src="/image/logoUnesa.png"
+                  alt="Logo Unesa"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>    
+            </div>
           </CardContent>
         </div>
+
       </main>
 
       {/* Footer */}

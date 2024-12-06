@@ -26,3 +26,21 @@ export const registerUser = (user) => api.post("/auth/register", user);
 
 // donate
 export const donate = (data) => api.post("/donations", data);
+export const getDonations = (data) => api.get("/donations", data);
+
+// items management
+export const createItem = (data) => api.post("/items", data);
+export const updateItem = (id, data) => api.patch(`/items/${id}`, data);
+export const deleteItemByUser = (id) => api.delete(`/items/${id}`);
+export const deleteItemByAdmin = (id) => api.delete(`/items/${id}`);
+export const getAllItemsByUser = (params) => api.get("/items", { params });
+export const getAllItemsByAdmin = (params) =>
+  api.get("/admin/items", { params });
+export const getTotalItemsByAdmin = () => api.get("/admin/items/total");
+export const getAllOwnItemsByUser = (params) =>
+  api.get("/items/own", { params });
+export const getItemById = (id) => api.get(`/items/${id}`);
+export const approveItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
+export const rejectItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
+export const donator = (data) => api.get("/donations", data);
+

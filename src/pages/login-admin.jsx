@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginAdmin } from "../api/api";
+import { toast } from "sonner";
+import { useAuth } from "../context/auth-context";
 
 function LoginAdmin() {
   const [email, setEmail] = useState("");
@@ -7,12 +11,15 @@ function LoginAdmin() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const { login } = useAuth();
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); 
-    setLoading(true); 
+    setErrorMessage("");
+    setLoading(true);
 
-    // Validasi sederhana
     if (!email || !password) {
       setErrorMessage("Email dan Password harus diisi");
       setLoading(false);
@@ -20,28 +27,20 @@ function LoginAdmin() {
     }
 
     try {
-      // Kirim data ke API
-      const response = await fetch("https://your-api-endpoint.com/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await loginAdmin({ email, password });
+      const token = response.data.data.token;
+      login(token);
+      toast.success(response.data?.message || "Login berhasil");
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login gagal");
-      }
-
-      // Berhasil login 
-      alert("Login berhasil!");
-      console.log("Token:", data.token); 
+      navigate("/admin");
     } catch (error) {
-      setErrorMessage(error.message);
+      if (error.response) {
+        toast.error(error.response.data?.errors || "Terjadi kesalahan");
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -55,12 +54,17 @@ function LoginAdmin() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">ItemTrack</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            ItemTrack
+          </h1>
         </div>
-  
+
         {/* Form */}
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-        <h1 className="text-sm sm:text-lg md:text-xl font-semibold"> Selamat Datang Admin!</h1>
+          <h1 className="text-sm sm:text-lg md:text-xl font-semibold">
+            {" "}
+            Selamat Datang Admin!
+          </h1>
           {/* Email Input */}
           <div className="text-left">
             <label htmlFor="email" className="block text-sm mb-1">
@@ -75,7 +79,7 @@ function LoginAdmin() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-  
+
           {/* Password Input */}
           <div className="text-left">
             <label htmlFor="password" className="block text-sm mb-1">
@@ -104,12 +108,12 @@ function LoginAdmin() {
               </div>
             </div>
           </div>
-  
+
           {/* Error Message */}
           {errorMessage && (
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
-  
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -119,7 +123,7 @@ function LoginAdmin() {
             {loading ? "Memuat..." : "Masuk"}
           </button>
         </form>
-  
+
         {/* Footer */}
         {/* <div className="text-center mt-4">
           <p className="text-xs sm:text-sm">
@@ -132,7 +136,6 @@ function LoginAdmin() {
       </div>
     </div>
   );
-  
 }
 
 export default LoginAdmin;

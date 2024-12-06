@@ -153,10 +153,10 @@ export const SearchBar = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-sliders-horizontal"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-sliders-horizontal"
               >
                 <line x1="21" x2="14" y1="4" y2="4" />
                 <line x1="10" x2="3" y1="4" y2="4" />
