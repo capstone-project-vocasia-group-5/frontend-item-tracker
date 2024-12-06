@@ -1,7 +1,7 @@
 import React from "react";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,25 +22,55 @@ const KontakKami = () => {
           <Card className="p-6 md:col-span-2">
             <form className="space-y-4 text-left">
               <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="name">
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="name"
+                >
                   Nama Lengkap <span className="text-red-500">*</span>
                 </label>
-                <Input id="name" type="text" placeholder="Nama Lengkap Anda" required className="h-12 mb-6" />
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Nama Lengkap Anda"
+                  required
+                  className="h-12 mb-6"
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="email">
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="email"
+                >
                   Alamat Email <span className="text-red-500">*</span>
                 </label>
-                <Input id="email" type="email" placeholder="Alamat Email Anda" required className="h-12 mb-6" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Alamat Email Anda"
+                  required
+                  className="h-12 mb-6"
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="subject">
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="subject"
+                >
                   Subyek Pesan <span className="text-red-500">*</span>
                 </label>
-                <Input id="subject" type="text" placeholder="Subyek Pesan" required className="h-12 mb-6" />
+                <Input
+                  id="subject"
+                  type="text"
+                  placeholder="Subyek Pesan"
+                  required
+                  className="h-12 mb-6"
+                />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="message">
+                <label
+                  className="block text-sm font-medium mb-1"
+                  htmlFor="message"
+                >
                   Isi Pesan <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -107,7 +137,6 @@ const KontakKami = () => {
           </Card>
         </div>
       </main>
-
 
       {/* Footer */}
       <Footer />
