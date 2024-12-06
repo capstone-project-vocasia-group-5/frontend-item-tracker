@@ -139,10 +139,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSearch}
-      className="md:max-w-2xl lg:max-w-4xl sm:max-w-xl max-w-sm lg:mx-auto mt-8 mx-3"
-    >
+    <form onSubmit={handleSearch} className="max-w-screen-xl mt-8 mx-3">
       <div className="flex items-center space-x-2">
         {/* Filter Button */}
         <Popover open={open} onOpenChange={setOpen}>

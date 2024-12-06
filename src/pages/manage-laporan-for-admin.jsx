@@ -1,7 +1,5 @@
 import "../App.css";
 import React, { useState, useEffect, useRef } from "react";
-import { Navbar } from "../components/organisms/navbar";
-import { Footer } from "../components/organisms/footer";
 
 const ManageLaporanAdmin = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,15 +20,13 @@ const ManageLaporanAdmin = () => {
       id: 2,
       nama: "Anjing",
       kategori: "Binatang",
-      gambar:
-        "https://example.com/anjing.jpg",
+      gambar: "https://example.com/anjing.jpg",
     },
     {
       id: 3,
       nama: "Earphone",
       kategori: "Elektronik",
-      gambar:
-        "https://example.com/Earphone.jpg",
+      gambar: "https://example.com/Earphone.jpg",
     },
   ];
 
@@ -57,28 +53,27 @@ const ManageLaporanAdmin = () => {
     setIsMobile(window.innerWidth <= 768);
   };
 
-  
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   const toggleDropdown = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
   };
-  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        openDropdownId !== null && 
-        dropdownRefs.current[openDropdownId] && 
+        openDropdownId !== null &&
+        dropdownRefs.current[openDropdownId] &&
         !dropdownRefs.current[openDropdownId].contains(event.target)
       ) {
         setOpenDropdownId(null);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -87,7 +82,6 @@ const ManageLaporanAdmin = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 flex justify-between items-center">
@@ -143,12 +137,12 @@ const ManageLaporanAdmin = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                    {filteredItems.map((item) => (
-                      <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="p-4">
-                          <div className="flex justify-center items-center">
-                            <div className="w-20 h-20 bg-gray-300 rounded flex justify-center items-center overflow-hidden">
-                              <img
+                  {filteredItems.map((item) => (
+                    <tr key={item.id} className="hover:bg-gray-50">
+                      <td className="p-4">
+                        <div className="flex justify-center items-center">
+                          <div className="w-20 h-20 bg-gray-300 rounded flex justify-center items-center overflow-hidden">
+                            <img
                               src={item.gambar}
                               alt={item.nama}
                               className="object-cover w-full h-full rounded"
@@ -160,10 +154,10 @@ const ManageLaporanAdmin = () => {
                       <td className="p-3 text-center">{item.kategori}</td>
                       <td className="px-4 sm:px-15 py-4">
                         <div className="flex justify-center items-center space-x-2">
-                            {/* Tombol untuk layar besar */}
-                            <div className="hidden sm:flex space-x-2">
-                              <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                                <svg
+                          {/* Tombol untuk layar besar */}
+                          <div className="hidden sm:flex space-x-2">
+                            <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+                              <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
@@ -174,7 +168,7 @@ const ManageLaporanAdmin = () => {
                               </svg>
                             </button>
                             <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                                <svg
+                              <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
@@ -187,17 +181,15 @@ const ManageLaporanAdmin = () => {
                                 />
                               </svg>
                             </button>
-                            </div>
+                          </div>
                         </div>
                         {/* Dropdown untuk layar kecil */}
-                        <div 
-                          className="sm:hidden relative flex justify-center items-center"
-                        >
-                            <button
+                        <div className="sm:hidden relative flex justify-center items-center">
+                          <button
                             className="p-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
                             onClick={() => toggleDropdown(item.id)}
                           >
-                              <svg
+                            <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
                               fill="currentColor"
@@ -211,17 +203,17 @@ const ManageLaporanAdmin = () => {
                             </svg>
                           </button>
                           {openDropdownId === item.id && (
-                              <div 
-                                ref={(el) => (dropdownRefs.current[item.id] = el)}
-                                className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
-                                style={{ top: "-4rm" }}
-                              >
-                                <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                  Edit
-                                </button>
+                            <div
+                              ref={(el) => (dropdownRefs.current[item.id] = el)}
+                              className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
+                              style={{ top: "-4rm" }}
+                            >
                               <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                  Hapus
-                                </button>
+                                Edit
+                              </button>
+                              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                                Hapus
+                              </button>
                             </div>
                           )}
                         </div>
@@ -234,7 +226,6 @@ const ManageLaporanAdmin = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -19,7 +19,7 @@ import {
   FaTags,
   FaBell,
 } from "react-icons/fa";
-import "./fitur-utama.css";
+import "./css/fitur-utama.css";
 
 const notifications = [
   {

@@ -72,7 +72,7 @@ const UpdateProfileUser = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Main Content */}
-      <main className="flex-grow mt-16">
+      <main className="flex-grow">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <form
             onSubmit={handleSubmit}

@@ -1,7 +1,5 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
-import { Navbar } from "../components/organisms/navbar.jsx";
-import { Footer } from "../components/organisms/footer.jsx";
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,10 +20,11 @@ const ManageCategory = () => {
     console.log("Searching for: ", searchQuery);
   };
 
-  const filteredCategories = sampleCategories.filter((category) =>
-    category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    category.itemCount.toString().includes(searchQuery) ||
-    category.createdAt.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredCategories = sampleCategories.filter(
+    (category) =>
+      category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      category.itemCount.toString().includes(searchQuery) ||
+      category.createdAt.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   useEffect(() => {
@@ -42,7 +41,6 @@ const ManageCategory = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
@@ -107,18 +105,22 @@ const ManageCategory = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500 text-center">
-                    {filteredCategories.length > 0 ? (
-                      filteredCategories.map((category) => (
-                        <tr key={category.id}>
-                          <td className="px-4 py-4 sm:px-8">{category.name}</td>
-                        <td className="px-4 py-4 sm:px-8">{category.itemCount}</td>
-                        <td className="px-4 py-4 sm:px-8">{category.createdAt}</td>
+                  {filteredCategories.length > 0 ? (
+                    filteredCategories.map((category) => (
+                      <tr key={category.id}>
+                        <td className="px-4 py-4 sm:px-8">{category.name}</td>
+                        <td className="px-4 py-4 sm:px-8">
+                          {category.itemCount}
+                        </td>
+                        <td className="px-4 py-4 sm:px-8">
+                          {category.createdAt}
+                        </td>
                         {/* Responsive Actions Column */}
                         <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
-                            {/* Large Screens */}
-                            <div className="hidden sm:flex space-x-2">
-                              <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
-                                <svg
+                          {/* Large Screens */}
+                          <div className="hidden sm:flex space-x-2">
+                            <button className="p-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+                              <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
@@ -129,7 +131,7 @@ const ManageCategory = () => {
                               </svg>
                             </button>
                             <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                                <svg
+                              <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
@@ -144,17 +146,16 @@ const ManageCategory = () => {
                             </button>
                           </div>
                           {/* Small Screens */}
-                          <div 
-                          className="sm:hidden relative dropdown-container"
-                          >
+                          <div className="sm:hidden relative dropdown-container">
                             <button
                               className="p-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
                               onClick={() =>
-                                    setActiveDropdown(
-                                      activeDropdown === category.id ? null : category.id
-                                    
-                              )
-                                }
+                                setActiveDropdown(
+                                  activeDropdown === category.id
+                                    ? null
+                                    : category.id
+                                )
+                              }
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -170,37 +171,35 @@ const ManageCategory = () => {
                               </svg>
                             </button>
                             {activeDropdown === category.id && (
-                                <div 
-                                  className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
-                                  style={{ top: "-4rem" }}
-                                >
-                                  <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                    Edit
-                                  </button>
+                              <div
+                                className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
+                                style={{ top: "-4rem" }}
+                              >
                                 <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                    Hapus
-                                  </button>
+                                  Edit
+                                </button>
+                                <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                                  Hapus
+                                </button>
                               </div>
                             )}
                           </div>
                         </td>
                       </tr>
-                     ))
-                      ) : (
-                      <tr>
-                        <td colSpan="4" className="px-4 py-4 sm:px-8 text-center">
-                          No categories found.
-                        </td>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4" className="px-4 py-4 sm:px-8 text-center">
+                        No categories found.
+                      </td>
                     </tr>
-                    )}
+                  )}
                 </tbody>
-
               </table>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

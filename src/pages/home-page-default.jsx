@@ -12,14 +12,14 @@ const HomePageDefault = () => {
     <div>
       <Navbar />
       {/* Fitur Utama */}
-      <div className="" id="header">
+      <div id="header">
         <HeaderFix />
       </div>
       {/* SearchBar */}
       <SearchBar />
       {/* Lost Section */}
       <div id="LostSection">
-        <h1 class="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+        <h1 class="px-1 mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
           Temukan dan Laporkan{" "}
           <span class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
             Barang Anda !

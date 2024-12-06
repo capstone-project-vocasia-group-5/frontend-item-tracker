@@ -1,26 +1,23 @@
-import React, { useEffect, useState , useRef } from "react";
-import { Navbar } from "../components/organisms/navbar";
-import Footer from "../components/organisms/footer";
+import React, { useEffect, useState, useRef } from "react";
 
 const ManagePengajuan = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filter, setFilter] = useState(""); 
+  const [filter, setFilter] = useState("");
   const actionMenuRef = useRef(null);
-
 
   const [actionMenuOpen, setActionMenuOpen] = useState(null);
   const toggleActionMenu = (id) => {
     setActionMenuOpen((prev) => (prev === id ? null : id));
   };
-  
-  const closeActionMenu =() => {
+
+  const closeActionMenu = () => {
     setActionMenuOpen(null);
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        actionMenuRef.current && 
+        actionMenuRef.current &&
         !actionMenuRef.current.contains(event.target)
       ) {
         closeActionMenu();
@@ -49,7 +46,6 @@ const ManagePengajuan = () => {
     },
   ];
 
-  
   const pengajuanOrangLain = [
     {
       id: 1,
@@ -87,11 +83,12 @@ const ManagePengajuan = () => {
   };
 
   const dataToDisplay =
-    filter === "saya" ? getFilteredData(pengajuanSaya) : getFilteredData(pengajuanOrangLain);
+    filter === "saya"
+      ? getFilteredData(pengajuanSaya)
+      : getFilteredData(pengajuanOrangLain);
 
   return (
     <div>
-      <Navbar />
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 flex justify-between">
@@ -136,18 +133,21 @@ const ManagePengajuan = () => {
 
             {/* Filter by Pengajuan */}
             <div className="flex justify-between p-4">
-                <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-blue-500 transition [-webkit-tap-highlight-color:_transparent]">
-                  <input
+              <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-blue-500 transition [-webkit-tap-highlight-color:_transparent]">
+                <input
                   className="peer sr-only"
                   type="checkbox"
                   checked={filter === "lain"}
-                  onChange={() => handleFilterChange(filter === "saya" ? "lain" : "saya")}
+                  onChange={() =>
+                    handleFilterChange(filter === "saya" ? "lain" : "saya")
+                  }
                 />
                 <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
               </label>
-              <span className="ml-2 text-lg">{filter === "saya" ? "Pengajuan Saya" : "Pengajuan Orang Lain"}</span>
+              <span className="ml-2 text-lg">
+                {filter === "saya" ? "Pengajuan Saya" : "Pengajuan Orang Lain"}
+              </span>
             </div>
-
 
             {/* Table */}
             <div className="px-4 sm:px-9 overflow-x-auto">
@@ -167,13 +167,13 @@ const ManagePengajuan = () => {
                       <td className="p-4">{item.barang}</td>
                       <td className="p-4">{item.deskripsi}</td>
                       <td className="p-4">
-                          <div className="flex justify-center items-center space-x-2">
-                            {/* Tombol Aksi (Full view) */}
-                            <div className="hidden sm:flex space-x-2">
-                              {filter === "saya" ? (
-                                <>
+                        <div className="flex justify-center items-center space-x-2">
+                          {/* Tombol Aksi (Full view) */}
+                          <div className="hidden sm:flex space-x-2">
+                            {filter === "saya" ? (
+                              <>
                                 <button className="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 flex items-center justify-center">
-                                    <svg
+                                  <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
@@ -188,7 +188,7 @@ const ManagePengajuan = () => {
                                   </svg>
                                 </button>
                                 <button className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
-                                    <svg
+                                  <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
@@ -202,10 +202,10 @@ const ManagePengajuan = () => {
                                   </svg>
                                 </button>
                               </>
-                          ) : (
-                                <>
+                            ) : (
+                              <>
                                 <button className="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 flex items-center justify-center">
-                                    <svg
+                                  <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
@@ -220,7 +220,7 @@ const ManagePengajuan = () => {
                                   </svg>
                                 </button>
                                 <button className="p-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center justify-center">
-                                    <svg
+                                  <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
@@ -248,13 +248,13 @@ const ManagePengajuan = () => {
                                   </svg>
                                 </button>
                               </>
-                          )}
+                            )}
                           </div>
                           {/* (Small view) */}
                           <div className="flex sm:hidden relative">
-                              <button
+                            <button
                               className="p-2 bg-gray-800 text-white rounded-md hover:bg-gray-600 flex items-center justify-center"
-                              onClick={() => toggleActionMenu(item.id)} 
+                              onClick={() => toggleActionMenu(item.id)}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -265,35 +265,23 @@ const ManagePengajuan = () => {
                                 <path d="M12 6.75a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 11.25a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15.75a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                               </svg>
                             </button>
-                            {actionMenuOpen === item.id && ( 
-                              <div 
-                              ref={actionMenuRef}
+                            {actionMenuOpen === item.id && (
+                              <div
+                                ref={actionMenuRef}
                                 className="absolute top-12 right-0 bg-white border rounded-md shadow-lg z-50"
                                 style={{ top: "-4rem" }}
                               >
                                 <ul className="text-sm text-gray-700">
                                   {filter === "saya" ? (
-                                    <><li>
-                                        <button
-                                        className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
-                                        onClick={() => console.log(`Lihat pengajuan ${item.id}`)}
-                                      >
-                                          Lihat Detail
-                                      </button>
-                                    </li><li>
-                                          <button
-                                          className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
-                                          onClick={() => console.log(`Batalkan pengajuan ${item.id}`)}
-                                        >
-                                            Hapus
-                                        </button>
-                                      </li></>
-                                  ) : (
                                     <>
                                       <li>
                                         <button
                                           className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
-                                          onClick={() => console.log(`Lihat pengajuan ${item.id}`)}
+                                          onClick={() =>
+                                            console.log(
+                                              `Lihat pengajuan ${item.id}`
+                                            )
+                                          }
                                         >
                                           Lihat Detail
                                         </button>
@@ -301,7 +289,38 @@ const ManagePengajuan = () => {
                                       <li>
                                         <button
                                           className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
-                                          onClick={() => console.log(`Setujui pengajuan ${item.id}`)}
+                                          onClick={() =>
+                                            console.log(
+                                              `Batalkan pengajuan ${item.id}`
+                                            )
+                                          }
+                                        >
+                                          Hapus
+                                        </button>
+                                      </li>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <li>
+                                        <button
+                                          className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
+                                          onClick={() =>
+                                            console.log(
+                                              `Lihat pengajuan ${item.id}`
+                                            )
+                                          }
+                                        >
+                                          Lihat Detail
+                                        </button>
+                                      </li>
+                                      <li>
+                                        <button
+                                          className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
+                                          onClick={() =>
+                                            console.log(
+                                              `Setujui pengajuan ${item.id}`
+                                            )
+                                          }
                                         >
                                           Setujui
                                         </button>
@@ -309,7 +328,11 @@ const ManagePengajuan = () => {
                                       <li>
                                         <button
                                           className="block w-full px-4 py-2 hover:bg-gray-100 text-left"
-                                          onClick={() => console.log(`Batalkan pengajuan ${item.id}`)}
+                                          onClick={() =>
+                                            console.log(
+                                              `Batalkan pengajuan ${item.id}`
+                                            )
+                                          }
                                         >
                                           Batalkan
                                         </button>
@@ -330,7 +353,6 @@ const ManagePengajuan = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
