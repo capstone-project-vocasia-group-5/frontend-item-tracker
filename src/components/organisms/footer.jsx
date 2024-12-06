@@ -61,7 +61,7 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/tentang-kami" className="hover:underline">
+                  <Link to="/about" className="hover:underline">
                     Tentang Kami
                   </Link>
                 </li>
@@ -78,12 +78,12 @@ export const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/kebijakan-privasi" className="hover:underline">
+                  <a href="/privacy" className="hover:underline">
                     Kebijakan Privasi
                   </a>
                 </li>
                 <li>
-                  <a href="/syarat-ketentuan" className="hover:underline">
+                  <a href="/terms" className="hover:underline">
                     Syarat &amp; Ketentuan
                   </a>
                 </li>
@@ -95,8 +95,8 @@ export const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              ItemTrack™
+            <a href="/" className="hover:underline">
+              ItemTracker™
             </a>
             . All Rights Reserved.
           </span>

@@ -20,12 +20,12 @@ export default function ReportButton() {
   };
 
   return (
-    <div className="w-full flex items-center justify-between p-4 bg-gray-200 rounded-md shadow-md m-3">
-      <p className="font-bold text-black">{getText()}</p>
+    <div className="w-full md:w-[30%] flex items-center  justify-between  bg-gray-100 rounded-md shadow-md">
+      <p className="font-bold text-black ml-4">Laporkan</p>
 
       <button
         onClick={handleNavigate}
-        className="flex items-center justify-center w-10 h-10 bg-black text-white rounded-md hover:bg-blue-600 "
+        className="flex items-center justify-center  bg-black text-white rounded-md hover:bg-blue-600 "
         aria-label="Tambah laporan"
       >
         +
