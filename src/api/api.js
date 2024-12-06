@@ -26,3 +26,4 @@ export const registerUser = (user) => api.post("/auth/register", user);
 
 // donate
 export const donate = (data) => api.post("/donations", data);
+export const getDonations = (data) => api.get("/donations",data); 
