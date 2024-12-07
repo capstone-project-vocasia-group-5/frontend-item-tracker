@@ -5,9 +5,6 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
-
-export default axiosInstance;
-
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -62,4 +59,3 @@ export const getUser = (data) => api.get("/users", data);
 //donations
 export const getTotalAmountDonations = (data) =>
   api.get("/donations/total-amount", data);
-
