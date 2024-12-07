@@ -160,33 +160,48 @@ const DetailItem = () => {
             </Button>
           </div>
         </div>
-        <div className="flex justify-center pb-10 m-8">
-          <ScrollArea className="w-full h-[450px] bg-[#D9D9D9] text-black rounded-md border p-6 text-justify relative">
-            <div className="bg-gray-200 p-6 rounded-lg">
-              <h3 className="text-lg font-bold mb-4">Komentar</h3>
-              <div className="space-y-4">
-                {comments.map((comment, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <img
-                      src={comment.profile}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <div>
-                      <p className="font-medium text-gray-800">
-                        {comment.name} -{" "}
-                        <span className="text-sm text-gray-500">
-                          {comment.date}
-                        </span>
+        <div className="flex flex-col justify-center pb-10 m-8 ">
+          {" "}
+          <div className="bg-primaryBlack p-6 rounded-t-lg">
+            <h3 className="text-2xl font-bold  text-center text-white">
+              Komentar
+            </h3>
+          </div>
+          <ScrollArea className="w-full h-[500px] bg-[#cecece] text-black rounded-md border p-2 text-justify relative">
+            {/* Daftar Komentar */}
+            <div className="space-y-3 p-2">
+              {comments.map((comment, index) => (
+                <div
+                  key={index}
+                  className="flex items-center space-x-3 p-2 bg-white shadow-md rounded-lg"
+                >
+                  {/* Avatar */}
+                  <img
+                    src={comment.profile}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full border-2 border-blue-500"
+                  />
+
+                  {/* Isi Komentar */}
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center mb-1">
+                      <p className="font-medium text-black text-lg">
+                        {comment.name}
                       </p>
-                      <p className="text-gray-700">{comment.description}</p>
+                      <span className="text-sm text-gray-500">
+                        {comment.date}
+                      </span>
                     </div>
+                    <p className="text-gray-700 bg-gray-100 p-2 rounded-md shadow-inner">
+                      {comment.description}
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
-            <div className="sticky bottom-0 bg-white p-4 border-t flex items-center space-x-2">
+            {/* Input Komentar */}
+            <div className="sticky bottom-0 bg-[#cecece] p-4  flex items-center space-x-3">
               <img
                 src="https://via.placeholder.com/40/FF5733/FFFFFF?text=U"
                 alt="User Profile"
@@ -194,7 +209,7 @@ const DetailItem = () => {
               />
               <input
                 type="text"
-                className="flex-grow p-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-grow bg-white p-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tambahkan komentar..."
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}

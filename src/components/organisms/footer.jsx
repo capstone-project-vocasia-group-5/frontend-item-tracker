@@ -4,7 +4,7 @@ import LogoItemTracker from "../atoms/logo-item-tracker";
 import "./css/footer.css";
 export const Footer = () => {
   return (
-    <footer className="flex relative bottom-0 w-full p-4 bg-primaryBlack   md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+    <footer className="flex relative bottom-0 w-full p-4 bg-primaryBlack md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
