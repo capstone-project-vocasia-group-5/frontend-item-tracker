@@ -1,17 +1,49 @@
 import "../App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [accounts, setAccounts] = useState([]);
 
+  // Data Sampel
+  const sampleData = [
+    {
+      id: 1,
+      nama: "Ade Irawan",
+      email: "adeirawan@gmail.com",
+      noTelepon: "0812333109",
+    },
+    {
+      id: 2,
+      nama: "Budi Santoso",
+      email: "budi.santoso@gmail.com",
+      noTelepon: "0898765432",
+    },
+    {
+      id: 3,
+      nama: "Cici Nurul",
+      email: "cici.nurul@example.com",
+      noTelepon: "0851234567",
+    },
+  ];
+
+  // Menggunakan data eksternal atau data sampel
+  useEffect(() => {
+    // Simulasi pengambilan data eksternal (gunakan API fetch jika diperlukan)
+    setAccounts(sampleData);
+  }, []);
+
+  // Fungsi untuk menangani perubahan input pencarian
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log("Searching for: ", searchQuery);
-  };
+  // Fungsi pencarian
+  const filteredAccounts = accounts.filter((account) =>
+    account.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    account.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    account.noTelepon.includes(searchQuery)
+  );
 
   return (
     <div>
@@ -23,7 +55,7 @@ const ManageAkunList = () => {
 
           <div className="bg-white shadow-md rounded-md overflow-hidden">
             {/* Search Bar */}
-            <form onSubmit={handleSearch} className="max-w-lg mx-auto mt-10">
+            <form onSubmit={(e) => e.preventDefault()} className="max-w-lg mx-auto mt-10">
               <div className="p-5">
                 <div className="flex border rounded-md">
                   {/* Input */}
@@ -33,7 +65,7 @@ const ManageAkunList = () => {
                     value={searchQuery}
                     onChange={handleSearchChange}
                     className="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Search items..."
+                    placeholder="Search by name, email, or phone..."
                     required
                   />
                   <button
@@ -64,42 +96,36 @@ const ManageAkunList = () => {
               <table className="w-full bg-white">
                 <thead className="bg-black text-white rounded-t-lg">
                   <tr>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">
-                      Nama
-                    </th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">
-                      Email
-                    </th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">
-                      No. Telepon
-                    </th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">
-                      Aksi
-                    </th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">Nama</th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">Email</th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">No. Telepon</th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500 text-center">
-                  <tr>
-                    <td className="px-4 py-4 sm:px-8">Ade Irawan</td>
-                    <td className="px-4 py-4 sm:px-8">adeirawan@gmail.com</td>
-                    <td className="px-4 py-4 sm:px-8">0812333109</td>
-                    <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
-                      <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="h-6 w-6"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
+                  {filteredAccounts.map((account) => (
+                    <tr key={account.id}>
+                      <td className="px-4 py-4 sm:px-8">{account.nama}</td>
+                      <td className="px-4 py-4 sm:px-8">{account.email}</td>
+                      <td className="px-4 py-4 sm:px-8">{account.noTelepon}</td>
+                      <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
+                        <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="h-6 w-6"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

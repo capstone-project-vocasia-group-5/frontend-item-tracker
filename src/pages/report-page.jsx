@@ -75,11 +75,13 @@ const ReportPage = () => {
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
+  const [villages, setVillages] = useState([]);
   const [postalCode, setPostalCode] = useState("");
 
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedVillage, setSelectedVillage] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -132,18 +134,30 @@ const ReportPage = () => {
     }
   };
 
+  const fetchVillages = async (districtId) => {
+    try {
+      const response = await axios.get(
+        `https://alamat.thecloudalert.com/api/kelurahan/get/?d_kecamatan_id=${districtId}`
+      );
+      setVillages(response.data.result);
+    } catch (error) {
+      console.error("Error fetching villages:", error);
+    }
+  };
+
   // Fetch postal code based on selected city and district
-  const fetchPostalCode = async (cityId, districtId) => {
-    setIsLoading(true);
+  const fetchZipCodes = async (cityId, districtId) => {
     try {
       const response = await axios.get(
         `https://alamat.thecloudalert.com/api/kodepos/get/?d_kabkota_id=${cityId}&d_kecamatan_id=${districtId}`
       );
-      setPostalCode(response.data.result[0]?.text || "Belum tersedia");
+      if (response.data.result.length > 0) {
+        setPostalCode(response.data.result[0].text);
+      } else {
+        setPostalCode("Belum tersedia");
+      }
     } catch (error) {
-      console.error("Error fetching postal code:", error);
-    } finally {
-      setIsLoading(false);
+      console.error("Error fetching zip codes:", error);
     }
   };
 
@@ -178,6 +192,12 @@ const ReportPage = () => {
   };
 
   // Handle village change
+  const handleVillageChange = (e) => {
+    const districtId = selectedDistrict;
+    const cityId = selectedCity;
+    setSelectedVillage(e.target.value);
+    fetchZipCodes(cityId, districtId);
+  };
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
@@ -187,7 +207,7 @@ const ReportPage = () => {
       </header>
 
       {/* Content */}
-      <main className="flex-1 container mx-auto p-4 mb-6 overflow-y-auto ">
+      <main className="flex-1 container mx-auto w-full max-w-screen-xl p-4 mb-6 overflow-y-auto ">
         <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
           Buat Laporan
         </h2>
@@ -195,7 +215,7 @@ const ReportPage = () => {
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
           {/* Upload Foto */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center ">
             <div
               className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center w-full sm:w-96 h-96 rounded-lg relative"
               onClick={() => document.getElementById("fileInput").click()}
@@ -417,6 +437,27 @@ const ReportPage = () => {
               </div>
 
               {/* Kelurahan */}
+              <div>
+                <label
+                  className="block text-sm font-medium mb-2 ml-2"
+                  htmlFor="district"
+                >
+                  Kelurahan
+                </label>
+                <select
+                  id="district"
+                  value={selectedVillage}
+                  onChange={handleVillageChange}
+                  className="block w-full text-sm font-medium mt-1 border rounded-md p-2 text-black bg-white"
+                >
+                  <option value="">Pilih Kelurahan</option>
+                  {villages.map((village) => (
+                    <option key={village.id} value={village.id}>
+                      {village.text}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Kode Pos */}
               <div>

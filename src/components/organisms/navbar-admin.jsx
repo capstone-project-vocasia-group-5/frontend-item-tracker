@@ -83,7 +83,7 @@ export const NavbarAfterLogin = () => {
             </li>
             <li>
               <a
-                href="/notifikasi"
+                href="/notification"
                 className={`block py-1 px-3 rounded-full hover:bg-gray-100 md:hover:bg-transparent md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${isActive(
                   "/notifikasi"
                 )}`}

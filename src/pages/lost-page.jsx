@@ -8,26 +8,24 @@ import ReportButton from "../components/organisms/upload-section.jsx";
 
 const LostPage = () => {
   return (
-    <div className="">
+    <div>
       <Navbar />
-      {/* SearchBar */}
-      <SearchBar />
-      <div className="md:max-w-2xl lg:max-w-5xl sm:max-w-xl max-w-sm mx-auto mt-10">
-        <ReportButton />
-      </div>
 
-      {/* Lost Section */}
-      <div id="LostSection">
-        <h1 class="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
-          Barang Hilang
-        </h1>
+      <main className="max-w-screen-xl mx-auto">
+        <div id="LostSection">
+          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+            Barang Hilang
+          </h1>
 
-        <LostList />
-      </div>
+          <SearchBar />
+          <ReportButton />
 
-      <PaginationDisplay />
-      <Separator />
+          <LostList />
+        </div>
 
+        <PaginationDisplay />
+        <Separator />
+      </main>
       {/* Footer */}
       <Footer />
     </div>

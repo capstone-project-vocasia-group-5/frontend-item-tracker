@@ -19,9 +19,10 @@ import ManageAkunList from "./manage-akun-list";
 import ManageLaporanAdmin from "./manage-laporan-for-admin";
 import VerifikasiLaporan from "./verifikasi-laporan";
 import Dashboard from "./dashboard";
+import UpdateProfileUser from "./update-profile-user";
 
 function HomePageAdmin() {
-  const [activePage, setActivePage] = useState("HomePageAdmin");
+  const [activePage, setActivePage] = useState("Dashboard");
 
   const renderActivePage = () => {
     switch (activePage) {
@@ -33,17 +34,19 @@ function HomePageAdmin() {
         return <ManageLaporanAdmin />;
       case "Verifikasi Laporan":
         return <VerifikasiLaporan />;
+      case "Update Profile":
+        return <UpdateProfileUser />;
       default:
         return <Dashboard />;
     }
   };
+
   return (
     <SidebarProvider>
-      <AppSidebar onMenuClick={(menu) => setActivePage(menu.title)} />{" "}
-      {/* Teruskan fungsi */}
+      <AppSidebar onMenuClick={(menu) => setActivePage(menu.title)} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4 ">
+          <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1 bg-white " />
             <Separator orientation="vertical" className="mr-2 h-4 " />
             <Breadcrumb>

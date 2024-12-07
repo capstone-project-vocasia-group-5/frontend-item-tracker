@@ -60,12 +60,11 @@ const data = {
     },
   ],
 };
-
 export function AppSidebar({ onMenuClick, ...props }) {
   return (
     <Sidebar className="bg-black text-white" collapsible="icon" {...props}>
       <SidebarHeader className="bg-black text-white">
-        <NavUser user={data.user} />
+        <NavUser user={data.user} onMenuClick={onMenuClick} />
       </SidebarHeader>
       <SidebarContent className="bg-black text-white">
         <NavMain

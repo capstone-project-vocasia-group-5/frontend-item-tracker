@@ -19,6 +19,7 @@ import {
   FaTags,
   FaBell,
 } from "react-icons/fa";
+import "./css/fitur-utama.css";
 
 const notifications = [
   {
@@ -75,28 +76,32 @@ const notifications = [
 
 export function FiturUtama({ className, ...props }) {
   return (
-    <div className="m-5 md:m-10 flex justify-center">
-      <div
-        className="flex flex-wrap justify-center gap-4"
-        style={{ gridAutoRows: "minmax(150px, auto)" }}
-      >
+    <div className="my-10 flex justify-center">
+      <div className="flex flex-wrap gap-4 w-full justify-center items-center p-4">
         {notifications.map((notification, index) => (
           <Card
             className={cn(
-              `grid w-[250px] mb-4 transform transition-transform duration-300 hover:scale-105`,
+              `relative flex flex-col items-center justify-center flex-grow flex-shrink w-full basis-[250px] lg:max-w-[300px] md:max-w-[300px] rounded-[14px] overflow-hidden shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] transform transition-transform duration-300 hover:scale-105`,
               className
             )}
             {...props}
             key={index}
           >
-            <CardContent className="p-4 flex justify-center">
+            {/* Blob Background */}
+            <div className="blob"></div>
+
+            {/* Foreground Blur Layer */}
+            <div className="bg"></div>
+
+            {/* Card Content */}
+            <CardContent className="relative z-[3] pt-4 flex justify-center">
               {notification.icon}
             </CardContent>
-            <CardHeader>
+            <CardHeader className="relative z-[3]">
               <CardTitle>{notification.title}</CardTitle>
               <CardDescription>{notification.description}</CardDescription>
             </CardHeader>
-            <CardFooter></CardFooter>
+            <CardFooter className="relative z-[3]"></CardFooter>
           </Card>
         ))}
       </div>

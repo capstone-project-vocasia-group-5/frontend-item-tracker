@@ -26,7 +26,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-export function NavUser({ user }) {
+export function NavUser({ user, onMenuClick }) {
   const { isMobile } = useSidebar();
 
   return (
@@ -71,13 +71,17 @@ export function NavUser({ user }) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => onMenuClick({ title: "Update Profile" })}
+              >
                 <BadgeCheck />
                 Edit Profile
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => (window.location.href = "/login-admin")}
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>

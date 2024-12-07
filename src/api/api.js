@@ -1,11 +1,10 @@
 import axios from "axios";
+import { data } from "react-router-dom";
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:9000/api/v1", // URL backend Anda
-  headers: {
-    "Content-Type": "application/json",
-  },
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
+
 
 export default axiosInstance;
 
@@ -63,3 +62,4 @@ export const getUser = (data) => api.get("/users", data);
 //donations
 export const getTotalAmountDonations = (data) =>
   api.get("/donations/total-amount", data);
+

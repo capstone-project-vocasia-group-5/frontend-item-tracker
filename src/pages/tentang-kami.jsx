@@ -8,15 +8,15 @@ const TentangKami = () => {
     <div className="bg-gray-100 min-h-screen">
       {/* Header */}
 
-      <Navbar></Navbar>
+      <Navbar />
       <header className="bg-black text-white">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-16">
           {/* Gambar Header */}
           <div className="w-full md:w-1/2">
             <img
-              src="https://s3-alpha-sig.figma.com/img/1d67/cdcc/05befe3f77b9a8c0ac8d124fe7a9b5b5?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=be0FaleGdPtcinZb7GkNVcrTdBGcmDW~UBXgwZ72TZwipO6cJGepjz25J66CP2IukHE9RujLnJPAjJcX5Wa4n~Wa1EanjCQw27eyW1LwmPuFTKzalZA9R88eVRVFGOGK~YT-SCZfUA8uzy5uP6p~tNzVZY3EexmTmm3TNhnS09V3RoGCZvh-va-u~k~-jO616YEf53IYQTq~DwgxJLvIzDbm4IfKxft-DPqfdHnkZwN-5nUeqc5CAF95otINccY4AWqMRWGGFyo6ggoj5Z0tt0fOs0PdcEShDm2KGdVHKk4Lz2t9G3IqsqwEnnrP9LTLMGRn8A5sBXDzeTwBWBBWtw__"
+              src="/image/logo-3-white.svg"
               alt="ItemTrack Hero"
-              className="rounded-lg shadow-lg"
+              className="rounded-lg shadow-lg w-[50%] mx-auto"
             />
           </div>
 
@@ -147,7 +147,7 @@ const TentangKami = () => {
       </div>
 
       {/* Footer */}
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

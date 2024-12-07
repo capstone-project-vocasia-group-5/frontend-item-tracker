@@ -48,12 +48,12 @@ const UcapanTerimakasih = () => {
         </div>
 
         {/* Informasi Ringkasan */}
-        <CardHeader>
+        {/* <CardHeader>
           <CardTitle className="text-2xl font-semibold text-gray-800 mb-4">
             Your Summary
           </CardTitle>
-        </CardHeader>
-        <CardContent>
+        </CardHeader> */}
+        {/* <CardContent>
           <div className="text-lg text-gray-700 space-y-2 text-left">
             <p>
               <strong>Nama:</strong> {summary.Nama}
@@ -68,12 +68,12 @@ const UcapanTerimakasih = () => {
               <strong>Metode Pembayaran:</strong> {summary.Method}
             </p>
           </div>
-        </CardContent>
+        </CardContent> */}
 
         {/* Tombol Aksi */}
         <div className="text-center mt-8">
-          <Button className="bg-black hover:bg-green-500 text-white text-xl px-6 py-3 rounded-md">
-            Kembali ke Menu
+          <Button className="bg-black hover:bg-blue-500 text-white text-xl px-6 py-3 rounded-md">
+            Kembali ke Home
           </Button>
         </div>
       </Card>
