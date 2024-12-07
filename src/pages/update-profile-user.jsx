@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { Navbar } from "@/components/organisms/navbar";
-import { Footer } from "@/components/organisms/footer";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaAt, FaEyeSlash, FaEye, FaUserCircle } from "react-icons/fa";
+import { getUser } from "../api/api";
 
 const UpdateProfileUser = () => {
-  // State untuk form
   const [formData, setFormData] = useState({
     fullName: "",
     username: "",
@@ -17,9 +15,30 @@ const UpdateProfileUser = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
 
-  // State untuk status loading dan pesan error/sukses
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await getUser();
+        const user = response.data;
+        setFormData({
+          fullName: user.fullName || "",
+          username: user.username || "",
+          email: user.email || "",
+          phoneNumber: user.phoneNumber || "",
+          password: "",
+        });
+        setProfileImage(user.profileImage || null);
+      } catch (error) {
+        console.error("Failed to load user data:", error);
+        setMessage("Error fetching user data.");
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +48,7 @@ const UpdateProfileUser = () => {
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setProfileImage(file); // Simpan file asli
+      setProfileImage(file);
     }
   };
 
@@ -39,7 +58,6 @@ const UpdateProfileUser = () => {
     setMessage("");
 
     try {
-      // Buat FormData untuk mengirim file dan data form
       const formDataToSend = new FormData();
       formDataToSend.append("fullName", formData.fullName);
       formDataToSend.append("username", formData.username);
@@ -50,19 +68,21 @@ const UpdateProfileUser = () => {
         formDataToSend.append("profileImage", profileImage);
       }
 
-      // Kirim ke endpoint API
-      const response = await fetch("https://api.example.com/user/profile", {
-        method: "POST", // Ganti ke "PUT" jika diperlukan
+      const response = await fetch("http://localhost:9000/api/v1/users", {
+        method: "PATCH",
         body: formDataToSend,
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update profile");
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || "Failed to update profile");
       }
 
       const result = await response.json();
+      console.log("Profile updated successfully:", result);
       setMessage("Profile updated successfully!");
     } catch (error) {
+      console.error("Error updating profile:", error.message);
       setMessage(error.message || "An error occurred while updating profile");
     } finally {
       setLoading(false);
