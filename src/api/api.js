@@ -45,9 +45,10 @@ export const approveItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
 export const rejectItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
 export const donator = (data) => api.get("/donations", data);
 
-
 //category
 export const getAllCategories = (data) => api.get("/categories", data);
-export const getAllItems = (data) => api.get("/items", data); 
-export const updateCategory = (id, data) => api.put(`/admin/categories/${id}`, data);
-export const deleteCategory = (id) => api.delete(`/admin/categories/${id}`, data)
+export const getAllItems = (data) => api.get("/items", data);
+export const updateCategory = (id, data) =>
+  api.put(`/admin/categories/${id}`, data);
+export const deleteCategory = (id) =>
+  api.delete(`/admin/categories/${id}`, data);
