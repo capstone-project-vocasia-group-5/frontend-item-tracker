@@ -17,10 +17,8 @@ const LostPage = () => {
             Barang Hilang
           </h1>
 
-          <div className="mt-8 flex justify-between flex-col md:flex-row items-center gap-2 px-4 ">
-            <SearchBar />
-            <ReportButton />
-          </div>
+          <SearchBar />
+          <ReportButton />
 
           <LostList />
         </div>
@@ -28,7 +26,6 @@ const LostPage = () => {
         <PaginationDisplay />
         <Separator />
       </main>
-
       {/* Footer */}
       <Footer />
     </div>

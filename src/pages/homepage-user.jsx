@@ -21,7 +21,8 @@ const Homepage = () => {
       </div>
       <main className="mx-auto max-w-screen-xl">
         {/* SearchBar */}
-        <div className="max-w-screen-xl mx-auto mt-10">
+        <div className="w-full mt-10">
+
           <SearchBar />
         </div>
 

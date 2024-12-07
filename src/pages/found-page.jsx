@@ -16,10 +16,8 @@ const FoundPage = () => {
             Barang Temuan
           </h1>
 
-          <div className="mt-8 flex justify-between flex-col md:flex-row items-center gap-2 px-4 ">
-            <SearchBar />
-            <ReportButton />
-          </div>
+          <SearchBar />
+          <ReportButton />
 
           <FoundList />
         </div>
