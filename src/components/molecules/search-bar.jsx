@@ -140,8 +140,8 @@ export const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="w-full p-4">
-      <div className="flex items-center space-x-2">
+    <form onSubmit={handleSearch} className="w-full md:w-[40%]">
+      <div className="flex items-center space-x-2 ">
         {/* Filter Button */}
 
         {/* Search Bar */}

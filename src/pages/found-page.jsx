@@ -9,21 +9,22 @@ const FoundPage = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="max-w-screen-xl mx-auto p-4">
-        {" "}
-        <SearchBar />
-        <ReportButton />
-        {/* Lost Section */}
-        <div id="LostSection">
-          <h1 className="mt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
-            Barang temuan
+
+      <main className="max-w-screen-xl mx-auto">
+        <div id="FoundSection">
+          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+            Barang Temuan
           </h1>
+
+          <div className="mt-8 flex justify-between flex-col md:flex-row items-center gap-2 px-4 ">
+            <SearchBar />
+            <ReportButton />
+          </div>
 
           <FoundList />
         </div>
         <PaginationDisplay />
-      </div>
-      {/* SearchBar */}
+      </main>
 
       {/* Footer */}
       <Footer />

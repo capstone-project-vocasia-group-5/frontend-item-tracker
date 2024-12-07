@@ -50,50 +50,52 @@ function ProfileBase() {
   };
 
   return (
-    <div className="bg-gray-50">
+    <>
       {/* Navbar */}
       <Navbar />
 
-      {/* Layout utama */}
-      <div className="flex justify-center max-w-screen-xl mx-auto p-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow w-full">
-          {/* Sidebar */}
-          <div className="w-full bg-white border border-gray-300 shadow rounded-lg ">
-            <div className="p-4 text-center border-gray-300 bg-gray-100 w-full">
-              <h4 className="text-lg font-semibold text-gray-800">
-                AGUS HERYANTO
-              </h4>
-              <p className="text-sm text-gray-500">
-                Universitas Amikom Yogyakarta
-              </p>
+      <main className="max-w-screen-xl mx-auto">
+        {/* Layout utama */}
+        <div className="flex justify-center m-4 max-w-screen-xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow">
+            {/* Sidebar */}
+            <div className="w-full bg-white border border-gray-300 shadow rounded-lg ">
+              <div className="p-4 text-center border-gray-300 bg-gray-100 w-full">
+                <h4 className="text-lg font-semibold text-gray-800">
+                  AGUS HERYANTO
+                </h4>
+                <p className="text-sm text-gray-500">
+                  Universitas Amikom Yogyakarta
+                </p>
+              </div>
+              <ul className="mt-4 space-y-4 p-4 text-center">
+                {menuItems.map((item) => (
+                  <li
+                    key={item.id}
+                    className={`p-4 cursor-pointer rounded-full ${
+                      item.id === activeItem
+                        ? "bg-black text-white"
+                        : "hover:bg-gray-200 text-gray-700"
+                    }`}
+                    onClick={() => handleMenuClick(item.id, item.action)}
+                  >
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="mt-4 space-y-4 p-4 text-center">
-              {menuItems.map((item) => (
-                <li
-                  key={item.id}
-                  className={`p-4 cursor-pointer rounded-full ${
-                    item.id === activeItem
-                      ? "bg-black text-white"
-                      : "hover:bg-gray-200 text-gray-700"
-                  }`}
-                  onClick={() => handleMenuClick(item.id, item.action)}
-                >
-                  {item.label}
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* Konten */}
-          <div className="col-span-1 md:col-span-2 bg-white border border-gray-300 shadow rounded-lg p-4 w-full">
-            {renderContent()}
+            {/* Konten */}
+            <div className="col-span-1 md:col-span-2 bg-white border border-gray-300 shadow rounded-lg p-4 w-full">
+              {renderContent()}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
 
       {/* Footer */}
       <Footer />
-    </div>
+    </>
   );
 }
 
