@@ -20,7 +20,7 @@ export default function ReportButton() {
   };
 
   return (
-    <div className="max-w-screen-xl flex items-center justify-between p-4 bg-gray-200 rounded-md shadow-md m-3">
+    <div className="flex items-center justify-between p-4 m-4 bg-gray-200 rounded-md shadow-md">
       <p className="font-bold text-black">{getText()}</p>
 
       <button

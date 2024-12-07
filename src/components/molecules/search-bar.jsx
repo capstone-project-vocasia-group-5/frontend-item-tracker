@@ -139,8 +139,8 @@ export const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="max-w-screen-xl mt-8 mx-3">
-      <div className="flex items-center space-x-2">
+    <form onSubmit={handleSearch} className="w-full p-4">
+      <div className="flex items-center space-x-2 ">
         {/* Filter Button */}
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
