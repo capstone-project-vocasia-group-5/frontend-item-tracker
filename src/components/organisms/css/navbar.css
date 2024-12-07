@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 8px 8px;
+  padding: 6px 6px;
   border-radius: 20px;
   display: none;
 }
@@ -13,36 +13,36 @@
 .bar1 {
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
-  width: 30px;
-  margin-bottom: 6px;
+  width: 28px;
+  margin-bottom: 5px;
   transition: 0.4s;
-  height: 4px;
+  height: 3px;
 }
 
 .bar2 {
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
-  width: 30px;
+  width: 28px;
   position: absolute;
   transition: 0.4s;
-  height: 4px;
+  height: 3px;
 }
 
 .bar3_h {
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
-  width: 30px;
+  width: 28px;
   transition: 0.4s;
-  height: 4px;
+  height: 3px;
 }
 
 .bar4 {
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
-  width: 30px;
-  margin-top: 6px;
+  width: 28px;
+  margin-top: 5px;
   transition: 0.4s;
-  height: 4px;
+  height: 3px;
 }
 
 .nav_bar:hover {

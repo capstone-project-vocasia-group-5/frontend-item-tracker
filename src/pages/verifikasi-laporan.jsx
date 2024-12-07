@@ -80,10 +80,8 @@ const VerifikasiLaporan = () => {
     <div>
       <div className="min-h-screen flex flex-col">
         <div className="p-4">
-          <header className="bg-white shadow-sm p-4 flex rounded-lg">
-            <h1 className="text-xl md:text-2xl font-bold text-gray-800 text-left">
-              Verifikasi Laporan
-            </h1>
+          <header className="bg-white shadow-sm p-4 flex justify-between">
+            <h1 className="text-xl font-bold">Verifikasi Laporan</h1>
           </header>
 
           <div className="bg-white shadow-md rounded-lg overflow-hidden">

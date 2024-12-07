@@ -20,8 +20,8 @@ export default function ReportButton() {
   };
 
   return (
-    <div className="w-full md:w-[30%] flex items-center  justify-between  bg-gray-100 rounded-md shadow-md">
-      <p className="font-bold text-black ml-4">Laporkan</p>
+    <div className="w-full flex items-center justify-between p-4 bg-gray-200 rounded-md shadow-md">
+      <p className="font-bold text-black">{getText()}</p>
 
       <button
         onClick={handleNavigate}

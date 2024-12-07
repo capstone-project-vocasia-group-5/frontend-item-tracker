@@ -4,7 +4,7 @@ import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
 import ManageLaporan from "./manage-laporan";
 import UpdateProfileUser from "./update-profile-user";
-import HomePageDefault from "./home-page-default";
+import HomePage from "./homepage-user";
 import ManagePengajuan from "./manage-pengajuan";
 
 const menuItems = [
@@ -43,7 +43,7 @@ function ProfileBase() {
   // Fungsi handle klik pada menu sidebar
   const handleMenuClick = (id, action) => {
     if (action === "logout") {
-      navigate("/"); // Arahkan ke halaman login atau beranda
+      navigate("/");
     } else {
       setActiveItem(id);
     }
@@ -109,8 +109,8 @@ function SectionManagePengajuan() {
 function SectionManageLaporan() {
   return <ManageLaporan />;
 }
-function SectionHomePageDefault() {
-  return <HomePageDefault />;
+function SectionHomePage() {
+  return <HomePage />;
 }
 
 export default ProfileBase;
