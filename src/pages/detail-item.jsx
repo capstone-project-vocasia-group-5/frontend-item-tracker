@@ -90,29 +90,26 @@ const DetailItem = () => {
           <div className="text-left sm:p-5 sm:m-4 px-9 pb-9 rounded-lg ">
             <h2 className="text-3xl font-semibold text-gray-900 my-6">Meong</h2>
             <p className="text-sm text-gray-700 my-4">
-              Terakhir Terlihat:{" "}
+              Terakhir Terlihat :{" "}
               <span className="font-semibold my-4">23 Juni 2024</span>
             </p>
             <div className="my-4">
               <label className="text-sm text-gray-700 mr-2 font-medium">
-                Status:
+                Status :
               </label>
-              <select
-                value={status}
-                onChange={handleStatusChange}
-                className={`p-1 rounded-full focus:outline-none focus:ring-2 ${
+              <div
+                className={`inline-block px-2 py-1 rounded-full text-white font-medium ${
                   status === "Masih Dicari"
-                    ? "bg-yellow-100 text-yellow-800 ring-yellow-500"
+                    ? "bg-yellow-500"
                     : status === "Ditemukan"
-                    ? "bg-green-100 text-green-800 ring-green-500"
-                    : "bg-gray-100 text-gray-800 ring-gray-500"
+                    ? "bg-green-500"
+                    : "bg-gray-500"
                 }`}
               >
-                <option value="Masih Dicari">Masih Dicari</option>
-                <option value="Ditemukan">Ditemukan</option>
-                <option value="Tidak Diketahui">Tidak Diketahui</option>
-              </select>
+                {status}
+              </div>
             </div>
+
             <p className="text-sm text-gray-700 my-4">
               Deskripsi:{" "}
               <span className="font-medium">

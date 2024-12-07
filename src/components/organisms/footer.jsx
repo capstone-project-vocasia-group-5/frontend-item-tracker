@@ -17,7 +17,7 @@ export const Footer = () => {
               <LogoItemTracker className="" />
             </a>
           </div>
-          <div className="grid grid-cols-3 gap-8 sm:gap-6 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 text-left pt-4 sm:pt-0">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
                 Tautan Cepat
