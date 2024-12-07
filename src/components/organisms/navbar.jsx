@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LogoItemTracker from "../atoms/logo-item-tracker";
+import Hamburger from "../molecules/hamburger";
+import ButtonLogin from "../atoms/button-login";
+import ButtonBulet from "../atoms/button-bulet";
 import "./css/navbar.css";
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,28 +40,14 @@ export const Navbar = () => {
               </Avatar>
             </div>
           ) : (
-            <button
-              onClick={() => navigate("/login")}
-              type="button"
-              className="text-white bg-primaryBlack hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Login
-            </button>
+            // <ButtonLogin isOnClick={() => navigate("/login")} />
+            <ButtonBulet isOnClick={() => navigate("/login")} />
           )}
-          <div
-            className="nav_bar"
-            aria-controls="navbar-sticky"
-            aria-expanded={isMenuOpen}
-            onClick={toggleMenu}
-          >
-            <div className="bar1"></div>
-            <div className="bar2"></div>
-            <div className="bar3_h"></div>
-            <div className="bar4"></div>
-          </div>
+
+          <Hamburger isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
         <div
-          className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
+          className={`items-center w-full md:flex md:w-auto md:order-1 ${
             isMenuOpen ? "block" : "hidden"
           }`}
           id="navbar-sticky"

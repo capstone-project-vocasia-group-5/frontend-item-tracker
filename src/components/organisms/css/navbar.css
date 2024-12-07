@@ -1,74 +1,35 @@
-.nav_bar {
-  background-color: rgb(27, 27, 27);
-  position: relative;
-  transition: 0.4s;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 6px 6px;
-  border-radius: 20px;
+.hamburger {
+  cursor: pointer;
+}
+
+.hamburger input {
   display: none;
 }
 
-.bar1 {
-  border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  width: 28px;
-  margin-bottom: 5px;
-  transition: 0.4s;
-  height: 3px;
+.hamburger svg {
+  height: 3em;
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bar2 {
-  border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  width: 28px;
-  position: absolute;
-  transition: 0.4s;
-  height: 3px;
+.line {
+  fill: none;
+  stroke: rgb(3, 0, 0);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bar3_h {
-  border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  width: 28px;
-  transition: 0.4s;
-  height: 3px;
+.line-top-bottom {
+  stroke-dasharray: 12 63;
 }
 
-.bar4 {
-  border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  width: 28px;
-  margin-top: 5px;
-  transition: 0.4s;
-  height: 3px;
-}
-
-.nav_bar:hover {
-  border-radius: 50px;
-}
-.nav_bar:hover .bar3_h {
+.hamburger input:checked + svg {
   transform: rotate(-45deg);
 }
-.nav_bar:hover .bar2 {
-  transform: rotate(45deg);
-}
 
-.nav_bar:hover .bar1 {
-  opacity: 0;
-  width: 30px;
-}
-.nav_bar:hover .bar4 {
-  opacity: 0;
-  width: 30px;
-}
-
-@media screen and (max-width: 768px) {
-  /* Tampilkan hanya di layar <= 768px */
-
-  .nav_bar {
-    display: flex;
-    /* Tampilkan flex hanya untuk layar kecil */
-  }
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
 }

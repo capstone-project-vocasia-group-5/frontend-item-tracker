@@ -1,4 +1,3 @@
-
 .white,
 .borderr,
 .darkBorderBg,
@@ -225,7 +224,7 @@
     #402fb5 5%,
     #000 38%,
     #000 50%,
-    #cf30aa 60%,
+    #f70fc1 60%,
     #000 87%
   );
   animation: rotate 4s 0.3s linear infinite;
