@@ -63,10 +63,9 @@ useEffect(() => {
     try {
       await updateCategory(editingCategory.id, { name: editName }); 
       setCategories((prevCategories) =>
-        prevCategories.map((cat) =>
-          cat.id === editingCategory.id ? { ...cat, name: editName } : cat
-        )
-      );
+        prevCategories.map((category) =>
+          category.id === editingCategory.id ? { ...category, name: editName } : category
+        ));
       setEditingCategory(null); 
     } catch (error) {
       console.error("Error updating category:", error);
