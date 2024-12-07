@@ -21,8 +21,8 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 55px;
-    height: 45px;
+    width: 54px;
+    height: 50px;
     border: none;
     border-radius: 50%;
     cursor: pointer;

@@ -28,9 +28,9 @@ export const Navbar = () => {
           <img src="/image/logo-3.svg" className="h-10" alt="Logo" />
           <LogoItemTracker className="text-black ml-3" />
         </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex md:order-2 justify-end space-x-3 md:space-x-0 rtl:space-x-reverse w-[130px]">
           {isLoggedIn ? (
-            <div className="lg:mr-4 md:mr-4">
+            <div className="lg:mr-4 md:mr-4 ">
               <Avatar onClick={() => navigate("/updateprofile")}>
                 <AvatarImage
                   src="https://github.com/shadcn.png"
@@ -47,7 +47,7 @@ export const Navbar = () => {
           <Hamburger isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         </div>
         <div
-          className={`items-center w-full md:flex md:w-auto md:order-1 ${
+          className={`items-center sticky w-full md:flex md:w-auto md:order-1 ${
             isMenuOpen ? "block" : "hidden"
           }`}
           id="navbar-sticky"
