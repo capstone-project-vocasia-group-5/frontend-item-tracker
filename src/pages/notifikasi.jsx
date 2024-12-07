@@ -6,13 +6,14 @@ const Notifikasi = () => {
   return (
     <div className="">
       <Navbar />
-      <header className="flex justify-center">
-        <h1 className="text-2xl p-4 font-bold">Notifikasi</h1>
-      </header>
-      <div className="max-w-screen-xl mx-auto">
-        <Notif />
-      </div>
-
+      <main className="max-w-screen-xl mx-auto">
+        <header className="flex justify-center">
+          <h1 className="text-2xl p-4 font-bold">Notifikasi</h1>
+        </header>
+        <div className="max-w-screen-xl mx-auto">
+          <Notif />
+        </div>
+      </main>
       <Footer />
     </div>
   );
