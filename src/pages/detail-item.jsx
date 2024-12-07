@@ -167,41 +167,44 @@ const DetailItem = () => {
               Komentar
             </h3>
           </div>
-          <ScrollArea className="w-full h-[500px] bg-[#cecece] text-black rounded-md border p-2 text-justify relative">
-            {/* Daftar Komentar */}
-            <div className="space-y-3 p-2">
-              {comments.map((comment, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-3 p-2 bg-white shadow-md rounded-lg"
-                >
-                  {/* Avatar */}
-                  <img
-                    src={comment.profile}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full border-2 border-blue-500"
-                  />
+          <div className="rounded-b-lg border bg-[#cecece]">
+            {" "}
+            <ScrollArea className="w-full h-[500px] text-black p-2 text-justify relative">
+              {/* Daftar Komentar */}
+              <div className="space-y-3 p-2">
+                {comments.map((comment, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center space-x-3 p-2 bg-white shadow-md rounded-lg"
+                  >
+                    {/* Avatar */}
+                    <img
+                      src={comment.profile}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full border-2 border-blue-500"
+                    />
 
-                  {/* Isi Komentar */}
-                  <div className="flex-1">
-                    <div className="flex justify-between items-center mb-1">
-                      <p className="font-medium text-black text-lg">
-                        {comment.name}
+                    {/* Isi Komentar */}
+                    <div className="flex-1">
+                      <div className="flex justify-between items-center mb-1">
+                        <p className="font-medium text-black text-lg">
+                          {comment.name}
+                        </p>
+                        <span className="text-sm text-gray-500">
+                          {comment.date}
+                        </span>
+                      </div>
+                      <p className="text-gray-700 bg-gray-100 p-2 rounded-md shadow-inner">
+                        {comment.description}
                       </p>
-                      <span className="text-sm text-gray-500">
-                        {comment.date}
-                      </span>
                     </div>
-                    <p className="text-gray-700 bg-gray-100 p-2 rounded-md shadow-inner">
-                      {comment.description}
-                    </p>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Input Komentar */}
-            <div className="sticky bottom-0 bg-[#cecece] p-4  flex items-center space-x-3">
+              {/* Input Komentar */}
+            </ScrollArea>
+            <div className=" bottom-0 p-4 flex items-center space-x-3">
               <img
                 src="https://via.placeholder.com/40/FF5733/FFFFFF?text=U"
                 alt="User Profile"
@@ -221,7 +224,7 @@ const DetailItem = () => {
                 ➤
               </button>
             </div>
-          </ScrollArea>
+          </div>
         </div>
       </div>
 
