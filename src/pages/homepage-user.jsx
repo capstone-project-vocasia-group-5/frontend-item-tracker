@@ -15,13 +15,14 @@ const Homepage = () => {
   return (
     <div>
       <Navbar />
-      {/* Fitur Utama */}
+
       <div id="header">
         <HeaderFix />
       </div>
       <main className="mx-auto max-w-screen-xl">
         {/* SearchBar */}
         <div className="w-full mt-10">
+
           <SearchBar />
         </div>
 

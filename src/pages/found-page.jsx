@@ -23,6 +23,7 @@ const FoundPage = () => {
         </div>
         <PaginationDisplay />
       </main>
+
       {/* Footer */}
       <Footer />
     </div>

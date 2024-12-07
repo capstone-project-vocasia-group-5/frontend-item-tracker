@@ -25,7 +25,7 @@ export default function ReportButton() {
 
       <button
         onClick={handleNavigate}
-        className="flex items-center justify-center w-10 h-10 bg-black text-white rounded-md hover:bg-blue-600 "
+        className="flex items-center justify-center  bg-black text-white rounded-md hover:bg-blue-600 "
         aria-label="Tambah laporan"
       >
         +

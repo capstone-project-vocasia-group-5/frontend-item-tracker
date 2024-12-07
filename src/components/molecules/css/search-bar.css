@@ -1,3 +1,4 @@
+
 .white,
 .borderr,
 .darkBorderBg,
@@ -52,8 +53,9 @@
 }
 #pink-mask {
   pointer-events: none;
-  width: 100px;
-  height: 20px;
+
+  width: 40px;
+  height: 10px;
   position: absolute;
   background: #dd2cb4;
   top: 10px;

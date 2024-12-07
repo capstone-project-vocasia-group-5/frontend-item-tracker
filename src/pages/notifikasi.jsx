@@ -9,7 +9,7 @@ const Notifikasi = () => {
       <header className="flex justify-center">
         <h1 className="text-2xl p-4 font-bold">Notifikasi</h1>
       </header>
-      <div className="max-w-screen-xl">
+      <div className="max-w-screen-xl mx-auto">
         <Notif />
       </div>
 

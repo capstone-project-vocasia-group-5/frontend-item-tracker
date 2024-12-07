@@ -8,13 +8,8 @@ import ReportButton from "../components/organisms/upload-section.jsx";
 
 const LostPage = () => {
   return (
-    <div className="">
+    <div>
       <Navbar />
-      {/* SearchBar */}
-      <SearchBar />
-      <div className="mx-auto mt-10">
-        <ReportButton />
-      </div>
 
       <main className="max-w-screen-xl mx-auto">
         <div id="LostSection">

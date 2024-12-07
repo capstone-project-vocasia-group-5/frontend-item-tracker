@@ -92,7 +92,7 @@ const KontakKami = () => {
           <Card className="p-6 bg-black text-white mr-16 text-left md:ml-auto w-full sm:w-[300px] md:w-[360px] h-96">
             <div className="flex items-center justify-center mb-4 mt-4 space-x-3">
               <img
-                src="/image/Logo.png"
+                src="/image/logo-3-white.svg"
                 alt="ItemTrack Logo"
                 className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
               />

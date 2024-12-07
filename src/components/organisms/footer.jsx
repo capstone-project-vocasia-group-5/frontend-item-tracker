@@ -10,8 +10,8 @@ export const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="https://flowbite.com/" className="flex items-center">
               <img
-                src="https://s3-alpha-sig.figma.com/img/1d67/cdcc/05befe3f77b9a8c0ac8d124fe7a9b5b5?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=be0FaleGdPtcinZb7GkNVcrTdBGcmDW~UBXgwZ72TZwipO6cJGepjz25J66CP2IukHE9RujLnJPAjJcX5Wa4n~Wa1EanjCQw27eyW1LwmPuFTKzalZA9R88eVRVFGOGK~YT-SCZfUA8uzy5uP6p~tNzVZY3EexmTmm3TNhnS09V3RoGCZvh-va-u~k~-jO616YEf53IYQTq~DwgxJLvIzDbm4IfKxft-DPqfdHnkZwN-5nUeqc5CAF95otINccY4AWqMRWGGFyo6ggoj5Z0tt0fOs0PdcEShDm2KGdVHKk4Lz2t9G3IqsqwEnnrP9LTLMGRn8A5sBXDzeTwBWBBWtw__"
-                className="h-8 me-3"
+                src="/image/logo-3-white.svg"
+                className="h-10 me-3"
                 alt="ItemTrack Logo"
               />
               <LogoItemTracker className="" />
@@ -61,7 +61,7 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/tentang-kami" className="hover:underline">
+                  <Link to="/about" className="hover:underline">
                     Tentang Kami
                   </Link>
                 </li>
@@ -78,12 +78,12 @@ export const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/kebijakan-privasi" className="hover:underline">
+                  <a href="/privacy" className="hover:underline">
                     Kebijakan Privasi
                   </a>
                 </li>
                 <li>
-                  <a href="/syarat-ketentuan" className="hover:underline">
+                  <a href="/terms" className="hover:underline">
                     Syarat &amp; Ketentuan
                   </a>
                 </li>
@@ -95,8 +95,8 @@ export const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              ItemTrack™
+            <a href="/" className="hover:underline">
+              ItemTracker™
             </a>
             . All Rights Reserved.
           </span>
