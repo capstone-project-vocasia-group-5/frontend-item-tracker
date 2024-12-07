@@ -6,10 +6,10 @@ import { getUser } from "../api/api";
 
 const UpdateProfileUser = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     username: "",
     email: "",
-    phoneNumber: "",
+    phone_number: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -24,13 +24,13 @@ const UpdateProfileUser = () => {
         const response = await getUser();
         const user = response.data;
         setFormData({
-          fullName: user.fullName || "",
+          name: user.name || "",
           username: user.username || "",
           email: user.email || "",
-          phoneNumber: user.phoneNumber || "",
+          phone_number: user.phone_number || "",
           password: "",
         });
-        setProfileImage(user.profileImage || null);
+        setProfileImage(user.image_url || null);
       } catch (error) {
         console.error("Failed to load user data:", error);
         setMessage("Error fetching user data.");
@@ -59,10 +59,10 @@ const UpdateProfileUser = () => {
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append("fullName", formData.fullName);
+      formDataToSend.append("fullName", formData.name);
       formDataToSend.append("username", formData.username);
       formDataToSend.append("email", formData.email);
-      formDataToSend.append("phoneNumber", formData.phoneNumber);
+      formDataToSend.append("phoneNumber", formData.phone_number);
       formDataToSend.append("password", formData.password);
       if (profileImage) {
         formDataToSend.append("profileImage", profileImage);
@@ -107,7 +107,7 @@ const UpdateProfileUser = () => {
                 <div className="w-24 h-24 rounded-full mx-auto border-2 border-white flex items-center justify-center bg-black transition-colors duration-300 hover:bg-gray-700">
                   {profileImage ? (
                     <img
-                      src={URL.createObjectURL(profileImage)}
+                      src={URL.createObjectURL(image_url)}
                       alt="Profile"
                       className="w-full h-full rounded-full object-cover"
                     />
@@ -133,7 +133,7 @@ const UpdateProfileUser = () => {
               <Input
                 type="text"
                 name="fullName"
-                value={formData.fullName}
+                value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Full Name"
                 className="w-full border px-4 py-2 rounded-md bg-white"
@@ -179,7 +179,7 @@ const UpdateProfileUser = () => {
                 <Input
                   type="tel"
                   name="phoneNumber"
-                  value={formData.phoneNumber}
+                  value={formData.phone_number}
                   onChange={handleInputChange}
                   placeholder="Phone Number"
                   className="w-full border px-4 py-2 rounded-r-md bg-white"
