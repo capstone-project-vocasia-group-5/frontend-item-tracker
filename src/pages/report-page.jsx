@@ -57,11 +57,15 @@ const ReportPage = () => {
   };
 
   const handleRemoveImage = (image) => {
-    setFiles((prevFiles) => prevFiles.filter((file) => file !== image));
-    if (selectedImage === image) {
-      setSelectedImage(files[0] || null);
-    }
+    setFiles((prevFiles) => {
+      const updatedFiles = prevFiles.filter((file) => file !== image);
+      if (selectedImage === image) {
+        setSelectedImage(updatedFiles[0] || null);
+      }
+      return updatedFiles;
+    });
   };
+  
 
   // Fungsi untuk menangani perubahan nomor telepon
   const handlePhoneNumberChange = (event) => {
