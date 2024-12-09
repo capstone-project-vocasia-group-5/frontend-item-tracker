@@ -12,6 +12,7 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false); // State untuk checkbox
 
   const navigate = useNavigate();
 
@@ -22,6 +23,12 @@ function RegisterForm() {
 
     if (!username || !fullname || !email || !phoneNumber || !password) {
       setErrorMessage("Harap mengisi data dengan lengkap.");
+      setLoading(false);
+      return;
+    }
+
+    if (!termsAccepted) {
+      setErrorMessage("Anda harus menyetujui syarat dan ketentuan.");
       setLoading(false);
       return;
     }
@@ -162,7 +169,7 @@ function RegisterForm() {
                   className="mr-2"
                 />
                 <label htmlFor="showPassword" className="text-sm">
-                  Show Password
+                  Perlihatkan Password
                 </label>
               </div>
             </div>
@@ -181,10 +188,32 @@ function RegisterForm() {
           >
             {loading ? "Mendaftar..." : "Daftar"}
           </button>
+
+          {/* Checkbox Syarat & Ketentuan */}
+          <div className="flex items-center mt-2">
+            <input
+              type="checkbox"
+              id="terms"
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+              className="mr-2"
+            />
+            <label htmlFor="terms" className="text-sm">
+              Saya menyetujui{" "}
+              <a
+                href="/terms"
+                className="text-blue-400 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                syarat dan ketentuan
+              </a>
+            </label>
+          </div>
         </form>
 
         {/* Footer */}
-        <div className="text-center mt-4">
+        <div className="text-center mt-8">
           <p className="text-sm">
             Sudah punya akun?{" "}
             <a href="/login" className="text-blue-400 hover:underline">
