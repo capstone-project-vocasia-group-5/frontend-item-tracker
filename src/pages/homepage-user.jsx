@@ -8,9 +8,19 @@ import { FiturUtama } from "../components/organisms/fitur-utama.jsx";
 import { Separator } from "@/components/ui/separator";
 import ReportButton from "../components/organisms/upload-section.jsx";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const Homepage = () => {
   const location = useLocation();
+  const [searchParams, setSearchParams] = useState({});
+
+  const handleSearch = (params) => {
+    setSearchParams(params);
+  };
+
+  const handleReset = () => {
+    setSearchParams({});
+  };
 
   return (
     <div>
@@ -22,8 +32,7 @@ const Homepage = () => {
       <main className="mx-auto max-w-screen-xl">
         {/* SearchBar */}
         <div className="w-full mt-10">
-
-          <SearchBar />
+          <SearchBar onSearch={handleSearch} onReset={handleReset} />
         </div>
 
         {/* Render ReportButton hanya di route "/after" */}
@@ -41,7 +50,7 @@ const Homepage = () => {
               Barang Anda !
             </span>
           </h1>
-          <LostList />
+          <LostList params={{ ...searchParams, type: "lost" }} />
         </div>
         <Separator />
 
@@ -52,7 +61,7 @@ const Homepage = () => {
               Barang Temuan{" "}
             </span>
           </h1>
-          <FoundList />
+          <FoundList params={{ ...searchParams, type: "found" }} />
         </div>
         <Separator />
 
@@ -63,7 +72,6 @@ const Homepage = () => {
             <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
               Fitur Utama
             </span>{" "}
-            ItemTrack
           </h1>
           <FiturUtama />
         </div>
