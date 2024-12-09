@@ -217,7 +217,7 @@ const ReportPage = () => {
           {/* Upload Foto */}
           <div className="flex flex-col items-center ">
             <div
-              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center sm:w-96 h-[350px] w-[350px] sm:h-96 rounded-lg relative"
+              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center h-[350px] w-[350px] sm:h-[500px] sm:w-[500px] rounded-lg relative"
               onClick={() => document.getElementById("fileInput").click()}
             >
               {selectedImage ? (
@@ -482,7 +482,7 @@ const ReportPage = () => {
 
         {/* Deskripsi */}
         <div className="mt-6 flex justify-center">
-          <div className="text-left w-full sm:w-[910px]">
+          <div className="text-left w-full sm:w-[1025px]">
             <label
               htmlFor="description"
               className="block text-sm font-medium mb-2 ml-2"
@@ -499,7 +499,7 @@ const ReportPage = () => {
 
         {/* Upload Button */}
         <div className="mt-6 flex justify-center">
-          <Button className="bg-black text-white w-full sm:w-[910px] h-12">
+          <Button className="bg-black text-white w-full sm:w-[1025px] h-12">
             Upload
           </Button>
         </div>
