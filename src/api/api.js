@@ -52,6 +52,8 @@ export const updateCategory = (id, data) =>
   api.put(`/admin/categories/${id}`, data);
 export const deleteCategory = (id) =>
   api.delete(`/admin/categories/${id}`, data);
+export const createCategory = (data) => 
+  api.post("/admin/categories", data);
 
 // Claims
 export const getUser = (data) => api.get("/users", data);
@@ -59,3 +61,8 @@ export const getUser = (data) => api.get("/users", data);
 //donations
 export const getTotalAmountDonations = (data) =>
   api.get("/donations/total-amount", data);
+
+//user-account
+export const getAllUsers = (data) => api.get("/admin/users", data);
+export const deleteUser = (id) => 
+  api.delete(`/admin/users/${id}`, data);
