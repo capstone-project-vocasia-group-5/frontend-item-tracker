@@ -1,36 +1,26 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
+import { getAllUsers, deleteUser } from "../api/api";
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [accounts, setAccounts] = useState([]);
+  const [alertVisible, setAlertVisible] = useState(false); // State untuk kontrol visibility alert
 
-  // Data Sampel
-  const sampleData = [
-    {
-      id: 1,
-      nama: "Ade Irawan",
-      email: "adeirawan@gmail.com",
-      noTelepon: "0812333109",
-    },
-    {
-      id: 2,
-      nama: "Budi Santoso",
-      email: "budi.santoso@gmail.com",
-      noTelepon: "0898765432",
-    },
-    {
-      id: 3,
-      nama: "Cici Nurul",
-      email: "cici.nurul@example.com",
-      noTelepon: "0851234567",
-    },
-  ];
-
-  // Menggunakan data eksternal atau data sampel
   useEffect(() => {
-    // Simulasi pengambilan data eksternal (gunakan API fetch jika diperlukan)
-    setAccounts(sampleData);
+    const fetchAccounts = async () => {
+      try {
+        const response = await getAllUsers();
+        console.log("Response data:", response); // Debugging untuk memeriksa respons
+        const users = response.data?.data?.users || []; // Akses data pengguna
+        setAccounts(users); // Simpan data ke state
+      } catch (error) {
+        console.error("Gagal mengambil data pengguna:", error);
+        setAccounts([]); // Jika terjadi error, set array kosong
+      }
+    };
+
+    fetchAccounts();
   }, []);
 
   // Fungsi untuk menangani perubahan input pencarian
@@ -39,11 +29,36 @@ const ManageAkunList = () => {
   };
 
   // Fungsi pencarian
-  const filteredAccounts = accounts.filter((account) =>
-    account.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    account.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    account.noTelepon.includes(searchQuery)
-  );
+  const filteredAccounts = Array.isArray(accounts)
+    ? accounts.filter((account) => {
+        const nama = account.name || ""; // Pastikan properti ada atau beri nilai default
+        const email = account.email || "";
+        const noTelepon = account.phone_number || "";
+
+        return (
+          nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          noTelepon.includes(searchQuery)
+        );
+      })
+    : [];
+
+  // Fungsi untuk menghapus pengguna
+  const handleDeleteUser = async (userId) => {
+    if (!window.confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {
+      return;
+    }
+
+    try {
+      await deleteUser(userId); // Panggil API delete
+      setAccounts((prevAccounts) => prevAccounts.filter((account) => account.id !== userId));
+      alert("Pengguna berhasil dihapus.");
+      setAlertVisible(true); // Menampilkan alert setelah penghapusan berhasil
+    } catch (error) {
+      console.error("Gagal menghapus pengguna:", error);
+      alert("Terjadi kesalahan saat menghapus pengguna.");
+    }
+  };
 
   return (
     <div>
@@ -105,11 +120,14 @@ const ManageAkunList = () => {
                 <tbody className="divide-y divide-gray-500 text-center">
                   {filteredAccounts.map((account) => (
                     <tr key={account.id}>
-                      <td className="px-4 py-4 sm:px-8">{account.nama}</td>
+                      <td className="px-4 py-4 sm:px-8">{account.name}</td>
                       <td className="px-4 py-4 sm:px-8">{account.email}</td>
-                      <td className="px-4 py-4 sm:px-8">{account.noTelepon}</td>
+                      <td className="px-4 py-4 sm:px-8">{account.phone_number}</td>
                       <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
-                        <button className="p-1 bg-red-500 text-white rounded hover:bg-red-600">
+                        <button
+                          onClick={() => handleDeleteUser(account.id)} // Panggil fungsi hapus
+                          className="p-1 bg-red-500 text-white rounded hover:bg-red-600"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
