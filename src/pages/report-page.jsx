@@ -27,8 +27,8 @@ const ReportPage = () => {
       return true;
     });
 
-    if (files.length + newFiles.length > 5) {
-      alert("Maksimal hanya dapat mengunggah 5 file.");
+    if (files.length + newFiles.length > 4) {
+      alert("Maksimal hanya dapat mengunggah 4 file.");
       return;
     }
 
@@ -217,7 +217,7 @@ const ReportPage = () => {
           {/* Upload Foto */}
           <div className="flex flex-col items-center ">
             <div
-              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center w-full sm:w-96 h-96 rounded-lg relative"
+              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center sm:w-96 h-[350px] w-[350px] sm:h-96 rounded-lg relative"
               onClick={() => document.getElementById("fileInput").click()}
             >
               {selectedImage ? (
@@ -241,26 +241,29 @@ const ReportPage = () => {
               {/* Icon Prev dan Next */}
               {files.length > 1 && (
                 <>
+                  {/* Tombol Prev */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handlePrevImage();
                     }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
                   >
                     ←
                   </button>
+                  {/* Tombol Next */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleNextImage();
                     }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
                   >
                     →
                   </button>
                 </>
               )}
+
             </div>
 
             {/* Thumbnail Preview */}
@@ -280,11 +283,13 @@ const ReportPage = () => {
                     />
                     {/* Icon Delete (x) */}
                     <button
-                      className="absolute top-1 right-1 text-white text-sm w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md"
                       onClick={() => handleRemoveImage(file)}
                     >
                       X
                     </button>
+
+
                   </div>
                 ))}
               </div>
@@ -509,3 +514,5 @@ const ReportPage = () => {
 };
 
 export default ReportPage;
+
+
