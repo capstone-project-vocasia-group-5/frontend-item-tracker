@@ -9,6 +9,7 @@ export const LostList = ({ params }) => {
 
   useEffect(() => {
     let isMounted = true;
+    setIsLoading(true);
 
     async function fetchCardItem() {
       try {

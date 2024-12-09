@@ -9,6 +9,7 @@ export const FoundList = ({ params }) => {
 
   useEffect(() => {
     let isMounted = true;
+    setIsLoading(true);
 
     async function fetchCardItem() {
       try {
