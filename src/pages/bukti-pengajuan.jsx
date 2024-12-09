@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
 
@@ -20,34 +12,43 @@ const BuktiPengajuan = () => {
     if (file) {
       const newFileUrl = URL.createObjectURL(file);
       setFiles((prevFiles) => {
-        const updatedFiles = [...prevFiles];
+        const updatedFiles = [...prevFiles];z
         updatedFiles[index] = newFileUrl;
         return updatedFiles;
       });
     }
   };
 
+  const handleRemoveImage = (index, event) => {
+    event.stopPropagation(); 
+    setFiles((prevFiles) => {
+      const updatedFiles = [...prevFiles];
+      updatedFiles[index] = null; // Hapus gambar
+      return updatedFiles;
+    });
+  };
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/* Header */}
-      <header className="bg-black text-white">
+      <header className="fixed top-0 left-0 w-full z-50">
         <Navbar />
       </header>
 
+
       {/* Content */}
       <main className="flex-1 container mx-auto py-10 px-4 overflow-y-auto">
-        <h1 className="text-2xl font-bold text-center mb-6">
+        <h1 className="text-2xl font-bold text-center mb-16 mt-24">
           Upload Bukti Kepemilikan
         </h1>
-
         {/* Form Layout */}
-        <div className="flex flex-col items-center gap-6 justify-center">
+        <div className="flex flex-col items-center justify-center">
           {/* Box Image */}
-          <div className="flex flex-wrap gap-6 justify-center">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 grid grid-cols-2 md:grid-cols-4">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
-                className="relative bg-gray-100 border-2 border-gray-300 flex items-center justify-center w-52 h-52 rounded-lg overflow-hidden cursor-pointer"
+                className="relative bg-gray-100 border-2 border-gray-300 flex items-center justify-center w-40 h-40 md:w-52 md:h-52 rounded-lg overflow-hidden cursor-pointer"
                 onClick={() =>
                   document.getElementById(`fileInput-${index}`).click()
                 }
@@ -67,6 +68,16 @@ const BuktiPengajuan = () => {
                   onChange={(e) => handleFileChange(e, index)}
                 />
                 {!files[index] && <p className="text-gray-500">Upload Bukti</p>}
+
+                {/* Icon Delete (X) */}
+                {files[index] && (
+                  <button
+                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-100 transition-opacity duration-200 shadow-md"
+                    onClick={(e) => handleRemoveImage(index, e)} 
+                  >
+                    X
+                  </button>
+                )}
               </div>
             ))}
           </div>
