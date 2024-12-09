@@ -107,7 +107,7 @@ const Donatur = () => {
                 <p className="text-left text-gray-600 mb-8">
                   Berikut pihak-pihak yang telah terlibat dalam proses pengembangan:
                 </p>
-                <div className="flex justify-between items-center gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 justify-center">
                   <div className="flex justify-center">
                     <img
                       src="/image/logoUnej.png"
@@ -131,6 +131,13 @@ const Donatur = () => {
                   </div>
                   <div className="flex justify-center">
                     <img
+                      src="/image/logoKM.png"
+                      alt="Logo Kampus Merdeka"
+                      className="w-24 h-24 object-contain"
+                    />
+                  </div>
+                  <div className="flex justify-center">
+                    <img
                       src="/image/logoUnsika.png"
                       alt="Logo Unsika"
                       className="w-24 h-24 object-contain"
@@ -146,6 +153,7 @@ const Donatur = () => {
                 </div>
               </CardContent>
             </div>
+
           </>
         )}
       </main>
