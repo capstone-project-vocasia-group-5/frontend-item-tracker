@@ -5,8 +5,18 @@ import { SearchBar } from "../components/molecules/search-bar.jsx";
 import { Separator } from "@/components/ui/separator";
 import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 import ReportButton from "../components/organisms/upload-section.jsx";
+import { useState } from "react";
 
 const LostPage = () => {
+  const [searchParams, setSearchParams] = useState({});
+
+  const handleSearch = (params) => {
+    setSearchParams(params);
+  };
+
+  const handleReset = () => {
+    setSearchParams({});
+  };
   return (
     <div>
       <Navbar />
@@ -17,10 +27,10 @@ const LostPage = () => {
             Barang Hilang
           </h1>
 
-          <SearchBar />
+          <SearchBar onSearch={handleSearch} onReset={handleReset} />
           <ReportButton />
 
-          <LostList />
+          <LostList params={{ ...searchParams, type: "lost" }} />
         </div>
 
         <PaginationDisplay />
