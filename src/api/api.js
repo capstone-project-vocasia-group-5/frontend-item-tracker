@@ -1,5 +1,6 @@
 import axios from "axios";
 import { data } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -7,7 +8,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -59,6 +60,6 @@ export const getTotalAmountDonations = (data) =>
   api.get("/donations/total-amount", data);
 
 //user-account
-export const getUser = (data) => api.get("/users", data);
+export const getUser = () => api.get("/users");
 export const getAllUsers = (data) => api.get("/admin/users", data);
 export const deleteUser = (id) => api.delete(`/admin/users/${id}`, data);

@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LogoItemTracker from "../atoms/logo-item-tracker";
 import Hamburger from "../molecules/hamburger";
-import ButtonLogin from "../atoms/button-login";
 import ButtonBulet from "../atoms/button-bulet";
 import "./css/navbar.css";
+import { useAuth } from "../../context/auth-context";
+import { Link } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
+
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const [isBeatLoaderVisible, setIsBeatLoaderVisible] = useState(true);
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsBeatLoaderVisible(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -29,18 +42,28 @@ export const Navbar = () => {
           <LogoItemTracker className="text-black ml-3" />
         </a>
         <div className="flex md:order-2 justify-end space-x-3 md:space-x-0 rtl:space-x-reverse w-[130px]">
-          {isLoggedIn ? (
-            <div className="lg:mr-4 md:mr-4 ">
-              <Avatar onClick={() => navigate("/updateprofile")}>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+          {isBeatLoaderVisible ? (
+            <div className="cursor-pointer hidden md:block">
+              <Link to="/user">
+                <Avatar>
+                  <AvatarFallback className="text-black">
+                    <BeatLoader size={6} color="#000000" />
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
+            </div>
+          ) : user ? (
+            <div className="cursor-pointer hidden md:block">
+              <Link to="/user">
+                <Avatar>
+                  <AvatarImage src={user.image_url} alt={user.name[0]} />
+                  <AvatarFallback className="text-black">
+                    {user.name[0]}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
             </div>
           ) : (
-            // <ButtonLogin isOnClick={() => navigate("/login")} />
             <ButtonBulet isOnClick={() => navigate("/login")} />
           )}
 

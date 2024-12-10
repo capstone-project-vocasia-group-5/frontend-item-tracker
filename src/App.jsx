@@ -44,14 +44,6 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route
-            path="/after"
-            element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
-            }
-          />
           <Route path="/about" element={<TentangKami />} />
           <Route path="/contact" element={<KontakKami />} />
           {/* CLIENT Routes */}
@@ -90,7 +82,14 @@ function App() {
             }
           />
           <Route path="/donation" element={<DonationForm />} />
-          <Route path="/sidebar" element={<ProfileBase />} />
+          <Route
+            path="/user"
+            element={
+              <ProtectedRoute>
+                <ProfileBase />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/terms" element={<SyaratKetentuan />} />
           <Route path="/privacy" element={<KebijakanPrivasi />} />
           <Route

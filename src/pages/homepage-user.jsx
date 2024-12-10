@@ -7,11 +7,10 @@ import { SearchBar } from "../components/molecules/search-bar.jsx";
 import { FiturUtama } from "../components/organisms/fitur-utama.jsx";
 import { Separator } from "@/components/ui/separator";
 import ReportButton from "../components/organisms/upload-section.jsx";
-import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/auth-context";
 
 const Homepage = () => {
-  const location = useLocation();
   const [searchParams, setSearchParams] = useState({});
 
   const handleSearch = (params) => {
@@ -22,10 +21,11 @@ const Homepage = () => {
     setSearchParams({});
   };
 
+  const { isAuthenticated } = useAuth();
+
   return (
     <div>
       <Navbar />
-
       <div id="header">
         <HeaderFix />
       </div>
@@ -35,8 +35,7 @@ const Homepage = () => {
           <SearchBar onSearch={handleSearch} onReset={handleReset} />
         </div>
 
-        {/* Render ReportButton hanya di route "/after" */}
-        {location.pathname === "/after" && (
+        {isAuthenticated && (
           <div className="max-w-screen-xl mx-auto mt-10">
             <ReportButton />
           </div>

@@ -31,7 +31,7 @@ function LoginForm() {
       login(token);
       toast.success(response.data?.message || "Login berhasil");
 
-      navigate("/after");
+      navigate("/");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
