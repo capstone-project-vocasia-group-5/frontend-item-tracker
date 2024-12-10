@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
-import { getAllCategories, updateCategory, deleteCategory } from "../api/api.js";
+import { getAllCategories, updateCategory, deleteCategory, createCategory } from "../api/api.js";
 import { getAllItems } from "../api/api.js";
 
 const ManageCategory = () => {
@@ -10,35 +10,35 @@ const ManageCategory = () => {
   const [items, setItems] = useState([]);
   const [editingCategory, setEditingCategory] = useState(null);
   const [editName, setEditName] = useState("");
-
+  const [newCategoryName, setNewCategoryName] = useState(""); // State for new category
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-useEffect(() => {
-  const fetchCategories = async () => {
-    try {
-      const response = await getAllCategories();
-      setCategories(response.data.data.categories);
-    } catch (error) {
-      console.log("Error fetching categories: ", error);
-    }
-  };
-  fetchCategories();
-}, []);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllCategories();
+        setCategories(response.data.data.categories);
+      } catch (error) {
+        console.log("Error fetching categories: ", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
-useEffect(() => {
-  const fetchItems = async () => {
-    try {
-      const response = await getAllItems();
-      setItems(response.data.data.items);
-    } catch (error) {
-      console.error('Error fetching items:', error);
-    }
-  };
-  fetchItems();
-}, []);
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await getAllItems();
+        setItems(response.data.data.items);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    };
+    fetchItems();
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -86,7 +86,24 @@ useEffect(() => {
       }
     }
   };
-  
+
+  const handleCreateCategory = async () => {
+    if (newCategoryName.trim() === "") {
+      alert("Nama kategori tidak boleh kosong.");
+      return;
+    }
+
+    try {
+      const response = await createCategory({ name: newCategoryName });
+      setCategories([...categories, response.data.data.category]); // Add new category to the list
+      setNewCategoryName(""); // Clear the input field
+      alert("Kategori berhasil dibuat.");
+    } catch (error) {
+      console.error("Error creating category:", error);
+      alert("Terjadi kesalahan saat membuat kategori.");
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".dropdown-container")) {
@@ -144,6 +161,25 @@ useEffect(() => {
               </div>
             </form>
 
+            {/* Create Category Section */}
+            <div className="p-5">
+              <div className="flex space-x-4">
+                <input
+                  type="text"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                  className="p-2.5 border rounded-md w-1/2"
+                  placeholder="Nama kategori baru..."
+                />
+                <button
+                  onClick={handleCreateCategory}
+                  className="p-2.5 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                  Tambah Kategori
+                </button>
+              </div>
+            </div>
+
             {/* Table */}
             <div className="overflow-x-auto px-2 sm:px-6 md:px-9">
               <table className="w-full bg-white">
@@ -169,7 +205,7 @@ useEffect(() => {
                         <tr key={category.id}>
                           <td className="px-4 py-4 sm:px-8">{category.name}</td>
                           <td className="px-4 py-4 sm:px-8">
-                              {items.filter((item) => item.category_id === category.id).length} {/*belumkepanggil*/}
+                              {items.filter((item) => item.category_id === category.id).length}
                           </td>
 
                         <td className="px-4 py-4 sm:px-8">{formatDate(category.created_at)}</td>
@@ -281,9 +317,7 @@ useEffect(() => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="4" className="px-4 py-4 sm:px-8 text-center">
-                        No categories found.
-                      </td>
+                      <td colSpan="4" className="px-4 py-4 sm:px-8 text-center text-sm">Tidak ada kategori ditemukan.</td>
                     </tr>
                   )}
                 </tbody>

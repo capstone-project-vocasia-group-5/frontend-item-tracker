@@ -1,23 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
+import { getDonations } from "../api/api";
+import Preloader from "../components/templates/preloader/preloader";
 
 const Donatur = () => {
+  const [investors, setInvestors] = useState([]);
+  const [donators, setDonators] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    const fetchDonations = async () => {
+      try {
+        const response = await getDonations();
+        if (isMounted) {
+          const donations = response.data.data.donations;
+
+          const investorsList = donations.filter(
+            (donation) => donation.amount > 10000000
+          );
+          const donatorsList = donations.filter(
+            (donation) => donation.amount <= 10000000
+          );
+
+          setInvestors(investorsList);
+          setDonators(donatorsList);
+        }
+      } catch (error) {
+        console.error("Error fetching donations:", error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchDonations();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
+      {loading && <Preloader />}
       {/* Navbar */}
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <Navbar />
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto py-8">
+      <main className="flex-grow container mx-auto py-8 px-4 md:px-8">
         <h1 className="text-center text-4xl font-bold mb-6 text-gray-800 mt-8">
           Donatur Kami
         </h1>
-
-        {/*Investors Section */}
+        {/* Investors Section */}
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
@@ -25,16 +67,19 @@ const Donatur = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
-            <ul className="list-none space-y-2 text-left text-gray-600">
-              <li>Bambang Pamungkas</li>
-              <li>Boaz Salosa</li>
-              <li>Willie Salim</li>
-              <li>Deny Sumargo</li>
-            </ul>
+            {investors.length > 0 ? (
+              <ul className="list-none space-y-2 text-left text-gray-600">
+                {investors.map((investor, index) => (
+                  <li key={index}>{investor.name}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">Belum ada investor.</p>
+            )}
           </CardContent>
         </div>
 
-        {/* Relawan & Kontributor Section */}
+        {/* Donators Section */}
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
@@ -42,18 +87,15 @@ const Donatur = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 text-left text-gray-600">
-              {[
-                "Adi Sudeva", "Aichida Ul-Alfaha", "Albert Boenardi", "Allisa Sepastihka",
-                "Andhyta Firselly Utami", "Andi Taufan", "Arana Dharma Budisantoso",
-                "Arie Satria", "Asep Iwan Gunawan", "Astrid Felicia", "Bagus Satria",
-                "Bakti Luddin", "Bayu Kurniadi", "Belva Devara", "Billie Setiawan",
-                "Bin Anindita", "Budiman Wikasra", "Catherine Hindra", "Chrina Messakh",
-                "Danu Wicaksana", "Diana Baely", "Dimas Nurdian Syah W.",
-              ].map((name, index) => (
-                <p key={index}>{name}</p>
-              ))}
-            </div>
+            {donators.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 text-left text-gray-600">
+                {donators.map((donator, index) => (
+                  <p key={index}>{donator.name}</p>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-600">Belum ada donatur.</p>
+            )}
           </CardContent>
         </div>
 
@@ -68,7 +110,7 @@ const Donatur = () => {
             <p className="text-left text-gray-600 mb-8">
               Berikut pihak-pihak yang telah terlibat dalam proses pengembangan:
             </p>
-            <div className="flex justify-between items-center gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 justify-center">
               <div className="flex justify-center">
                 <img
                   src="/image/logoUnej.png"
@@ -92,6 +134,13 @@ const Donatur = () => {
               </div>
               <div className="flex justify-center">
                 <img
+                  src="/image/logoKM.png"
+                  alt="Logo Kampus Merdeka"
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
                   src="/image/logoUnsika.png"
                   alt="Logo Unsika"
                   className="w-24 h-24 object-contain"
@@ -103,11 +152,10 @@ const Donatur = () => {
                   alt="Logo Unesa"
                   className="w-24 h-24 object-contain"
                 />
-              </div>    
+              </div>
             </div>
           </CardContent>
         </div>
-
       </main>
 
       {/* Footer */}

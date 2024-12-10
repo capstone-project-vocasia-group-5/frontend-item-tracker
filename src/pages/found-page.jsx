@@ -4,8 +4,19 @@ import { FoundList } from "../components/organisms/found-list.jsx";
 import { SearchBar } from "../components/molecules/search-bar.jsx";
 import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 import ReportButton from "../components/organisms/upload-section.jsx";
+import { useState } from "react";
 
 const FoundPage = () => {
+  const [searchParams, setSearchParams] = useState({});
+
+  const handleSearch = (params) => {
+    setSearchParams(params);
+  };
+
+  const handleReset = () => {
+    setSearchParams({});
+  };
+
   return (
     <div className="">
       <Navbar />
@@ -16,10 +27,10 @@ const FoundPage = () => {
             Barang Temuan
           </h1>
 
-          <SearchBar />
+          <SearchBar onSearch={handleSearch} onReset={handleReset} />
           <ReportButton />
 
-          <FoundList />
+          <FoundList params={{ ...searchParams, type: "found" }} />
         </div>
         <PaginationDisplay />
       </main>

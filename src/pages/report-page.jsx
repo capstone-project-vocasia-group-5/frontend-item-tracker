@@ -17,7 +17,6 @@ const ReportPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("+62");
-
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files).filter((file) => {
       if (file.size > 10 * 1024 * 1024) {
@@ -34,7 +33,6 @@ const ReportPage = () => {
 
     const newFileURLs = newFiles.map((file) => URL.createObjectURL(file));
     setFiles((prevFiles) => [...prevFiles, ...newFileURLs]);
-
     if (!selectedImage && newFileURLs.length > 0) {
       setSelectedImage(newFileURLs[0]);
     }
@@ -57,17 +55,17 @@ const ReportPage = () => {
   };
 
   const handleRemoveImage = (image) => {
-    setFiles((prevFiles) => prevFiles.filter((file) => file !== image));
-    if (selectedImage === image) {
-      setSelectedImage(files[0] || null);
-    }
+    setFiles((prevFiles) => {
+      const updatedFiles = prevFiles.filter((file) => file !== image);
+      if (selectedImage === image) {
+        setSelectedImage(updatedFiles[0] || null);
+      }
+      return updatedFiles;
+    });
   };
-
-  // Fungsi untuk menangani perubahan nomor telepon
+  
   const handlePhoneNumberChange = (event) => {
     const value = event.target.value;
-
-    // Hanya izinkan angka setelah +62
     if (/^\+62\d*$/.test(value)) {
       setPhoneNumber(value);
     }
@@ -77,15 +75,12 @@ const ReportPage = () => {
   const [districts, setDistricts] = useState([]);
   const [villages, setVillages] = useState([]);
   const [postalCode, setPostalCode] = useState("");
-
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedVillage, setSelectedVillage] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch provinces on initial render
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
@@ -205,19 +200,17 @@ const ReportPage = () => {
       <header className="bg-black text-white fixed top-0 z-50 w-full">
         <Navbar />
       </header>
-
       {/* Content */}
       <main className="flex-1 container mx-auto w-full max-w-screen-xl p-4 mb-6 overflow-y-auto ">
         <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
           Buat Laporan
         </h2>
-
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
           {/* Upload Foto */}
           <div className="flex flex-col items-center ">
             <div
-              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center w-full sm:w-96 h-96 rounded-lg relative"
+              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center h-[350px] w-[350px] sm:h-[500px] sm:w-[500px] rounded-lg relative"
               onClick={() => document.getElementById("fileInput").click()}
             >
               {selectedImage ? (
@@ -237,32 +230,32 @@ const ReportPage = () => {
                 accept="image/*"
                 onChange={handleFileChange}
               />
-
               {/* Icon Prev dan Next */}
               {files.length > 1 && (
                 <>
+                  {/* Tombol Prev */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handlePrevImage();
                     }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
                   >
                     ←
                   </button>
+                  {/* Tombol Next */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleNextImage();
                     }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
                   >
                     →
                   </button>
                 </>
               )}
             </div>
-
             {/* Thumbnail Preview */}
             {files.length > 0 && (
               <div className="mt-4 flex gap-2 overflow-x-auto">
@@ -280,7 +273,7 @@ const ReportPage = () => {
                     />
                     {/* Icon Delete (x) */}
                     <button
-                      className="absolute top-1 right-1 text-white text-sm w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md"
                       onClick={() => handleRemoveImage(file)}
                     >
                       X
@@ -290,7 +283,7 @@ const ReportPage = () => {
               </div>
             )}
           </div>
-
+          
           {/* Form */}
           <div className="space-y-4 text-left w-full sm:w-[500px]">
             <div>
@@ -306,7 +299,6 @@ const ReportPage = () => {
                 className="w-full h-12"
               />
             </div>
-
             <div className="text-left">
               <label
                 htmlFor="category"
@@ -324,7 +316,6 @@ const ReportPage = () => {
                 </SelectContent>
               </Select>
             </div>
-
             <div className="text-left">
               <label
                 htmlFor="category"
@@ -343,7 +334,6 @@ const ReportPage = () => {
                 </SelectContent>
               </Select>
             </div>
-
             <div className="text-left">
               <label
                 htmlFor="phoneNumber"
@@ -359,7 +349,6 @@ const ReportPage = () => {
                 onChange={handlePhoneNumberChange}
               />
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
               {/* Provinsi */}
               <div>
@@ -383,7 +372,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kota */}
               <div>
                 <label
@@ -412,7 +400,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kecamatan */}
               <div>
                 <label
@@ -435,7 +422,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kelurahan */}
               <div>
                 <label
@@ -458,7 +444,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kode Pos */}
               <div>
                 <label className="block text-sm font-medium mb-2 ml-2">
@@ -474,10 +459,9 @@ const ReportPage = () => {
             </div>
           </div>
         </div>
-
         {/* Deskripsi */}
         <div className="mt-6 flex justify-center">
-          <div className="text-left w-full sm:w-[910px]">
+          <div className="text-left w-full sm:w-[1025px]">
             <label
               htmlFor="description"
               className="block text-sm font-medium mb-2 ml-2"
@@ -491,15 +475,13 @@ const ReportPage = () => {
             />
           </div>
         </div>
-
         {/* Upload Button */}
         <div className="mt-6 flex justify-center">
-          <Button className="bg-black text-white w-full sm:w-[910px] h-12">
+          <Button className="bg-black text-white w-full sm:w-[1025px] h-12">
             Upload
           </Button>
         </div>
       </main>
-
       {/* Footer */}
       <footer className="bg-black text-white">
         <Footer />
@@ -509,3 +491,5 @@ const ReportPage = () => {
 };
 
 export default ReportPage;
+
+
