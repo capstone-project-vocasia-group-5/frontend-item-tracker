@@ -60,7 +60,7 @@ const DonationForm = () => {
       <Navbar></Navbar>
       <div className="flex flex-col justify-center items-center max-w-screen-md mx-auto px-4">
         <div className="w-full md:mt-6 mt-4 mb-10">
-          <div className="">
+          <div>
             <BackButton handleClickBack={handleClickBack} />
             <h1 className="text-2xl font-bold text-center mb-6">
               Donasi Sekarang

@@ -3,6 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import BackButton from "../components/organisms/back-button";
+import { useNavigate } from "react-router-dom";
 import {
   Select,
   SelectTrigger,
@@ -17,6 +19,8 @@ const ReportPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("+62");
+  const navigate = useNavigate();
+
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files).filter((file) => {
       if (file.size > 10 * 1024 * 1024) {
@@ -63,7 +67,7 @@ const ReportPage = () => {
       return updatedFiles;
     });
   };
-  
+
   const handlePhoneNumberChange = (event) => {
     const value = event.target.value;
     if (/^\+62\d*$/.test(value)) {
@@ -194,17 +198,22 @@ const ReportPage = () => {
     fetchZipCodes(cityId, districtId);
   };
 
+  const handleClickBack = () => {
+    navigate(-1);
+  };
+
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
-      {/* Header */}
-      <header className="bg-black text-white fixed top-0 z-50 w-full">
-        <Navbar />
-      </header>
+    <div className="flex flex-col min-h-screen ">
+      <Navbar />
+
       {/* Content */}
-      <main className="flex-1 container mx-auto w-full max-w-screen-xl p-4 mb-6 overflow-y-auto ">
-        <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
-          Buat Laporan
-        </h2>
+      <main className="flex-1 container mx-auto w-full max-w-screen-xl min-h-screen p-4 mb-6 overflow-y-auto ">
+        <div>
+          <BackButton handleClickBack={handleClickBack} />
+          <h2 className="text-2xl font-semibold text-center mb-16 ">
+            Buat Laporan
+          </h2>
+        </div>
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
           {/* Upload Foto */}
@@ -283,7 +292,7 @@ const ReportPage = () => {
               </div>
             )}
           </div>
-          
+
           {/* Form */}
           <div className="space-y-4 text-left w-full sm:w-[500px]">
             <div>
@@ -491,5 +500,3 @@ const ReportPage = () => {
 };
 
 export default ReportPage;
-
-

@@ -48,7 +48,7 @@ function VerifikasiOTP() {
       const token = response.data.data.token;
       localStorage.setItem("token", token);
       toast.success(response.data?.message || "Verifikasi berhasil");
-      navigate("/after");
+      navigate("/");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
