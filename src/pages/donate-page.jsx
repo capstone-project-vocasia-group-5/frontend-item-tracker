@@ -3,6 +3,7 @@ import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import { toast } from "sonner";
 import { donate } from "../api/api";
+import BackButton from "../components/organisms/back-button.jsx";
 
 const DonationForm = () => {
   const [amount, setAmount] = useState("");
@@ -50,13 +51,22 @@ const DonationForm = () => {
     }
   };
 
+  const handleClickBack = () => {
+    window.history.back();
+  };
+
   return (
     <div>
       <Navbar></Navbar>
-      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
-        <div className="w-full max-w-xl absolute left-1/2 transform -translate-x-1/2 px-4">
-          <h1 className="text-2xl font-bold text-center mb-6">Donasi Yuk</h1>
-          <div className="bg-black text-white p-5 rounded-lg shadow-lg">
+      <div className="flex flex-col justify-center items-center max-w-screen-md mx-auto px-4">
+        <div className="w-full md:mt-6 mt-4 mb-10">
+          <div className="">
+            <BackButton handleClickBack={handleClickBack} />
+            <h1 className="text-2xl font-bold text-center mb-6">
+              Donasi Sekarang
+            </h1>
+          </div>
+          <div className="bg-black w-full mx-auto text-white p-5 rounded-lg shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block mb-2 text-sm font-semibold">
