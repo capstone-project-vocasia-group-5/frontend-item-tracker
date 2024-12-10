@@ -26,8 +26,8 @@ const ReportPage = () => {
       return true;
     });
 
-    if (files.length + newFiles.length > 4) {
-      alert("Maksimal hanya dapat mengunggah 4 file.");
+    if (files.length + newFiles.length > 5) {
+      alert("Maksimal hanya dapat mengunggah 5 file.");
       return;
     }
 

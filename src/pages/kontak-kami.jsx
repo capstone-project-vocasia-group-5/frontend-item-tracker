@@ -19,7 +19,7 @@ const KontakKami = () => {
         <h1 className="text-3xl font-bold text-center mb-16">Kontak Kami</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Formulir Kontak */}
-          <Card className="p-6 md:col-span-2">
+          <Card className="p-6 md:col-span-2 md:ml-16">
             <form className="space-y-4 text-left">
               <div>
                 <label
@@ -115,12 +115,12 @@ const KontakKami = () => {
             <p className="mt-4 ml-4">
               <FontAwesomeIcon icon={faEnvelope} size="2x" className="mr-4" />
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=ItemTracker@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=itemtrackerteam@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white text-lg"
               >
-                ItemTracker@gmail.com
+                itemtrackerteam@gmail.com
               </a>
             </p>
             <p className="mt-4 ml-4">
