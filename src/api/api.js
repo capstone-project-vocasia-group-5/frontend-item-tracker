@@ -34,7 +34,7 @@ export const getDonations = (data) => api.get("/donations", data);
 export const createItem = (data) => api.post("/items", data);
 export const updateItem = (id, data) => api.patch(`/items/${id}`, data);
 export const deleteItemByUser = (id) => api.delete(`/items/${id}`);
-export const deleteItemByAdmin = (id) => api.delete(`/items/${id}`);
+export const deleteItemByAdmin = (id) => api.delete(`/admin/items/${id}`);
 export const getAllItemsByUser = (params) => api.get("/items", { params });
 export const getAllItemsByAdmin = (params) =>
   api.get("/admin/items", { params });

@@ -2,6 +2,7 @@ import "../App.css";
 import React, { useState, useEffect } from "react";
 import { getAllCategories, updateCategory, deleteCategory, createCategory } from "../api/api.js";
 import { getAllItems } from "../api/api.js";
+import { toast } from 'react-toastify';
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -10,7 +11,7 @@ const ManageCategory = () => {
   const [items, setItems] = useState([]);
   const [editingCategory, setEditingCategory] = useState(null);
   const [editName, setEditName] = useState("");
-  const [newCategoryName, setNewCategoryName] = useState(""); // State for new category
+  const [newCategoryName, setNewCategoryName] = useState(""); 
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -95,8 +96,8 @@ const ManageCategory = () => {
 
     try {
       const response = await createCategory({ name: newCategoryName });
-      setCategories([...categories, response.data.data.category]); // Add new category to the list
-      setNewCategoryName(""); // Clear the input field
+      setCategories([...categories, response.data.data.category]); 
+      setNewCategoryName(""); 
       alert("Kategori berhasil dibuat.");
     } catch (error) {
       console.error("Error creating category:", error);
@@ -163,17 +164,17 @@ const ManageCategory = () => {
 
             {/* Create Category Section */}
             <div className="p-5">
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 justify-center">
                 <input
                   type="text"
                   value={newCategoryName}
                   onChange={(e) => setNewCategoryName(e.target.value)}
-                  className="p-2.5 border rounded-md w-1/2"
+                  className="p-2.5 border rounded-md w-full sm:w-1/2"
                   placeholder="Nama kategori baru..."
                 />
                 <button
                   onClick={handleCreateCategory}
-                  className="p-2.5 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  className="p-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                 >
                   Tambah Kategori
                 </button>

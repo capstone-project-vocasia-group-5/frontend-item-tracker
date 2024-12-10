@@ -1,37 +1,38 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
 import { getAllUsers, deleteUser } from "../api/api";
+import { toast } from 'react-toastify';
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [accounts, setAccounts] = useState([]);
-  const [alertVisible, setAlertVisible] = useState(false); // State untuk kontrol visibility alert
+  const [alertVisible, setAlertVisible] = useState(false); 
 
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
         const response = await getAllUsers();
-        console.log("Response data:", response); // Debugging untuk memeriksa respons
-        const users = response.data?.data?.users || []; // Akses data pengguna
-        setAccounts(users); // Simpan data ke state
+        console.log("Response data:", response); 
+        const users = response.data?.data?.users || []; 
+        setAccounts(users); 
       } catch (error) {
         console.error("Gagal mengambil data pengguna:", error);
-        setAccounts([]); // Jika terjadi error, set array kosong
+        setAccounts([]); 
       }
     };
 
     fetchAccounts();
   }, []);
 
-  // Fungsi untuk menangani perubahan input pencarian
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Fungsi pencarian
+  
   const filteredAccounts = Array.isArray(accounts)
     ? accounts.filter((account) => {
-        const nama = account.name || ""; // Pastikan properti ada atau beri nilai default
+        const nama = account.name || ""; 
         const email = account.email || "";
         const noTelepon = account.phone_number || "";
 
@@ -43,17 +44,17 @@ const ManageAkunList = () => {
       })
     : [];
 
-  // Fungsi untuk menghapus pengguna
+  
   const handleDeleteUser = async (userId) => {
     if (!window.confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {
       return;
     }
 
     try {
-      await deleteUser(userId); // Panggil API delete
+      await deleteUser(userId); 
       setAccounts((prevAccounts) => prevAccounts.filter((account) => account.id !== userId));
       alert("Pengguna berhasil dihapus.");
-      setAlertVisible(true); // Menampilkan alert setelah penghapusan berhasil
+      setAlertVisible(true); 
     } catch (error) {
       console.error("Gagal menghapus pengguna:", error);
       alert("Terjadi kesalahan saat menghapus pengguna.");
@@ -125,7 +126,7 @@ const ManageAkunList = () => {
                       <td className="px-4 py-4 sm:px-8">{account.phone_number}</td>
                       <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
                         <button
-                          onClick={() => handleDeleteUser(account.id)} // Panggil fungsi hapus
+                          onClick={() => handleDeleteUser(account.id)} 
                           className="p-1 bg-red-500 text-white rounded hover:bg-red-600"
                         >
                           <svg
