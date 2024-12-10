@@ -17,7 +17,6 @@ const ReportPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("+62");
-
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files).filter((file) => {
       if (file.size > 10 * 1024 * 1024) {
@@ -34,7 +33,6 @@ const ReportPage = () => {
 
     const newFileURLs = newFiles.map((file) => URL.createObjectURL(file));
     setFiles((prevFiles) => [...prevFiles, ...newFileURLs]);
-
     if (!selectedImage && newFileURLs.length > 0) {
       setSelectedImage(newFileURLs[0]);
     }
@@ -66,12 +64,8 @@ const ReportPage = () => {
     });
   };
   
-
-  // Fungsi untuk menangani perubahan nomor telepon
   const handlePhoneNumberChange = (event) => {
     const value = event.target.value;
-
-    // Hanya izinkan angka setelah +62
     if (/^\+62\d*$/.test(value)) {
       setPhoneNumber(value);
     }
@@ -81,15 +75,12 @@ const ReportPage = () => {
   const [districts, setDistricts] = useState([]);
   const [villages, setVillages] = useState([]);
   const [postalCode, setPostalCode] = useState("");
-
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedVillage, setSelectedVillage] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch provinces on initial render
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
@@ -209,13 +200,11 @@ const ReportPage = () => {
       <header className="bg-black text-white fixed top-0 z-50 w-full">
         <Navbar />
       </header>
-
       {/* Content */}
       <main className="flex-1 container mx-auto w-full max-w-screen-xl p-4 mb-6 overflow-y-auto ">
         <h2 className="text-2xl font-semibold text-center mb-16 mt-24">
           Buat Laporan
         </h2>
-
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
           {/* Upload Foto */}
@@ -241,7 +230,6 @@ const ReportPage = () => {
                 accept="image/*"
                 onChange={handleFileChange}
               />
-
               {/* Icon Prev dan Next */}
               {files.length > 1 && (
                 <>
@@ -267,9 +255,7 @@ const ReportPage = () => {
                   </button>
                 </>
               )}
-
             </div>
-
             {/* Thumbnail Preview */}
             {files.length > 0 && (
               <div className="mt-4 flex gap-2 overflow-x-auto">
@@ -292,14 +278,12 @@ const ReportPage = () => {
                     >
                       X
                     </button>
-
-
                   </div>
                 ))}
               </div>
             )}
           </div>
-
+          
           {/* Form */}
           <div className="space-y-4 text-left w-full sm:w-[500px]">
             <div>
@@ -315,7 +299,6 @@ const ReportPage = () => {
                 className="w-full h-12"
               />
             </div>
-
             <div className="text-left">
               <label
                 htmlFor="category"
@@ -333,7 +316,6 @@ const ReportPage = () => {
                 </SelectContent>
               </Select>
             </div>
-
             <div className="text-left">
               <label
                 htmlFor="category"
@@ -352,7 +334,6 @@ const ReportPage = () => {
                 </SelectContent>
               </Select>
             </div>
-
             <div className="text-left">
               <label
                 htmlFor="phoneNumber"
@@ -368,7 +349,6 @@ const ReportPage = () => {
                 onChange={handlePhoneNumberChange}
               />
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
               {/* Provinsi */}
               <div>
@@ -392,7 +372,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kota */}
               <div>
                 <label
@@ -421,7 +400,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kecamatan */}
               <div>
                 <label
@@ -444,7 +422,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kelurahan */}
               <div>
                 <label
@@ -467,7 +444,6 @@ const ReportPage = () => {
                   ))}
                 </select>
               </div>
-
               {/* Kode Pos */}
               <div>
                 <label className="block text-sm font-medium mb-2 ml-2">
@@ -483,7 +459,6 @@ const ReportPage = () => {
             </div>
           </div>
         </div>
-
         {/* Deskripsi */}
         <div className="mt-6 flex justify-center">
           <div className="text-left w-full sm:w-[1025px]">
@@ -500,7 +475,6 @@ const ReportPage = () => {
             />
           </div>
         </div>
-
         {/* Upload Button */}
         <div className="mt-6 flex justify-center">
           <Button className="bg-black text-white w-full sm:w-[1025px] h-12">
@@ -508,7 +482,6 @@ const ReportPage = () => {
           </Button>
         </div>
       </main>
-
       {/* Footer */}
       <footer className="bg-black text-white">
         <Footer />
