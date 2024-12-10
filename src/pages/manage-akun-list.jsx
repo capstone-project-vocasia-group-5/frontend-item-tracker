@@ -1,7 +1,7 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
 import { getAllUsers, deleteUser } from "../api/api";
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,27 +12,26 @@ const ManageAkunList = () => {
     const fetchAccounts = async () => {
       try {
         const response = await getAllUsers();
-        console.log("Response data:", response); 
-        const users = response.data?.data?.users || []; 
-        setAccounts(users); 
+        console.log("Response data:", response);
+        const users = response.data?.data?.users || [];
+        setAccounts(users);
+        toast.success("Data pengguna berhasil diambil.");
       } catch (error) {
-        console.error("Gagal mengambil data pengguna:", error);
-        setAccounts([]); 
+        toast.error(`Gagal mengambil data pengguna: ${error.message}`);
+        setAccounts([]);
       }
     };
 
     fetchAccounts();
   }, []);
 
-
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  
   const filteredAccounts = Array.isArray(accounts)
     ? accounts.filter((account) => {
-        const nama = account.name || ""; 
+        const nama = account.name || "";
         const email = account.email || "";
         const noTelepon = account.phone_number || "";
 
@@ -44,20 +43,17 @@ const ManageAkunList = () => {
       })
     : [];
 
-  
   const handleDeleteUser = async (userId) => {
-    if (!window.confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {
-      return;
-    }
-
     try {
-      await deleteUser(userId); 
-      setAccounts((prevAccounts) => prevAccounts.filter((account) => account.id !== userId));
-      alert("Pengguna berhasil dihapus.");
-      setAlertVisible(true); 
+      await deleteUser(userId);
+      setAccounts((prevAccounts) =>
+        prevAccounts.filter((account) => account.id !== userId)
+      );
+      toast.success("Pengguna berhasil dihapus.");
+      setAlertVisible(true);
     } catch (error) {
       console.error("Gagal menghapus pengguna:", error);
-      alert("Terjadi kesalahan saat menghapus pengguna.");
+      toast.error(`Terjadi kesalahan saat menghapus pengguna: ${error.message}`);
     }
   };
 
@@ -114,6 +110,7 @@ const ManageAkunList = () => {
                   <tr>
                     <th className="px-4 py-4 text-center text-sm sm:px-8">Nama</th>
                     <th className="px-4 py-4 text-center text-sm sm:px-8">Email</th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">Role</th>
                     <th className="px-4 py-4 text-center text-sm sm:px-8">No. Telepon</th>
                     <th className="px-4 py-4 text-center text-sm sm:px-8">Aksi</th>
                   </tr>
@@ -123,6 +120,7 @@ const ManageAkunList = () => {
                     <tr key={account.id}>
                       <td className="px-4 py-4 sm:px-8">{account.name}</td>
                       <td className="px-4 py-4 sm:px-8">{account.email}</td>
+                      <td className="px-4 py-4 sm:px-8">{account.role}</td>
                       <td className="px-4 py-4 sm:px-8">{account.phone_number}</td>
                       <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
                         <button
