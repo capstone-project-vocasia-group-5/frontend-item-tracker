@@ -14,15 +14,17 @@ const UpdateProfileUser = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
-
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await getUser();
-        const user = response.data;
+        const response = await getUser(); // Memanggil fungsi `getUser`
+        const user = response.data?.user; // Pastikan data `user` ada
+        if (!user) {
+          throw new Error("User data not found");
+        }
         setFormData({
           name: user.name || "",
           username: user.username || "",
@@ -32,7 +34,7 @@ const UpdateProfileUser = () => {
         });
         setProfileImage(user.image_url || null);
       } catch (error) {
-        console.error("Failed to load user data:", error);
+        console.error("Failed to load user data:", error.message);
         setMessage("Error fetching user data.");
       }
     };
@@ -59,11 +61,13 @@ const UpdateProfileUser = () => {
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append("fullName", formData.name);
+      formDataToSend.append("name", formData.name);
       formDataToSend.append("username", formData.username);
       formDataToSend.append("email", formData.email);
-      formDataToSend.append("phoneNumber", formData.phone_number);
-      formDataToSend.append("password", formData.password);
+      formDataToSend.append("phone_number", formData.phone_number);
+      if (formData.password) {
+        formDataToSend.append("password", formData.password);
+      }
       if (profileImage) {
         formDataToSend.append("profileImage", profileImage);
       }

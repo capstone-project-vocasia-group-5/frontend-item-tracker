@@ -1,31 +1,121 @@
 import { useSidebar } from "@/components/ui/sidebar";
 import React, { useEffect, useState } from "react";
 import { getTotalAmountDonations } from "../api/api";
+import { getAllUsers } from "../api/api";
+import { getAllItemsByAdmin } from "../api/api";
+import { getAllCategories } from "../api/api";
 
 function Dashboard() {
   const [totalAmount, setTotalAmount] = useState(0);
-  const [error, setError] = useState(null);
+  const [totalUsers, setTotalUsers] = useState(0);
   const { setActiveMenu } = useSidebar();
+  const [totalFoundItems, setTotalFoundItems] = useState(0);
+  const [totalLostItems, setTotalLostItems] = useState(0);
+  const [totalCategories, setTotalCategories] = useState(0);
+  const [totalMatched, setTotalMatched] = useState(0);
 
-  const handleCardClick = (menuTitle) => {
-    setActiveMenu(menuTitle);
-  };
+  // SEMUA BARANG YANG DITEMUKAN
+  useEffect(() => {
+    const fetchTotalFoundItems = async () => {
+      try {
+        const response = await getAllItemsByAdmin();
+        const foundItems =
+          response.data?.data?.items?.filter((item) => item.type === "found") ||
+          [];
+        setTotalFoundItems(foundItems.length);
+      } catch (error) {
+        console.error("Failed to fetch items:", error.message);
+      }
+    };
 
+    fetchTotalFoundItems();
+  }, []);
+
+  // SEMUA BARANG YANG SUDAH KEMBALI
+  useEffect(() => {
+    const fetchTotalMatched = async () => {
+      try {
+        const response = await getAllItemsByAdmin();
+        const totalMatched =
+          response.data?.data?.items?.filter(
+            (item) => item.matched_status === "true"
+          ) || [];
+        setTotalMatched(totalMatched.length);
+      } catch (error) {
+        console.error("Failed to fetch items:", error.message);
+      }
+    };
+
+    fetchTotalMatched();
+  }, []);
+
+  // SENUA BARANG YANG HILANG
+  useEffect(() => {
+    const fetchTotalLostItems = async () => {
+      try {
+        const response = await getAllItemsByAdmin();
+        const lostItems =
+          response.data?.data?.items?.filter((item) => item.type === "lost") ||
+          [];
+        setTotalLostItems(lostItems.length);
+      } catch (error) {
+        console.error("Failed to fetch items:", error.message);
+      }
+    };
+
+    fetchTotalLostItems();
+  }, []);
+
+  // TOTAL DONASI
   useEffect(() => {
     const fetchTotalDonations = async () => {
       try {
         const response = await getTotalAmountDonations();
-        const total = response.data.data.totalAmount.totalAmount || 0;
-        setTotalAmount(total);
+        const amount = response.data?.data?.totalAmount?.[0]?.totalAmount || 0;
+        setTotalAmount(amount);
       } catch (error) {
-        console.error("Error fetching total donations:", error);
-        setError(error.message || "Error fetching total donations");
+        console.error("Error fetching total amount donations:", error.message);
       } finally {
+        setLoading(false);
       }
     };
 
     fetchTotalDonations();
   }, []);
+
+  //  TOTAL PENGGUNA
+  useEffect(() => {
+    const fetchTotalUsers = async () => {
+      try {
+        const response = await getAllUsers();
+        const totalUsers = response.data?.data?.users?.length || 0;
+        setTotalUsers(totalUsers);
+      } catch (error) {
+        console.error("Failed to fetch total users:", error.message);
+      }
+    };
+
+    fetchTotalUsers();
+  }, []);
+
+  // TOTAL KATEGORI
+  useEffect(() => {
+    const fetchTotalCategories = async () => {
+      try {
+        const response = await getAllCategories();
+        const totalCategories = response.data?.data?.categories?.length || 0;
+        setTotalCategories(totalCategories);
+      } catch (error) {
+        console.error("Failed to fetch total Categories:", error.message);
+      }
+    };
+
+    fetchTotalCategories();
+  }, []);
+
+  const handleCardClick = (menuTitle) => {
+    setActiveMenu(menuTitle);
+  };
 
   return (
     <div className="p-8">
@@ -38,7 +128,10 @@ function Dashboard() {
         >
           <div className="p-6">
             {" "}
-            <h2 className="text-4xl font-bold">100</h2>
+            <h2 className="text-4xl font-bold">
+              {" "}
+              {totalUsers.toLocaleString()}
+            </h2>
             <p className="mt-2">Semua Pengguna</p>
           </div>
 
@@ -52,7 +145,10 @@ function Dashboard() {
         >
           <div className="p-6">
             {" "}
-            <h2 className="text-4xl font-bold">100</h2>
+            <h2 className="text-4xl font-bold">
+              {" "}
+              {totalLostItems.toLocaleString()}{" "}
+            </h2>
             <p className="mt-2">Semua Barang Hilang</p>
           </div>
 
@@ -66,7 +162,9 @@ function Dashboard() {
         >
           <div className="p-6">
             {" "}
-            <h2 className="text-4xl font-bold">100</h2>
+            <h2 className="text-4xl font-bold">
+              {totalFoundItems.toLocaleString()}
+            </h2>
             <p className="mt-2">Semua Penemuan Barang</p>
           </div>
 
@@ -80,7 +178,10 @@ function Dashboard() {
         >
           <div className="p-6">
             {" "}
-            <h2 className="text-4xl font-bold">100</h2>
+            <h2 className="text-4xl font-bold">
+              {" "}
+              {totalCategories.toLocaleString()}
+            </h2>
             <p className="mt-2">Semua Kategori</p>
           </div>
 
@@ -94,7 +195,10 @@ function Dashboard() {
         >
           <div className="p-6">
             {" "}
-            <h2 className="text-4xl font-bold">100</h2>
+            <h2 className="text-4xl font-bold">
+              {" "}
+              {totalMatched.toLocaleString()}
+            </h2>
             <p className="mt-2">Semua Barang Yang Telah Kembali</p>
           </div>
 
@@ -108,7 +212,9 @@ function Dashboard() {
           onClick={() => handleCardClick("Jumlah Donasi")}
         >
           <div className="p-6">
-            <h2 className="text-4xl font-bold">{totalAmount}</h2>
+            <h2 className="text-4xl font-bold">
+              {totalAmount.toLocaleString()}
+            </h2>
             <p className="mt-2">Jumlah Donasi</p>
           </div>
           <button className="w-full rounded-t-none">Lihat Detail </button>
