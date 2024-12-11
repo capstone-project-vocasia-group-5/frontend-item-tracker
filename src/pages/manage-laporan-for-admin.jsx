@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { useState, useEffect, useRef } from "react";
-import { getAllItemsByAdmin, deleteItemByAdmin } from "../api/api";
+import { getAllItemsByAdmin, deleteItemByAdmin, approveItemByAdmin, rejectItemByAdmin } from "../api/api";
 import { toast } from "sonner";
 import Popup from "../components/molecules/Popup";
 
@@ -17,7 +17,7 @@ const ManageLaporanAdmin = () => {
       try {
         const response = await getAllItemsByAdmin();
         setItems(response.data.data.items);
-        console.log("Items: ", response.data.data.items);
+        toast.success("Data berhasil diambil.");
       } catch (error) {
         toast.error("Error fetching data: ", error);
       }
