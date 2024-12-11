@@ -9,6 +9,16 @@ import { useState } from "react";
 
 const LostPage = () => {
   const [searchParams, setSearchParams] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+
+  const handleTotalItemsUpdate = (total) => {
+    setTotalItems(total);
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   const handleSearch = (params) => {
     setSearchParams(params);
@@ -30,10 +40,23 @@ const LostPage = () => {
           <SearchBar onSearch={handleSearch} onReset={handleReset} />
           <ReportButton />
 
-          <LostList params={{ ...searchParams, type: "lost" }} />
+          <LostList
+            params={{
+              ...searchParams,
+              type: "lost",
+              limit: "14",
+              page: currentPage,
+            }}
+            onTotalItemsUpdate={handleTotalItemsUpdate}
+          />
         </div>
 
-        <PaginationDisplay />
+        <PaginationDisplay
+          currentPage={currentPage}
+          totalItems={totalItems}
+          onPageChange={handlePageChange}
+          limit={14}
+        />
         <Separator />
       </main>
       {/* Footer */}

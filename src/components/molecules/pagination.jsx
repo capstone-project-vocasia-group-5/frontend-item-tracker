@@ -8,30 +8,56 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export function PaginationDisplay() {
+export function PaginationDisplay({
+  currentPage,
+  totalItems,
+  onPageChange,
+  limit,
+}) {
+  const totalPages = Math.ceil(totalItems / limit);
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) onPageChange(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) onPageChange(currentPage + 1);
+  };
+
+  const renderPageNumbers = () => {
+    let pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        <PaginationItem key={i}>
+          <PaginationLink
+            href="#"
+            isActive={i === currentPage}
+            onClick={(e) => {
+              e.preventDefault();
+              onPageChange(i);
+            }}
+          >
+            {i}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+    return pages;
+  };
+
   return (
     <div className="mb-10">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href="#" />
+            <PaginationPrevious href="#" onClick={goToPreviousPage} />
           </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
+          {renderPageNumbers()}
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
           <PaginationItem>
-            <PaginationNext href="#" />
+            <PaginationNext href="#" onClick={goToNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
