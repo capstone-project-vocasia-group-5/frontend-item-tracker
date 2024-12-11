@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getAllItemsByUser } from "../../api/api";
 import Preloader from "../templates/preloader/preloader";
 
-export const LostList = ({ params }) => {
+export const LostList = ({ params, onTotalItemsUpdate }) => {
   const [cardItems, setCardItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,7 +16,9 @@ export const LostList = ({ params }) => {
         const res = await getAllItemsByUser(params);
         if (isMounted) {
           const items = res.data?.data?.items || [];
+          const total = res.data?.data?.total_items || 0;
           setCardItems(items);
+          onTotalItemsUpdate(total);
         }
       } catch (error) {
         console.error("Failed to fetch items:", error);

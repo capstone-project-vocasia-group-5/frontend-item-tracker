@@ -8,6 +8,16 @@ import { useState } from "react";
 
 const FoundPage = () => {
   const [searchParams, setSearchParams] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+
+  const handleTotalItemsUpdate = (total) => {
+    setTotalItems(total);
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   const handleSearch = (params) => {
     setSearchParams(params);
@@ -30,9 +40,23 @@ const FoundPage = () => {
           <SearchBar onSearch={handleSearch} onReset={handleReset} />
           <ReportButton />
 
-          <FoundList params={{ ...searchParams, type: "found" }} />
+          <FoundList
+            params={{
+              ...searchParams,
+              type: "found",
+              limit: "14",
+              page: currentPage,
+            }}
+            onTotalItemsUpdate={handleTotalItemsUpdate}
+          />
         </div>
-        <PaginationDisplay />
+
+        <PaginationDisplay
+          currentPage={currentPage}
+          totalItems={totalItems}
+          onPageChange={handlePageChange}
+          limit={14}
+        />
       </main>
 
       {/* Footer */}
