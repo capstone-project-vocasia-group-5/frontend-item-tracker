@@ -8,7 +8,11 @@ import { FiturUtama } from "../components/organisms/fitur-utama.jsx";
 import { Separator } from "@/components/ui/separator";
 import ReportButton from "../components/organisms/upload-section.jsx";
 import { useState } from "react";
+<<<<<<< Updated upstream
 import { useAuth } from "../context/auth-context";
+=======
+import FlowSection from "../components/organisms/flow.jsx";
+>>>>>>> Stashed changes
 
 const Homepage = () => {
   const [searchParams, setSearchParams] = useState({});
@@ -54,13 +58,24 @@ const Homepage = () => {
         <Separator />
 
         {/* Found Section */}
-        <div id="FoundSection">
+        <div id="FoundSection" className="pb-10">
           <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
             <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
               Barang Temuan{" "}
             </span>
           </h1>
           <FoundList params={{ ...searchParams, type: "found" }} />
+        </div>
+        <Separator />
+
+        {/* Flow Section */}
+        <div id="FlowSection" className="bg-gray-200 pb-10">
+          <h1 className="pt-10 mb-4 text-2xl text-left lg:text-center px-10 font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
+              Panduan Penggunaan{" "}
+            </span>
+          </h1>
+          <FlowSection />
         </div>
         <Separator />
 
