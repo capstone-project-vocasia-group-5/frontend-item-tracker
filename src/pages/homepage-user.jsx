@@ -8,11 +8,8 @@ import { FiturUtama } from "../components/organisms/fitur-utama.jsx";
 import { Separator } from "@/components/ui/separator";
 import ReportButton from "../components/organisms/upload-section.jsx";
 import { useState } from "react";
-<<<<<<< Updated upstream
 import { useAuth } from "../context/auth-context";
-=======
 import FlowSection from "../components/organisms/flow.jsx";
->>>>>>> Stashed changes
 
 const Homepage = () => {
   const [searchParams, setSearchParams] = useState({});
