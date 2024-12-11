@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import { Button } from "../components/ui/button.jsx";
+import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
 
 const TentangKami = () => {
   return (
@@ -21,9 +22,10 @@ const TentangKami = () => {
           </div>
 
           {/* Konten Teks */}
-          <div className="w-full md:w-1/2 mt-8 md:mt-0 md:ml-8 text-left">
+          <div className="w-full md:w-2/3 mt-8 md:mt-0 md:ml-8 text-left">
             <h1 className="text-4xl font-bold leading-tight mb-4">
-              Sekilas Tentang <span className="text-blue-500">ItemTrack</span>
+              Sekilas Tentang{" "}
+              <LogoItemTracker className={`text-blue-500 text-4xl`} />
             </h1>
             <p className="text-lg leading-relaxed mb-6">
               itemTrack adalah solusi digital yang membantu Anda melacak barang

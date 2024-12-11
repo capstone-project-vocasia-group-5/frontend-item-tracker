@@ -7,6 +7,7 @@ import { Footer } from "@/components/organisms/footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
 
 const KontakKami = () => {
   return (
@@ -96,9 +97,7 @@ const KontakKami = () => {
                 alt="ItemTrack Logo"
                 className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
               />
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-                ItemTracker
-              </h1>
+              <LogoItemTracker className={`text-3xl`} />
             </div>
             <h2 className="ml-4 mb-8 mt-8 text-2xl font-bold">Sosial Media</h2>
             <p className="mt-4 ml-4 flex items-center">
