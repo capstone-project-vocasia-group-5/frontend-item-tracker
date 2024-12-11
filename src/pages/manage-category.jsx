@@ -2,7 +2,7 @@ import "../App.css";
 import React, { useState, useEffect } from "react";
 import { getAllCategories, updateCategory, deleteCategory, createCategory } from "../api/api.js";
 import { getAllItems } from "../api/api.js";
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 const ManageCategory = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,8 +22,9 @@ const ManageCategory = () => {
       try {
         const response = await getAllCategories();
         setCategories(response.data.data.categories);
+        toast.success("Data berhasil diambil.");
       } catch (error) {
-        console.log("Error fetching categories: ", error);
+        toast.log("Error fetching categories: ", error);
       }
     };
     fetchCategories();
@@ -35,7 +36,7 @@ const ManageCategory = () => {
         const response = await getAllItems();
         setItems(response.data.data.items);
       } catch (error) {
-        console.error('Error fetching items:', error);
+        toast.error('Error fetching items:', error);
       }
     };
     fetchItems();
@@ -69,28 +70,26 @@ const ManageCategory = () => {
         ));
       setEditingCategory(null); 
     } catch (error) {
-      console.error("Error updating category:", error);
+      toast.error("Error updating category:", error);
     }
   };
 
   const handleDeleteCategory = async (categoryId) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus kategori ini?")) {
       try {
         await deleteCategory(categoryId);
         setCategories((prevCategories) =>
           prevCategories.filter((category) => category.id !== categoryId)
         );
-        alert("Kategori berhasil dihapus.");
+        toast.success("Kategori berhasil dihapus.");
       } catch (error) {
         console.error("Error deleting category:", error);
-        alert("Terjadi kesalahan saat menghapus kategori.");
+        toast.error("Terjadi kesalahan saat menghapus kategori.");
       }
-    }
   };
 
   const handleCreateCategory = async () => {
     if (newCategoryName.trim() === "") {
-      alert("Nama kategori tidak boleh kosong.");
+      toast.warning("Nama kategori tidak boleh kosong.");
       return;
     }
 
@@ -98,10 +97,10 @@ const ManageCategory = () => {
       const response = await createCategory({ name: newCategoryName });
       setCategories([...categories, response.data.data.category]); 
       setNewCategoryName(""); 
-      alert("Kategori berhasil dibuat.");
+      toast.success("Kategori berhasil dibuat.");
     } catch (error) {
       console.error("Error creating category:", error);
-      alert("Terjadi kesalahan saat membuat kategori.");
+      toast.error("Terjadi kesalahan saat membuat kategori.");
     }
   };
 
