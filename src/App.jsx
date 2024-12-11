@@ -101,7 +101,7 @@ function App() {
             }
           />
           <Route
-            path="/detail-item"
+            path="/item/detail/:id"
             element={
               <ProtectedRoute>
                 <DetailItem />

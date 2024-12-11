@@ -6,13 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 export function CardDemo({ cardItem, className, ...props }) {
+  const navigate = useNavigate();
+  function handleClick(id) {
+    navigate(`/item/detail/${id}`);
+  }
   return (
     <div className="flex flex-wrap gap-2 justify-center">
       {cardItem?.map((card) => (
         <Card
           key={card._id}
+          id={card._id}
           className={cn(
             "w-[180px] hover:bg-gray-100 relative group overflow-hidden grid sm:w-[160px] md:w-[170px] lg:w-[180px] flex-grow flex-shrink-0 basis-[160px] border rounded-md shadow-md",
             className
@@ -20,7 +26,10 @@ export function CardDemo({ cardItem, className, ...props }) {
           {...props}
         >
           {/* Konten Hover */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div
+            onClick={() => handleClick(card._id)}
+            className="absolute cursor-pointer inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          >
             Lihat Detail
           </div>
 

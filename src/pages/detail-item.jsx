@@ -8,36 +8,77 @@ import {
   updateComment,
   deleteComment,
   createComment,
+  getItemById,
+  getCommentByItemId,
 } from "../api/api";
 
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
+import {
+  formatDate,
+  formatTime,
+  formatDateTimeComment,
+} from "../utils/time-formatter.js";
+import Preloader from "../components/templates/preloader/preloader.jsx";
+import BackButton from "../components/organisms/back-button.jsx";
+import { useNavigate } from "react-router-dom";
+
 const DetailItem = () => {
-  const [mainImage, setMainImage] = useState(
-    "https://flowbite.s3.amazonaws.com/docs/gallery/featured/image.jpg"
-  );
-  const [status, setStatus] = useState("Masih Dicari");
+  const [item, setItem] = useState(null);
+  const [mainImage, setMainImage] = useState("");
+  const [status, setStatus] = useState("Dicari");
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const handleClickHubungi = () => {
+    if (item?.item?.phone_number) {
+      const url = `https://wa.me/${item.item.phone_number}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      toast.error("Nomor telepon tidak tersedia");
+    }
+  };
+
+  const handleClickBackButton = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    const fetchItem = async () => {
+      try {
+        const response = await getItemById(id);
+        setItem(response.data.data);
+        if (response.data.data.item.type === "found") {
+          setStatus("Ditemukan");
+        }
+        setMainImage(response.data.data.item.images[0]);
+      } catch (error) {
+        console.error("Error fetching item:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const fetchComments = async () => {
+      try {
+        const response = await getCommentByItemId(id);
+        setComments(response.data.data.comment);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+
+    fetchItem();
+
+    fetchComments();
+  }, []);
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
-
-  // Daftar gambar kecil
-  const thumbnails = [
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg",
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
-    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg",
-  ];
-
-  const [comments, setComments] = useState([
-    {
-      profile: "https://via.placeholder.com/40/FF5733/FFFFFF?text=P",
-      name: "Penemu",
-      date: "10 September 2024",
-      description: "Tolong temukan barang saya",
-    },
-  ]);
-  const [newComment, setNewComment] = useState("");
 
   const handleAddComment = () => {
     if (newComment.trim()) {
@@ -61,14 +102,19 @@ const DetailItem = () => {
       setNewComment("");
     }
   };
+
   return (
     <div>
       <Navbar />
       {/* Fitur Utama */}
-      <div className="max-w-screen-xl mx-auto">
+      {isLoading && <Preloader />}
+      <div className="max-w-screen-xl min-h-screen mx-auto">
         {" "}
-        <div className="flex flex-wrap w-full">
-          <div className="w-[100%] sm:w-[50%] lg:p-5 lg:m-5 p-9">
+        <div className="mt-4 px-4">
+          <BackButton handleClickBack={handleClickBackButton} />
+        </div>
+        <div className="flex md:flex-row mt-4 md:mt-6 flex-col w-full">
+          <div className="w-[100%] sm:w-[50%] px-4">
             <div className="grid gap-4">
               {/* Div untuk gambar utama */}
               <div>
@@ -80,90 +126,80 @@ const DetailItem = () => {
               </div>
               {/* Grid untuk thumbnail */}
               <div className="grid grid-cols-5 gap-4">
-                {thumbnails.map((image, index) => (
+                {item?.item?.images.map((image, index) => (
                   <div key={index}>
                     <img
                       className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-80"
                       src={image}
                       alt={`Thumbnail ${index + 1}`}
-                      onClick={() => setMainImage(image)} // Saat gambar diklik, set main image
+                      onClick={() => setMainImage(image)}
                     />
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <div className="text-left sm:p-5 sm:m-4 px-9 pb-9 rounded-lg ">
-            <h2 className="text-3xl font-semibold text-gray-900 my-6">Meong</h2>
-            <p className="text-sm text-gray-700 my-4">
-              Terakhir Terlihat :{" "}
-              <span className="font-semibold my-4">23 Juni 2024</span>
-            </p>
-            <div className="my-4">
-              <label className="text-sm text-gray-700 mr-2 font-medium">
-                Status :
-              </label>
-              <div
-                className={`inline-block px-2 py-1 rounded-full text-white font-medium ${
-                  status === "Masih Dicari"
-                    ? "bg-yellow-500"
-                    : status === "Ditemukan"
-                    ? "bg-green-500"
-                    : "bg-gray-500"
-                }`}
-              >
-                {status}
+          <div className="text-left w-[100%] sm:w-[50%] px-4  rounded-lg ">
+            <div>
+              <h2 className="text-3xl font-semibold text-gray-900 my-6">
+                {item?.item?.name}
+              </h2>
+              <p className="text-sm text-gray-700 my-4">
+                Diupload pada :{" "}
+                <span className="font-semibold my-4">
+                  {item?.item?.created_at
+                    ? formatDate(item.item.created_at)
+                    : "Tanggal tidak tersedia"}
+                </span>
+              </p>
+              <p className="text-sm text-gray-700 my-4">
+                Waktu :{" "}
+                <span className="font-semibold my-4">
+                  {item?.item?.created_at
+                    ? formatTime(item.item.created_at)
+                    : "Tanggal tidak tersedia"}
+                </span>
+              </p>
+              <div className="my-4">
+                <label className="text-sm text-gray-700 mr-2 font-medium">
+                  Status :
+                </label>
+                <div
+                  className={`inline-block px-4 py-1 rounded-full text-white font-medium ${
+                    status === "Dicari"
+                      ? "bg-red-500"
+                      : status === "Ditemukan"
+                      ? "bg-green-500"
+                      : "bg-gray-500"
+                  }`}
+                >
+                  {status}
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-700 my-4">
+                Deskripsi:{" "}
+                <span className="font-medium">{item?.item?.description}</span>
+              </p>
+
+              <div className="flex items-center mt-4 space-x-2">
+                <h2 className="text-lg font-medium text-gray-900 uppercase">
+                  {`${item?.item?.province}, ${item?.item?.city}, ${item?.item?.subdistrict} ${item?.item?.village}, ${item?.item?.postal_code}`}
+                </h2>
               </div>
             </div>
 
-            <p className="text-sm text-gray-700 my-4">
-              Deskripsi:{" "}
-              <span className="font-medium">
-                Kucing Hitam kalau ngomong bilang meong
-              </span>
-            </p>
-
-            <div className="flex items-center mt-4 space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
+            <div className="mt-4 flex justify-center md:justify-start items-center">
+              <Button
+                onClick={handleClickHubungi}
+                className="mt-4 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <path
-                  d="M16.3197 0.833374C7.48384 2.62737 0.833008 10.4397 0.833008 19.8065C0.833008 30.4995 9.50017 39.1667 20.1933 39.1667C29.56 39.1667 37.3723 32.5159 39.1663 23.68"
-                  stroke="black"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M33.2978 31.5C34.0106 31.3496 34.6967 31.0931 35.3333 30.7391M25.152 30.2369C26.2956 30.7352 27.3926 31.1058 28.4429 31.3486M17.8054 25.6503C18.597 26.2062 19.4442 26.8732 20.2683 27.4482M2.75 23.4998C3.36717 23.1989 4.03417 22.852 4.78742 22.5549M9.3625 21.9167C10.4397 22.0355 11.6472 22.3441 13.0157 22.9191M31.5 11.375C31.5 10.6125 31.1971 9.88123 30.6579 9.34207C30.1188 8.8029 29.3875 8.5 28.625 8.5C27.8625 8.5 27.1312 8.8029 26.5921 9.34207C26.0529 9.88123 25.75 10.6125 25.75 11.375C25.75 12.1375 26.0529 12.8688 26.5921 13.4079C27.1312 13.9471 27.8625 14.25 28.625 14.25C29.3875 14.25 30.1188 13.9471 30.6579 13.4079C31.1971 12.8688 31.5 12.1375 31.5 11.375Z"
-                  stroke="black"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M30.5181 23.105C30.0002 23.5762 29.3245 23.836 28.6244 23.8334C27.9243 23.836 27.2486 23.5762 26.7307 23.105C22.079 18.804 15.846 13.997 18.8858 7.02037C20.5303 3.24646 24.4748 0.833374 28.6244 0.833374C32.774 0.833374 36.7185 3.24837 38.3611 7.02037C41.399 13.9894 35.1794 18.8175 30.5181 23.105Z"
-                  stroke="black"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <h2 className="text-lg font-medium text-gray-900">
-                Kota: Surabaya
-              </h2>
+                Hubungi Pemilik
+              </Button>
             </div>
-
-            <Button className="mt-4 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              Hubungi Pemilik
-            </Button>
           </div>
         </div>
-        <div className="flex flex-col justify-center pb-10 m-8 ">
+        <div className="flex flex-col justify-center mt-10  pb-10 px-4 ">
           {" "}
           <div className="bg-primaryBlack p-6 rounded-t-lg">
             <h3 className="text-2xl font-bold  text-center text-white">
@@ -172,37 +208,66 @@ const DetailItem = () => {
           </div>
           <div className="rounded-b-lg border bg-[#cecece]">
             {" "}
-            <ScrollArea className="w-full h-[500px] text-black p-2 text-justify relative">
+            <ScrollArea
+              className={`w-full text-black p-2 text-justify relative ${
+                comments?.length > 0 ? "h-[450px]" : "h-[100px]"
+              }`}
+            >
               {/* Daftar Komentar */}
               <div className="space-y-3 p-2">
-                {comments.map((comment, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center space-x-3 p-2 bg-white shadow-md rounded-lg"
-                  >
-                    {/* Avatar */}
-                    <img
-                      src={comment.profile}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full border-2 border-blue-500"
-                    />
+                {comments?.length > 0 ? (
+                  comments.map((comment, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center space-x-3 p-2 bg-white shadow-md rounded-lg"
+                    >
+                      {/* Avatar */}
+                      <img
+                        src={comment.user_id.image_url}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full border-2 border-blue-500"
+                      />
 
-                    {/* Isi Komentar */}
-                    <div className="flex-1">
-                      <div className="flex justify-between items-center mb-1">
-                        <p className="font-medium text-black text-lg">
-                          {comment.name}
+                      {/* Isi Komentar */}
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <p className="font-medium text-black text-lg">
+                            {item?.item?.user_id === comment.user_id.id &&
+                            item?.item?.type === "lost" ? (
+                              <span className="text-black">
+                                {comment.user_id.name}{" "}
+                                <span className="text-red-500">(Pelapor)</span>
+                              </span>
+                            ) : item?.item?.user_id === comment.user_id.id &&
+                              item?.item?.type === "found" ? (
+                              <span className="text-red-500">Penemu</span>
+                            ) : (
+                              <span className="text-black">
+                                {comment.user_id.name}
+                              </span>
+                            )}
+                          </p>
+                          <span className="text-sm text-gray-500">
+                            {
+                              <span className="font-semibold my-4">
+                                {item?.item?.created_at
+                                  ? formatDateTimeComment(item.item.created_at)
+                                  : "Tanggal tidak tersedia"}
+                              </span>
+                            }
+                          </span>
+                        </div>
+                        <p className="text-gray-700 bg-gray-100 p-2 rounded-md shadow-inner">
+                          {comment.comment_text}
                         </p>
-                        <span className="text-sm text-gray-500">
-                          {comment.date}
-                        </span>
                       </div>
-                      <p className="text-gray-700 bg-gray-100 p-2 rounded-md shadow-inner">
-                        {comment.description}
-                      </p>
                     </div>
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    <p>Belum ada komentar</p>
                   </div>
-                ))}
+                )}
               </div>
 
               {/* Input Komentar */}
