@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { registerUser } from "../api/api";
+import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -67,9 +68,7 @@ function RegisterForm() {
             alt="ItemTrack Logo"
             className="w-10 h-10 sm:w-8 sm:h-8 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            ItemTrack
-          </h1>
+          <LogoItemTracker className={`text-3xl`} />
         </div>
 
         {/* Form */}

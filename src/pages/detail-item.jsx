@@ -1,5 +1,6 @@
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
+import Komentar from "../components/organisms/komentar.jsx";
 import { Button } from "../components/ui/button.jsx";
 import React, { useState, useEffect } from "react";
 import { ScrollArea } from "../components/ui/scroll-area.jsx";
@@ -198,6 +199,10 @@ const DetailItem = () => {
               </Button>
             </div>
           </div>
+        </div>
+        <div className="p-4">
+          {" "}
+          <Komentar />
         </div>
         <div className="flex flex-col justify-center mt-10  pb-10 px-4 ">
           {" "}

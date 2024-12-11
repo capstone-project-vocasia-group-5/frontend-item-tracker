@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
 import { toast } from "sonner";
 import { useAuth } from "../context/auth-context";
+import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -52,9 +53,7 @@ function LoginForm() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            ItemTrack
-          </h1>
+          <LogoItemTracker className={`text-3xl`} />
         </div>
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
           <div className="text-left">

@@ -14,13 +14,13 @@ export function CardDemo({ cardItem, className, ...props }) {
     navigate(`/item/detail/${id}`);
   }
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
       {cardItem?.map((card) => (
         <Card
           key={card._id}
           id={card._id}
           className={cn(
-            "w-[180px] hover:bg-gray-100 relative group overflow-hidden grid sm:w-[160px] md:w-[170px] lg:w-[180px] flex-grow flex-shrink-0 basis-[160px] border rounded-md shadow-md",
+            "relative flex flex-col items-center justify-center w-full transform transition-transform duration-300 hover:scale-105 group overflow-hidden border rounded-md shadow-md hover:bg-gray-100",
             className
           )}
           {...props}
@@ -34,7 +34,7 @@ export function CardDemo({ cardItem, className, ...props }) {
           </div>
 
           {/* Konten Utama */}
-          <CardContent className="grid ">
+          <CardContent className="grid">
             <div className="flex justify-center mt-3">
               <img
                 src={card.images[0]}

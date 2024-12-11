@@ -6,12 +6,12 @@ const KebijakanPrivasi = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="p-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+      <h1 className="py-10 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
         Kebijakan Privasi
       </h1>
       <div className="flex justify-center pb-10 px-4">
         {" "}
-        <ScrollArea className="w-[400px] md:w-[550px] lg:w-[850px] h-[450px] bg-primaryBlack rounded-md border p-6 text-white text-justify">
+        <ScrollArea className="w-[400px] md:w-[550px] lg:w-[850px] h-[600px] bg-primaryBlack rounded-md border p-6 text-white text-justify">
           {" "}
           <div></div>
           Privasi Anda penting bagi kami. Kebijakan ini menjelaskan bagaimana
