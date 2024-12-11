@@ -1,9 +1,7 @@
 import { useSidebar } from "@/components/ui/sidebar";
 import React, { useEffect, useState } from "react";
 import { getTotalAmountDonations } from "../api/api";
-import { getAllUsers } from "../api/api";
-import { getAllItemsByAdmin } from "../api/api";
-import { getAllCategories } from "../api/api";
+import { getAllUsers, getAllItemsByAdmin, getAllCategories } from "../api/api";
 
 function Dashboard() {
   const [totalAmount, setTotalAmount] = useState(0);

@@ -63,3 +63,9 @@ export const getTotalAmountDonations = (data) =>
 export const getUser = () => api.get("/users");
 export const getAllUsers = (data) => api.get("/admin/users", data);
 export const deleteUser = (id) => api.delete(`/admin/users/${id}`, data);
+
+//comments
+export const getComment = (id) => api.get(`/item/comments/${id}`, data);
+export const createComment = (id, data) => api.post(`/comments/${id}`, data);
+export const updateComment = (id, data) => api.put(`/comments/${id}`, data);
+export const deleteComment = (id, data) => api.delete(`/comments/${id}`, data);

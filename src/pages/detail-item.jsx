@@ -1,8 +1,14 @@
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import { Button } from "../components/ui/button.jsx";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollArea } from "../components/ui/scroll-area.jsx";
+import {
+  getComment,
+  updateComment,
+  deleteComment,
+  createComment,
+} from "../api/api";
 
 const DetailItem = () => {
   const [mainImage, setMainImage] = useState(
