@@ -36,6 +36,7 @@ import HomePageAdmin from "./pages/homepage-admin";
 
 import { AuthProvider } from "./context/auth-context";
 import ProtectedRoute from "./config/protected-route";
+import NotFound from "./pages/not-found";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
       <Router>
         <ScrollToTop />
         <Routes>
+          <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<TentangKami />} />
           <Route path="/contact" element={<KontakKami />} />

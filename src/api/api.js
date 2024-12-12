@@ -70,3 +70,13 @@ export const createComment = (id, data) => api.post(`/comments/${id}`, data);
 export const updateComment = (id, data) => api.put(`/comments/${id}`, data);
 export const deleteComment = (id, data) => api.delete(`/comments/${id}`, data);
 export const getCommentByItemId = (id) => api.get(`/item/comments/${id}`);
+
+// notifications
+export const getNotificationByUser = (params) =>
+  api.get("/notifications", { params });
+export const getDetailNotificationById = (id) =>
+  api.get(`/notifications/${id}`);
+export const setNotificationIsRead = (id) => api.put(`/notifications/${id}`);
+export const getNotificationByAdmin = () => api.get("/admin/notifications");
+export const setAllNotificationIsRead = () =>
+  api.put("/notifications/all/set-read");
