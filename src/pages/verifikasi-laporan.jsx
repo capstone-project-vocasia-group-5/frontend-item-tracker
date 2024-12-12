@@ -78,7 +78,7 @@ const VerifikasiLaporan = () => {
 
   return (
     <div>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen w-full flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 flex justify-between">
             <h1 className="text-xl font-bold">Verifikasi Laporan</h1>

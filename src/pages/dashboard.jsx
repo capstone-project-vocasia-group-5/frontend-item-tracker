@@ -118,7 +118,7 @@ function Dashboard() {
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Card Semua Pengguna */}
         <div
           className="bg-black text-white rounded-md shadow-md cursor-pointer"
@@ -133,7 +133,9 @@ function Dashboard() {
             <p className="mt-2">Semua Pengguna</p>
           </div>
 
-          <button className="w-full rounded-t-none">Lihat Detail</button>
+          <button className="w-full bg-[#1A1A1A] rounded-t-none bottom-0">
+            Lihat Detail
+          </button>
         </div>
 
         {/* Card Semua Barang Hilang */}
@@ -147,10 +149,12 @@ function Dashboard() {
               {" "}
               {totalLostItems.toLocaleString()}{" "}
             </h2>
-            <p className="mt-2">Semua Barang Hilang</p>
+            <p className="mt-2 ">Semua Barang Hilang</p>
           </div>
 
-          <button className="w-full rounded-t-none">Lihat Detail</button>
+          <button className="w-full bg-[#1A1A1A] rounded-t-none bottom-0">
+            Lihat Detail
+          </button>
         </div>
 
         {/* Card Semua Penemuan Barang */}
@@ -166,7 +170,9 @@ function Dashboard() {
             <p className="mt-2">Semua Penemuan Barang</p>
           </div>
 
-          <button className="w-full rounded-t-none">Lihat Detail</button>
+          <button className="w-full bg-[#1A1A1A] rounded-t-none bottom-0">
+            Lihat Detail
+          </button>
         </div>
 
         {/* Card Semua Kategori */}
@@ -183,7 +189,9 @@ function Dashboard() {
             <p className="mt-2">Semua Kategori</p>
           </div>
 
-          <button className="w-full rounded-t-none">Lihat Detail</button>
+          <button className="w-full bg-[#1A1A1A] rounded-t-none bottom-0">
+            Lihat Detail
+          </button>
         </div>
 
         {/* Card Semua Barang yang Telah Kembali */}
@@ -200,7 +208,9 @@ function Dashboard() {
             <p className="mt-2">Semua Barang Yang Telah Kembali</p>
           </div>
 
-          <button className="w-full rounded-t-none">Lihat Detail</button>
+          <button className="w-full bg-[#1A1A1A] rounded-t-none bottom-0">
+            Lihat Detail
+          </button>
         </div>
 
         {/* Card Jumlah Donasi */}
@@ -210,12 +220,14 @@ function Dashboard() {
           onClick={() => handleCardClick("Jumlah Donasi")}
         >
           <div className="p-6">
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-4xl font-bold flex flex-wrap justify-center">
               {totalAmount.toLocaleString()}
             </h2>
             <p className="mt-2">Jumlah Donasi</p>
           </div>
-          <button className="w-full rounded-t-none">Lihat Detail </button>
+          <button className="w-full bg-[#1A1A1A] rounded-t-none bottom-0">
+            Lihat Detail{" "}
+          </button>
         </div>
       </div>
     </div>

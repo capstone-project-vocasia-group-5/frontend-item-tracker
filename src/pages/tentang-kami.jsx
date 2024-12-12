@@ -3,8 +3,48 @@ import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import { Button } from "../components/ui/button.jsx";
 import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
+import KamiCard from "../components/molecules/kami-card.jsx";
 
 const TentangKami = () => {
+  const members = [
+    {
+      name: "Agus Heryanto",
+      role: "FullStack Web Developer",
+      github: "https://github.com/agusheryanto182",
+      instagram: "https://www.instagram.com/agusheryanto182/",
+      linkedin: "https://www.linkedin.com/in/agus-heryanto-b34561284/",
+      photo:
+        "https://res.cloudinary.com/dpb2qk5lf/image/upload/v1733998869/Logo/bqtp1lkuteqengil7see.png",
+    },
+    {
+      name: `Aisyah Lailia Sari`,
+      role: "FullStack Web Developer",
+      github: "https://github.com/aisyahbelajar",
+      instagram: "https://www.instagram.com/aisyahlailia/",
+      linkedin: "https://www.linkedin.com/in/aisyahlailia/",
+      photo:
+        "https://s3-alpha-sig.figma.com/img/c94f/405d/3329b48656723464fa39a225d0f78be9?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CV3wRyLDDm98tr6m17ZstCUl-RCYrczIHDDyWWi~Aem~koUk3wtTyZvU1O8XkMTa-p5~IEj2Jepe0V6Dhn2--5Up1UvhPTumSphFZNHFzfTvmduK5MnDP0CT~GfLk~LfhoFCsjRMe8fGzTeQ49eAfR~g40ECEoET7gpvcrwMQcKlH1PRElsDFUEogRjJJnm5T3O9WZ6m-VCiTAovaSEDNcW6bn4V6X7ebBEXC9c9ol~UFLq3r~OVLykXo23uRwRSiOR7dqXiDLhSWnbq1FJuKmB0mW20lchUPWqepUY4NNHNg0a0i0B3l97BgZWtmqXKYy3BAx2h3olgFZAfP2MP-g__",
+    },
+    {
+      name: "Anisa Ayu Yandani",
+      role: "FullStack Web Developer",
+      github: "https://github.com/NisaayU",
+      instagram: "https://www.instagram.com/annissaa_ay/",
+      linkedin: "https://www.linkedin.com/in/anisa-ayu-yandani-79334b263/",
+      photo:
+        "https://s3-alpha-sig.figma.com/img/5991/0bce/699cbbbe9c32ddff55dcd16af7446b93?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Q0tgyhaxwdiG62IISOrMo~F-s4FxiflckPhsixDbiDpzhmHevYML1ZbEol5P9ZlZW1f3S1uBi05FY40kAs~kQ2WU8OU2OonLoilU0CwxCf5-S3cFCLxN4GpZjLGfiIsEW9yN9d7YeWWFXKA-tWCCaau54vokArauf11IrwBpAzHtfq4a9C3BhNovbsyRg6ih26ANsyrANzibWawi2G3beH8EE59TMjldDCDRu8ng32gxIewMHVUaZUQnZCqgazc-4u7maOJtHhIllp3yNAIjMLNp0sfNqHWY8ehB3sfJI0NXUnG29sPrwColkQflKIp2UYSuV3W-h7Zkimdug8vrQA__",
+    },
+    {
+      name: "M. Ade Irawan",
+      role: "FullStack Web Developer",
+      github: "https://github.com/adeirawan18",
+      instagram: "https://www.instagram.com/adeeirawan._/",
+      linkedin: "https://www.linkedin.com/in/adeirawann/",
+      photo:
+        "https://s3-alpha-sig.figma.com/img/46b2/c194/2eb3402c3ef01fde5fde08e0ee047600?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Sr3BMu5wmlEODiLvH70JuFJx3Re16I4d8h-X2AC0~G37bXpPCeRM4BvDD~QmCZYilOlIMd6L1JZVN2oqLbuok6KVE5Wg1bQd1-XBXNB6RLVNxBjwy0nSTmohcC9WGGaiO6S6rErzthcmq4H3vtfrlnUx9mI6x6wFIwcI5Zl06gLXK~2hfwQbkkYY~whvx6vyOpSHeewAy3xOgg-IlHKQhfPKDLKVplXocJzXd0fxR8urIPIdpgnFo1St6uTg3ViYW~315j3M-hVlIW6ibZrhUTrdVdVmNJuEqVe6fgAmWWnEPPtZ3nWtUSQOntwc7EbSZmIvG8eQ2LD0dxzjuS0jqw__",
+    },
+  ];
+
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* Header */}
@@ -37,60 +77,21 @@ const TentangKami = () => {
         </div>
       </header>
       {/* Konten Utama */}
-      <main className="container mx-auto py-12 px-6">
+      <main className="container mx-auto max-w-full py-12 px-6">
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-800 mb-10">Tim Kami</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {/* Anggota Tim 1 */}
-            <div className="bg-white p-6 rounded-lg shadow">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Team Member"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
+          <h2 className="text-4xl font-bold text-gray-800 mb-10">Tim Kami</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {members.map((member, index) => (
+              <KamiCard
+                key={index}
+                name={member.name}
+                role={member.role}
+                github={member.github}
+                instagram={member.instagram}
+                linkedin={member.linkedin}
+                photo={member.photo}
               />
-              <h3 className="text-lg font-semibold text-gray-800 text-center">
-                Agus Heryanto
-              </h3>
-              <p className="text-sm text-gray-600 text-center">Web Developer</p>
-            </div>
-
-            {/* Anggota Tim 2 */}
-            <div className="bg-white p-6 rounded-lg shadow">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Team Member"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
-              />
-              <h3 className="text-lg font-semibold text-gray-800 text-center">
-                Aisyah Lailia
-              </h3>
-              <p className="text-sm text-gray-600 text-center">Web Developer</p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Team Member"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
-              />
-              <h3 className="text-lg font-semibold text-gray-800 text-center">
-                Annisa
-              </h3>
-              <p className="text-sm text-gray-600 text-center">Web Developer</p>
-            </div>
-
-            {/* Anggota Tim 3 */}
-            <div className="bg-white p-6 rounded-lg shadow">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Team Member"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
-              />
-              <h3 className="text-lg font-semibold text-gray-800 text-center">
-                Ade
-              </h3>
-              <p className="text-sm text-gray-600 text-center">Web Developer</p>
-            </div>
+            ))}
           </div>
         </section>
       </main>
@@ -110,40 +111,6 @@ const TentangKami = () => {
             </div>
 
             {/* Kolom Kanan */}
-
-            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  Komplain & Bantuan Pengguna
-                </h3>
-
-                <p className="text-gray-600">support@itemtrack.com</p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  Sekretaris Perusahaan
-                </h3>
-
-                <p className="text-gray-600">corpsec@itemtrack.com</p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  Hubungan Investor
-                </h3>
-
-                <p className="text-gray-600">investor@itemtrack.com</p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  Kebutuhan Media
-                </h3>
-
-                <p className="text-gray-600">media@itemtrack.com</p>
-              </div>
-            </div>
           </div>
         </section>
       </div>

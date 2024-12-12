@@ -20,9 +20,9 @@ import {
 
 export function NavMain({ items, onMenuClick }) {
   return (
-    <SidebarGroup className="text-white">
-      <SidebarGroupLabel className="text-white">Menu</SidebarGroupLabel>
-      <SidebarMenu className="bg-black">
+    <SidebarGroup className="text-white ">
+      <SidebarGroupLabel className="text-white ">Menu</SidebarGroupLabel>
+      <SidebarMenu>
         {items.map((item) => (
           <Collapsible
             key={item.title}
@@ -31,7 +31,7 @@ export function NavMain({ items, onMenuClick }) {
             className="group/collapsible text-white"
           >
             <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
+              <CollapsibleTrigger asChild className="bg-[#1A1A1A]">
                 <SidebarMenuButton
                   tooltip={item.title}
                   className="text-white"

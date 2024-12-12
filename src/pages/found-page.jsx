@@ -33,7 +33,7 @@ const FoundPage = () => {
 
       <main className="max-w-screen-xl mx-auto">
         <div id="FoundSection">
-          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl ">
             Barang Temuan
           </h1>
 

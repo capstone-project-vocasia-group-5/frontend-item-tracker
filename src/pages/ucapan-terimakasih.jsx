@@ -3,7 +3,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const UcapanTerimakasih = () => {
-  // Data ringkasan
   const summary = {
     Nama: "Mohammad Ade Irawan",
     Tanggal: "3 Desember, 2024",
@@ -27,16 +26,8 @@ const UcapanTerimakasih = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                className="animate-draw-circle"
-              />
-              <path
-                d="M9 12l2 2 4-4"
-                className="animate-draw-check"
-              />
+              <circle cx="12" cy="12" r="10" className="animate-draw-circle" />
+              <path d="M9 12l2 2 4-4" className="animate-draw-check" />
             </svg>
           </div>
         </div>
