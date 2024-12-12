@@ -31,7 +31,7 @@ const LostPage = () => {
     <div>
       <Navbar />
 
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-xl min-h-screen mx-auto">
         <div id="LostSection">
           <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
             Barang Hilang
@@ -44,7 +44,7 @@ const LostPage = () => {
             params={{
               ...searchParams,
               type: "lost",
-              limit: "14",
+              limit: "12",
               page: currentPage,
             }}
             onTotalItemsUpdate={handleTotalItemsUpdate}
@@ -55,7 +55,7 @@ const LostPage = () => {
           currentPage={currentPage}
           totalItems={totalItems}
           onPageChange={handlePageChange}
-          limit={14}
+          limit={12}
         />
         <Separator />
       </main>

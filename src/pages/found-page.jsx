@@ -44,7 +44,7 @@ const FoundPage = () => {
             params={{
               ...searchParams,
               type: "found",
-              limit: "14",
+              limit: "12",
               page: currentPage,
             }}
             onTotalItemsUpdate={handleTotalItemsUpdate}
@@ -55,7 +55,7 @@ const FoundPage = () => {
           currentPage={currentPage}
           totalItems={totalItems}
           onPageChange={handlePageChange}
-          limit={14}
+          limit={12}
         />
       </main>
 
