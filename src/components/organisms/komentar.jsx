@@ -1,60 +1,110 @@
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { formatDateTimeComment } from "../../utils/time-formatter";
+import { ScrollArea } from "../ui/scroll-area";
+import { useAuth } from "../../context/auth-context";
+import { useState } from "react";
 
-const Komentar = () => {
+const Komentar = ({ comments, item }) => {
+  const { user } = useAuth();
+
+  const [showOptions, setShowOptions] = useState(false);
+
+  const handleEdit = () => {
+    // Fungsi untuk mengedit komentar (misalnya membuka form edit)
+    console.log("Edit comment");
+    setShowOptions(false); // Menutup pilihan setelah klik
+  };
+
+  const handleDelete = () => {
+    // Fungsi untuk menghapus komentar
+    console.log("Delete comment");
+    setShowOptions(false); // Menutup pilihan setelah klik
+  };
+
   return (
     <StyledWrapper>
       <div className="ee-card ">
-        <span className="title">Comments</span>
-        <div class="comments ">
-          <div class="comment-react">
-            <button>✏️</button>
-            <hr />
-            <button>🗑️</button>
-          </div>
-          <div class="comment-container">
-            <div class="user">
-              <div class="user-pic">
-                <svg
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  height="20"
-                  width="20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linejoin="round"
-                    fill="#707277"
-                    stroke-linecap="round"
-                    stroke-width="2"
-                    stroke="#707277"
-                    d="M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z"
-                  ></path>
-                  <path
-                    stroke-width="2"
-                    fill="#707277"
-                    stroke="#707277"
-                    d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z"
-                  ></path>
-                </svg>
+        <span className="title">Komentar</span>
+
+        <ScrollArea
+          className={`w-full text-black p-2 text-justify relative ${
+            comments?.length > 0 ? "h-[450px]" : "h-[100px]"
+          }`}
+        >
+          {comments?.length > 0 ? (
+            comments.map((comment, index) => (
+              <div key={index} className="comments ">
+                <div className="comment-react">
+                  <button
+                    className={
+                      user?.id === comment?.user_id?.id ? "" : "!hidden"
+                    }
+                    onClick={() => setShowOptions(!showOptions)}
+                  >
+                    ✏️
+                  </button>
+
+                  {showOptions && (
+                    <div className="absolute bg-white shadow-lg rounded-md p-4 mt-2 w-48 border">
+                      <button
+                        onClick={handleEdit}
+                        className="w-full py-2 px-4 mb-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={handleDelete}
+                        className="w-full py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className="comment-container">
+                  <div className="user">
+                    <div className="user-pic">
+                      <img
+                        src={
+                          comment?.user_id?.image_url ||
+                          comment?.user_id?.name[0]
+                        }
+                        alt="user"
+                      />
+                    </div>
+                    <div className="user-info">
+                      {item?.user_id === comment.user_id.id &&
+                      item?.type === "lost" ? (
+                        <span className="text-black">
+                          {comment.user_id.name}{" "}
+                          <span className="!text-red-500">(Pemilik)</span>
+                        </span>
+                      ) : item?.user_id === comment.user_id.id &&
+                        item?.type === "found" ? (
+                        <span className="!text-green-500">Penemu</span>
+                      ) : (
+                        <span className="text-black">
+                          {comment.user_id.name}
+                        </span>
+                      )}
+                      <p>{formatDateTimeComment(comment?.created_at)}</p>
+                    </div>
+                  </div>
+                  <p className="comment-content text-left">
+                    {comment?.comment_text}
+                  </p>
+                </div>
               </div>
-              <div class="user-info">
-                <span>Yassine Zanina</span>
-                <p>Wednesday, March 13th at 2:45pm</p>
-              </div>
-            </div>
-            <p class="comment-content text-left">
-              I've been using this product for a few days now and I'm really
-              impressed! The interface is intuitive and easy to use, and the
-              features are exactly what I need to streamline my workflow.
-            </p>
-          </div>
-        </div>
+            ))
+          ) : (
+            <p>Belum ada komentar</p>
+          )}
+        </ScrollArea>
 
         <div className="text-box rounded-b-xl bg-gray-200">
           <div className="box-container flex gap-4">
             <textarea
-              placeholder="Reply"
+              placeholder="Tulis komentar disini"
               className="bg-white comment-content text-left overflow-hidden resize-none"
             />
             <button
@@ -71,16 +121,16 @@ const Komentar = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  stroke-width="2.5"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
                   stroke="#ffffff"
                   d="M12 5L12 20"
                 ></path>
                 <path
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  stroke-width="2.5"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
                   stroke="#ffffff"
                   d="M7 9L11.2929 4.70711C11.6262 4.37377 11.7929 4.20711 12 4.20711C12.2071 4.20711 12.3738 4.37377 12.7071 4.70711L17 9"
                 ></path>
@@ -110,7 +160,7 @@ const StyledWrapper = styled.div`
     padding-left: 20px;
     border-bottom: 1px solid #f1f1f1;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 1rem;
     color: #47484b;
   }
 
@@ -250,21 +300,21 @@ const StyledWrapper = styled.div`
 
   .comment-container .user .user-info span {
     font-weight: 700;
-    font-size: 12px;
-    color: #47484b;
+    font-size: 18px;
+    color: black;
   }
 
   .comment-container .user .user-info p {
     font-weight: 600;
-    font-size: 10px;
+    font-size: 14px;
     color: #acaeb4;
   }
 
   .comment-container .comment-content {
-    font-size: 12px;
+    font-size: 1rem;
     line-height: 16px;
-    font-weight: 600;
-    color: #5f6064;
+    // font-weight: 600;
+    color: black;
   }
 
   .text-box {
