@@ -24,7 +24,6 @@ export const SearchBar = ({ onSearch, onReset }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [cityID, setCityID] = useState("");
   const [districtID, setDistrictID] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
 

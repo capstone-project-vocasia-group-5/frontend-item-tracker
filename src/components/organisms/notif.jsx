@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Table,
   TableHeader,
@@ -7,110 +7,149 @@ import {
   TableRow,
   TableCell,
   Input,
-  Pagination,
 } from "@nextui-org/react";
 
-const notifications = [
-  {
-    id: 1,
-    image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    description: "Barang anda sudah disetujui",
-    read: false,
-  },
-  {
-    id: 2,
-    image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-    description: "Barang Hilang anda sudah ditemukan",
-    read: true,
-  },
-  {
-    id: 3,
-    image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-    description: "Ayo berdonatur!",
-    read: false,
-  },
-  {
-    id: 4,
-    image: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    description: "Barang anda dimana?",
-    read: false,
-  },
-  {
-    id: 5,
-    image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-    description: "Dimana yh?",
-    read: true,
-  },
-  {
-    id: 6,
-    image: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-    description: "Es Es apa yang Teh",
-    read: false,
-  },
-];
+import { getNotificationByUser, setNotificationIsRead } from "../../api/api";
+import newComment from "/public/image/new-comment.svg";
+import { PaginationDisplay } from "../molecules/pagination";
+import { useNavigate } from "react-router-dom";
+import Preloader from "../templates/preloader/preloader";
 
 export function Notif() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
+  const [notifications, setNotifications] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [totalNotif, setTotalNotif] = useState(0);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredNotifications = useMemo(() => {
-    return notifications.filter((notif) =>
-      notif.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
-  const totalPages = Math.ceil(filteredNotifications.length / itemsPerPage);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 500);
 
-  const currentData = useMemo(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return filteredNotifications.slice(startIndex, endIndex);
-  }, [currentPage, filteredNotifications]);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
+
+  const fetchNotifications = async (params = {}) => {
+    setIsLoading(true);
+    try {
+      const response = await getNotificationByUser({
+        search: params.search || debouncedQuery,
+        page: params.page || currentPage,
+        limit: params.limit || itemsPerPage,
+      });
+
+      const notifications = response.data.data.notifications || [];
+      const total = response.data.data.pagination.total || notifications.length;
+      setNotifications(notifications);
+      setTotalNotif(total);
+    } catch (error) {
+      console.error("Failed to fetch notifications:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotifications({
+      search: debouncedQuery,
+      page: currentPage,
+      limit: itemsPerPage,
+    });
+  }, [currentPage, debouncedQuery]);
+
+  const setNotificationIsReadHandler = async (notifId) => {
+    try {
+      const response = await setNotificationIsRead(notifId);
+      fetchNotifications();
+    } catch (error) {
+      console.error("Failed to set notification as read:", error);
+    }
+  };
+
+  const handleClickNotif = (notif) => {
+    if (!notif.is_read) {
+      setNotificationIsReadHandler(notif._id);
+    }
+
+    const navigateToDetail = (item) => {
+      if (item.deleted_at) {
+        navigate("/not-found");
+      } else {
+        navigate(`/item/detail/${item._id}`);
+      }
+    };
+
+    if (notif.claim) {
+      navigate("/user");
+    } else if (notif.comment) {
+      navigateToDetail(notif.comment.item_id);
+    } else if (notif.item) {
+      navigateToDetail(notif.item);
+    } else {
+      navigate("/not-found");
+    }
+  };
 
   return (
     <div className="p-4">
+      {isLoading && <Preloader />}
       <Input
         placeholder="Cari notifikasi..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearchChange}
+        value={searchQuery}
         className="mb-4"
       />
-
       <Table aria-label="Tabel Notifikasi">
         <TableHeader>
           <TableColumn>Gambar</TableColumn>
-          <TableColumn>Deskripsi</TableColumn>
+          <TableColumn>Judul</TableColumn>
         </TableHeader>
         <TableBody>
-          {currentData.map((notif) => (
+          {notifications.map((notif) => (
             <TableRow
-              key={notif.id}
+              key={notif._id}
               style={{
-                backgroundColor: notif.read ? "#e2e8f0" : "white",
+                backgroundColor: notif.is_read ? "white" : "#f5f5f5",
+                cursor: "pointer",
+                borderBottom: "5px solid transparent",
+                borderRadius: "10px",
               }}
+              onClick={() => handleClickNotif(notif)}
             >
               <TableCell>
                 <img
-                  src={notif.image}
+                  src={
+                    notif.claim?.images?.[0] ||
+                    notif.item?.images?.[0] ||
+                    (notif.comment ? newComment : "")
+                  }
                   alt="Gambar Notifikasi"
                   style={{ width: 50, height: 50 }}
                   className="rounded-lg"
                 />
               </TableCell>
-              <TableCell>{notif.description}</TableCell>
+              <TableCell>{notif.title}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
       <div className="flex justify-center mt-4">
-        <Pagination
-          total={totalPages}
-          page={currentPage}
-          onChange={(page) => setCurrentPage(page)}
-          siblings={1}
-          boundaries={1}
+        <PaginationDisplay
+          currentPage={currentPage}
+          totalItems={totalNotif}
+          onPageChange={(page) => setCurrentPage(page)}
+          limit={itemsPerPage}
         />
       </div>
     </div>
