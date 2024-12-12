@@ -4,7 +4,7 @@ import LogoItemTracker from "../atoms/logo-item-tracker";
 import "./css/footer.css";
 export const Footer = () => {
   return (
-    <footer className="flex relative bottom-0 w-full p-4 bg-primaryBlack md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+    <footer className="flex relative bottom-0 w-full p-4 bg-primaryBlack md:flex md:items-center md:justify-between md:p-6  ">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -19,10 +19,10 @@ export const Footer = () => {
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 text-left pt-4 sm:pt-0">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase ">
                 Tautan Cepat
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500  font-medium">
                 <li className="mb-4">
                   <a href="/" className="hover:underline">
                     Beranda
@@ -46,10 +46,10 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase ">
                 Alat
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500  font-medium">
                 <li className="mb-4">
                   <Link to="/donation" className="hover:underline">
                     Donasi Sekarang
@@ -73,10 +73,10 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold text-white uppercase ">
                 Legal
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
                   <a href="/privacy" className="hover:underline">
                     Kebijakan Privasi
@@ -91,9 +91,9 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="text-sm text-gray-500 sm:text-center ">
             © 2024{" "}
             <a href="/" className="hover:underline">
               ItemTracker™

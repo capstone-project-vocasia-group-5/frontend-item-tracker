@@ -64,7 +64,9 @@ export const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <ButtonBulet isOnClick={() => navigate("/login")} />
+            <div className="hidden md:block">
+              <ButtonBulet isOnClick={() => navigate("/login")} />
+            </div>
           )}
 
           <Hamburger isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
@@ -77,39 +79,71 @@ export const Navbar = () => {
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-primaryGrey dark:border-gray-700">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className={`block py-1 px-2 rounded-full ${isActive("/")}`}
               >
                 Beranda
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/notification"
+              <Link
+                to="/notification"
                 className={`block py-1 px-3 rounded-full ${isActive(
                   "/notification"
                 )}`}
               >
                 Notifikasi
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/lost"
+              <Link
+                to="/lost"
                 className={`block py-1 px-2 rounded-full ${isActive("/lost")}`}
               >
                 Kehilangan
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/found"
+              <Link
+                to="/found"
                 className={`block py-1 px-2 rounded-full ${isActive("/found")}`}
               >
                 Penemuan
-              </a>
+              </Link>
             </li>
+
+            {!user && (
+              <li className="block md:hidden bg-black rounded-full text-white">
+                <Link to="/login" className={`block py-1 px-3 rounded-full`}>
+                  Login
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li className="block md:hidden rounded-full text-white">
+                <Link
+                  to="/profile-side"
+                  className={`block py-1 px-3 rounded-full ${isActive(
+                    "/profil"
+                  )}`}
+                >
+                  Profile
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li className="block md:hidden rounded-full text-white">
+                <Link
+                  to="/login"
+                  className={`block py-1 px-3 rounded-full ${isActive(
+                    "/login"
+                  )}`}
+                >
+                  Keluar
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

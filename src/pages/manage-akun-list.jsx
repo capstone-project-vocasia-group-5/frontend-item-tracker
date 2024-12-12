@@ -1,12 +1,12 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
 import { getAllUsers, deleteUser } from "../api/api";
-import { toast } from 'sonner';
+import { toast } from "sonner";
 
 const ManageAkunList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [accounts, setAccounts] = useState([]);
-  const [alertVisible, setAlertVisible] = useState(false); 
+  const [alertVisible, setAlertVisible] = useState(false);
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -53,13 +53,15 @@ const ManageAkunList = () => {
       setAlertVisible(true);
     } catch (error) {
       console.error("Gagal menghapus pengguna:", error);
-      toast.error(`Terjadi kesalahan saat menghapus pengguna: ${error.message}`);
+      toast.error(
+        `Terjadi kesalahan saat menghapus pengguna: ${error.message}`
+      );
     }
   };
 
   return (
     <div>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen w-full flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 mb-6 flex justify-between">
             <h1 className="text-xl font-bold">Manajemen Akun Pengguna</h1>
@@ -67,7 +69,10 @@ const ManageAkunList = () => {
 
           <div className="bg-white shadow-md rounded-md overflow-hidden">
             {/* Search Bar */}
-            <form onSubmit={(e) => e.preventDefault()} className="max-w-lg mx-auto mt-10">
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="max-w-lg mx-auto mt-10"
+            >
               <div className="p-5">
                 <div className="flex border rounded-md">
                   {/* Input */}
@@ -108,11 +113,21 @@ const ManageAkunList = () => {
               <table className="w-full bg-white">
                 <thead className="bg-black text-white rounded-t-lg">
                   <tr>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">Nama</th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">Email</th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">Role</th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">No. Telepon</th>
-                    <th className="px-4 py-4 text-center text-sm sm:px-8">Aksi</th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">
+                      Nama
+                    </th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">
+                      Email
+                    </th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">
+                      Role
+                    </th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">
+                      No. Telepon
+                    </th>
+                    <th className="px-4 py-4 text-center text-sm sm:px-8">
+                      Aksi
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500 text-center">
@@ -121,10 +136,12 @@ const ManageAkunList = () => {
                       <td className="px-4 py-4 sm:px-8">{account.name}</td>
                       <td className="px-4 py-4 sm:px-8">{account.email}</td>
                       <td className="px-4 py-4 sm:px-8">{account.role}</td>
-                      <td className="px-4 py-4 sm:px-8">{account.phone_number}</td>
+                      <td className="px-4 py-4 sm:px-8">
+                        {account.phone_number}
+                      </td>
                       <td className="px-4 py-4 sm:px-8 space-x-2 flex justify-center items-center">
                         <button
-                          onClick={() => handleDeleteUser(account.id)} 
+                          onClick={() => handleDeleteUser(account.id)}
                           className="p-1 bg-red-500 text-white rounded hover:bg-red-600"
                         >
                           <svg

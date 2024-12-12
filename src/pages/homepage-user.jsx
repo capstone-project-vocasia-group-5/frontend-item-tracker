@@ -44,9 +44,9 @@ const Homepage = () => {
 
         {/* Lost Section */}
         <div id="LostSection">
-          <h1 className="pt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+          <h1 className="pt-10 mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl">
             Temukan dan Laporkan{" "}
-            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
+            <span className="underline underline-offset-3 decoration-8 decoration-blue-600">
               Barang Anda !
             </span>
           </h1>
@@ -56,37 +56,40 @@ const Homepage = () => {
 
         {/* Found Section */}
         <div id="FoundSection" className="pb-10">
-          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
-            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
+          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl ">
+            <span className="underline underline-offset-3 decoration-8 decoration-blue-600">
               Barang Temuan{" "}
             </span>
           </h1>
           <FoundList params={{ ...searchParams, type: "found" }} />
         </div>
         <Separator />
+      </main>
 
-        {/* Flow Section */}
-        <div id="FlowSection" className="bg-gray-200 pb-10">
-          <h1 className="pt-10 mb-4 text-2xl text-left lg:text-center px-10 font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
-            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
-              Panduan Penggunaan{" "}
-            </span>
-          </h1>
+      {/* Flow Section */}
+      <div id="FlowSection" className="bg-gray-200 pb-10">
+        <h1 className="pt-10 mb-4 text-2xl text-left lg:text-center px-10 font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl ">
+          <span className="underline underline-offset-3 decoration-8 decoration-blue-600">
+            Panduan Penggunaan{" "}
+          </span>
+        </h1>
+        <div className="max-w-screen-xl mx-auto">
           <FlowSection />
         </div>
-        <Separator />
+      </div>
+      <Separator />
 
-        {/* 10 Fitur Utama */}
-        <div id="fiturUtama" className="max-w-screen-xl mx-auto">
-          <h1 className="mt-12 mb-10 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
-            10{" "}
-            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">
-              Fitur Utama
-            </span>{" "}
-          </h1>
-          <FiturUtama />
-        </div>
-      </main>
+      {/* 10 Fitur Utama */}
+      <div id="fiturUtama" className="max-w-screen-xl mx-auto">
+        <h1 className="mt-12 mb-10 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl">
+          10{" "}
+          <span className="underline underline-offset-3 decoration-8 decoration-blue-600">
+            Fitur Utama
+          </span>{" "}
+        </h1>
+        <FiturUtama />
+      </div>
+
       {/* Footer */}
       <Footer />
     </div>

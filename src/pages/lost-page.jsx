@@ -33,7 +33,7 @@ const LostPage = () => {
 
       <main className="max-w-screen-xl min-h-screen mx-auto">
         <div id="LostSection">
-          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl ">
             Barang Hilang
           </h1>
 
