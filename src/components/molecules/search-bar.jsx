@@ -248,7 +248,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         onChange={handleProvinceChange}
                         className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
                       >
-                        <option value="test">Pilih Provinsi</option>
+                        <option value="">Pilih Provinsi</option>
                         {provinces.map((prov) => (
                           <option
                             key={prov.id}

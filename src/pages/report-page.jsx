@@ -14,31 +14,117 @@ import {
 } from "@/components/ui/select";
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
+import { getAllCategories, createReport } from "../api/api";
+import { toast } from "sonner";
+import Preloader from "../components/templates/preloader/preloader";
+
+const reportTypes = [
+  { value: "lost", label: "Kehilangan Barang" },
+  { value: "found", label: "Penemuan Barang" },
+];
 
 const ReportPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("+62");
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [villages, setVillages] = useState([]);
+  const [postalCode, setPostalCode] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedVillage, setSelectedVillage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [reportType, setReportType] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [inputCategories, setInputCategories] = useState("");
+  const [cityID, setCityID] = useState("");
+  const [districtID, setDistrictID] = useState("");
+  const [description, setDescription] = useState("");
+  const [inputFiles, setInputFiles] = useState([]);
+
   const navigate = useNavigate();
+
+  const handleClickUpload = async () => {
+    setIsLoading(true);
+    try {
+      if (!name || !description || !inputFiles || !reportType) {
+        toast.error("Semua kolom harus diisi");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("type", reportType);
+      formData.append("province", selectedProvince);
+      formData.append("city", selectedCity);
+      formData.append("subdistrict", selectedDistrict);
+      formData.append("village", selectedVillage);
+      formData.append("postal_code", postalCode);
+      formData.append("phone_number", phoneNumber);
+      formData.append("categories", inputCategories);
+
+      inputFiles.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      const response = await createReport(formData);
+
+      if (response.status === 201) {
+        toast.success(response?.data?.message);
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data?.errors || "Terjadi kesalahan");
+      } else {
+        toast.error("Terjadi kesalahan");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllCategories();
+        setCategories(response.data.data.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files).filter((file) => {
       if (file.size > 10 * 1024 * 1024) {
-        alert(`File ${file.name} melebihi batas ukuran maksimal 10 MB.`);
+        toast.error("Ukuran file tidak boleh lebih dari 10 MB");
         return false;
       }
       return true;
     });
 
     if (files.length + newFiles.length > 5) {
-      alert("Maksimal hanya dapat mengunggah 5 file.");
+      toast.error("Maksimal 5 gambar");
       return;
     }
+
+    setInputFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
     const newFileURLs = newFiles.map((file) => URL.createObjectURL(file));
     setFiles((prevFiles) => [...prevFiles, ...newFileURLs]);
     if (!selectedImage && newFileURLs.length > 0) {
       setSelectedImage(newFileURLs[0]);
+    }
+
+    if (!selectedImage && newFiles.length > 0) {
+      setSelectedImage(URL.createObjectURL(newFiles[0]));
     }
   };
 
@@ -74,38 +160,23 @@ const ReportPage = () => {
       setPhoneNumber(value);
     }
   };
-  const [provinces, setProvinces] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [districts, setDistricts] = useState([]);
-  const [villages, setVillages] = useState([]);
-  const [postalCode, setPostalCode] = useState("");
-  const [selectedProvince, setSelectedProvince] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedVillage, setSelectedVillage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(
-          "https://alamat.thecloudalert.com/api/provinsi/get/"
-        );
-        setProvinces(response.data.result);
-      } catch (error) {
-        console.error("Error fetching provinces:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchProvinces();
   }, []);
 
-  // Fetch cities based on selected province
+  const fetchProvinces = async () => {
+    try {
+      const response = await axios.get(
+        "https://alamat.thecloudalert.com/api/provinsi/get/"
+      );
+      setProvinces(response.data.result);
+    } catch (error) {
+      console.error("Error fetching provinces:", error);
+    }
+  };
+
   const fetchCities = async (provinceId) => {
-    setIsLoading(true);
     try {
       const response = await axios.get(
         `https://alamat.thecloudalert.com/api/kabkota/get/?d_provinsi_id=${provinceId}`
@@ -113,14 +184,10 @@ const ReportPage = () => {
       setCities(response.data.result);
     } catch (error) {
       console.error("Error fetching cities:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  // Fetch districts based on selected city
   const fetchDistricts = async (cityId) => {
-    setIsLoading(true);
     try {
       const response = await axios.get(
         `https://alamat.thecloudalert.com/api/kecamatan/get/?d_kabkota_id=${cityId}`
@@ -128,8 +195,6 @@ const ReportPage = () => {
       setDistricts(response.data.result);
     } catch (error) {
       console.error("Error fetching districts:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -144,12 +209,12 @@ const ReportPage = () => {
     }
   };
 
-  // Fetch postal code based on selected city and district
   const fetchZipCodes = async (cityId, districtId) => {
     try {
       const response = await axios.get(
         `https://alamat.thecloudalert.com/api/kodepos/get/?d_kabkota_id=${cityId}&d_kecamatan_id=${districtId}`
       );
+
       if (response.data.result.length > 0) {
         setPostalCode(response.data.result[0].text);
       } else {
@@ -160,10 +225,11 @@ const ReportPage = () => {
     }
   };
 
-  // Handle province change
   const handleProvinceChange = (e) => {
-    const provinceId = e.target.value;
-    setSelectedProvince(provinceId);
+    const provinceText = e.target.value;
+    const provinceId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-id");
+    setSelectedProvince(provinceText);
     setSelectedCity("");
     setSelectedDistrict("");
     setSelectedVillage("");
@@ -171,31 +237,34 @@ const ReportPage = () => {
     if (provinceId) fetchCities(provinceId);
   };
 
-  // Handle city change
   const handleCityChange = (e) => {
-    const cityId = e.target.value;
-    setSelectedCity(cityId);
+    const cityText = e.target.value;
+    const cityId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-id");
+
+    setCityID(cityId);
+    setSelectedCity(cityText);
     setSelectedDistrict("");
     setSelectedVillage("");
     setPostalCode("");
     if (cityId) fetchDistricts(cityId);
   };
 
-  // Handle district change
   const handleDistrictChange = (e) => {
-    const districtId = e.target.value;
-    setSelectedDistrict(districtId);
+    const districtText = e.target.value;
+    const districtId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-id");
+    setSelectedDistrict(districtText);
     setSelectedVillage("");
     setPostalCode("");
+    setDistrictID(districtId);
     if (districtId) fetchVillages(districtId);
   };
 
-  // Handle village change
   const handleVillageChange = (e) => {
-    const districtId = selectedDistrict;
-    const cityId = selectedCity;
-    setSelectedVillage(e.target.value);
-    fetchZipCodes(cityId, districtId);
+    const villageText = e.target.value;
+    setSelectedVillage(villageText);
+    fetchZipCodes(cityID, districtID);
   };
 
   const handleClickBack = () => {
@@ -204,6 +273,7 @@ const ReportPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen ">
+      {isLoading && <Preloader />}
       <Navbar />
 
       {/* Content */}
@@ -306,6 +376,8 @@ const ReportPage = () => {
                 id="itemName"
                 placeholder="Masukkan nama barang"
                 className="w-full h-12"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="text-left">
@@ -315,13 +387,16 @@ const ReportPage = () => {
               >
                 Jenis Laporan
               </label>
-              <Select>
+              <Select onValueChange={(value) => setReportType(value)}>
                 <SelectTrigger id="category" className="w-full h-12">
                   <SelectValue placeholder="Pilih Jenis Laporan" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="elektronik">Penemuan Barang</SelectItem>
-                  <SelectItem value="pakaian">Kehilangan Barang</SelectItem>
+                  {reportTypes.map((reportType) => (
+                    <SelectItem key={reportType.value} value={reportType.value}>
+                      {reportType.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -332,14 +407,16 @@ const ReportPage = () => {
               >
                 Kategori
               </label>
-              <Select>
+              <Select onValueChange={(value) => setInputCategories(value)}>
                 <SelectTrigger id="category" className="w-full h-12">
                   <SelectValue placeholder="Pilih kategori" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="elektronik">Elektronik</SelectItem>
-                  <SelectItem value="pakaian">Pakaian</SelectItem>
-                  <SelectItem value="lainnya">Lainnya</SelectItem>
+                  {categories.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -375,7 +452,7 @@ const ReportPage = () => {
                 >
                   <option value="">Pilih Provinsi</option>
                   {provinces.map((prov) => (
-                    <option key={prov.id} value={prov.id}>
+                    <option key={prov.id} value={prov.text} data-id={prov.id}>
                       {prov.text}
                     </option>
                   ))}
@@ -399,11 +476,7 @@ const ReportPage = () => {
                     Pilih Kota/Kabupaten
                   </option>
                   {cities.map((city) => (
-                    <option
-                      className="block text-sm  mb-2 ml-2"
-                      key={city.id}
-                      value={city.id}
-                    >
+                    <option key={city.id} value={city.text} data-id={city.id}>
                       {city.text}
                     </option>
                   ))}
@@ -425,7 +498,11 @@ const ReportPage = () => {
                 >
                   <option value="">Pilih Kecamatan</option>
                   {districts.map((district) => (
-                    <option key={district.id} value={district.id}>
+                    <option
+                      key={district.id}
+                      value={district.text}
+                      data-id={district.id}
+                    >
                       {district.text}
                     </option>
                   ))}
@@ -447,7 +524,11 @@ const ReportPage = () => {
                 >
                   <option value="">Pilih Kelurahan</option>
                   {villages.map((village) => (
-                    <option key={village.id} value={village.id}>
+                    <option
+                      key={village.id}
+                      value={village.text}
+                      data-id={village.id}
+                    >
                       {village.text}
                     </option>
                   ))}
@@ -481,12 +562,17 @@ const ReportPage = () => {
               id="description"
               placeholder="Masukkan deskripsi barang"
               className="w-full h-64"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
         </div>
         {/* Upload Button */}
         <div className="mt-6 flex justify-center">
-          <Button className="bg-black text-white w-full sm:w-[1025px] h-12">
+          <Button
+            onClick={handleClickUpload}
+            className="bg-black text-white w-full sm:w-[1025px] h-12"
+          >
             Upload
           </Button>
         </div>

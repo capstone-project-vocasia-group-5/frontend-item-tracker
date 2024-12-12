@@ -80,3 +80,6 @@ export const setNotificationIsRead = (id) => api.put(`/notifications/${id}`);
 export const getNotificationByAdmin = () => api.get("/admin/notifications");
 export const setAllNotificationIsRead = () =>
   api.put("/notifications/all/set-read");
+
+// reports
+export const createReport = (data) => api.post("/items", data);
