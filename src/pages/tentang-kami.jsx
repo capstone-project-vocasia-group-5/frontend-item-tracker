@@ -14,7 +14,7 @@ const TentangKami = () => {
       instagram: "https://www.instagram.com/agusheryanto182/",
       linkedin: "https://www.linkedin.com/in/agus-heryanto-b34561284/",
       photo:
-        "https://res.cloudinary.com/dpb2qk5lf/image/upload/v1733998869/Logo/bqtp1lkuteqengil7see.png",
+        "https://s3-alpha-sig.figma.com/img/5e24/f81d/b91f5061028f4737046bbc134c9800f1?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=pi94nsqa8agSGni25UMo97At-sRD1-58KYgbd33lUEdzvv5X5izHHeJEyD-w~tARTmqOHX2CTBcRNyUohVvBYdoodwa3fYYZEqJa8WDBUedcIttItxJSBj2hDNulFS9PUwrBSTWzP~kzzHzE9qjoViNgd9SbwV-VkqyPSGlsAD~5geCgb~LnRnHfp2u03rLBmw4RwjshJ9z2YG4rgMdKlgCsvpjunyNn6~sJqDT5VyDAHTUvYF0qdGGykatzbh~MxmxJ5BMS8OpBCCljDgssqquD-skE2ksJPgmJPRNDxHRu-s1~M084ndvr-axpzgIW5wrhoOjliU3sbOmvniP9XA__",
     },
     {
       name: `Aisyah Lailia Sari`,
