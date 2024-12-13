@@ -102,7 +102,7 @@ export const Navbar = () => {
               >
                 Notifikasi
               </Link>
-              {totalNotif > 0 && (
+              {totalNotif > 0 && user.role === "user" && (
                 <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {totalNotif > 99 ? "99+" : totalNotif}
                 </span>
