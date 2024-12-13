@@ -42,8 +42,10 @@ export const getTotalItemsByAdmin = () => api.get("/admin/items/total");
 export const getAllOwnItemsByUser = (params) =>
   api.get("/items/own", { params });
 export const getItemById = (id) => api.get(`/items/${id}`);
-export const approveItemByAdmin = (id) => api.patch(`/admin/items/${id}/approval`);
-export const rejectItemByAdmin = (id, messages) => api.patch(`/admin/items/${id}/reject`, messages);
+export const approveItemByAdmin = (id) =>
+  api.patch(`/admin/items/${id}/approval`);
+export const rejectItemByAdmin = (id, messages) =>
+  api.patch(`/admin/items/${id}/reject`, messages);
 export const donator = (data) => api.get("/donations", data);
 
 //category
@@ -84,8 +86,14 @@ export const setAllNotificationIsRead = () =>
 // reports
 export const createReport = (data) => api.post("/items", data);
 
-
+// claims
+export const uploadBuktiPengajuan = (data) =>
+  api.post("/bukti-pengajuan", data);
 
 // claims
-export const uploadBuktiPengajuan = (data) => api.post("/bukti-pengajuan", data);
-
+export const getAllClaimsByUser = (params) => api.get("/claims", { params });
+export const getClaimById = (id) => api.get(`/claims/${id}`);
+export const approveClaimByUser = (id) => api.put(`/claims/${id}/approve`);
+export const rejectClaimByUser = (id, messages) =>
+  api.put(`/claims/${id}/reject`, messages);
+export const deleteClaimByUser = (id) => api.put(`/claims/${id}/delete`);
