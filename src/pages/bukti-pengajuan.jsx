@@ -92,12 +92,28 @@ const BuktiPengajuan = () => {
   }, []);
 
   const handleSubmit = async () => {
+    // Validasi minimal satu gambar terunggah
+    if (!files.some((file) => file !== null)) {
+      setNotification("Harap unggah minimal satu gambar.");
+      setNotificationType("error");
+      setTimeout(() => setNotification(""), 3000);
+      return;
+    }
+  
+    // Validasi deskripsi wajib diisi
+    if (description.trim() === "") {
+      setNotification("Deskripsi wajib diisi.");
+      setNotificationType("error");
+      setTimeout(() => setNotification(""), 3000);
+      return;
+    }
+  
     const formData = new FormData();
     files.forEach((file, index) => {
       if (file) formData.append(`files[${index}]`, file);
     });
     formData.append("description", description);
-
+  
     setIsSubmitting(true);
     try {
       await uploadBuktiPengajuan(formData);
@@ -105,7 +121,7 @@ const BuktiPengajuan = () => {
       setNotificationType("success");
       setFiles([null, null, null, null]);
       setDescription("");
-
+  
       setIsModalOpen(true);
     } catch (error) {
       setNotification("Terjadi kesalahan saat mengunggah bukti pengajuan.");
@@ -115,6 +131,7 @@ const BuktiPengajuan = () => {
       setTimeout(() => setNotification(""), 3000);
     }
   };
+  
 
   const handleBack = () => {
     navigate(-1); 
