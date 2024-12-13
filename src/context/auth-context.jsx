@@ -20,11 +20,9 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => !!Cookies.get("token")
-  );
   const [user, setUser] = useState(null);
   const [currToken, setCurrToken] = useState(Cookies.get("token") || null);
+  const isAuthenticated = !!currToken;
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -59,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (currToken) {
-      Cookies.set("token", currToken);
+      Cookies.set("token", currToken, { secure: true, sameSite: "Strict" });
     } else {
       Cookies.remove("token");
     }
@@ -67,13 +65,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     setCurrToken(token);
-    setIsAuthenticated(true);
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
     setCurrToken(null);
     setUser(null);
+    setIsLoading(false);
     Cookies.remove("token");
   };
 

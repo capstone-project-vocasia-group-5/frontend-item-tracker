@@ -30,7 +30,6 @@ function SendOTP() {
       toast.success(response.data.message);
       navigate("/verifikasi-otp");
     } catch (error) {
-      console.log("error", error);
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
       } else {

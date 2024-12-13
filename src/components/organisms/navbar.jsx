@@ -8,6 +8,7 @@ import "./css/navbar.css";
 import { useAuth } from "../../context/auth-context";
 import { Link } from "react-router-dom";
 import BeatLoader from "react-spinners/BeatLoader";
+import { useNotif } from "../../context/notif-context";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +16,13 @@ export const Navbar = () => {
   const location = useLocation();
   const [isBeatLoaderVisible, setIsBeatLoaderVisible] = useState(true);
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const { totalNotif } = useNotif();
+
+  const handleClickLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,7 +93,7 @@ export const Navbar = () => {
                 Beranda
               </Link>
             </li>
-            <li>
+            <li className="relative">
               <Link
                 to="/notification"
                 className={`block py-1 px-3 rounded-full ${isActive(
@@ -95,6 +102,11 @@ export const Navbar = () => {
               >
                 Notifikasi
               </Link>
+              {totalNotif > 0 && (
+                <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {totalNotif > 99 ? "99+" : totalNotif}
+                </span>
+              )}
             </li>
             <li>
               <Link
@@ -114,16 +126,26 @@ export const Navbar = () => {
             </li>
 
             {!user && (
-              <li className="block md:hidden bg-black rounded-full text-white">
-                <Link to="/login" className={`block py-1 px-3 rounded-full`}>
-                  Login
-                </Link>
-              </li>
+              <>
+                <li className="block mt-2 md:hidden bg-black rounded-full text-white">
+                  <Link to="/login" className={`block py-1 px-3 rounded-full`}>
+                    <span className="text-white ">Masuk</span>
+                  </Link>
+                </li>
+                <li className="block mt-2 md:hidden bg-black rounded-full text-white">
+                  <Link
+                    to="/register"
+                    className={`block py-1 px-3 rounded-full`}
+                  >
+                    <span className="text-white ">Daftar</span>
+                  </Link>
+                </li>
+              </>
             )}
             {user && (
               <li className="block md:hidden rounded-full text-white">
                 <Link
-                  to="/profile-side"
+                  to="/user"
                   className={`block py-1 px-3 rounded-full ${isActive(
                     "/profil"
                   )}`}
@@ -133,15 +155,11 @@ export const Navbar = () => {
               </li>
             )}
             {user && (
-              <li className="block md:hidden rounded-full text-white">
-                <Link
-                  to="/login"
-                  className={`block py-1 px-3 rounded-full ${isActive(
-                    "/login"
-                  )}`}
-                >
-                  Keluar
-                </Link>
+              <li
+                onClick={handleClickLogout}
+                className="block mt-2 md:hidden py-1  cursor-pointer bg-red-600 rounded-full text-white"
+              >
+                <span className="text-white ">Keluar</span>
               </li>
             )}
           </ul>

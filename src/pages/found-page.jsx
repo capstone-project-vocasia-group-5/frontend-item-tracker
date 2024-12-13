@@ -28,10 +28,10 @@ const FoundPage = () => {
   };
 
   return (
-    <div className="">
+    <div>
       <Navbar />
 
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-xl min-h-screen mx-auto">
         <div id="FoundSection">
           <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl ">
             Barang Temuan

@@ -36,103 +36,106 @@ import HomePageAdmin from "./pages/homepage-admin";
 import { AuthProvider } from "./context/auth-context";
 import ProtectedRoute from "./config/protected-route";
 import NotFound from "./pages/not-found";
+import { NotifProvider } from "./context/notif-context";
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/not-found" element={<NotFound />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<TentangKami />} />
-          <Route path="/contact" element={<KontakKami />} />
-          {/* CLIENT Routes */}
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route
-            path="/found"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <FoundPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/lost"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <LostPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/update-profile"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <UpdateProfileUser />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/report"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <ReportPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/donation" element={<DonationForm />} />
-          <Route
-            path="/user"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <ProfileBase />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/terms" element={<SyaratKetentuan />} />
-          <Route path="/privacy" element={<KebijakanPrivasi />} />
-          <Route
-            path="/notification"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <Notifikasi />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/item/detail/:id"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <DetailItem />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/send-otp" element={<SendOTP />} />
-          <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
-          <Route
-            path="/proof-of-submission/:id"
-            element={
-              <ProtectedRoute allowedRoles={["user"]}>
-                <BuktiPengajuan />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/donatur" element={<Donatur />} />
-          <Route path="/thanks" element={<ThankYou />} />
-          {/* ADMIN Routes */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <HomePageAdmin />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/admin/login" element={<LoginAdmin />} />
-        </Routes>
-      </Router>
+      <NotifProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<TentangKami />} />
+            <Route path="/contact" element={<KontakKami />} />
+            {/* CLIENT Routes */}
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route
+              path="/found"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <FoundPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/lost"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <LostPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/update-profile"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <UpdateProfileUser />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <ReportPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/donation" element={<DonationForm />} />
+            <Route
+              path="/user"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <ProfileBase />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/terms" element={<SyaratKetentuan />} />
+            <Route path="/privacy" element={<KebijakanPrivasi />} />
+            <Route
+              path="/notification"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <Notifikasi />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/item/detail/:id"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <DetailItem />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/send-otp" element={<SendOTP />} />
+            <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
+            <Route
+              path="/proof-of-submission/:id"
+              element={
+                <ProtectedRoute allowedRoles={["user"]}>
+                  <BuktiPengajuan />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/donatur" element={<Donatur />} />
+            <Route path="/thanks" element={<ThankYou />} />
+            {/* ADMIN Routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <HomePageAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/admin/login" element={<LoginAdmin />} />
+          </Routes>
+        </Router>
+      </NotifProvider>
     </AuthProvider>
   );
 }

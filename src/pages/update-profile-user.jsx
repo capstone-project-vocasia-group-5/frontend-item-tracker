@@ -51,8 +51,6 @@ const UpdateProfileUser = () => {
 
     // Menghapus karakter non-digit
     const phoneNumber = formData.phone_number.replace(/\D/g, "");
-    console.log("Nomor telepon yang akan dikirim:", phoneNumber); // Log nomor telepon
-    console.log("Panjang nomor telepon:", phoneNumber.length); // Log panjang nomor telepon
 
     // Coba kirim nomor telepon tanpa angka nol di depan
     const formattedPhoneNumber = phoneNumber.startsWith("0")
