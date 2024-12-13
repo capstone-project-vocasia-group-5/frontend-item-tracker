@@ -1,7 +1,6 @@
 import React from "react";
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
-import { Button } from "../components/ui/button.jsx";
 import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
 import KamiCard from "../components/molecules/kami-card.jsx";
 
@@ -68,10 +67,10 @@ const TentangKami = () => {
               <LogoItemTracker className={`text-blue-500 text-4xl`} />
             </h1>
             <p className="text-lg leading-relaxed mb-6">
-              itemTrack adalah solusi digital yang membantu Anda melacak barang
-              hilang dengan mudah. Misi kami adalah memberikan platform inovatif
-              untuk memastikan barang Anda dapat ditemukan dengan cepat dan
-              efisien.
+              Item Tracker adalah solusi digital yang membantu anda melacak
+              barang hilang dengan mudah. Misi kami adalah memberikan platform
+              inovatif untuk memastikan barang anda dapat ditemukan dengan cepat
+              dan efisien.
             </p>
           </div>
         </div>

@@ -31,8 +31,6 @@ function LoginAdmin() {
       const token = response.data.data.token;
       login(token);
       toast.success(response.data?.message || "Login berhasil");
-
-      navigate("/admin");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
@@ -41,6 +39,9 @@ function LoginAdmin() {
       }
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1000);
     }
   };
 
