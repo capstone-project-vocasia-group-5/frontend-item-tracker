@@ -33,7 +33,6 @@ import ManageLaporanAdmin from "./pages/manage-laporan-for-admin";
 import TentangKami from "./pages/tentang-kami";
 import KontakKami from "./pages/kontak-kami";
 import HomePageAdmin from "./pages/homepage-admin";
-
 import { AuthProvider } from "./context/auth-context";
 import ProtectedRoute from "./config/protected-route";
 import NotFound from "./pages/not-found";
@@ -113,7 +112,7 @@ function App() {
           <Route path="/send-otp" element={<SendOTP />} />
           <Route path="/verifikasi-otp" element={<VerifikasiOTP />} />
           <Route
-            path="/proof-of-submission"
+            path="/proof-of-submission/:id"
             element={
               <ProtectedRoute>
                 <BuktiPengajuan />

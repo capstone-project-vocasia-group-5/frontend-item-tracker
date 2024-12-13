@@ -3,9 +3,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
-import { uploadBuktiPengajuan } from "../api/api";
+import { createClaims } from "../api/api";
 import imageCompression from "browser-image-compression"; 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, useParams } from "react-router-dom"; 
 
 const FileUpload = React.memo(({ file, index, onFileChange, onRemoveImage }) => {
   return (
@@ -48,6 +48,7 @@ const BuktiPengajuan = () => {
   const [notificationType, setNotificationType] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const navigate = useNavigate();
+  const { id } = useParams(); 
 
   const handleFileChange = useCallback(async (event, index) => {
     const file = event.target.files[0];
@@ -109,16 +110,23 @@ const BuktiPengajuan = () => {
     }
   
     const formData = new FormData();
-    files.forEach((file, index) => {
-      if (file) formData.append(`files[${index}]`, file);
+  
+    formData.append("item_id", id);
+    formData.append("claim_text", description);
+
+    files.forEach((file) => {
+      if (file) {
+        formData.append("images", file); 
+      }
     });
-    formData.append("description", description);
   
     setIsSubmitting(true);
     try {
-      await uploadBuktiPengajuan(formData);
+      const response = await createClaims(formData);
       setNotification("Bukti pengajuan berhasil diunggah!");
       setNotificationType("success");
+  
+      // Reset form setelah berhasil
       setFiles([null, null, null, null]);
       setDescription("");
   
@@ -132,7 +140,6 @@ const BuktiPengajuan = () => {
     }
   };
   
-
   const handleBack = () => {
     navigate(-1); 
   };
@@ -196,7 +203,7 @@ const BuktiPengajuan = () => {
 
         {/* Deskripsi */}
         <div className="mt-6 flex justify-center">
-          <div className="text-left w-full sm:w-[910px] w-[345px]">
+          <div className="text-left w-full sm:w-[910px] w-[340px]">
             <label htmlFor="description" className="block text-sm font-medium mb-2 ml-2">
               Deskripsi
             </label>
@@ -213,7 +220,7 @@ const BuktiPengajuan = () => {
         {/* Kirim Button */}
         <div className="mt-6 flex justify-center">
           <Button
-            className="bg-black text-white w-full sm:w-[910px] w-[345px] h-12"
+            className="bg-black text-white w-full sm:w-[910px] w-[340px] h-12"
             onClick={handleSubmit}
             disabled={isSubmitting}
           >
