@@ -203,7 +203,7 @@ const BuktiPengajuan = () => {
 
         {/* Deskripsi */}
         <div className="mt-6 flex justify-center">
-          <div className="text-left w-full sm:w-[910px] w-[340px]">
+          <div className="text-left md:w-[910px] w-[340px]">
             <label htmlFor="description" className="block text-sm font-medium mb-2 ml-2">
               Deskripsi
             </label>
@@ -220,7 +220,7 @@ const BuktiPengajuan = () => {
         {/* Kirim Button */}
         <div className="mt-6 flex justify-center">
           <Button
-            className="bg-black text-white w-full sm:w-[910px] w-[340px] h-12"
+            className="bg-black text-white md:w-[910px] w-[340px] h-12"
             onClick={handleSubmit}
             disabled={isSubmitting}
           >
