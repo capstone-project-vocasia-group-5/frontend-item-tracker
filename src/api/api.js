@@ -33,6 +33,8 @@ export const getDonations = (data) => api.get("/donations", data);
 // items management
 export const createItem = (data) => api.post("/items", data);
 export const updateItem = (id, data) => api.patch(`/items/${id}`, data);
+export const updateMatchedStatus = (id) =>
+  api.patch(`/items/${id}`, { matched_status: true });
 export const deleteItemByUser = (id) => api.delete(`/items/${id}`);
 export const deleteItemByAdmin = (id) => api.delete(`/admin/items/${id}`);
 export const getAllItemsByUser = (params) => api.get("/items", { params });
@@ -40,7 +42,7 @@ export const getAllItemsByAdmin = (params) =>
   api.get("/admin/items", { params });
 export const getTotalItemsByAdmin = () => api.get("/admin/items/total");
 export const getAllOwnItemsByUser = (params) =>
-  api.get("/items/own", { params });
+  api.get("/items/user", { params });
 export const getItemById = (id) => api.get(`/items/${id}`);
 export const approveItemByAdmin = (id) =>
   api.patch(`/admin/items/${id}/approval`);
@@ -63,6 +65,7 @@ export const getTotalAmountDonations = (data) =>
 
 //user-account
 export const getUser = () => api.get("/users");
+export const updateUsers = (data) => api.patch(`/users`, data);
 export const getAllUsers = (data) => api.get("/admin/users", data);
 export const deleteUser = (id) => api.delete(`/admin/users/${id}`, data);
 
