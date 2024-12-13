@@ -10,6 +10,7 @@ const Notifikasi = () => {
       const response = await setAllNotificationIsRead();
       if (response.status === 200) {
         toast.success("Semua notifikasi telah dibaca");
+        window.location.reload();
       }
     } catch (error) {
       if (error.response) {
