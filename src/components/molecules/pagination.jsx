@@ -13,6 +13,7 @@ export function PaginationDisplay({
   totalItems,
   onPageChange,
   limit,
+  className,
 }) {
   const totalPages = Math.ceil(totalItems / limit);
 
@@ -30,7 +31,6 @@ export function PaginationDisplay({
       pages.push(
         <PaginationItem key={i}>
           <PaginationLink
-            href="#"
             isActive={i === currentPage}
             onClick={(e) => {
               e.preventDefault();
@@ -46,18 +46,18 @@ export function PaginationDisplay({
   };
 
   return (
-    <div className="mb-10">
+    <div className={`mb-10 ${className}`}>
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href="#" onClick={goToPreviousPage} />
+            <PaginationPrevious onClick={goToPreviousPage} />
           </PaginationItem>
           {renderPageNumbers()}
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
           <PaginationItem>
-            <PaginationNext href="#" onClick={goToNextPage} />
+            <PaginationNext onClick={goToNextPage} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
