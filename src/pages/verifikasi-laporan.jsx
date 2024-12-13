@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getAllItemsByAdmin, rejectItemByAdmin, approveItemByAdmin } from "../api/api";
+import {
+  getAllItemsByAdmin,
+  rejectItemByAdmin,
+  approveItemByAdmin,
+} from "../api/api";
 import { toast } from "sonner";
 import Popup from "../components/molecules/Popup";
 
@@ -18,7 +22,6 @@ const VerifikasiLaporan = () => {
       try {
         const response = await getAllItemsByAdmin({ approved: false });
         setItems(response.data.data.items);
-        console.log(response);
       } catch (error) {
         toast.error("Error fetching data: ", error);
       } finally {
@@ -27,7 +30,6 @@ const VerifikasiLaporan = () => {
     };
     fetchItems();
   }, []);
-  
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -35,11 +37,10 @@ const VerifikasiLaporan = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Searching for:", searchQuery);
   };
 
-  const filteredData = items.filter(
-    (item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+  const filteredData = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleResize = () => {
@@ -79,17 +80,17 @@ const VerifikasiLaporan = () => {
     try {
       const response = await approveItemByAdmin(itemId);
       if (response?.status === 200) {
-        const updatedItems = items.filter(item => item._id !== itemId);
+        const updatedItems = items.filter((item) => item._id !== itemId);
         setItems(updatedItems);
         toast.success("Laporan berhasil disetujui.");
       } else {
         toast.error("Gagal menyetujui laporan.");
       }
-    } catch (error) {  
+    } catch (error) {
       console.error("Error while approving item:", error);
       toast.error("Terjadi kesalahan saat menyetujui laporan.");
     }
-  };  
+  };
 
   const handleReject = async () => {
     if (!rejectMessage.trim()) {
@@ -98,9 +99,13 @@ const VerifikasiLaporan = () => {
     }
 
     try {
-      const response = await rejectItemByAdmin(selectedItem._id, { messages: rejectMessage });
+      const response = await rejectItemByAdmin(selectedItem._id, {
+        messages: rejectMessage,
+      });
       if (response?.status === 200) {
-        const updatedItems = items.filter(item => item._id !== selectedItem._id);
+        const updatedItems = items.filter(
+          (item) => item._id !== selectedItem._id
+        );
         setItems(updatedItems);
         toast.success("Laporan berhasil ditolak.");
         setOpenRejectPopup(false);
@@ -196,9 +201,13 @@ const VerifikasiLaporan = () => {
                               />
                             </div>
                             <div>
-                              <h3 className="text-lg font-semibold">{item.name}</h3>
+                              <h3 className="text-lg font-semibold">
+                                {item.name}
+                              </h3>
                               <p className="text-sm text-gray-500">
-                                {item.categories.map((category) => category.name).join(", ")}
+                                {item.categories
+                                  .map((category) => category.name)
+                                  .join(", ")}
                               </p>
                             </div>
                           </div>
@@ -240,10 +249,10 @@ const VerifikasiLaporan = () => {
                                 />
                               </svg>
                             </button>
-                            <button 
-                              onClick={(e) => 
-                                handleOpenRejectPopup(item)}
-                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
+                            <button
+                              onClick={(e) => handleOpenRejectPopup(item)}
+                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center"
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
@@ -262,111 +271,117 @@ const VerifikasiLaporan = () => {
                       </div>
                     ))
                   ) : (
-                    <p className="text-center text-gray-500">Tidak ada data ditemukan</p>
+                    <p className="text-center text-gray-500">
+                      Tidak ada data ditemukan
+                    </p>
                   )}
                 </div>
               ) : (
                 <table className="w-full border-collapse">
                   <thead className="bg-black text-white">
-                      <tr>
-                        <th className="p-4 text-center">Gambar</th>
-                        <th className="p-4 text-center">Nama Barang</th>
-                        <th className="p-4 text-center">Kategori</th>
-                        <th className="p-4 text-center">Status</th>
-                        <th className="p-4 text-center">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {filteredData.length > 0 ? (
-                        filteredData.map((item) => (
-                          <tr key={item._id} className="hover:bg-gray-50">
-                            <td className="p-4">
-                              <div className="flex justify-center items-center">
-                                <div className="w-20 h-20 bg-gray-300 rounded flex justify-center items-center overflow-hidden">
-                                  <img
-                                    src={item.images?.[0] || "default-image-url"}
-                                    alt={item.name || "Default Name"}
-                                    className="object-cover w-full h-full rounded"
-                                  />
-                                </div>
+                    <tr>
+                      <th className="p-4 text-center">Gambar</th>
+                      <th className="p-4 text-center">Nama Barang</th>
+                      <th className="p-4 text-center">Kategori</th>
+                      <th className="p-4 text-center">Status</th>
+                      <th className="p-4 text-center">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {filteredData.length > 0 ? (
+                      filteredData.map((item) => (
+                        <tr key={item._id} className="hover:bg-gray-50">
+                          <td className="p-4">
+                            <div className="flex justify-center items-center">
+                              <div className="w-20 h-20 bg-gray-300 rounded flex justify-center items-center overflow-hidden">
+                                <img
+                                  src={item.images?.[0] || "default-image-url"}
+                                  alt={item.name || "Default Name"}
+                                  className="object-cover w-full h-full rounded"
+                                />
                               </div>
-                            </td>
-                            <td className="p-4 text-center">{item.name}</td>
-                            <td className="p-4 text-center">
-                              {item.categories.map((category) => category.name).join(", ")}
+                            </div>
+                          </td>
+                          <td className="p-4 text-center">{item.name}</td>
+                          <td className="p-4 text-center">
+                            {item.categories
+                              .map((category) => category.name)
+                              .join(", ")}
                           </td>
                           <td className="p-4 text-center">
                             {item.approved ? "Terima" : "Tolak"}
                           </td>
                           <td className="p-4 text-center">
                             <div className="flex justify-center flex-wrap space-x-2 sm:space-x-3">
-                            <button
-                              onClick={() => handleDetail(item)}
-                              className="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition-colorsflex items-center justify-center"
-                              aria-label="Lihat Detail"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="w-5 h-5"
+                              <button
+                                onClick={() => handleDetail(item)}
+                                className="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition-colorsflex items-center justify-center"
+                                aria-label="Lihat Detail"
                               >
-                                <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                                <path
-                                  fillRule="evenodd"
-                                  d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </button>
-                            <button
-                              onClick={() => handleApprove(item._id)}
-                              className="p-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colorsflex items-center justify-center"
-                              aria-label="Terima"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="w-5 h-5"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </button>
-                            <button 
-                              onClick={(e) => 
-                                  handleOpenRejectPopup(item)}
-                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
                                 <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="w-5 h-5"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="w-5 h-5"
+                                >
+                                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                              <button
+                                onClick={() => handleApprove(item._id)}
+                                className="p-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colorsflex items-center justify-center"
+                                aria-label="Terima"
                               >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </button>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="w-5 h-5"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
+                              <button
+                                onClick={(e) => handleOpenRejectPopup(item)}
+                                className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="w-5 h-5"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </button>
                             </div>
                           </td>
                         </tr>
                       ))
                     ) : (
-                        <tr>
-                          <td colSpan="4" className="p-3 text-center text-gray-500">
-                            Tidak ada data ditemukan
-                          </td>
-                        </tr>
+                      <tr>
+                        <td
+                          colSpan="4"
+                          className="p-3 text-center text-gray-500"
+                        >
+                          Tidak ada data ditemukan
+                        </td>
+                      </tr>
                     )}
                   </tbody>
-
                 </table>
               )}
             </div>

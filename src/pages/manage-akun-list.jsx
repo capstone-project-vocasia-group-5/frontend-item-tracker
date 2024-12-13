@@ -11,7 +11,6 @@ const ManageAkunList = () => {
     const fetchAccounts = async () => {
       try {
         const response = await getAllUsers();
-        console.log("Response data:", response);
         const users = response.data?.data?.users || [];
         setAccounts(users);
       } catch (error) {
@@ -66,7 +65,10 @@ const ManageAkunList = () => {
 
           <div className="bg-white shadow-md rounded-md overflow-hidden">
             {/* Search Bar */}
-            <form onSubmit={(e) => e.preventDefault()} className="max-w-lg mx-auto mt-10">
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="max-w-lg mx-auto mt-10"
+            >
               <div className="p-5">
                 <div className="flex border rounded-md">
                   <input
@@ -108,7 +110,9 @@ const ManageAkunList = () => {
                     <th className="px-4 py-4 text-center text-sm">Nama</th>
                     <th className="px-4 py-4 text-center text-sm">Email</th>
                     <th className="px-4 py-4 text-center text-sm">Role</th>
-                    <th className="px-4 py-4 text-center text-sm">No. Telepon</th>
+                    <th className="px-4 py-4 text-center text-sm">
+                      No. Telepon
+                    </th>
                     <th className="px-4 py-4 text-center text-sm">Aksi</th>
                   </tr>
                 </thead>

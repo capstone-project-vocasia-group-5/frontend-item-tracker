@@ -85,7 +85,8 @@ export const setNotificationIsRead = (id) => api.put(`/notifications/${id}`);
 export const getNotificationByAdmin = () => api.get("/admin/notifications");
 export const setAllNotificationIsRead = () =>
   api.put("/notifications/all/set-read");
-
+export const getUnreadNotification = () =>
+  api.get("/notifications/unread/total");
 // reports
 export const createReport = (data) => api.post("/items", data);
 
@@ -103,5 +104,3 @@ export const rejectClaimByUser = (id, messages) =>
 export const deleteClaimByUser = (id) => api.put(`/claims/${id}/delete`);
 
 export const createClaims = (data) => api.post("/claims", data);
-
-

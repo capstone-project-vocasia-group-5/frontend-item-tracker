@@ -6,6 +6,8 @@ import ManageLaporan from "./manage-laporan";
 import UpdateProfileUser from "./update-profile-user";
 import HomePage from "./homepage-user";
 import ManagePengajuan from "./manage-pengajuan";
+import { useAuth } from "../context/auth-context";
+import Preloader from "../components/templates/preloader/preloader";
 
 const menuItems = [
   {
@@ -33,6 +35,7 @@ const menuItems = [
 function ProfileBase() {
   const [activeItem, setActiveItem] = useState(menuItems[0].id);
   const [activeView, setActiveView] = useState("menubar");
+  const { user, isLoading, logout } = useAuth();
   const navigate = useNavigate();
 
   const renderContent = () => {
@@ -42,7 +45,8 @@ function ProfileBase() {
 
   const handleMenuClick = (id, action) => {
     if (action === "logout") {
-      navigate("/");
+      logout();
+      navigate("/login");
     } else {
       setActiveItem(id);
       setActiveView("mainmenu");
@@ -55,7 +59,7 @@ function ProfileBase() {
 
   return (
     <>
-      {/* Navbar */}
+      {isLoading && <Preloader />}
       <Navbar />
 
       <main className="max-w-screen-xl mx-auto">
@@ -71,11 +75,9 @@ function ProfileBase() {
             >
               <div className="p-4 text-center border-gray-300 bg-gray-100 w-full">
                 <h4 className="text-lg font-semibold text-gray-800">
-                  AGUS HERYANTO
+                  {`@${user?.username}`}
                 </h4>
-                <p className="text-sm text-gray-500">
-                  Universitas Amikom Yogyakarta
-                </p>
+                <p className="text-sm text-gray-500">{user?.name}</p>
               </div>
               <ul className="mt-4 space-y-4 p-4 text-center">
                 {menuItems.map((item) => (

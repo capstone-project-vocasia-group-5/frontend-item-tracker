@@ -20,9 +20,9 @@ const Notifikasi = () => {
     }
   };
   return (
-    <div className="">
+    <div>
       <Navbar />
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-xl min-h-screen mx-auto">
         <header className="flex justify-between">
           <h1 className="text-2xl p-4 font-bold">Notifikasi</h1>
           <h1
