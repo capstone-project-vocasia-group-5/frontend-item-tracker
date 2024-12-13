@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { sendOTP } from "../api/api";
+import LogoItemTracker from "../components/atoms/logo-item-tracker";
 
 function SendOTP() {
-  const navigate = useNavigate(); // Inisialisasi navigasi
+  const navigate = useNavigate();
   const [email, setEmail] = useState(localStorage.getItem("email") || "");
   const [loading, setLoading] = useState(false);
 
   const handleClickToLogin = () => {
-    navigate("/login");
+    navigate(-1);
   };
 
   const handleSubmit = async (e) => {
@@ -51,9 +52,7 @@ function SendOTP() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            ItemTrack
-          </h1>
+          <LogoItemTracker />
         </div>
 
         {/* Form */}

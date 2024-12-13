@@ -1,6 +1,7 @@
 ("use admin");
 
 import React from "react";
+import Preloader from "@/components/templates/preloader/preloader";
 import {
   AudioWaveform,
   BookOpen,
@@ -25,12 +26,9 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
+import { useAuth } from "@/context/auth-context";
+
 const data = {
-  user: {
-    name: "Admin",
-    email: "admin@itemtrack.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -61,10 +59,12 @@ const data = {
   ],
 };
 export function AppSidebar({ onMenuClick, ...props }) {
+  const { user, isLoading } = useAuth();
   return (
     <Sidebar className="bg-black text-white" collapsible="icon" {...props}>
+      {isLoading && <Preloader />}
       <SidebarHeader className="bg-black text-white">
-        <NavUser user={data.user} onMenuClick={onMenuClick} />
+        <NavUser user={user} onMenuClick={onMenuClick} />
       </SidebarHeader>
       <SidebarContent className="bg-black text-white">
         <NavMain
