@@ -42,8 +42,8 @@ export const getTotalItemsByAdmin = () => api.get("/admin/items/total");
 export const getAllOwnItemsByUser = (params) =>
   api.get("/items/own", { params });
 export const getItemById = (id) => api.get(`/items/${id}`);
-export const approveItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
-export const rejectItemByAdmin = (id) => api.patch(`/admin/items/${id}`);
+export const approveItemByAdmin = (id) => api.patch(`/admin/items/${id}/approval`);
+export const rejectItemByAdmin = (id, messages) => api.patch(`/admin/items/${id}/reject`, messages);
 export const donator = (data) => api.get("/donations", data);
 
 //category

@@ -146,14 +146,14 @@ const ManageLaporanUser = () => {
             </form>
 
             {/* Table */}
-            <div className="px-4 sm:px-9 overflow-x-auto">
-              <table className="w-full bg-white rounded-md">
+            <div className="px-4 sm:px-9 md:px-7 overflow-x-auto">
+              <table className="w-full bg-white table-fixed rounded-md">
                 <thead className="bg-black text-white">
                   <tr>
-                    <th className="p-4 text-center">Gambar</th>
-                    <th className="p-4 text-center">Nama Barang</th>
-                    <th className="p-4 text-center">Kategori</th>
-                    <th className="p-4 text-center">Aksi</th>
+                    <th className="p-4 text-center w-1/4">Gambar</th>
+                    <th className="p-4 text-center w-1/4">Nama Barang</th>
+                    <th className="p-4 text-center w-1/4">Kategori</th>
+                    <th className="p-4 text-center w-1/4">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500 text-center">
