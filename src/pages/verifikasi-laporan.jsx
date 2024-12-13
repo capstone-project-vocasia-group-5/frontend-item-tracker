@@ -1,38 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
+import { getAllItemsByAdmin, rejectItemByAdmin, approveItemByAdmin } from "../api/api";
+import { toast } from "sonner";
+import Popup from "../components/molecules/Popup";
 
 const VerifikasiLaporan = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [items, setItems] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [openRejectPopup, setOpenRejectPopup] = useState(false);
+  const [rejectMessage, setRejectMessage] = useState("");
   const dropdownRefs = useRef({});
 
-  const [dataLaporan, setDataLaporan] = useState([
-    {
-      id: 1,
-      gambar:
-        "https://s3-alpha-sig.figma.com/img/a3c4/d7a8/8ae3782c58628580e16637eaf8be662f?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Op3W5GV6R~OZ9wecvWsf8QBZWrEWNVXVSHDpgO9THUqsXfIO8sIEQG0HNiJZ7Jja09vrkj-vnKXmruTy1Ba8KYbOIpkNyQHscGBq3O32Yik36oc5WvFMoIgwPm4mW8ONq~ME2I4V2v8FonO6rmnnTSZgfu7d5h0Z53NuQJ-5YPXYnhqdtKDxIbJd6e55bhK4lhGu8To67LQE1elkmGTLZX0ouelD11GbB-Hk1b0SpNcHLPHJdusZZjuoz0DCnSTQXZBxfKWyA2mIKVMVHJ~482I8kghLCeyQCQ4Z1yGV5V15K~3wS0A6of4r5RJSiWVR4-p8fs6Qr0qW4WLMmAlYQQ__",
-      namaBarang: "Kucing",
-      kategori: "Binatang",
-    },
-    {
-      id: 2,
-      gambar: "https://via.placeholder.com/64",
-      namaBarang: "Laptop",
-      kategori: "Elektronik",
-    },
-    {
-      id: 3,
-      gambar: "https://via.placeholder.com/64",
-      namaBarang: "Sepeda",
-      kategori: "Kendaraan",
-    },
-    {
-      id: 4,
-      gambar: "https://via.placeholder.com/64",
-      namaBarang: "Anjing",
-      kategori: "Binatang",
-    },
-  ]);
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await getAllItemsByAdmin({ approved: false });
+        setItems(response.data.data.items);
+        console.log(response);
+      } catch (error) {
+        toast.error("Error fetching data: ", error);
+      } finally {
+        setLoading(false); // Set loading ke false setelah fetch selesai
+      }
+    };
+    fetchItems();
+  }, []);
+  
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -43,10 +38,8 @@ const VerifikasiLaporan = () => {
     console.log("Searching for:", searchQuery);
   };
 
-  const filteredData = dataLaporan.filter(
-    (item) =>
-      item.namaBarang.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.kategori.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = items.filter(
+    (item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()) 
   );
 
   const handleResize = () => {
@@ -61,6 +54,67 @@ const VerifikasiLaporan = () => {
 
   const toggleDropdown = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
+  };
+
+  const handleDetail = (item) => {
+    setSelectedItem(item);
+    setOpenDropdownId(item._id);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedItem(null);
+  };
+
+  const handleOpenRejectPopup = (item) => {
+    setSelectedItem(item);
+    setOpenRejectPopup(true);
+  };
+
+  const handleCloseRejectPopup = () => {
+    setOpenRejectPopup(false);
+    setRejectMessage(""); // Clear message when closing popup
+  };
+
+  const handleApprove = async (itemId) => {
+    try {
+      const response = await approveItemByAdmin(itemId);
+      if (response?.status === 200) {
+        const updatedItems = items.filter(item => item._id !== itemId);
+        setItems(updatedItems);
+        toast.success("Laporan berhasil disetujui.");
+      } else {
+        toast.error("Gagal menyetujui laporan.");
+      }
+    } catch (error) {  
+      console.error("Error while approving item:", error);
+      toast.error("Terjadi kesalahan saat menyetujui laporan.");
+    }
+  };  
+
+  const handleReject = async () => {
+    if (!rejectMessage.trim()) {
+      toast.error("Pesan penolakan diperlukan.");
+      return;
+    }
+
+    try {
+      const response = await rejectItemByAdmin(selectedItem._id, { messages: rejectMessage });
+      if (response?.status === 200) {
+        const updatedItems = items.filter(item => item._id !== selectedItem._id);
+        setItems(updatedItems);
+        toast.success("Laporan berhasil ditolak.");
+        setOpenRejectPopup(false);
+      } else {
+        toast.error("Gagal menolak laporan.");
+      }
+    } catch (error) {
+      console.error("Error while rejecting item:", error);
+      if (error.response && error.response.data && error.response.data.errors) {
+        toast.error(`Error: ${error.response.data.errors}`);
+      } else {
+        toast.error("Terjadi kesalahan saat menolak laporan.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -123,171 +177,236 @@ const VerifikasiLaporan = () => {
             </form>
 
             {/* Responsive Table */}
-            <div className="overflow-x-auto px-4">
-              <table className="w-full border-collapse">
-                <thead className="bg-black text-white">
-                  <tr>
-                    <th className="p-4 text-center">Gambar</th>
-                    <th className="p-4 text-center">Nama Barang</th>
-                    <th className="p-4 text-center">Kategori</th>
-                    <th className="p-4 text-center">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
+            <div className="overflow-x-auto px-2">
+              {isMobile ? (
+                <div className="space-y-2">
                   {filteredData.length > 0 ? (
                     filteredData.map((item) => (
-                      <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="p-4 text-center">
-                          <img
-                            src={item.gambar}
-                            alt={item.namaBarang}
-                            className="object-cover w-16 h-16 rounded"
-                          />
-                        </td>
-                        <td className="p-4 text-center">{item.namaBarang}</td>
-                        <td className="p-4 text-center">{item.kategori}</td>
-                        <td className="p-4 text-center">
-                          {isMobile ? (
-                            <div className="relative">
-                              <button
-                                onClick={() => toggleDropdown(item.id)}
-                                className="p-2 bg-gray-800 text-white rounded-md hover:bg-gray-600"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                  className="w-6 h-6"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </button>
-                              {openDropdownId === item.id && (
-                                <div
-                                  ref={(el) =>
-                                    (dropdownRefs.current[item.id] = el)
-                                  }
-                                  className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
-                                  style={{ top: "-4rem" }}
-                                >
-                                  <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                    Lihat Detail
-                                  </button>
-                                  <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                    Terima
-                                  </button>
-                                  <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
-                                    Tolak
-                                  </button>
-                                </div>
-                              )}
+                      <div
+                        key={item._id}
+                        className="bg-white border border-gray-300 rounded-md p-1 shadow-sm"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                              <img
+                                src={item.images?.[0] || "default-image-url"}
+                                alt={item.name || "Default Name"}
+                                className="w-full h-full object-cover"
+                              />
                             </div>
-                          ) : (
-                            <div className="flex justify-center flex-wrap space-x-2 sm:space-x-3">
-                              <button
-                                className="
-                            p-2 
-                            bg-gray-800 
-                            text-white 
-                            rounded 
-                            hover:bg-gray-600 
-                            transition-colors
-                            flex 
-                            items-center 
-                            justify-center
-                          "
-                                aria-label="Lihat Detail"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                  className="w-5 h-5"
-                                >
-                                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </button>
-                              <button
-                                className="
-                            p-2 
-                            bg-green-500 
-                            text-white 
-                            rounded 
-                            hover:bg-green-600 
-                            transition-colors
-                            flex 
-                            items-center 
-                            justify-center
-                          "
-                                aria-label="Terima"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                  className="w-5 h-5"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </button>
-                              <button
-                                className="
-                            p-2 
-                            bg-red-500 
-                            text-white 
-                            rounded 
-                            hover:bg-red-600 
-                            transition-colors
-                            flex 
-                            items-center 
-                            justify-center
-                          "
-                                aria-label="Tolak"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                  fill="currentColor"
-                                  className="w-5 h-5"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </button>
+                            <div>
+                              <h3 className="text-lg font-semibold">{item.name}</h3>
+                              <p className="text-sm text-gray-500">
+                                {item.categories.map((category) => category.name).join(", ")}
+                              </p>
                             </div>
-                          )}
-                        </td>
-                      </tr>
+                          </div>
+                          <div className="flex space-x-1">
+                            <button
+                              onClick={() => handleDetail(item)}
+                              className="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition-colorsflex items-center justify-center"
+                              aria-label="Lihat Detail"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5"
+                              >
+                                <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                <path
+                                  fillRule="evenodd"
+                                  d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => handleApprove(item._id)}
+                              className="p-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colorsflex items-center justify-center"
+                              aria-label="Terima"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                            <button 
+                              onClick={(e) => 
+                                handleOpenRejectPopup(item)}
+                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     ))
                   ) : (
-                    <tr>
-                      <td colSpan="4" className="p-3 text-center text-gray-500">
-                        Tidak ada data ditemukan
-                      </td>
-                    </tr>
+                    <p className="text-center text-gray-500">Tidak ada data ditemukan</p>
                   )}
-                </tbody>
-              </table>
+                </div>
+              ) : (
+                <table className="w-full border-collapse">
+                  <thead className="bg-black text-white">
+                      <tr>
+                        <th className="p-4 text-center">Gambar</th>
+                        <th className="p-4 text-center">Nama Barang</th>
+                        <th className="p-4 text-center">Kategori</th>
+                        <th className="p-4 text-center">Status</th>
+                        <th className="p-4 text-center">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {filteredData.length > 0 ? (
+                        filteredData.map((item) => (
+                          <tr key={item._id} className="hover:bg-gray-50">
+                            <td className="p-4">
+                              <div className="flex justify-center items-center">
+                                <div className="w-20 h-20 bg-gray-300 rounded flex justify-center items-center overflow-hidden">
+                                  <img
+                                    src={item.images?.[0] || "default-image-url"}
+                                    alt={item.name || "Default Name"}
+                                    className="object-cover w-full h-full rounded"
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                            <td className="p-4 text-center">{item.name}</td>
+                            <td className="p-4 text-center">
+                              {item.categories.map((category) => category.name).join(", ")}
+                          </td>
+                          <td className="p-4 text-center">
+                            {item.approved ? "Terima" : "Tolak"}
+                          </td>
+                          <td className="p-4 text-center">
+                            <div className="flex justify-center flex-wrap space-x-2 sm:space-x-3">
+                            <button
+                              onClick={() => handleDetail(item)}
+                              className="p-2 bg-gray-800 text-white rounded hover:bg-gray-600 transition-colorsflex items-center justify-center"
+                              aria-label="Lihat Detail"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5"
+                              >
+                                <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                <path
+                                  fillRule="evenodd"
+                                  d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => handleApprove(item._id)}
+                              className="p-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colorsflex items-center justify-center"
+                              aria-label="Terima"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                            <button 
+                              onClick={(e) => 
+                                  handleOpenRejectPopup(item)}
+                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center">
+                                <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="w-5 h-5"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                        <tr>
+                          <td colSpan="4" className="p-3 text-center text-gray-500">
+                            Tidak ada data ditemukan
+                          </td>
+                        </tr>
+                    )}
+                  </tbody>
+
+                </table>
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Popup for detail */}
+      {selectedItem && openDropdownId === selectedItem._id && (
+        <Popup item={selectedItem} onClose={handleClosePopup} />
+      )}
+
+      {/* Reject Popup */}
+      {openRejectPopup && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl font-bold mb-4">Alasan Penolakan</h2>
+            <textarea
+              value={rejectMessage}
+              onChange={(e) => setRejectMessage(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mb-4 h-32"
+              placeholder="Masukkan alasan penolakan"
+            ></textarea>
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={handleCloseRejectPopup}
+                className="px-4 py-2 bg-gray-300 text-black rounded"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleReject}
+                className="px-4 py-2 bg-red-500 text-white rounded"
+              >
+                Tolak
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
