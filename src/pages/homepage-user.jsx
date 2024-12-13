@@ -10,9 +10,30 @@ import ReportButton from "../components/organisms/upload-section.jsx";
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import FlowSection from "../components/organisms/flow.jsx";
+import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 
 const Homepage = () => {
   const [searchParams, setSearchParams] = useState({});
+  const [totalFoundItems, setTotalFoundItems] = useState(0);
+  const [totalLostItems, setTotalLostItems] = useState(0);
+  const [currentPageFound, setCurrentPageFound] = useState(1);
+  const [currentPageLost, setCurrentPageLost] = useState(1);
+
+  const handlePageChangeFound = (newPage) => {
+    setCurrentPageFound(newPage);
+  };
+
+  const handlePageChangeLost = (newPage) => {
+    setCurrentPageLost(newPage);
+  };
+
+  const handleTotalFoundItemsUpdate = (total) => {
+    setTotalFoundItems(total);
+  };
+
+  const handleTotalLostItemsUpdate = (total) => {
+    setTotalLostItems(total);
+  };
 
   const handleSearch = (params) => {
     setSearchParams(params);
@@ -50,7 +71,17 @@ const Homepage = () => {
               Barang Anda !
             </span>
           </h1>
-          <LostList params={{ ...searchParams, type: "lost" }} />
+          <LostList
+            params={{ ...searchParams, type: "lost", limit: 12 }}
+            onTotalItemsUpdate={handleTotalLostItemsUpdate}
+          />
+          <PaginationDisplay
+            currentPage={currentPageLost}
+            totalItems={totalLostItems}
+            onPageChange={handlePageChangeLost}
+            limit={12}
+            className="mt-6"
+          />
         </div>
         <Separator />
 
@@ -61,7 +92,17 @@ const Homepage = () => {
               Barang Temuan{" "}
             </span>
           </h1>
-          <FoundList params={{ ...searchParams, type: "found" }} />
+          <FoundList
+            params={{ ...searchParams, type: "found", limit: 12 }}
+            onTotalItemsUpdate={handleTotalFoundItemsUpdate}
+          />
+          <PaginationDisplay
+            currentPage={currentPageFound}
+            totalItems={totalFoundItems}
+            onPageChange={handlePageChangeFound}
+            limit={12}
+            className="mt-6"
+          />
         </div>
         <Separator />
       </main>
