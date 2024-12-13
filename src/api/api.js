@@ -104,3 +104,6 @@ export const rejectClaimByUser = (id, messages) =>
 export const deleteClaimByUser = (id) => api.put(`/claims/${id}/delete`);
 
 export const createClaims = (data) => api.post("/claims", data);
+
+// contact
+export const sendEmail = (data) => api.post("/send-mail", data);

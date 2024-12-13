@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,10 +8,43 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
+import { toast } from "sonner";
+import Preloader from "../components/templates/preloader/preloader.jsx";
+import { sendEmail } from "../api/api.js";
 
 const KontakKami = () => {
+  const [isLoading, setIsLoading] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await sendEmail({
+        name,
+        email,
+        subject,
+        message,
+      });
+      toast.success("Pesan berhasil dikirim!");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    } catch (error) {
+      console.error(error);
+      toast.error("Terjadi kesalahan saat mengirim pesan.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div>
+      {isLoading && <Preloader />}
       {/* Navbar */}
       <Navbar />
 
@@ -35,6 +68,8 @@ const KontakKami = () => {
                   placeholder="Nama Lengkap Anda"
                   required
                   className="h-12 mb-6"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div>
@@ -50,6 +85,8 @@ const KontakKami = () => {
                   placeholder="Alamat Email Anda"
                   required
                   className="h-12 mb-6"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div>
@@ -65,6 +102,8 @@ const KontakKami = () => {
                   placeholder="Subyek Pesan"
                   required
                   className="h-12 mb-6"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
                 />
               </div>
               <div>
@@ -80,10 +119,12 @@ const KontakKami = () => {
                   className="w-full h-72 border bg-white rounded-md p-2"
                   placeholder="Tuliskan pesan Anda..."
                   required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 ></textarea>
               </div>
 
-              <Button type="submit" className="w-full">
+              <Button onClick={handleSubmit} type="submit" className="w-full">
                 Kirim
               </Button>
             </form>
