@@ -5,6 +5,7 @@ import {
   approveItemByAdmin,
 } from "../api/api";
 import { toast } from "sonner";
+import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 import Popup from "../components/molecules/Popup";
 
 const VerifikasiLaporan = () => {
@@ -16,6 +17,14 @@ const VerifikasiLaporan = () => {
   const [openRejectPopup, setOpenRejectPopup] = useState(false);
   const [rejectMessage, setRejectMessage] = useState("");
   const dropdownRefs = useRef({});
+  const [currentPage, setCurrentPage] = useState(1); // Halaman awal
+  const totalItems = items.length; // Total item
+
+  const handlePageChange = (page) => {
+  setCurrentPage(page);
+  console.log(`Navigated to page ${page}`);
+};
+
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -136,7 +145,7 @@ const VerifikasiLaporan = () => {
   }, [openDropdownId]);
 
   return (
-    <div>
+    <><div>
       <div className="min-h-screen w-full flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 flex justify-between">
@@ -157,8 +166,7 @@ const VerifikasiLaporan = () => {
                   onChange={handleSearchChange}
                   className="flex-grow p-2.5 text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Cari laporan (nama atau kategori)..."
-                  required
-                />
+                  required />
                 <button
                   type="submit"
                   className="p-2.5 text-white bg-black rounded-r-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
@@ -174,8 +182,7 @@ const VerifikasiLaporan = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                   </svg>
                 </button>
               </div>
@@ -197,8 +204,7 @@ const VerifikasiLaporan = () => {
                               <img
                                 src={item.images?.[0] || "default-image-url"}
                                 alt={item.name || "Default Name"}
-                                className="w-full h-full object-cover"
-                              />
+                                className="w-full h-full object-cover" />
                             </div>
                             <div>
                               <h3 className="text-lg font-semibold">
@@ -227,8 +233,7 @@ const VerifikasiLaporan = () => {
                                 <path
                                   fillRule="evenodd"
                                   d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
-                                  clipRule="evenodd"
-                                />
+                                  clipRule="evenodd" />
                               </svg>
                             </button>
                             <button
@@ -245,8 +250,7 @@ const VerifikasiLaporan = () => {
                                 <path
                                   fillRule="evenodd"
                                   d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
-                                  clipRule="evenodd"
-                                />
+                                  clipRule="evenodd" />
                               </svg>
                             </button>
                             <button
@@ -262,8 +266,7 @@ const VerifikasiLaporan = () => {
                                 <path
                                   fillRule="evenodd"
                                   d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-                                  clipRule="evenodd"
-                                />
+                                  clipRule="evenodd" />
                               </svg>
                             </button>
                           </div>
@@ -423,6 +426,11 @@ const VerifikasiLaporan = () => {
         </div>
       )}
     </div>
+    <PaginationDisplay
+        currentPage={currentPage}
+        totalItems={totalItems}
+        onPageChange={handlePageChange}
+        limit={10} /></>
   );
 };
 

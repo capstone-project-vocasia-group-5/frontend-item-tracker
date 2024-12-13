@@ -2,6 +2,7 @@ import "../App.css";
 import React, { useState, useEffect, useRef } from "react";
 import { getAllItemsByAdmin, deleteItemByAdmin } from "../api/api";
 import { toast } from "sonner";
+import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 import Popup from "../components/molecules/Popup";
 
 const ManageLaporanAdmin = () => {
@@ -11,9 +12,16 @@ const ManageLaporanAdmin = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const dropdownRefs = useRef({});
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalItems, setTotalItems] = useState(0); 
+
+const handlePageChange = (newPage) => {
+  setCurrentPage(newPage);
+  fetchItems(newPage);
+};
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchItems = async (page = 1) => {
       try {
         const response = await getAllItemsByAdmin();
         setItems(response.data.data.items);
@@ -83,7 +91,7 @@ const ManageLaporanAdmin = () => {
   }, []);
 
   return (
-    <div>
+    <><div>
       <div className="min-h-screen w-full flex flex-col">
         <div className="p-4">
           <header className="bg-white shadow-sm p-4 flex justify-between items-center">
@@ -125,7 +133,6 @@ const ManageLaporanAdmin = () => {
                 </div>
               </div>
             </form>
-
             <div className="overflow-x-auto px-2">
               {isMobile ? (
                 <div className="space-y-2">
@@ -293,6 +300,11 @@ const ManageLaporanAdmin = () => {
       {/* Tampilkan Popup jika ada item yang dipilih */}
       {selectedItem && <Popup item={selectedItem} onClose={handleClosePopup} />}
     </div>
+    <PaginationDisplay
+        currentPage={currentPage}
+        totalItems={totalItems}
+        onPageChange={handlePageChange}
+        limit={10} /></>
   );
 };
 
