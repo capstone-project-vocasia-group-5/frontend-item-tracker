@@ -1,31 +1,123 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/organisms/navbar";
 import { Footer } from "@/components/organisms/footer";
+import { uploadBuktiPengajuan } from "../api/api";
+import imageCompression from "browser-image-compression"; 
+import { useNavigate } from "react-router-dom"; 
+
+const FileUpload = React.memo(({ file, index, onFileChange, onRemoveImage }) => {
+  return (
+    <div
+      key={index}
+      className="relative bg-gray-100 border-2 border-gray-300 flex items-center justify-center w-40 h-40 md:w-52 md:h-52 rounded-lg overflow-hidden cursor-pointer"
+      onClick={() => document.getElementById(`fileInput-${index}`).click()}
+      style={{
+        backgroundImage: file ? `url(${URL.createObjectURL(file)})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <input
+        type="file"
+        id={`fileInput-${index}`}
+        className="hidden"
+        accept="image/*"
+        onChange={(e) => onFileChange(e, index)}
+      />
+      {!file && <p className="text-gray-500">Upload Bukti</p>}
+
+      {file && (
+        <button
+          className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center"
+          onClick={(e) => onRemoveImage(index, e)}
+        >
+          X
+        </button>
+      )}
+    </div>
+  );
+});
 
 const BuktiPengajuan = () => {
-  const [files, setFiles] = useState([null, null, null, null]); // Set default dengan null untuk 4 gambar
+  const [files, setFiles] = useState([null, null, null, null]);
+  const [description, setDescription] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState("");
+  const [notificationType, setNotificationType] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const navigate = useNavigate();
 
-  const handleFileChange = (event, index) => {
+  const handleFileChange = useCallback(async (event, index) => {
     const file = event.target.files[0];
-    if (file) {
-      const newFileUrl = URL.createObjectURL(file);
-      setFiles((prevFiles) => {
-        const updatedFiles = [...prevFiles];
-        updatedFiles[index] = newFileUrl;
-        return updatedFiles;
-      });
-    }
-  };
+    const maxFileSize = 10 * 1024 * 1024;
 
-  const handleRemoveImage = (index, event) => {
+    if (file) {
+      if (file.size > maxFileSize) {
+        setNotification(`File ke-${index + 1} melebihi ukuran maksimum 5MB.`);
+        setNotificationType("error");
+        setTimeout(() => setNotification(""), 3000);
+        return;
+      }
+
+      try {
+        const options = {
+          maxSizeMB: 2,
+          maxWidthOrHeight: 1024,
+          useWebWorker: true,
+        };
+
+        const compressedFile = await imageCompression(file, options);
+        setFiles((prevFiles) => {
+          const updatedFiles = [...prevFiles];
+          updatedFiles[index] = compressedFile;
+          return updatedFiles;
+        });
+      } catch (error) {
+        setNotification("Terjadi kesalahan saat mengompresi gambar.");
+        setNotificationType("error");
+        setTimeout(() => setNotification(""), 3000);
+      }
+    }
+  }, []);
+
+  const handleRemoveImage = useCallback((index, event) => {
     event.stopPropagation();
     setFiles((prevFiles) => {
       const updatedFiles = [...prevFiles];
-      updatedFiles[index] = null; // Hapus gambar pada index yang sesuai
+      updatedFiles[index] = null;
       return updatedFiles;
     });
+  }, []);
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    files.forEach((file, index) => {
+      if (file) formData.append(`files[${index}]`, file);
+    });
+    formData.append("description", description);
+
+    setIsSubmitting(true);
+    try {
+      await uploadBuktiPengajuan(formData);
+      setNotification("Bukti pengajuan berhasil diunggah!");
+      setNotificationType("success");
+      setFiles([null, null, null, null]);
+      setDescription("");
+
+      setIsModalOpen(true);
+    } catch (error) {
+      setNotification("Terjadi kesalahan saat mengunggah bukti pengajuan.");
+      setNotificationType("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setNotification(""), 3000);
+    }
+  };
+
+  const handleBack = () => {
+    navigate(-1); 
   };
 
   return (
@@ -35,60 +127,81 @@ const BuktiPengajuan = () => {
         <Navbar />
       </header>
 
+      {/* Notifikasi */}
+      {notification && (
+        <div
+          className={`fixed bottom-16 right-4 px-6 py-2 rounded-lg shadow-md z-50 ${
+            notificationType === "success" ? "bg-green-500" : "bg-red-500"
+          } text-white`}
+        >
+          {notification}
+        </div>
+      )}
+
+      {/* Modal Konfirmasi */}
+      {/* {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-80 text-center">
+            <h2 className="text-lg font-bold mb-4">Berhasil Upload Bukti</h2>
+            <div className="flex justify-between">
+              <Button
+                className="bg-gray-300 text-black w-24"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Tutup
+              </Button>
+              <Button className="bg-black text-white w-24" onClick={handleBack}>
+                Kembali
+              </Button>
+            </div>
+          </div>
+        </div>
+      )} */}
+
       {/* Content */}
       <main className="flex-1 container mx-auto py-10 px-4 overflow-y-auto mt-24">
         <h1 className="text-2xl font-bold text-center mb-16">Upload Bukti Kepemilikan</h1>
+
         {/* Form Layout */}
         <div className="flex flex-col items-center justify-center">
-          {/* Box Image */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 grid grid-cols-2 md:grid-cols-4">
+          <div className="flex flex-wrap justify-center gap-6 grid grid-cols-2 md:grid-cols-4">
             {files.map((file, index) => (
-              <div
+              <FileUpload
                 key={index}
-                className="relative bg-gray-100 border-2 border-gray-300 flex items-center justify-center w-40 h-40 md:w-52 md:h-52 rounded-lg overflow-hidden cursor-pointer"
-                onClick={() => document.getElementById(`fileInput-${index}`).click()}
-                style={{
-                  backgroundImage: file ? `url(${file})` : "none",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <input
-                  type="file"
-                  id={`fileInput-${index}`}
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e) => handleFileChange(e, index)}
-                />
-                {!file && <p className="text-gray-500">Upload Bukti</p>}
-
-                {/* Icon Delete (X) */}
-                {file && (
-                  <button
-                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-100 transition-opacity duration-200 shadow-md"
-                    onClick={(e) => handleRemoveImage(index, e)}
-                  >
-                    X
-                  </button>
-                )}
-              </div>
+                index={index}
+                file={file}
+                onFileChange={handleFileChange}
+                onRemoveImage={handleRemoveImage}
+              />
             ))}
           </div>
         </div>
 
         {/* Deskripsi */}
         <div className="mt-6 flex justify-center">
-          <div className="text-left w-full sm:w-[910px]">
+          <div className="text-left w-full sm:w-[910px] w-[345px]">
             <label htmlFor="description" className="block text-sm font-medium mb-2 ml-2">
               Deskripsi
             </label>
-            <Textarea id="description" placeholder="Masukkan deskripsi barang" className="w-full h-64" />
+            <Textarea
+              id="description"
+              placeholder="Masukkan deskripsi barang"
+              className="w-full h-64 border-2 border-gray-300"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
         </div>
 
         {/* Kirim Button */}
         <div className="mt-6 flex justify-center">
-          <Button className="bg-black text-white w-full sm:w-[910px] h-12">Kirim</Button>
+          <Button
+            className="bg-black text-white w-full sm:w-[910px] w-[345px] h-12"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Mengirim..." : "Kirim"}
+          </Button>
         </div>
       </main>
 

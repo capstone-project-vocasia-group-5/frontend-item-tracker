@@ -83,3 +83,10 @@ export const setAllNotificationIsRead = () =>
 
 // reports
 export const createReport = (data) => api.post("/items", data);
+<<<<<<< Updated upstream
+=======
+
+
+// claims
+export const uploadBuktiPengajuan = (data) => api.post("/bukti-pengajuan", data);
+>>>>>>> Stashed changes
