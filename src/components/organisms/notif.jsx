@@ -52,6 +52,7 @@ export function Notif() {
       const total = response.data.data.pagination.total || notifications.length;
       setNotifications(notifications);
       setTotalNotif(total);
+      setIsLoading(false);
     } catch (error) {
       console.error("Failed to fetch notifications:", error);
     } finally {
@@ -69,7 +70,7 @@ export function Notif() {
 
   const setNotificationIsReadHandler = async (notifId) => {
     try {
-      const response = await setNotificationIsRead(notifId);
+      await setNotificationIsRead(notifId);
       fetchNotifications();
     } catch (error) {
       console.error("Failed to set notification as read:", error);
