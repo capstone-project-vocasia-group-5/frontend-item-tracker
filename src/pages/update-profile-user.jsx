@@ -1,131 +1,162 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FaAt, FaEyeSlash, FaEye, FaUserCircle } from "react-icons/fa";
-import { getUser } from "../api/api";
+import { FaEyeSlash, FaEye, FaUser } from "react-icons/fa";
+import { getUser, updateUsers } from "../api/api";
+import { toast } from "sonner";
 
 const UpdateProfileUser = () => {
   const [formData, setFormData] = useState({
     name: "",
     username: "",
     email: "",
-    phone_number: "",
     password: "",
+    phone_number: "",
+    images: null,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await getUser(); // Memanggil fungsi `getUser`
-        const user = response.data?.user; // Pastikan data `user` ada
-        if (!user) {
-          throw new Error("User data not found");
-        }
-        setFormData({
-          name: user.name || "",
-          username: user.username || "",
-          email: user.email || "",
-          phone_number: user.phone_number || "",
-          password: "",
-        });
-        setProfileImage(user.image_url || null);
-      } catch (error) {
-        console.error("Failed to load user data:", error.message);
-        setMessage("Error fetching user data.");
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setProfileImage(file);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleGet = async () => {
     setLoading(true);
-    setMessage("");
-
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("username", formData.username);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone_number", formData.phone_number);
-      if (formData.password) {
-        formDataToSend.append("password", formData.password);
+      const response = await getUser();
+      if (response.data && response.data.success) {
+        const user = response.data.data.user;
+        setFormData({
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          password: "",
+          phone_number: user.phone_number,
+          images: null,
+        });
+        setProfileImage(user.image_url);
+      } else {
+        throw new Error("Failed to fetch user data");
       }
-      if (profileImage) {
-        formDataToSend.append("profileImage", profileImage);
-      }
-
-      const response = await fetch("http://localhost:9000/api/v1/users", {
-        method: "PATCH",
-        body: formDataToSend,
-      });
-
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message || "Failed to update profile");
-      }
-
-      const result = await response.json();
-      console.log("Profile updated successfully:", result);
-      setMessage("Profile updated successfully!");
     } catch (error) {
-      console.error("Error updating profile:", error.message);
-      setMessage(error.message || "An error occurred while updating profile");
+      console.error("Error fetching user data:", error);
+      toast.error("Gagal mengambil data pengguna.");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Menghapus karakter non-digit
+    const phoneNumber = formData.phone_number.replace(/\D/g, "");
+    console.log("Nomor telepon yang akan dikirim:", phoneNumber); // Log nomor telepon
+    console.log("Panjang nomor telepon:", phoneNumber.length); // Log panjang nomor telepon
+
+    // Coba kirim nomor telepon tanpa angka nol di depan
+    const formattedPhoneNumber = phoneNumber.startsWith("0")
+      ? phoneNumber.slice(1)
+      : phoneNumber;
+
+    if (formattedPhoneNumber.length < 8 || formattedPhoneNumber.length > 13) {
+      toast.error("Nomor telepon harus memiliki 8 hingga 13 digit.");
+      setLoading(false);
+      return; // Hentikan eksekusi jika validasi gagal
+    }
+
+    const dataToSend = new FormData();
+    dataToSend.append("name", formData.name);
+    dataToSend.append("username", formData.username);
+    dataToSend.append("email", formData.email);
+    if (formData.password) {
+      dataToSend.append("password", formData.password);
+    }
+    dataToSend.append("phone_number", formattedPhoneNumber); // Menggunakan nomor telepon yang sudah diformat
+    if (formData.images) {
+      dataToSend.append("images", formData.images); // Kirim file gambar baru
+    }
+
+    try {
+      const response = await updateUsers(dataToSend); // Pastikan Anda memanggil API dengan benar
+      if (response.data && response.data.success) {
+        toast.success("Profil berhasil diperbarui!");
+        setMessage("Profil berhasil diperbarui!");
+        setProfileImage(response.data.data.user.image_url); // Update gambar profil
+      } else {
+        throw new Error("Gagal memperbarui profil");
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data); // Log data respons
+        toast.error(
+          `Gagal memperbarui profil: ${
+            error.response.data.message || "Kesalahan tidak diketahui."
+          }`
+        );
+      } else {
+        toast.error("Gagal memperbarui profil.");
+      }
+      setMessage("Gagal memperbarui profil.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    handleGet(); // Memanggil fungsi untuk mendapatkan data pengguna saat komponen dimuat
+  }, []);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0]; // Ambil file pertama yang dipilih
+
+    if (file) {
+      // Periksa ukuran file
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("Ukuran file tidak boleh lebih dari 10 MB");
+        return;
+      }
+      const fileURL = URL.createObjectURL(file);
+      setProfileImage(fileURL);
+      setFormData((prev) => ({
+        ...prev,
+        images: file,
+      }));
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Main Content */}
       <main className="flex-grow">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleUpdate}
             className="w-full max-w-lg mx-auto bg-black p-6 rounded-md shadow-md"
           >
             <h1 className="text-2xl sm:text-3xl font-semibold text-white mt-4 mb-8">
               Update Profile
             </h1>
             {/* Icon Foto Profile */}
-            <div className="relative inline-block">
+            <div className="relative inline-block mb-4">
               <label htmlFor="profileImage" className="cursor-pointer relative">
                 <div className="w-24 h-24 rounded-full mx-auto border-2 border-white flex items-center justify-center bg-black transition-colors duration-300 hover:bg-gray-700">
                   {profileImage ? (
                     <img
-                      src={URL.createObjectURL(image_url)}
+                      src={profileImage}
                       alt="Profile"
                       className="w-full h-full rounded-full object-cover"
                     />
                   ) : (
-                    <FaUserCircle className="text-white text-5xl" />
+                    <FaUser className="text-white text-5xl" />
                   )}
                 </div>
               </label>
               <input
-                id="profileImage"
                 type="file"
-                accept="image/*"
+                id="profileImage"
+                onChange={handleFileChange}
                 className="hidden"
-                onChange={handleImageChange}
               />
             </div>
 
@@ -136,10 +167,14 @@ const UpdateProfileUser = () => {
               </label>
               <Input
                 type="text"
-                name="fullName"
+                name="name"
                 value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Full Name"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    name: e.target.value,
+                  })
+                }
                 className="w-full border px-4 py-2 rounded-md bg-white"
               />
             </div>
@@ -153,7 +188,12 @@ const UpdateProfileUser = () => {
                 type="text"
                 name="username"
                 value={formData.username}
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    username: e.target.value,
+                  })
+                }
                 placeholder="Username"
                 className="w-full border px-4 py-2 rounded-md bg-white"
               />
@@ -168,7 +208,12 @@ const UpdateProfileUser = () => {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    email: e.target.value,
+                  })
+                }
                 placeholder="Email"
                 className="w-full border px-4 py-2 rounded-md bg-white"
               />
@@ -182,9 +227,14 @@ const UpdateProfileUser = () => {
               <div className="flex items-center">
                 <Input
                   type="tel"
-                  name="phoneNumber"
+                  name="phone_number"
                   value={formData.phone_number}
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      phone_number: e.target.value,
+                    })
+                  }
                   placeholder="Phone Number"
                   className="w-full border px-4 py-2 rounded-r-md bg-white"
                   pattern="[0-9]*"
@@ -207,7 +257,12 @@ const UpdateProfileUser = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    password: e.target.value,
+                  })
+                }
                 placeholder="Password"
                 className="w-full border px-4 py-2 rounded-md pr-10 bg-white"
               />
@@ -241,7 +296,7 @@ const UpdateProfileUser = () => {
             {message && (
               <p
                 className={`text-center mt-4 ${
-                  message.includes("success")
+                  message.includes("berhasil")
                     ? "text-green-500"
                     : "text-red-500"
                 }`}
