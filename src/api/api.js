@@ -94,9 +94,14 @@ export const uploadBuktiPengajuan = (data) =>
   api.post("/bukti-pengajuan", data);
 
 // claims
+
 export const getAllClaimsByUser = (params) => api.get("/claims", { params });
 export const getClaimById = (id) => api.get(`/claims/${id}`);
 export const approveClaimByUser = (id) => api.put(`/claims/${id}/approve`);
 export const rejectClaimByUser = (id, messages) =>
   api.put(`/claims/${id}/reject`, messages);
 export const deleteClaimByUser = (id) => api.put(`/claims/${id}/delete`);
+
+export const createClaims = (data) => api.post("/claims", data);
+
+

@@ -31,7 +31,7 @@ const DetailItem = () => {
   const navigate = useNavigate();
 
   const handleClickAjukan = () => {
-    navigate("/proof-of-submission");
+    navigate(`/proof-of-submission/${id}`);
   };
 
   const handleClickHubungi = () => {
