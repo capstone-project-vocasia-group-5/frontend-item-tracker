@@ -9,6 +9,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { useAuth } from "@/context/auth-context";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -25,9 +27,19 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export function NavUser({ user, onMenuClick }) {
   const { isMobile } = useSidebar();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClickLogout = () => {
+    logout();
+    toast.success("Keluar berhasil");
+    navigate("/admin/login");
+  };
 
   return (
     <SidebarMenu>
@@ -79,11 +91,9 @@ export function NavUser({ user, onMenuClick }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => (window.location.href = "/login-admin")}
-            >
+            <DropdownMenuItem onClick={handleClickLogout}>
               <LogOut />
-              Log out
+              Keluar
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

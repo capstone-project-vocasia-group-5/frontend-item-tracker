@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { verifyOTP } from "../api/api";
+import LogoItemTracker from "../components/atoms/logo-item-tracker";
 
 function VerifikasiOTP() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -71,9 +72,7 @@ function VerifikasiOTP() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            ItemTrack
-          </h1>
+          <LogoItemTracker />
         </div>
 
         {/* Form */}

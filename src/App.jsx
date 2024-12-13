@@ -21,15 +21,10 @@ import Notifikasi from "./pages/notifikasi";
 import DetailItem from "./pages/detail-item";
 import VerifikasiOTP from "./pages/verifikasi-otp";
 import BuktiPengajuan from "./pages/bukti-pengajuan";
-import ManageLaporanUser from "./pages/manage-laporan";
-import ManagePengajuan from "./pages/manage-pengajuan";
 import ThankYou from "./pages/ucapan-terimakasih";
+
 // ADMIN Pages
 import LoginAdmin from "./pages/login-admin";
-import ManageAkunList from "./pages/manage-akun-list";
-import ManageCategory from "./pages/manage-category";
-import VerifikasiLaporan from "./pages/verifikasi-laporan";
-import ManageLaporanAdmin from "./pages/manage-laporan-for-admin";
 import TentangKami from "./pages/tentang-kami";
 import KontakKami from "./pages/kontak-kami";
 import HomePageAdmin from "./pages/homepage-admin";
@@ -45,7 +40,7 @@ function App() {
         <Router>
           <ScrollToTop />
           <Routes>
-            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<TentangKami />} />
             <Route path="/contact" element={<KontakKami />} />

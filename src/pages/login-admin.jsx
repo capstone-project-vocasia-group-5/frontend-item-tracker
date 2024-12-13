@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginAdmin } from "../api/api";
 import { toast } from "sonner";
 import { useAuth } from "../context/auth-context";
+import LogoItemTracker from "../components/atoms/logo-item-tracker";
 
 function LoginAdmin() {
   const [email, setEmail] = useState("");
@@ -55,9 +56,7 @@ function LoginAdmin() {
             alt="ItemTrack Logo"
             className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            ItemTrack
-          </h1>
+          <LogoItemTracker />
         </div>
 
         {/* Form */}
@@ -95,17 +94,26 @@ function LoginAdmin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="flex items-center mt-2">
-                <input
-                  type="checkbox"
-                  id="showPassword"
-                  checked={showPassword}
-                  onChange={() => setShowPassword(!showPassword)}
-                  className="mr-2"
-                />
-                <label htmlFor="showPassword" className="text-sm">
-                  Show Password
-                </label>
+              <div className="flex items-center justify-between mt-2">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showPassword"
+                    checked={showPassword}
+                    onChange={() => setShowPassword(!showPassword)}
+                    className="mr-2"
+                  />
+                  <label htmlFor="showPassword" className="text-sm">
+                    Tampilkan Password
+                  </label>
+                </div>
+
+                <a
+                  href="/send-otp"
+                  className="text-sm text-blue-400 hover:underline"
+                >
+                  Lupa Password?
+                </a>
               </div>
             </div>
           </div>

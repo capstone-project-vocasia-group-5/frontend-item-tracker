@@ -2,6 +2,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 import React, { useEffect, useState } from "react";
 import { getTotalAmountDonations } from "../api/api";
 import { getAllUsers, getAllItemsByAdmin, getAllCategories } from "../api/api";
+import Preloader from "../components/templates/preloader/preloader";
 
 function Dashboard() {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -11,6 +12,7 @@ function Dashboard() {
   const [totalLostItems, setTotalLostItems] = useState(0);
   const [totalCategories, setTotalCategories] = useState(0);
   const [totalMatched, setTotalMatched] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   // SEMUA BARANG YANG DITEMUKAN
   useEffect(() => {
@@ -117,6 +119,7 @@ function Dashboard() {
 
   return (
     <div className="p-8">
+      {loading && <Preloader />}
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Card Semua Pengguna */}
