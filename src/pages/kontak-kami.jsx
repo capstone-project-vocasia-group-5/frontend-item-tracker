@@ -100,7 +100,7 @@ const KontakKami = () => {
               <LogoItemTracker className={`text-3xl`} />
             </div>
             <h2 className="ml-4 mb-8 mt-8 text-2xl font-bold">Sosial Media</h2>
-            <p className="mt-4 ml-4 flex items-center">
+            <p className="mt-4 ml-4 flex items-center ">
               <FontAwesomeIcon icon={faInstagram} size="2x" className="mr-4" />
               <a
                 href="https://instagram.com"
@@ -111,7 +111,7 @@ const KontakKami = () => {
                 @ItemTracker
               </a>
             </p>
-            <p className="mt-4 ml-4">
+            <p className="mt-4 ml-4 flex items-center">
               <FontAwesomeIcon icon={faEnvelope} size="2x" className="mr-4" />
               <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=itemtrackerteam@gmail.com"
@@ -122,7 +122,7 @@ const KontakKami = () => {
                 itemtrackerteam@gmail.com
               </a>
             </p>
-            <p className="mt-4 ml-4">
+            <p className="mt-4 ml-4 flex items-center">
               <FontAwesomeIcon icon={faGithub} size="2x" className="mr-4" />
               <a
                 href="https://github.com/orgs/capstone-project-vocasia-group-5/repositories"
