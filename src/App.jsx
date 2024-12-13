@@ -53,7 +53,7 @@ function App() {
           <Route
             path="/found"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <FoundPage />
               </ProtectedRoute>
             }
@@ -61,7 +61,7 @@ function App() {
           <Route
             path="/lost"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <LostPage />
               </ProtectedRoute>
             }
@@ -69,7 +69,7 @@ function App() {
           <Route
             path="/update-profile"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <UpdateProfileUser />
               </ProtectedRoute>
             }
@@ -77,7 +77,7 @@ function App() {
           <Route
             path="/report"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <ReportPage />
               </ProtectedRoute>
             }
@@ -86,7 +86,7 @@ function App() {
           <Route
             path="/user"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <ProfileBase />
               </ProtectedRoute>
             }
@@ -96,7 +96,7 @@ function App() {
           <Route
             path="/notification"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <Notifikasi />
               </ProtectedRoute>
             }
@@ -104,7 +104,7 @@ function App() {
           <Route
             path="/item/detail/:id"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <DetailItem />
               </ProtectedRoute>
             }
@@ -114,24 +114,8 @@ function App() {
           <Route
             path="/proof-of-submission/:id"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <BuktiPengajuan />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/management-report"
-            element={
-              <ProtectedRoute>
-                <ManageLaporanUser />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/management-submission"
-            element={
-              <ProtectedRoute>
-                <ManagePengajuan />
               </ProtectedRoute>
             }
           />
@@ -141,40 +125,12 @@ function App() {
           <Route
             path="/admin"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["admin"]}>
                 <HomePageAdmin />
               </ProtectedRoute>
             }
           />
-          <Route path="/login-admin" element={<LoginAdmin />} />
-          <Route
-            path="/admin/management-account"
-            element={
-              <ProtectedRoute>
-                <ManageAkunList />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/management-category"
-            element={
-              <ProtectedRoute>
-                <ManageCategory />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/management-verification"
-            element={
-              <ProtectedRoute>
-                <VerifikasiLaporan />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/management-report"
-            element={<ManageLaporanAdmin />}
-          />
+          <Route path="/admin/login" element={<LoginAdmin />} />
         </Routes>
       </Router>
     </AuthProvider>

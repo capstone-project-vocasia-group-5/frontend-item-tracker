@@ -52,7 +52,7 @@ export const Navbar = () => {
                 </Avatar>
               </Link>
             </div>
-          ) : user ? (
+          ) : user && user.role === "user" ? (
             <div className="cursor-pointer hidden md:block">
               <Link to="/user">
                 <Avatar>
