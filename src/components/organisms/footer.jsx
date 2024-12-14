@@ -128,9 +128,11 @@ export const Footer = () => {
               </li>
               <li className="icon-content">
                 <a
-                  href="https://www.github.com/"
+                  href="https://github.com/capstone-project-vocasia-group-5"
                   aria-label="GitHub"
                   data-social="github"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <div className="filled"></div>
                   <svg
