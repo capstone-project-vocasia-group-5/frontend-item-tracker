@@ -14,7 +14,7 @@ import {
   getNotificationByUser,
   setNotificationIsRead,
 } from "../../api/api";
-import newComment from "/public/image/new-comment.svg";
+import newNotif from "/public/image/new-notif.svg";
 import { PaginationDisplay } from "../molecules/pagination";
 import { useNavigate } from "react-router-dom";
 import Preloader from "../templates/preloader/preloader";
@@ -30,6 +30,8 @@ export function Notif({ role }) {
   const [totalNotif, setTotalNotif] = useState(0);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log(notifications);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -152,7 +154,8 @@ export function Notif({ role }) {
                       src={
                         notif.claim?.images?.[0] ||
                         notif.item?.images?.[0] ||
-                        (notif.comment ? newComment : "")
+                        notif.comment?.item_id?.images[0] ||
+                        newNotif
                       }
                       alt="Gambar Notifikasi"
                       style={{ width: 50, height: 50 }}
