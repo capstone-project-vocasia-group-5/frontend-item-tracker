@@ -17,9 +17,10 @@ const PopupAvatar = ({ onLogout }) => {
             to="/user"
             className="block px-4 py-3 bg-white text-sm font-medium text-gray-800 hover:bg-green-300 hover:text-black transition rounded-lg"
           >
-            Akun
+            Menu
           </Link>
         </li>
+        <hr className="mx-auto w-48 border-gray-300" />
         <li>
           <button
             onClick={handleLogout} 
