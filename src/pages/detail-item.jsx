@@ -50,42 +50,34 @@ const DetailItem = () => {
     navigate(-1);
   };
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const response = await getItemById(id);
-        setItem(response.data.data);
-        if (response.data.data.item.type === "found") {
-          setStatus("Ditemukan");
-        }
-        setMainImage(response.data.data.item.images[0]);
-      } catch (error) {
-        console.error("Error fetching item:", error);
-      } finally {
-        setIsLoading(false);
+  const fetchItem = async () => {
+    try {
+      const response = await getItemById(id);
+      setItem(response.data.data);
+      if (response.data.data.item.type === "found") {
+        setStatus("Ditemukan");
       }
-    };
+      setMainImage(response.data.data.item.images[0]);
+    } catch (error) {
+      console.error("Error fetching item:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const fetchComments = async () => {
-      try {
-        const response = await getCommentByItemId(id);
-        setComments(response.data.data.comment);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-      }
-    };
-    fetchItem();
-    fetchComments();
-  }, [comments]);
-
-  const refreshComments = async () => {
+  const fetchComments = async () => {
     try {
       const response = await getCommentByItemId(id);
       setComments(response.data.data.comment);
     } catch (error) {
-      console.error("Error refreshing comments:", error);
+      console.error("Error fetching comments:", error);
     }
   };
+
+  useEffect(() => {
+    fetchItem();
+    fetchComments();
+  }, []);
 
   const handleCreateComment = async () => {
     if (newCommentText.trim()) {
@@ -93,17 +85,16 @@ const DetailItem = () => {
         const response = await createComment(id, {
           comment_text: newCommentText,
         });
-        await refreshComments();
-
-        const createdComment = {
-          ...response.data.data,
-          created_at: new Date().toISOString(),
-        };
-        setComments([...comments, createdComment]);
-        setNewCommentText("");
-        toast.success("Komentar berhasil ditambahkan!");
+        if (response?.status === 201) {
+          await fetchComments();
+          setNewCommentText("");
+          toast.success("Komentar berhasil ditambahkan!");
+        }
       } catch (error) {
         console.error("Error creating comment:", error);
+        if (error.response) {
+          toast.error(error.response.data?.errors || "Terjadi kesalahan");
+        }
         toast.error("Gagal menambahkan komentar.");
       }
     }
