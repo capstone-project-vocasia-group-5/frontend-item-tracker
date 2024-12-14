@@ -31,8 +31,6 @@ export function Notif({ role }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(notifications);
-
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };

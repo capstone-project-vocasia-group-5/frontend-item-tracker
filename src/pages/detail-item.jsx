@@ -76,7 +76,7 @@ const DetailItem = () => {
     };
     fetchItem();
     fetchComments();
-  }, []);
+  }, [comments]);
 
   const refreshComments = async () => {
     try {
@@ -277,8 +277,8 @@ const DetailItem = () => {
                           </div>
                           <div className="user-info">
                             <span className="text-black">
-                              {comment.user_id
-                                ? comment.user_id.name
+                              {comment?.user_id
+                                ? comment?.user_id?.name
                                 : "Unknown User"}{" "}
                             </span>
                             <p>{formatDateTimeComment(comment?.created_at)}</p>
