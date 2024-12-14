@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import dog from "/public/image/dog.jpg";
+import cat from "/public/image/cat.jpg";
+import key from "/public/image/key.jpg";
 
 export const HeaderFix = () => {
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
@@ -8,6 +11,9 @@ export const HeaderFix = () => {
     "https://images.unsplash.com/photo-1585501954837-9d99d09aa2c1?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://images.unsplash.com/photo-1648398673098-b4852da7eca6?q=80&w=1372&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    dog,
+    cat,
+    key,
   ];
 
   // Update background index setiap 3 detik
