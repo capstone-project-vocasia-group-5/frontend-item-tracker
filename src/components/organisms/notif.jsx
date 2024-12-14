@@ -9,13 +9,19 @@ import {
   Input,
 } from "@nextui-org/react";
 
-import { getNotificationByUser, setNotificationIsRead } from "../../api/api";
+import {
+  getNotificationByAdmin,
+  getNotificationByUser,
+  setNotificationIsRead,
+} from "../../api/api";
 import newComment from "/public/image/new-comment.svg";
 import { PaginationDisplay } from "../molecules/pagination";
 import { useNavigate } from "react-router-dom";
 import Preloader from "../templates/preloader/preloader";
+import { useAuth } from "../../context/auth-context";
 
-export function Notif() {
+export function Notif({ role }) {
+  const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [notifications, setNotifications] = useState([]);
@@ -42,11 +48,20 @@ export function Notif() {
   const fetchNotifications = async (params = {}) => {
     setIsLoading(true);
     try {
-      const response = await getNotificationByUser({
-        search: params.search || debouncedQuery,
-        page: params.page || currentPage,
-        limit: params.limit || itemsPerPage,
-      });
+      let response;
+      if (role === "admin") {
+        response = await getNotificationByAdmin({
+          search: params.search || debouncedQuery,
+          page: params.page || currentPage,
+          limit: params.limit || itemsPerPage,
+        });
+      } else {
+        response = await getNotificationByUser({
+          search: params.search || debouncedQuery,
+          page: params.page || currentPage,
+          limit: params.limit || itemsPerPage,
+        });
+      }
 
       const notifications = response.data.data.notifications || [];
       const total = response.data.data.pagination.total || notifications.length;
@@ -83,6 +98,9 @@ export function Notif() {
     }
 
     const navigateToDetail = (item) => {
+      if (user.role === "admin") {
+        return;
+      }
       if (item.deleted_at) {
         navigate("/not-found");
       } else {
