@@ -13,6 +13,7 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
+  Bell,
 } from "lucide-react";
 
 import { NavMain } from "@/components/ui/nav-main";
@@ -34,6 +35,12 @@ const data = {
       title: "Dashboard",
       url: "/dashboard",
       icon: Frame,
+      isActive: true,
+    },
+    {
+      title: "Notifikasi",
+      url: "/notification",
+      icon: Bell,
       isActive: true,
     },
     {

@@ -20,6 +20,7 @@ import ManageLaporanAdmin from "./manage-laporan-for-admin";
 import VerifikasiLaporan from "./verifikasi-laporan";
 import Dashboard from "./dashboard";
 import UpdateProfileUser from "./update-profile-user";
+import Notifikasi from "./notifikasi";
 
 function HomePageAdmin() {
   const [activePage, setActivePage] = useState("Dashboard");
@@ -36,6 +37,8 @@ function HomePageAdmin() {
         return <VerifikasiLaporan />;
       case "Update Profile":
         return <UpdateProfileUser />;
+      case "Notifikasi":
+        return <Notifikasi />;
       default:
         return <Dashboard />;
     }
