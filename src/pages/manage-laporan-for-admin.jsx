@@ -13,24 +13,26 @@ const ManageLaporanAdmin = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const dropdownRefs = useRef({});
   const [currentPage, setCurrentPage] = useState(1); 
-  const [totalItems, setTotalItems] = useState(0); 
+  const [totalItems, setTotalItems] = useState(0);
 
-const handlePageChange = (newPage) => {
-  setCurrentPage(newPage);
-  fetchItems(newPage);
+  const limit = 10;
+
+const onPageChange = (page) => {
+  fetchData(page);
 };
 
   useEffect(() => {
     const fetchItems = async (page = 1) => {
       try {
-        const response = await getAllItemsByAdmin();
+        const response = await getAllItemsByAdmin({page, limit: 10});
         setItems(response.data.data.items);
+        setTotalItems(response.data.data.total_items);
       } catch (error) {
         toast.error("Error fetching data: ", error);
       }
     };
-    fetchItems();
-  }, []);
+    fetchItems(currentPage);
+  }, [currentPage]);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -303,8 +305,9 @@ const handlePageChange = (newPage) => {
     <PaginationDisplay
         currentPage={currentPage}
         totalItems={totalItems}
-        onPageChange={handlePageChange}
-        limit={10} /></>
+        onPageChange={(page) => setCurrentPage(page)}
+        limit={10}
+      /></>
   );
 };
 

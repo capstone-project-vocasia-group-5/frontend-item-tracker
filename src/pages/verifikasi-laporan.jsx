@@ -18,8 +18,8 @@ const VerifikasiLaporan = () => {
   const [openRejectPopup, setOpenRejectPopup] = useState(false);
   const [rejectMessage, setRejectMessage] = useState("");
   const dropdownRefs = useRef({});
-  const [currentPage, setCurrentPage] = useState(1); // Halaman awal
-  const totalItems = items.length; // Total item
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const handlePageChange = (page) => {
@@ -31,10 +31,11 @@ const VerifikasiLaporan = () => {
       try {
         const response = await getAllItemsByAdmin({ approved: false });
         setItems(response.data.data.items);
+        setTotalItems(response.data.data.total_items);
       } catch (error) {
         toast.error("Error fetching data: ", error);
       } finally {
-        setLoading(false); // Set loading ke false setelah fetch selesai
+        setLoading(false); 
       }
     };
     fetchItems();
@@ -82,7 +83,7 @@ const VerifikasiLaporan = () => {
 
   const handleCloseRejectPopup = () => {
     setOpenRejectPopup(false);
-    setRejectMessage(""); // Clear message when closing popup
+    setRejectMessage(""); 
   };
 
   const handleApprove = async (itemId) => {
