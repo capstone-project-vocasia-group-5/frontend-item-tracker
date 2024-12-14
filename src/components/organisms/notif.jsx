@@ -110,49 +110,55 @@ export function Notif() {
         value={searchQuery}
         className="mb-4"
       />
-      <Table aria-label="Tabel Notifikasi">
-        <TableHeader>
-          <TableColumn>Gambar</TableColumn>
-          <TableColumn>Judul</TableColumn>
-        </TableHeader>
-        <TableBody>
-          {notifications.map((notif) => (
-            <TableRow
-              key={notif._id}
-              style={{
-                backgroundColor: notif.is_read ? "white" : "#f5f5f5",
-                cursor: "pointer",
-                borderBottom: "5px solid transparent",
-                borderRadius: "10px",
-              }}
-              onClick={() => handleClickNotif(notif)}
-            >
-              <TableCell>
-                <img
-                  src={
-                    notif.claim?.images?.[0] ||
-                    notif.item?.images?.[0] ||
-                    (notif.comment ? newComment : "")
-                  }
-                  alt="Gambar Notifikasi"
-                  style={{ width: 50, height: 50 }}
-                  className="rounded-lg"
-                />
-              </TableCell>
-              <TableCell>{notif.title}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {notifications.length > 0 ? (
+        <>
+          <Table aria-label="Tabel Notifikasi">
+            <TableHeader>
+              <TableColumn>Gambar</TableColumn>
+              <TableColumn>Judul</TableColumn>
+            </TableHeader>
+            <TableBody>
+              {notifications.map((notif) => (
+                <TableRow
+                  key={notif._id}
+                  style={{
+                    backgroundColor: notif.is_read ? "white" : "#f5f5f5",
+                    cursor: "pointer",
+                    borderBottom: "5px solid transparent",
+                    borderRadius: "10px",
+                  }}
+                  onClick={() => handleClickNotif(notif)}
+                >
+                  <TableCell>
+                    <img
+                      src={
+                        notif.claim?.images?.[0] ||
+                        notif.item?.images?.[0] ||
+                        (notif.comment ? newComment : "")
+                      }
+                      alt="Gambar Notifikasi"
+                      style={{ width: 50, height: 50 }}
+                      className="rounded-lg"
+                    />
+                  </TableCell>
+                  <TableCell>{notif.title}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
 
-      <div className="flex justify-center mt-4">
-        <PaginationDisplay
-          currentPage={currentPage}
-          totalItems={totalNotif}
-          onPageChange={(page) => setCurrentPage(page)}
-          limit={itemsPerPage}
-        />
-      </div>
+          <div className="flex justify-center mt-4">
+            <PaginationDisplay
+              currentPage={currentPage}
+              totalItems={totalNotif}
+              onPageChange={(page) => setCurrentPage(page)}
+              limit={itemsPerPage}
+            />
+          </div>
+        </>
+      ) : (
+        <p className="text-center">Tidak ada notifikasi</p>
+      )}
     </div>
   );
 }
