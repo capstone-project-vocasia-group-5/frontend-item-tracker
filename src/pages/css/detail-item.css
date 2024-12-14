@@ -28,8 +28,8 @@
 }
 
 .comments {
-  display: grid;
-  grid-template-columns: 35px 1fr;
+  /* display: grid; */
+  /* grid-template-columns: 35px 1fr; */
   gap: 20px;
   padding: 20px;
 }
