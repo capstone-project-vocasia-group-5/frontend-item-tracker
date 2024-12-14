@@ -267,7 +267,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="city"
                         value={selectedCity}
                         onChange={handleCityChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-500"
+                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
                       >
                         <option value="">Pilih Kota/Kabupaten</option>
                         {cities.map((city) => (
@@ -288,7 +288,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="district"
                         value={selectedDistrict}
                         onChange={handleDistrictChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-500"
+                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
                       >
                         <option value="">Pilih Kecamatan</option>
                         {districts.map((district) => (
@@ -308,7 +308,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="village"
                         value={selectedVillage}
                         onChange={handleVillageChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-500"
+                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
                       >
                         <option value="">Pilih Kelurahan</option>
                         {villages.map((village) => (

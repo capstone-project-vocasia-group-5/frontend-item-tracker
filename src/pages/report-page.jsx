@@ -439,7 +439,7 @@ const ReportPage = () => {
               {/* Provinsi */}
               <div>
                 <label
-                  className="block text-sm font-medium mb-2 ml-2"
+                  className="block text-sm font-medium mb-2 ml-2 bg-[#F9F9F9]"
                   htmlFor="province"
                 >
                   Provinsi
@@ -448,7 +448,7 @@ const ReportPage = () => {
                   id="province"
                   value={selectedProvince}
                   onChange={handleProvinceChange}
-                  className="block w-full text-sm font-medium border rounded-md p-2 text-black bg-white"
+                  className="block w-full text-sm font-medium border rounded-md p-2 text-black bg-[#F9F9F9]"
                 >
                   <option value="">Pilih Provinsi</option>
                   {provinces.map((prov) => (
@@ -461,7 +461,7 @@ const ReportPage = () => {
               {/* Kota */}
               <div>
                 <label
-                  className="block text-sm font-medium mb-2 ml-2"
+                  className="block text-sm font-medium mb-2 ml-2 bg-[#F9F9F9]"
                   htmlFor="city"
                 >
                   Kota/Kabupaten
@@ -470,7 +470,7 @@ const ReportPage = () => {
                   id="city"
                   value={selectedCity}
                   onChange={handleCityChange}
-                  className="block w-full  text-sm font-medium mt-1 border rounded-md p-2 text-black bg-white"
+                  className="block w-full  text-sm font-medium mt-1 border rounded-md p-2 text-black bg-[#F9F9F9]"
                 >
                   <option className="block text-sm  mb-2 ml-2" value="">
                     Pilih Kota/Kabupaten
@@ -485,7 +485,7 @@ const ReportPage = () => {
               {/* Kecamatan */}
               <div>
                 <label
-                  className="block text-sm font-medium mb-2 ml-2"
+                  className="block text-sm font-medium mb-2 ml-2 bg-[#F9F9F9]"
                   htmlFor="district"
                 >
                   Kecamatan
@@ -494,7 +494,7 @@ const ReportPage = () => {
                   id="district"
                   value={selectedDistrict}
                   onChange={handleDistrictChange}
-                  className="block w-full text-sm font-medium  mt-1 border rounded-md p-2 text-black bg-white"
+                  className="block w-full text-sm font-medium  mt-1 border rounded-md p-2 text-black bg-[#F9F9F9]"
                 >
                   <option value="">Pilih Kecamatan</option>
                   {districts.map((district) => (
@@ -511,7 +511,7 @@ const ReportPage = () => {
               {/* Kelurahan */}
               <div>
                 <label
-                  className="block text-sm font-medium mb-2 ml-2"
+                  className="block text-sm font-medium mb-2 ml-2 bg-[#F9F9F9]"
                   htmlFor="district"
                 >
                   Kelurahan
@@ -520,7 +520,7 @@ const ReportPage = () => {
                   id="district"
                   value={selectedVillage}
                   onChange={handleVillageChange}
-                  className="block w-full text-sm font-medium mt-1 border rounded-md p-2 text-black bg-white"
+                  className="block w-full text-sm font-medium mt-1 border rounded-md p-2 text-black bg-[#F9F9F9]"
                 >
                   <option value="">Pilih Kelurahan</option>
                   {villages.map((village) => (
@@ -536,7 +536,7 @@ const ReportPage = () => {
               </div>
               {/* Kode Pos */}
               <div>
-                <label className="block text-sm font-medium mb-2 ml-2">
+                <label className="block text-sm font-medium mb-2 ml-2 bg-[#F9F9F9]">
                   Kode Pos
                 </label>
                 <Input
