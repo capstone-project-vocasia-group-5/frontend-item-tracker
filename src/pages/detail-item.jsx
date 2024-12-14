@@ -365,7 +365,11 @@ const DetailItem = () => {
                   </div>
                 ))
               ) : (
-                <p className="flex justify-center">Belum ada komentar</p>
+                <div className="mt-8">
+                  <p className="flex justify-center items-center">
+                    Belum ada komentar
+                  </p>
+                </div>
               )}
             </ScrollArea>
 
