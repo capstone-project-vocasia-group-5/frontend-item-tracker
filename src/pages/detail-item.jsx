@@ -37,6 +37,10 @@ const DetailItem = () => {
   const [editCommentText, setEditCommentText] = useState("");
   const { user } = useAuth();
 
+  const handleClickAjukan = () => {
+    navigate(`/proof-of-submission/${id}`);
+  };
+
   const handleClickHubungi = () => {
     if (item?.item?.phone_number) {
       const url = `https://wa.me/${item.item.phone_number}`;
@@ -104,7 +108,6 @@ const DetailItem = () => {
     if (editCommentText.trim()) {
       try {
         await updateComment(editCommentId, { comment_text: editCommentText });
-        await refreshComments();
         setEditCommentId(null);
         setEditCommentText("");
         toast.success("Komentar berhasil diperbarui !");
@@ -118,7 +121,6 @@ const DetailItem = () => {
   const handleDeleteComment = async (commentId) => {
     try {
       await deleteComment(commentId);
-      await refreshComments();
       toast.success("Komentar berhasil dihapus!");
     } catch (error) {
       console.error("Error deleting comment:", error);
@@ -211,13 +213,22 @@ const DetailItem = () => {
               </div>
             </div>
 
-            <div className="mt-4 flex justify-center md:justify-start items-center">
-              <Button
-                onClick={handleClickHubungi}
-                className="mt-4 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Hubungi Pemilik
-              </Button>
+            <div className="mt-4 flex justify-start items-center">
+              {item?.item?.type === "found" ? (
+                <Button
+                  onClick={handleClickAjukan}
+                  className="mt-2 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Ajukan Kepemilikan
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleClickHubungi}
+                  className="mt-2 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Hubungi Pemilik
+                </Button>
+              )}
             </div>
           </div>
         </div>
