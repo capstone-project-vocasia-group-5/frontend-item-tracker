@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { getAllItemsByUser } from "../../api/api";
 import Preloader from "../templates/preloader/preloader";
 
-export const FoundList = ({ params, onTotalItemsUpdate }) => {
+export const FoundList = ({
+  isPreloaderActive,
+  params,
+  onTotalItemsUpdate,
+}) => {
   const [cardItems, setCardItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,7 +41,7 @@ export const FoundList = ({ params, onTotalItemsUpdate }) => {
   }, [params]);
   return (
     <div className="flex justify-center">
-      {isLoading && <Preloader />}
+      {isPreloaderActive === undefined && isLoading && <Preloader />}
       <div className="flex flex-wrap justify-center p-4 gap-2 w-full">
         <CardDemo cardItem={cardItems} />
       </div>

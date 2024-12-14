@@ -72,14 +72,19 @@ const Homepage = () => {
             </span>
           </h1>
           <LostList
-            params={{ ...searchParams, type: "lost", limit: 12 }}
+            params={{
+              ...searchParams,
+              type: "lost",
+              limit: 24,
+              page: currentPageLost,
+            }}
             onTotalItemsUpdate={handleTotalLostItemsUpdate}
           />
           <PaginationDisplay
             currentPage={currentPageLost}
             totalItems={totalLostItems}
             onPageChange={handlePageChangeLost}
-            limit={12}
+            limit={24}
             className="mt-6"
           />
         </div>
@@ -93,14 +98,20 @@ const Homepage = () => {
             </span>
           </h1>
           <FoundList
-            params={{ ...searchParams, type: "found", limit: 12 }}
+            params={{
+              ...searchParams,
+              type: "found",
+              limit: 24,
+              page: currentPageFound,
+            }}
             onTotalItemsUpdate={handleTotalFoundItemsUpdate}
+            isPreloaderActive={false}
           />
           <PaginationDisplay
             currentPage={currentPageFound}
             totalItems={totalFoundItems}
             onPageChange={handlePageChangeFound}
-            limit={12}
+            limit={24}
             className="mt-6"
           />
         </div>
