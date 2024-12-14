@@ -19,17 +19,19 @@ import { PaginationDisplay } from "../molecules/pagination";
 import { useNavigate } from "react-router-dom";
 import Preloader from "../templates/preloader/preloader";
 import { useAuth } from "../../context/auth-context";
+import { useNotif } from "../../context/notif-context";
 
 export function Notif({ role }) {
   const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 30;
   const [notifications, setNotifications] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [totalNotif, setTotalNotif] = useState(0);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const { fetchNotif } = useNotif();
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -87,6 +89,7 @@ export function Notif({ role }) {
     try {
       await setNotificationIsRead(notifId);
       fetchNotifications();
+      fetchNotif();
     } catch (error) {
       console.error("Failed to set notification as read:", error);
     }

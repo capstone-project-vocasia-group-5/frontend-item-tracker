@@ -8,6 +8,7 @@ import HomePage from "./homepage-user";
 import ManagePengajuan from "./manage-pengajuan";
 import { useAuth } from "../context/auth-context";
 import Preloader from "../components/templates/preloader/preloader";
+import Backbuton from "../components/organisms/back-button";
 
 const menuItems = [
   {
@@ -106,9 +107,9 @@ function ProfileBase() {
               <button
                 type="button"
                 onClick={handleBackClick}
-                className="border-white bg-white md:hidden flex items-center justify-center text-center w-32 rounded-2xl h-12 relative text-black text-lg font-semibold border-4  group"
+                className="!border-white mb-6 md:mb-0 bg-white flex items-center justify-center text-center w-36 rounded-2xl h-12 relative text-black text-lg font-semibold !border-4 group"
               >
-                <div className="bg-gray-300 rounded-xl h-10 w-1/3 grid place-items-center absolute left-0 top-0 group-hover:w-full z-10 duration-500">
+                <div className="bg-black rounded-xl h-10 w-1/3 grid place-items-center absolute left-0 top-0 group-hover:w-full z-10 duration-500">
                   <svg
                     width="20px"
                     height="20px"
@@ -116,16 +117,16 @@ function ProfileBase() {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill="#000000"
+                      fill="#ffffff"
                       d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
                     />
                     <path
-                      fill="#000000"
+                      fill="#ffffff"
                       d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
                     />
                   </svg>
                 </div>
-                <p className="translate-x-3">Back</p>
+                <p className="translate-x-3 ml-5">Kembali</p>
               </button>
               {renderContent()}
             </div>

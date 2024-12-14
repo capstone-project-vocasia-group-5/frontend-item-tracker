@@ -7,6 +7,7 @@ import { useAuth } from "../context/auth-context.jsx";
 
 const Notifikasi = () => {
   const { user } = useAuth();
+
   const handleSetAllNotificationIsRead = async () => {
     try {
       const response = await setAllNotificationIsRead();

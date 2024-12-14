@@ -69,6 +69,10 @@ const Popup = ({ title, item, onClose }) => {
               ? "Ditolak"
               : "Belum Disetujui"}
           </p>
+          <p className={item.reason ? "" : "hidden"}>
+            <strong>Alasan: </strong>
+            {item.reason}
+          </p>
           <p className={item.phone_number ? "" : "hidden"}>
             <strong>Nomor Telepon:</strong> {item.phone_number}
           </p>

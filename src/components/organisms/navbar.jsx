@@ -150,7 +150,7 @@ export const Navbar = () => {
                     "/profil"
                   )}`}
                 >
-                  Profile
+                  Profil
                 </Link>
               </li>
             )}
