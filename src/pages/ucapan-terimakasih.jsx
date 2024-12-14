@@ -1,13 +1,20 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const UcapanTerimakasih = () => {
-  const summary = {
-    Nama: "Mohammad Ade Irawan",
-    Tanggal: "3 Desember, 2024",
-    Jumlah: "Rp.2.000.000",
-    Method: "BRI Virtual Account",
+  // const summary = {
+  //   Nama: "Mohammad Ade Irawan",
+  //   Tanggal: "3 Desember, 2024",
+  //   Jumlah: "Rp.2.000.000",
+  //   Method: "BRI Virtual Account",
+  // };
+
+  const navigate = useNavigate();
+
+  const handleClickToHome = () => {
+    navigate("/");
   };
 
   return (
@@ -63,7 +70,10 @@ const UcapanTerimakasih = () => {
 
         {/* Tombol Aksi */}
         <div className="text-center mt-8">
-          <Button className="bg-black hover:bg-blue-500 text-white text-xl px-6 py-3 rounded-md">
+          <Button
+            onClick={handleClickToHome}
+            className="bg-black hover:bg-[#656bfb] text-white text-xl px-6 py-3 rounded-md"
+          >
             Kembali ke Home
           </Button>
         </div>
