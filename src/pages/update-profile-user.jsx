@@ -87,7 +87,6 @@ const UpdateProfileUser = () => {
     } catch (error) {
       console.error("Error updating user:", error);
       if (error.response) {
-        console.error("Response data:", error.response.data); // Log data respons
         toast.error(
           `Gagal memperbarui profil: ${
             error.response.data.message || "Kesalahan tidak diketahui."
@@ -235,10 +234,10 @@ const UpdateProfileUser = () => {
                   }
                   placeholder="Phone Number"
                   className="w-full border px-4 py-2 rounded-r-md bg-white"
-                  pattern="[0-9]*"
-                  inputMode="numeric"
+                  pattern="[0-9+]+"
+                  inputMode="text"
                   onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key)) {
+                    if (!/[0-9+]/.test(e.key)) {
                       e.preventDefault();
                     }
                   }}
