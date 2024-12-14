@@ -285,12 +285,13 @@ const DetailItem = () => {
                                 comment?.user_id?.name[0]
                               }
                               alt="user"
+                              className="w-full h-full object-cover rounded-full"
                             />
                           </div>
                           <div className="user-info">
                             <span className="text-black">
                               {comment?.user_id
-                                ? comment?.user_id?.name
+                                ? comment?.user_id?.username
                                 : "Unknown User"}{" "}
                             </span>
                             <p>{formatDateTimeComment(comment?.created_at)}</p>
