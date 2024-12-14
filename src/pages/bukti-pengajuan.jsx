@@ -129,7 +129,7 @@ const BuktiPengajuan = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await createClaims(formData);
+      await createClaims(formData);
       setNotification("Bukti pengajuan berhasil diunggah!");
       setNotificationType("success");
 
@@ -138,8 +138,14 @@ const BuktiPengajuan = () => {
       setDescription("");
 
       setIsModalOpen(true);
+      navigate(-1);
     } catch (error) {
-      setNotification("Terjadi kesalahan saat mengunggah bukti pengajuan.");
+      if (error.response) {
+        setNotification(
+          error.response.data.errors ||
+            "Terjadi kesalahan saat mengunggah bukti pengajuan."
+        );
+      }
       setNotificationType("error");
     } finally {
       setIsSubmitting(false);
@@ -170,24 +176,18 @@ const BuktiPengajuan = () => {
       )}
 
       {/* Modal Konfirmasi */}
-      {/* {isModalOpen && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-80 text-center">
-            <h2 className="text-lg font-bold mb-4">Berhasil Upload Bukti</h2>
-            <div className="flex justify-between">
-              <Button
-                className="bg-gray-300 text-black w-24"
-                onClick={() => setIsModalOpen(false)}
-              >
-                Tutup
-              </Button>
+            <h2 className="text-lg font-bold mb-4">Pengajuan anda sedang dalam proses verifikasi, Silahkan tunggu</h2>
+            <div className="align-item-center">
               <Button className="bg-black text-white w-24" onClick={handleBack}>
                 Kembali
               </Button>
             </div>
           </div>
         </div>
-      )} */}
+      )}
 
       {/* Content */}
       <main className="flex-1 w-full max-w-screen-xl container mx-auto py-10 px-4 overflow-y-auto items-center mt-12 justify-center min-h-screen">

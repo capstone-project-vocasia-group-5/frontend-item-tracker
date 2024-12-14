@@ -71,12 +71,18 @@ const Homepage = () => {
               Barang Anda !
             </span>
           </h1>
+          <h1 className="pt-10 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl ">
+            <span className="underline underline-offset-3 decoration-8 decoration-blue-600">
+              Barang Hilang{" "}
+            </span>
+          </h1>
           <LostList
             params={{
               ...searchParams,
               type: "lost",
               limit: 24,
               page: currentPageLost,
+              matched_status: false,
             }}
             onTotalItemsUpdate={handleTotalLostItemsUpdate}
           />
@@ -103,6 +109,7 @@ const Homepage = () => {
               type: "found",
               limit: 24,
               page: currentPageFound,
+              matched_status: false,
             }}
             onTotalItemsUpdate={handleTotalFoundItemsUpdate}
             isPreloaderActive={false}

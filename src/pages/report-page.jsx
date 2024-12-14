@@ -541,9 +541,9 @@ const ReportPage = () => {
                 </label>
                 <Input
                   value={postalCode}
-                  disabled
                   className="w-full h-12"
                   placeholder="Kode Pos"
+                  onChange={(e) => setPostalCode(e.target.value)}
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ScrollArea } from "../components/ui/scroll-area.jsx";
 import { Button } from "../components/ui/button.jsx";
 import {
@@ -9,7 +9,6 @@ import {
   createComment,
   getItemById,
   getCommentByItemId,
-  getUser,
 } from "../api/api";
 import { useAuth } from "../context/auth-context";
 import { useParams } from "react-router-dom";
@@ -36,6 +35,29 @@ const DetailItem = () => {
   const [editCommentId, setEditCommentId] = useState(null);
   const [editCommentText, setEditCommentText] = useState("");
   const { user } = useAuth();
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+  const dropdownRefs = useRef({});
+
+  const toggleDropdown = (commentId) => {
+    setOpenDropdownId((prevId) => (prevId === commentId ? null : commentId));
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        openDropdownId !== null &&
+        dropdownRefs.current[openDropdownId] &&
+        !dropdownRefs.current[openDropdownId].contains(event.target)
+      ) {
+        setOpenDropdownId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openDropdownId]);
 
   const handleClickAjukan = () => {
     navigate(`/proof-of-submission/${id}`);
@@ -59,7 +81,7 @@ const DetailItem = () => {
       const response = await getItemById(id);
       setItem(response.data.data);
       if (response.data.data.item.type === "found") {
-        setStatus("Ditemukan");
+        setStatus("Sedang Mencari Pemilik");
       }
       setMainImage(response.data.data.item.images[0]);
     } catch (error) {
@@ -92,14 +114,13 @@ const DetailItem = () => {
         if (response?.status === 201) {
           await fetchComments();
           setNewCommentText("");
-          toast.success("Komentar berhasil ditambahkan!");
+          toast.success("Komentar berhasil dibuat");
         }
       } catch (error) {
         console.error("Error creating comment:", error);
         if (error.response) {
           toast.error(error.response.data?.errors || "Terjadi kesalahan");
         }
-        toast.error("Gagal menambahkan komentar.");
       }
     }
   };
@@ -110,10 +131,13 @@ const DetailItem = () => {
         await updateComment(editCommentId, { comment_text: editCommentText });
         setEditCommentId(null);
         setEditCommentText("");
-        toast.success("Komentar berhasil diperbarui !");
+        await fetchComments();
+        toast.success("Komentar berhasil diperbarui");
       } catch (error) {
         console.error("Error updating comment:", error);
-        toast.error("Gagal memperbarui komentar.");
+        if (error.response) {
+          toast.error(error.response.data?.errors || "Terjadi kesalahan");
+        }
       }
     }
   };
@@ -121,6 +145,7 @@ const DetailItem = () => {
   const handleDeleteComment = async (commentId) => {
     try {
       await deleteComment(commentId);
+      await fetchComments();
       toast.success("Komentar berhasil dihapus!");
     } catch (error) {
       console.error("Error deleting comment:", error);
@@ -190,11 +215,7 @@ const DetailItem = () => {
                 </label>
                 <div
                   className={`inline-block px-4 py-1 rounded-full text-white font-medium ${
-                    status === "Dicari"
-                      ? "bg-red-500"
-                      : status === "Ditemukan"
-                      ? "bg-green-500"
-                      : "bg-gray-500"
+                    status === "Dicari" ? "bg-red-500" : "bg-gray-500"
                   }`}
                 >
                   {status}
@@ -244,39 +265,8 @@ const DetailItem = () => {
               {comments?.length > 0 ? (
                 comments.map((comment, index) => (
                   <div key={index}>
-                    <div className="comments ">
-                      <div className="comment-react">
-                        {user?.id === comment?.user_id?.id && (
-                          <>
-                            <button
-                              onClick={() => {
-                                setEditCommentId(comment.id);
-                                setEditCommentText(comment.comment_text);
-                              }}
-                            >
-                              <div
-                                class="flex items-center justify-center p-2 cursor-pointer rounded-md text-neutral-500 hover:text-neutral-100 hover:bg-neutral-500 font-medium relative z-[9999999999] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:ml-2 data-[tooltip]:after:text-sm data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-left data-[tooltip]:after:opacity-0 hover:data-[tooltip]:after:visible hover:data-[tooltip]:after:opacity-100 hover:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-white data-[tooltip]:after:top-1/2 data-[tooltip]:after:left-[calc(100%+4px)] data-[tooltip]:after:-translate-y-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-2.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:ml-2 data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-zinc-800 data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[10px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 hover:data-[tooltip]:before:visible hover:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-white data-[tooltip]:before:[clip-path:polygon(0_50%,100%_0,100%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:top-1/2 data-[tooltip]:before:left-full data-[tooltip]:before:-translate-y-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-[4px] data-[tooltip]:before:h-3"
-                                data-tooltip="Edit"
-                              >
-                                ✏️
-                              </div>
-                            </button>
-                            <hr />
-                            <button
-                              onClick={() => handleDeleteComment(comment.id)}
-                            >
-                              <div
-                                class="flex items-center justify-center p-2 cursor-pointer rounded-md text-neutral-500 hover:text-neutral-100 hover:bg-neutral-500 font-medium relative z-[9999999999] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:ml-2 data-[tooltip]:after:text-sm data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-left data-[tooltip]:after:opacity-0 hover:data-[tooltip]:after:visible hover:data-[tooltip]:after:opacity-100 hover:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-white data-[tooltip]:after:top-1/2 data-[tooltip]:after:left-[calc(100%+4px)] data-[tooltip]:after:-translate-y-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-2.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:ml-2 data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-zinc-800 data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[10px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 hover:data-[tooltip]:before:visible hover:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-white data-[tooltip]:before:[clip-path:polygon(0_50%,100%_0,100%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:top-1/2 data-[tooltip]:before:left-full data-[tooltip]:before:-translate-y-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-[4px] data-[tooltip]:before:h-3"
-                                data-tooltip="Hapus"
-                              >
-                                🗑️
-                              </div>
-                            </button>
-                          </>
-                        )}
-                      </div>
-
-                      <div className="comment-container">
+                    <div className="comments flex gap-4 items-center justify-between">
+                      <div className="comment-container ">
                         <div className="user">
                           <div className="user-pic w-10 h-10 relative flex items-center justify-center bg-gray-200 rounded-full">
                             <img
@@ -319,12 +309,67 @@ const DetailItem = () => {
                           )}
                         </p>
                       </div>
+                      <div className="relative">
+                        {user?.id === comment?.user_id?.id && (
+                          <div>
+                            <button
+                              onClick={() => toggleDropdown(comment.id)}
+                              className="p-2 bg-transparent  text-black rounded-md hover:bg-gray-200"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="size-6"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm0 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </button>
+
+                            {openDropdownId === comment.id && (
+                              <div
+                                ref={(el) =>
+                                  (dropdownRefs.current[comment.id] = el)
+                                }
+                                className="absolute flex flex-col gap-1 right-0 mt-2 w-24 md:w-48 bg-white border rounded-md shadow-lg z-10"
+                                style={{ top: "-2rem" }}
+                              >
+                                <button
+                                  onClick={() => {
+                                    setEditCommentId(comment.id);
+                                    setEditCommentText(comment.comment_text);
+                                  }}
+                                  className="block w-full text-left px-4 py-2 bg-blue-500 hover:text-black text-white hover:bg-gray-100"
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleDeleteComment(comment.id)
+                                  }
+                                  className="block w-full text-left px-4 py-2 bg-red-500 hover:text-black text-white hover:bg-gray-100"
+                                >
+                                  Hapus
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <hr />
                   </div>
                 ))
               ) : (
-                <p className="flex justify-center">Belum ada komentar</p>
+                <div className="mt-8">
+                  <p className="flex justify-center items-center">
+                    Belum ada komentar
+                  </p>
+                </div>
               )}
             </ScrollArea>
 

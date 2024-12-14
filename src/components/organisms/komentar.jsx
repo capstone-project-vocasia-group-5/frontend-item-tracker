@@ -11,13 +11,11 @@ const Komentar = ({ comments, item }) => {
 
   const handleEdit = () => {
     // Fungsi untuk mengedit komentar (misalnya membuka form edit)
-    console.log("Edit comment");
     setShowOptions(false); // Menutup pilihan setelah klik
   };
 
   const handleDelete = () => {
     // Fungsi untuk menghapus komentar
-    console.log("Delete comment");
     setShowOptions(false); // Menutup pilihan setelah klik
   };
 

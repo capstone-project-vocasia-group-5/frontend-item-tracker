@@ -46,6 +46,7 @@ const FoundPage = () => {
               type: "found",
               limit: "30",
               page: currentPage,
+              matched_status: false,
             }}
             onTotalItemsUpdate={handleTotalItemsUpdate}
           />

@@ -46,6 +46,7 @@ const LostPage = () => {
               type: "lost",
               limit: "30",
               page: currentPage,
+              matched_status: false,
             }}
             onTotalItemsUpdate={handleTotalItemsUpdate}
           />
