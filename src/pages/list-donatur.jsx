@@ -13,22 +13,40 @@ const Donatur = () => {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-
+  
     const fetchDonations = async () => {
       try {
         const response = await getDonations();
         if (isMounted) {
           const donations = response.data.data.donations;
-
-          const investorsList = donations.filter(
-            (donation) => donation.amount > 10000000
+  
+          // Unique Name (Case insensitive)
+          const uniqueInvestors = Array.from(
+            new Set(
+              donations
+                .filter((donation) => donation.amount >= 10000000)
+                .map((donation) => donation.name.toLowerCase()) 
+            )
+          ).map((name) =>
+            donations.find(
+              (donation) => donation.name.toLowerCase() === name 
+            )
           );
-          const donatorsList = donations.filter(
-            (donation) => donation.amount <= 10000000
+  
+          const uniqueDonators = Array.from(
+            new Set(
+              donations
+                .filter((donation) => donation.amount < 10000000)
+                .map((donation) => donation.name.toLowerCase())
+            )
+          ).map((name) =>
+            donations.find(
+              (donation) => donation.name.toLowerCase() === name 
+            )
           );
-
-          setInvestors(investorsList);
-          setDonators(donatorsList);
+  
+          setInvestors(uniqueInvestors);
+          setDonators(uniqueDonators);
         }
       } catch (error) {
         console.error("Error fetching donations:", error);
@@ -38,9 +56,9 @@ const Donatur = () => {
         }
       }
     };
-
+  
     fetchDonations();
-
+  
     return () => {
       isMounted = false;
     };
@@ -49,32 +67,31 @@ const Donatur = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
       {loading && <Preloader />}
-      {/* Navbar */}
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <Navbar />
       </header>
 
-      {/* Main Content */}
       <main className="flex-grow container mx-auto py-8 px-4 md:px-8">
         <h1 className="text-center text-4xl font-bold mb-6 text-gray-800 mt-8">
           Donatur Kami
         </h1>
+
         {/* Investors Section */}
         <div className="mb-6">
           <CardHeader>
             <CardTitle className="text-left text-xl font-semibold mb-4 text-gray-700">
-              Investor (&gt; IDR 10 JUTA)
+              Donatur (&gt; IDR 10 JUTA)
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
             {investors.length > 0 ? (
-              <ul className="list-none space-y-2 text-left text-gray-600">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left text-gray-600">
                 {investors.map((investor, index) => (
-                  <li key={index}>{investor.name}</li>
+                  <p key={index} className="text-center">{investor.name}</p>
                 ))}
-              </ul>
+              </div>
             ) : (
-              <p className="text-gray-600">Belum ada investor.</p>
+              <p className="text-gray-600">Belum ada donatur.</p>
             )}
           </CardContent>
         </div>
@@ -88,9 +105,9 @@ const Donatur = () => {
           </CardHeader>
           <CardContent className="bg-white rounded-md shadow-sm p-6">
             {donators.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-y-4 text-left text-gray-600">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left text-gray-600">
                 {donators.map((donator, index) => (
-                  <p key={index}>{donator.name}</p>
+                  <p key={index} className="text-center">{donator.name}</p>
                 ))}
               </div>
             ) : (
@@ -158,7 +175,6 @@ const Donatur = () => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="mt-8">
         <Footer />
       </footer>
