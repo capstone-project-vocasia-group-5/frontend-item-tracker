@@ -129,7 +129,7 @@ const BuktiPengajuan = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await createClaims(formData);
+      await createClaims(formData);
       setNotification("Bukti pengajuan berhasil diunggah!");
       setNotificationType("success");
 
@@ -138,8 +138,14 @@ const BuktiPengajuan = () => {
       setDescription("");
 
       setIsModalOpen(true);
+      navigate(-1);
     } catch (error) {
-      setNotification("Terjadi kesalahan saat mengunggah bukti pengajuan.");
+      if (error.response) {
+        setNotification(
+          error.response.data.errors ||
+            "Terjadi kesalahan saat mengunggah bukti pengajuan."
+        );
+      }
       setNotificationType("error");
     } finally {
       setIsSubmitting(false);

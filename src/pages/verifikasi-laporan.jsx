@@ -24,7 +24,6 @@ const VerifikasiLaporan = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    console.log(`Navigated to page ${page}`);
   };
 
   useEffect(() => {
