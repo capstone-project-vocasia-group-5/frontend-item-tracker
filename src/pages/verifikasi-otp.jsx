@@ -49,7 +49,7 @@ function VerifikasiOTP() {
       const token = response.data.data.token;
       localStorage.setItem("token", token);
       toast.success(response.data?.message || "Verifikasi berhasil");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
@@ -93,6 +93,8 @@ function VerifikasiOTP() {
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 ref={(el) => (inputRefs.current[index] = el)}
                 maxLength={1}
+                inputMode="numeric"
+                pattern="[0-9]*"
                 className="w-12 h-12 text-center bg-white text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
               />
             ))}
