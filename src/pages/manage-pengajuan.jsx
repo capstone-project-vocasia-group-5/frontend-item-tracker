@@ -9,7 +9,6 @@ import { toast } from "sonner";
 import Popup from "../components/molecules/Popup";
 import Preloader from "../components/templates/preloader/preloader";
 import { useAuth } from "../context/auth-context";
-import { Button } from "../components/ui/button";
 
 const ManagePengajuan = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -237,7 +236,9 @@ const ManagePengajuan = () => {
                   <tr>
                     <th className="p-4 text-center">Nama</th>
                     <th className="p-4  text-center">Nama Barang</th>
-                    <th className="p-4  text-center">Deskripsi</th>
+                    <th className="p-4 hidden md:block text-center">
+                      Deskripsi
+                    </th>
                     <th className="p-4 text-center">Aksi</th>
                   </tr>
                 </thead>
@@ -250,7 +251,9 @@ const ManagePengajuan = () => {
                           : item?.to_user?.id?.name}
                       </td>
                       <td className="p-4 ">{item?.item_id?.name}</td>
-                      <td className="p-4 ">{item.claim_text}</td>
+                      <td className="p-4 hidden md:block ">
+                        {item.claim_text}
+                      </td>
                       <td className="p-4">
                         <div className="flex justify-center items-center space-x-2">
                           {/* Tombol Aksi (Full view) */}
@@ -556,6 +559,7 @@ const ManagePengajuan = () => {
             name: selectedClaim.item_id.name,
             description: selectedClaim.claim_text,
             status: true,
+            reason: selectedClaim.messages,
             is_approved: selectedClaim.is_approved,
             phone_number: null,
             village: null,

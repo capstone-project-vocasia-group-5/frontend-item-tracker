@@ -182,7 +182,7 @@ const ManageLaporanUser = () => {
           <div className="bg-white shadow-md rounded-md overflow-hidden">
             {/* Search Bar */}
             <form className="max-w-lg mx-auto my-6 px-4">
-              <div className="p-5">
+              <div className="p-4">
                 <div className="flex border rounded-md">
                   <input
                     type="search"
@@ -217,14 +217,16 @@ const ManageLaporanUser = () => {
             </form>
 
             {/* Table */}
-            <div className="px-4 sm:px-9 md:px-7 overflow-x-auto">
+            <div className="px-4 overflow-x-auto">
               <table className="w-full bg-white table-fixed rounded-md">
                 <thead className="bg-black text-white">
                   <tr>
-                    <th className="p-4 text-center w-1/4">Gambar</th>
-                    <th className="p-4 text-center w-1/4">Nama Barang</th>
-                    <th className="p-4 text-center w-1/4">Kategori</th>
-                    <th className="p-4 text-center w-1/4">Aksi</th>
+                    <th className="p-4 text-center ">Gambar</th>
+                    <th className="p-4 text-center ">Nama Barang</th>
+                    <th className="p-4 text-center hidden md:block">
+                      Kategori
+                    </th>
+                    <th className="p-4 text-center ">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500 text-center">
@@ -242,7 +244,7 @@ const ManageLaporanUser = () => {
                         </div>
                       </td>
                       <td className="p-4">{item.name}</td>
-                      <td className="p-4">
+                      <td className="p-4 hidden my-8 md:block">
                         {item.categories.length > 0
                           ? item.categories
                               .map((category) => category.name)
@@ -277,34 +279,37 @@ const ManageLaporanUser = () => {
                                   ref={(el) =>
                                     (dropdownRefs.current[item._id] = el)
                                   }
-                                  className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
+                                  className="absolute flex flex-col gap-1 right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
                                   style={{ top: "-4rem" }}
                                 >
                                   <button
                                     onClick={() => handleItemDetail(item)}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                    className="block w-full text-left px-4 py-2 bg-black hover:text-black text-white hover:bg-gray-100"
                                   >
                                     Lihat Detail
                                   </button>
-                                  <button
-                                    onClick={() => handleEditItem(item)}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                  >
-                                    Edit
-                                  </button>
+
                                   {!item.matched_status && (
-                                    <button
-                                      onClick={() =>
-                                        handleMatchedStatus(item._id)
-                                      }
-                                      className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                                    >
-                                      Setuju
-                                    </button>
+                                    <>
+                                      <button
+                                        onClick={() => handleEditItem(item)}
+                                        className="block w-full text-left px-4 py-2 bg-blue-500 hover:text-black text-white hover:bg-gray-100"
+                                      >
+                                        Edit
+                                      </button>
+                                      <button
+                                        onClick={() =>
+                                          handleMatchedStatus(item._id)
+                                        }
+                                        className="block w-full text-left px-4 bg-green-500 text-white hover:text-black py-2 hover:bg-gray-100"
+                                      >
+                                        Selesaikan Laporan
+                                      </button>
+                                    </>
                                   )}
                                   <button
                                     onClick={() => handleDeleteItem(item._id)}
-                                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                    className="block w-full text-left px-4 py-2 bg-red-500 hover:text-black text-white hover:bg-gray-100"
                                   >
                                     Hapus
                                   </button>
@@ -338,50 +343,54 @@ const ManageLaporanUser = () => {
                                 </div>
                               </button>
 
-                              <button
-                                onClick={() => handleEditItem(item)}
-                                className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center justify-center"
-                              >
-                                <div
-                                  class="flex items-center justify-center cursor-pointer rounded-md font-medium relative z-[9999999999] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:mt-2 data-[tooltip]:after:text-sm data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-top data-[tooltip]:after:opacity-0 hover:data-[tooltip]:after:visible hover:data-[tooltip]:after:opacity-100 hover:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-white data-[tooltip]:after:top-[calc(100%+4px)] data-[tooltip]:after:left-1/2 data-[tooltip]:after:-translate-x-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-2.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:mt-2 data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-zinc-800 data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[10px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 hover:data-[tooltip]:before:visible hover:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-white data-[tooltip]:before:[clip-path:polygon(50%_0,0_100%,100%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:top-full data-[tooltip]:before:left-1/2 data-[tooltip]:before:-translate-x-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-3 data-[tooltip]:before:h-[4px]"
-                                  data-tooltip="Edit"
-                                >
-                                  {" "}
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    className="w-5 h-5"
-                                  >
-                                    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-                                    <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                                  </svg>
-                                </div>
-                              </button>
                               {!item.matched_status && (
-                                <button
-                                  onClick={() => handleMatchedStatus(item._id)}
-                                  className="p-2 bg-green-500 text-white rounded hover:bg-green-600  flex items-center justify-center"
-                                >
-                                  <div
-                                    class="flex items-center justify-center cursor-pointer rounded-md font-medium relative z-[9999999999] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:mt-2 data-[tooltip]:after:text-sm data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-top data-[tooltip]:after:opacity-0 hover:data-[tooltip]:after:visible hover:data-[tooltip]:after:opacity-100 hover:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-white data-[tooltip]:after:top-[calc(100%+4px)] data-[tooltip]:after:left-1/2 data-[tooltip]:after:-translate-x-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-2.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:mt-2 data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-zinc-800 data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[10px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 hover:data-[tooltip]:before:visible hover:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-white data-[tooltip]:before:[clip-path:polygon(50%_0,0_100%,100%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:top-full data-[tooltip]:before:left-1/2 data-[tooltip]:before:-translate-x-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-3 data-[tooltip]:before:h-[4px]"
-                                    data-tooltip="Sudah Ditemukan?"
+                                <>
+                                  <button
+                                    onClick={() =>
+                                      handleMatchedStatus(item._id)
+                                    }
+                                    className="p-2 bg-green-500 text-white rounded hover:bg-green-600  flex items-center justify-center"
                                   >
-                                    {" "}
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 24 24"
-                                      fill="currentColor"
-                                      className="w-5 h-5"
+                                    <div
+                                      class="flex items-center justify-center cursor-pointer rounded-md font-medium relative z-[9999999999] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:mt-2 data-[tooltip]:after:text-sm data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-top data-[tooltip]:after:opacity-0 hover:data-[tooltip]:after:visible hover:data-[tooltip]:after:opacity-100 hover:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-white data-[tooltip]:after:top-[calc(100%+4px)] data-[tooltip]:after:left-1/2 data-[tooltip]:after:-translate-x-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-2.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:mt-2 data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-zinc-800 data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[10px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 hover:data-[tooltip]:before:visible hover:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-white data-[tooltip]:before:[clip-path:polygon(50%_0,0_100%,100%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:top-full data-[tooltip]:before:left-1/2 data-[tooltip]:before:-translate-x-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-3 data-[tooltip]:before:h-[4px]"
+                                      data-tooltip="Selesaikan Laporan!"
                                     >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
-                                        clipRule="evenodd"
-                                      />
-                                    </svg>
-                                  </div>
-                                </button>
+                                      {" "}
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        className="w-5 h-5"
+                                      >
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </div>
+                                  </button>
+                                  <button
+                                    onClick={() => handleEditItem(item)}
+                                    className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center justify-center"
+                                  >
+                                    <div
+                                      class="flex items-center justify-center cursor-pointer rounded-md font-medium relative z-[9999999999] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:mt-2 data-[tooltip]:after:text-sm data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-top data-[tooltip]:after:opacity-0 hover:data-[tooltip]:after:visible hover:data-[tooltip]:after:opacity-100 hover:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-white data-[tooltip]:after:top-[calc(100%+4px)] data-[tooltip]:after:left-1/2 data-[tooltip]:after:-translate-x-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-2.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:mt-2 data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-zinc-800 data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[10px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 hover:data-[tooltip]:before:visible hover:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-white data-[tooltip]:before:[clip-path:polygon(50%_0,0_100%,100%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:top-full data-[tooltip]:before:left-1/2 data-[tooltip]:before:-translate-x-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-3 data-[tooltip]:before:h-[4px]"
+                                      data-tooltip="Edit"
+                                    >
+                                      {" "}
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        className="w-5 h-5"
+                                      >
+                                        <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                        <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                      </svg>
+                                    </div>
+                                  </button>
+                                </>
                               )}
                               <button
                                 onClick={() => handleDeleteItem(item._id)}
@@ -392,16 +401,32 @@ const ManageLaporanUser = () => {
                                   data-tooltip="Hapus"
                                 >
                                   <svg
-                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
                                     viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    className="w-5 h-5"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
                                   >
                                     <path
-                                      fillRule="evenodd"
-                                      d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 ```javascript
-.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                                      clipRule="evenodd"
+                                      d="M4 7H20"
+                                      stroke="currentColor"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                    <path
+                                      d="M6 7V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V7"
+                                      stroke="currentColor"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                    <path
+                                      d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+                                      stroke="currentColor"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
                                     />
                                   </svg>
                                 </div>
