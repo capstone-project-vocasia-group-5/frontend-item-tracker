@@ -107,3 +107,7 @@ export const createClaims = (data) => api.post("/claims", data);
 
 // contact
 export const sendEmail = (data) => api.post("/send-mail", data);
+
+// category items
+export const getAllCategoriesWithTotal = () =>
+  api.get(`/admin/category-items/total`);

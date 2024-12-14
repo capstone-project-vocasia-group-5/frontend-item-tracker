@@ -49,20 +49,6 @@ const UpdateProfileUser = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Menghapus karakter non-digit
-    const phoneNumber = formData.phone_number.replace(/\D/g, "");
-
-    // Coba kirim nomor telepon tanpa angka nol di depan
-    const formattedPhoneNumber = phoneNumber.startsWith("0")
-      ? phoneNumber.slice(1)
-      : phoneNumber;
-
-    if (formattedPhoneNumber.length < 8 || formattedPhoneNumber.length > 13) {
-      toast.error("Nomor telepon harus memiliki 8 hingga 13 digit.");
-      setLoading(false);
-      return; // Hentikan eksekusi jika validasi gagal
-    }
-
     const dataToSend = new FormData();
     dataToSend.append("name", formData.name);
     dataToSend.append("username", formData.username);
@@ -70,7 +56,7 @@ const UpdateProfileUser = () => {
     if (formData.password) {
       dataToSend.append("password", formData.password);
     }
-    dataToSend.append("phone_number", formattedPhoneNumber); // Menggunakan nomor telepon yang sudah diformat
+    dataToSend.append("phone_number", formData.phone_number); // Menggunakan nomor telepon yang sudah diformat
     if (formData.images) {
       dataToSend.append("images", formData.images); // Kirim file gambar baru
     }
@@ -87,11 +73,7 @@ const UpdateProfileUser = () => {
     } catch (error) {
       console.error("Error updating user:", error);
       if (error.response) {
-        toast.error(
-          `Gagal memperbarui profil: ${
-            error.response.data.message || "Kesalahan tidak diketahui."
-          }`
-        );
+        toast.error(error.response.data.errors || "Kesalahan tidak diketahui.");
       } else {
         toast.error("Gagal memperbarui profil.");
       }

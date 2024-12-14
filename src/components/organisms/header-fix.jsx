@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import dog from "/public/image/dog.jpg";
-import cat from "/public/image/cat.jpg";
-import key from "/public/image/key.jpg";
+import dog from "/image/dog.jpg";
+import cat from "/image/cat.jpg";
+import key from "/image/key.jpg";
 
 export const HeaderFix = () => {
   const [currentBgIndex, setCurrentBgIndex] = useState(0);

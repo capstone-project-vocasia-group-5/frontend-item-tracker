@@ -14,7 +14,7 @@ import {
   getNotificationByUser,
   setNotificationIsRead,
 } from "../../api/api";
-import newNotif from "/public/image/new-notif.svg";
+import newNotif from "/image/new-notif.svg";
 import { PaginationDisplay } from "../molecules/pagination";
 import { useNavigate } from "react-router-dom";
 import Preloader from "../templates/preloader/preloader";
