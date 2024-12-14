@@ -5,8 +5,8 @@ const PopupAvatar = ({ onLogout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    onLogout(); 
-    navigate("/"); 
+    onLogout();
+    navigate("/");
   };
 
   return (
@@ -15,15 +15,15 @@ const PopupAvatar = ({ onLogout }) => {
         <li>
           <Link
             to="/user"
-            className="block px-4 py-3 bg-white text-sm font-medium text-gray-800 hover:bg-green-300 hover:text-black transition rounded-lg"
+            className="block px-4  text-start py-3 bg-white text-sm font-extrabold text-gray-800 hover:bg-green-300 hover:text-white transition rounded-lg"
           >
             Akun
           </Link>
         </li>
         <li>
           <button
-            onClick={handleLogout} 
-            className="w-full bg-white block px-4 py-2 text-sm font-medium text-black hover:bg-red-500 hover:border-red-500 hover:text-white transition border-2"
+            onClick={handleLogout}
+            className="w-full text-start bg-white block px-4 py-2 text-sm font-medium text-black hover:bg-red-500 hover:border-red-500 hover:text-white transition border-2"
           >
             Keluar
           </button>
