@@ -9,9 +9,11 @@ import { useAuth } from "../../context/auth-context";
 import { Link } from "react-router-dom";
 import BeatLoader from "react-spinners/BeatLoader";
 import { useNotif } from "../../context/notif-context";
+import PopupAvatar from "./pop-up-avatar";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false); 
   const navigate = useNavigate();
   const location = useLocation();
   const [isBeatLoaderVisible, setIsBeatLoaderVisible] = useState(true);
@@ -34,6 +36,15 @@ export const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/"); 
   };
 
   const isActive = (path) =>
@@ -59,16 +70,20 @@ export const Navbar = () => {
                 </Avatar>
               </Link>
             </div>
-          ) : user && user.role === "user" ? (
-            <div className="cursor-pointer hidden md:block">
-              <Link to="/user">
+          ) : user ? (
+            <div className="relative">
+              <Link
+                onClick={togglePopup}
+                className="cursor-pointer"
+              >
                 <Avatar>
                   <AvatarImage src={user.image_url} alt={user.name[0]} />
-                  <AvatarFallback className="text-black">
+                  <AvatarFallback className="text-black bg-white">
                     {user.name[0]}
                   </AvatarFallback>
                 </Avatar>
               </Link>
+              {isPopupOpen && <PopupAvatar onLogout={handleLogout} />} 
             </div>
           ) : (
             <div className="hidden md:block">
