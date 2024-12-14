@@ -39,7 +39,6 @@ const ManageLaporanUser = () => {
   const fetchData = async () => {
     try {
       const response = await getAllOwnItemsByUser({ own: true });
-      console.log("Fetched data:", response.data);
       setData(response.data.data.items);
       setFilteredData(response.data.data.items);
     } catch (error) {
@@ -82,7 +81,6 @@ const ManageLaporanUser = () => {
   };
 
   const handleMatchedStatus = async (id) => {
-    console.log("Updating matched status for ID:", id);
     try {
       await updateMatchedStatus(id);
       fetchData();

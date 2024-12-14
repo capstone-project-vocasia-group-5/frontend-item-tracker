@@ -81,7 +81,7 @@ const DetailItem = () => {
       const response = await getItemById(id);
       setItem(response.data.data);
       if (response.data.data.item.type === "found") {
-        setStatus("Ditemukan");
+        setStatus("Sedang Mencari Pemilik");
       }
       setMainImage(response.data.data.item.images[0]);
     } catch (error) {
@@ -215,11 +215,7 @@ const DetailItem = () => {
                 </label>
                 <div
                   className={`inline-block px-4 py-1 rounded-full text-white font-medium ${
-                    status === "Dicari"
-                      ? "bg-red-500"
-                      : status === "Ditemukan"
-                      ? "bg-green-500"
-                      : "bg-gray-500"
+                    status === "Dicari" ? "bg-red-500" : "bg-gray-500"
                   }`}
                 >
                   {status}
@@ -339,8 +335,8 @@ const DetailItem = () => {
                                 ref={(el) =>
                                   (dropdownRefs.current[comment.id] = el)
                                 }
-                                className="absolute flex flex-col gap-1 right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10"
-                                style={{ top: "-4rem" }}
+                                className="absolute flex flex-col gap-1 right-0 mt-2 w-24 md:w-48 bg-white border rounded-md shadow-lg z-10"
+                                style={{ top: "-2rem" }}
                               >
                                 <button
                                   onClick={() => {
