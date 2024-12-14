@@ -13,7 +13,7 @@ import PopupAvatar from "./pop-up-avatar";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const [isBeatLoaderVisible, setIsBeatLoaderVisible] = useState(true);
@@ -44,7 +44,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/"); 
+    navigate("/");
   };
 
   const isActive = (path) =>
@@ -71,11 +71,8 @@ export const Navbar = () => {
               </Link>
             </div>
           ) : user ? (
-            <div className="relative">
-              <Link
-                onClick={togglePopup}
-                className="cursor-pointer"
-              >
+            <div className="relative hidden md:block">
+              <Link onClick={togglePopup} className="cursor-pointer">
                 <Avatar>
                   <AvatarImage src={user.image_url} alt={user.name[0]} />
                   <AvatarFallback className="text-black bg-white">
@@ -83,7 +80,7 @@ export const Navbar = () => {
                   </AvatarFallback>
                 </Avatar>
               </Link>
-              {isPopupOpen && <PopupAvatar onLogout={handleLogout} />} 
+              {isPopupOpen && <PopupAvatar onLogout={handleLogout} />}
             </div>
           ) : (
             <div className="hidden md:block">
@@ -162,10 +159,10 @@ export const Navbar = () => {
                 <Link
                   to="/user"
                   className={`block py-1 px-3 rounded-full ${isActive(
-                    "/profil"
+                    "/user"
                   )}`}
                 >
-                  Profil
+                  Menu
                 </Link>
               </li>
             )}
