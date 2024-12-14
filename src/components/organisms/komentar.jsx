@@ -77,7 +77,6 @@ const Komentar = ({ comments, item }) => {
                       item?.type === "lost" ? (
                         <span className="text-black">
                           {comment.user_id.name}{" "}
-                          <span className="!text-red-500">(Pemilik)</span>
                         </span>
                       ) : item?.user_id === comment.user_id.id &&
                         item?.type === "found" ? (
