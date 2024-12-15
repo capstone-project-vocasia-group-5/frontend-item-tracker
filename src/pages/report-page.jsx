@@ -149,12 +149,14 @@ const ReportPage = () => {
     setSelectedImage(image);
   };
 
-  const handleRemoveImage = (image) => {
+  const handleRemoveImage = (index) => {
     setFiles((prevFiles) => {
-      const updatedFiles = prevFiles.filter((file) => file !== image);
-      if (selectedImage === image) {
-        setSelectedImage(updatedFiles[0] || null);
-      }
+      const updatedFiles = prevFiles.filter((index) => index !== index);
+      setSelectedImage(null);
+      return updatedFiles;
+    });
+    setInputFiles((prevFiles) => {
+      const updatedFiles = prevFiles.filter((index) => index !== index);
       return updatedFiles;
     });
   };
@@ -358,7 +360,7 @@ const ReportPage = () => {
                     {/* Icon Delete (x) */}
                     <button
                       className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md"
-                      onClick={() => handleRemoveImage(file)}
+                      onClick={() => handleRemoveImage(index)}
                     >
                       X
                     </button>
@@ -576,10 +578,17 @@ const ReportPage = () => {
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 w-[500px] text-center">
-              <h2 className="text-lg font-bold">Pengajuan anda sedang dalam proses verifikasi</h2>
-              <h2 className="text-lg font-bold mb-4">Silahkan tunggu persetujuan Admin</h2>
+              <h2 className="text-lg font-bold">
+                Pengajuan anda sedang dalam proses verifikasi
+              </h2>
+              <h2 className="text-lg font-bold mb-4">
+                Silahkan tunggu persetujuan Admin
+              </h2>
               <div className="align-item-center">
-                <Button className="bg-black text-white w-24" onClick={handleBack}>
+                <Button
+                  className="bg-black text-white w-24"
+                  onClick={handleBack}
+                >
                   Kembali
                 </Button>
               </div>

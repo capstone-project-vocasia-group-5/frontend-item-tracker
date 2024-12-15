@@ -18,7 +18,7 @@ const VerifikasiLaporan = () => {
   const [openRejectPopup, setOpenRejectPopup] = useState(false);
   const [rejectMessage, setRejectMessage] = useState("");
   const dropdownRefs = useRef({});
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ const VerifikasiLaporan = () => {
       } catch (error) {
         toast.error("Error fetching data: ", error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
     fetchItems();
@@ -83,7 +83,7 @@ const VerifikasiLaporan = () => {
 
   const handleCloseRejectPopup = () => {
     setOpenRejectPopup(false);
-    setRejectMessage(""); 
+    setRejectMessage("");
   };
 
   const handleApprove = async (itemId) => {
@@ -323,7 +323,7 @@ const VerifikasiLaporan = () => {
                                 .join(", ")}
                             </td>
                             <td className="p-4 text-center">
-                              {item.approved ? "Terima" : "Tolak"}
+                              Perlu Verifikasi
                             </td>
                             <td className="p-4 text-center">
                               <div className="flex justify-center flex-wrap space-x-2 sm:space-x-3">
