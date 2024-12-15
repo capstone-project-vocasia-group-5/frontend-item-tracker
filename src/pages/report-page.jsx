@@ -45,6 +45,7 @@ const ReportPage = () => {
   const [districtID, setDistrictID] = useState("");
   const [description, setDescription] = useState("");
   const [inputFiles, setInputFiles] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -77,6 +78,7 @@ const ReportPage = () => {
       if (response.status === 201) {
         toast.success(response?.data?.message);
       }
+      setIsModalOpen(true);
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
@@ -126,6 +128,9 @@ const ReportPage = () => {
     if (!selectedImage && newFiles.length > 0) {
       setSelectedImage(URL.createObjectURL(newFiles[0]));
     }
+  };
+  const handleBack = () => {
+    navigate(-1);
   };
 
   const handleNextImage = () => {
@@ -567,6 +572,20 @@ const ReportPage = () => {
             />
           </div>
         </div>
+        {/* Modal Konfirmasi */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-[500px] text-center">
+              <h2 className="text-lg font-bold">Pengajuan anda sedang dalam proses verifikasi</h2>
+              <h2 className="text-lg font-bold mb-4">Silahkan tunggu persetujuan Admin</h2>
+              <div className="align-item-center">
+                <Button className="bg-black text-white w-24" onClick={handleBack}>
+                  Kembali
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
         {/* Upload Button */}
         <div className="mt-6 flex justify-center">
           <Button
