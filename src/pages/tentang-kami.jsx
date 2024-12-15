@@ -64,7 +64,7 @@ const TentangKami = () => {
           <div className="w-full md:w-2/3 mt-8 md:mt-0 md:ml-8 text-left">
             <h1 className="text-4xl font-bold leading-tight mb-4">
               Sekilas Tentang{" "}
-              <LogoItemTracker className={`text-blue-500 text-4xl`} />
+              <LogoItemTracker className={`text-[#656bfb] text-4xl`} />
             </h1>
             <p className="text-lg leading-relaxed mb-6">
               Item Tracker adalah solusi digital yang membantu anda melacak
@@ -76,10 +76,10 @@ const TentangKami = () => {
         </div>
       </header>
       {/* Konten Utama */}
-      <main className="container mx-auto max-w-full py-12 px-6">
-        <section className="mb-12">
+      <main className="container mx-auto min-h-screen max-w-full py-12 px-6">
+        <section className="mb-12 max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-800 mb-10">Tim Kami</h2>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center  gap-4">
             {members.map((member, index) => (
               <KamiCard
                 key={index}
@@ -100,7 +100,7 @@ const TentangKami = () => {
             {/* Kolom Kiri */}
 
             <div className="lg:w-1/3 mb-10 lg:mb-0">
-              <h2 className="text-5xl font-bold text-gray-800 mb-4 ">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4 ">
                 Pintu kami selalu terbuka!
               </h2>
 
