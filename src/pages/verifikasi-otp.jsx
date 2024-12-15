@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { verifyOTP } from "../api/api";
 import LogoItemTracker from "../components/atoms/logo-item-tracker";
+import { useAuth } from "../context/auth-context";
 
 function VerifikasiOTP() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -10,6 +11,7 @@ function VerifikasiOTP() {
   const navigate = useNavigate();
   const email = localStorage.getItem("email");
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleSendOTP = () => {
     navigate("/send-otp");
@@ -47,9 +49,14 @@ function VerifikasiOTP() {
       const response = await verifyOTP({ email, otp: otp.join("") });
 
       const token = response.data.data.token;
-      localStorage.setItem("token", token);
       toast.success(response.data?.message || "Verifikasi berhasil");
-      navigate("/login");
+
+      login(token);
+      if (response.data?.data?.user?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data?.errors || "Terjadi kesalahan");
