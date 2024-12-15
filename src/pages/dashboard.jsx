@@ -1,7 +1,12 @@
 import { useSidebar } from "@/components/ui/sidebar";
 import React, { useEffect, useState } from "react";
 import { getTotalAmountDonations } from "../api/api";
-import { getAllUsers, getAllItemsByAdmin, getAllCategories } from "../api/api";
+import {
+  getAllUsers,
+  getAllItemsByAdmin,
+  getAllCategories,
+  getAllMatchedStatus,
+} from "../api/api";
 import Preloader from "../components/templates/preloader/preloader";
 
 function Dashboard() {
@@ -18,11 +23,8 @@ function Dashboard() {
   useEffect(() => {
     const fetchTotalFoundItems = async () => {
       try {
-        const response = await getAllItemsByAdmin();
-        const foundItems =
-          response.data?.data?.items?.filter((item) => item.type === "found") ||
-          [];
-        setTotalFoundItems(foundItems.length);
+        const response = await getAllItemsByAdmin({ type: "found" });
+        setTotalFoundItems(response.data.data.total_items);
       } catch (error) {
         console.error("Failed to fetch items:", error.message);
       }
@@ -31,33 +33,28 @@ function Dashboard() {
     fetchTotalFoundItems();
   }, []);
 
-  // SEMUA BARANG YANG SUDAH KEMBALI
   useEffect(() => {
-    const fetchTotalMatched = async () => {
+    const getMatchedItemsCount = async () => {
       try {
-        const response = await getAllItemsByAdmin();
-        const totalMatched =
-          response.data?.data?.items?.filter(
-            (item) => item.matched_status === "true"
-          ) || [];
-        setTotalMatched(totalMatched.length);
+        const response = await getAllMatchedStatus({ matched_status: true });
+
+        setTotalMatched(response.data.data.total_items);
+        console.log(response.data.data.total_items);
+        console.log(response);
       } catch (error) {
         console.error("Failed to fetch items:", error.message);
       }
     };
 
-    fetchTotalMatched();
+    getMatchedItemsCount();
   }, []);
 
   // SENUA BARANG YANG HILANG
   useEffect(() => {
     const fetchTotalLostItems = async () => {
       try {
-        const response = await getAllItemsByAdmin();
-        const lostItems =
-          response.data?.data?.items?.filter((item) => item.type === "lost") ||
-          [];
-        setTotalLostItems(lostItems.length);
+        const response = await getAllItemsByAdmin({ type: "lost" });
+        setTotalLostItems(response.data.data.total_items);
       } catch (error) {
         console.error("Failed to fetch items:", error.message);
       }
@@ -204,10 +201,7 @@ function Dashboard() {
         >
           <div className="p-6">
             {" "}
-            <h2 className="text-4xl font-bold">
-              {" "}
-              {totalMatched.toLocaleString()}
-            </h2>
+            <h2 className="text-4xl font-bold"> {totalMatched.toString()}</h2>
             <p className="mt-2">Semua Barang Yang Telah Kembali</p>
           </div>
 
