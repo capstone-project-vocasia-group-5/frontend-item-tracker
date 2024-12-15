@@ -138,7 +138,6 @@ const BuktiPengajuan = () => {
       setDescription("");
 
       setIsModalOpen(true);
-      navigate(-1);
     } catch (error) {
       if (error.response) {
         setNotification(
