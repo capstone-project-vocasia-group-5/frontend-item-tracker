@@ -74,9 +74,9 @@ export const Navbar = () => {
             <div className="relative hidden md:block">
               <Link onClick={togglePopup} className="cursor-pointer">
                 <Avatar>
-                  <AvatarImage src={user.image_url} alt={user.name[0]} />
+                  <AvatarImage src={user?.image_url} alt={user?.name[0]} />
                   <AvatarFallback className="text-black bg-white">
-                    {user.name[0]}
+                    {user?.name[0]}
                   </AvatarFallback>
                 </Avatar>
               </Link>
@@ -114,7 +114,7 @@ export const Navbar = () => {
               >
                 Notifikasi
               </Link>
-              {totalNotif > 0 && user.role === "user" && (
+              {totalNotif > 0 && user?.role === "user" && (
                 <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {totalNotif > 99 ? "99+" : totalNotif}
                 </span>

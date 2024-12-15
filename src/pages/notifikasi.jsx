@@ -24,7 +24,7 @@ const Notifikasi = () => {
   };
   return (
     <div>
-      {user.role === "admin" ? "" : <Navbar />}
+      {user?.role === "admin" ? "" : <Navbar />}
       <main className="max-w-screen-xl min-h-screen mx-auto">
         <header className="flex justify-between">
           <h1 className="text-2xl p-4 font-bold">Notifikasi</h1>
@@ -39,7 +39,7 @@ const Notifikasi = () => {
           <Notif role={user?.role} />
         </div>
       </main>
-      {user.role === "admin" ? "" : <Footer />}
+      {user?.role === "admin" ? "" : <Footer />}
     </div>
   );
 };

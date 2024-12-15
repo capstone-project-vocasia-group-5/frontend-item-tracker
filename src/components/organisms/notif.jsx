@@ -101,7 +101,7 @@ export function Notif({ role }) {
     }
 
     const navigateToDetail = (item) => {
-      if (user.role === "admin") {
+      if (user?.role === "admin") {
         return;
       }
       if (item.deleted_at) {

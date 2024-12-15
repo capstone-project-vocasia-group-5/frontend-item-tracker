@@ -104,9 +104,9 @@ const ManagePengajuan = () => {
     try {
       const response = await getAllClaimsByUser();
       const claims = response.data.data.claims;
-      setPengajuanSaya(claims.filter((claim) => claim.user_id.id === user.id));
+      setPengajuanSaya(claims.filter((claim) => claim.user_id.id === user?.id));
       setPengajuanOrangLain(
-        claims.filter((claim) => claim.user_id.id !== user.id)
+        claims.filter((claim) => claim.user_id.id !== user?.id)
       );
       setIsLoading(false);
     } catch (error) {
