@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LogoItemTracker from "../atoms/logo-item-tracker";
@@ -14,6 +14,7 @@ import PopupAvatar from "./pop-up-avatar";
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const popupRef = useRef(null); // Tambahkan useRef untuk popup
   const navigate = useNavigate();
   const location = useLocation();
   const [isBeatLoaderVisible, setIsBeatLoaderVisible] = useState(true);
@@ -33,6 +34,25 @@ export const Navbar = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Fungsi untuk menangani klik di luar popup
+  const handleClickOutside = (event) => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      setIsPopupOpen(false); // Tutup popup
+    }
+  };
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isPopupOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -71,7 +91,7 @@ export const Navbar = () => {
               </Link>
             </div>
           ) : user ? (
-            <div className="relative hidden md:block">
+            <div className="relative hidden md:block" ref={popupRef}>
               <Link onClick={togglePopup} className="cursor-pointer">
                 <Avatar>
                   <AvatarImage src={user?.image_url} alt={user?.name[0]} />
