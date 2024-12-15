@@ -203,7 +203,7 @@ const ManageCategory = () => {
                   type="text"
                   value={newCategoryName}
                   onChange={(e) => setNewCategoryName(e.target.value)}
-                  className="p-2 border rounded-md w-full sm:w-1/2"
+                  className="p-2 border bg-white rounded-md w-full sm:w-1/2"
                   placeholder="Nama kategori baru..."
                 />
                 <button
@@ -254,7 +254,7 @@ const ManageCategory = () => {
                                 type="text"
                                 value={editName}
                                 onChange={(e) => setEditName(e.target.value)}
-                                className="border p-1 rounded text-xs w-20"
+                                className="border bg-white p-2 rounded text-xs w-auto"
                               />
                               <button
                                 onClick={handleSaveEdit}

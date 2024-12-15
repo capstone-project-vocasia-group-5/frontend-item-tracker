@@ -416,7 +416,7 @@ const VerifikasiLaporan = () => {
               <textarea
                 value={rejectMessage}
                 onChange={(e) => setRejectMessage(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mb-4 h-32"
+                className="w-full p-2 bg-white border border-gray-300 rounded mb-4 h-32"
                 placeholder="Masukkan alasan penolakan"
               ></textarea>
               <div className="flex justify-end space-x-2">
