@@ -21,22 +21,22 @@ const onPageChange = (page) => {
   fetchData(page);
 };
 
-  useEffect(() => {
-    const fetchItems = async (page = 1) => {
-      try {
-        const response = await getAllItemsByAdmin({page, limit: 10});
-        setItems(response.data.data.items);
-        setTotalItems(response.data.data.total_items);
-      } catch (error) {
-        toast.error("Error fetching data: ", error);
-      }
-    };
-    fetchItems(currentPage);
-  }, [currentPage]);
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+useEffect(() => {
+  const fetchItems = async (page = 1, filter = true) => {
+    try {
+      const response = await getAllItemsByAdmin({page, limit: 10, filtered: filter});
+      setItems(response.data.data.items);
+      setTotalItems(response.data.data.total_items);
+    } catch (error) {
+      toast.error("Error fetching data: ", error);
+    }
   };
+  fetchItems(currentPage);
+}, [currentPage]);
+
+const handleSearchChange = (event) => {
+  setSearchQuery(event.target.value);
+};
 
   const filteredItems = items.filter(
     (item) =>
@@ -157,7 +157,7 @@ const onPageChange = (page) => {
                               <h3 className="text-lg font-semibold">
                                 {item.name}
                               </h3>
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm text-left text-gray-500">
                                 {item.categories
                                   .map((category) => category.name)
                                   .join(", ")}
@@ -306,7 +306,7 @@ const onPageChange = (page) => {
         currentPage={currentPage}
         totalItems={totalItems}
         onPageChange={(page) => setCurrentPage(page)}
-        limit={10}
+        limit={isMobile ? 35 : limit}
       /></>
   );
 };
