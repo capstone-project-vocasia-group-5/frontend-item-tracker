@@ -60,7 +60,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter title"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-2">
@@ -80,7 +80,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter kelurahan"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-2">
@@ -95,7 +95,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 onChange={(e) =>
                   setUpdatedData({ ...updatedData, type: e.target.value })
                 }
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
                 <option value="" disabled>
                   Select type
@@ -119,7 +119,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter title"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-2">
@@ -136,7 +136,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter title"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-2">
@@ -156,7 +156,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter title"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-2">
@@ -173,7 +173,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter kelurahan"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
             <div className="mb-2">
@@ -193,7 +193,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
                 }
                 placeholder="Enter kelurahan"
                 type="text"
-                className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
               rows="3"
               placeholder="Enter your content"
               id="content"
-              className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
           </div>
           <div className="flex items-center justify-end gap-4">
