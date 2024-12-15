@@ -177,8 +177,9 @@ const BuktiPengajuan = () => {
       {/* Modal Konfirmasi */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-80 text-center">
-            <h2 className="text-lg font-bold mb-4">Pengajuan anda sedang dalam proses verifikasi, Silahkan tunggu</h2>
+          <div className="bg-white rounded-lg p-6 w-[500px] text-center">
+            <h2 className="text-lg font-bold">Pengajuan anda sedang dalam proses verifikasi</h2>
+            <h2 className="text-lg font-bold mb-4">Silahkan menunggu persetujuan dari penemu barang</h2>
             <div className="align-item-center">
               <Button className="bg-black text-white w-24" onClick={handleBack}>
                 Kembali

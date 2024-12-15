@@ -246,7 +246,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="province"
                         value={selectedProvince}
                         onChange={handleProvinceChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
+                        className="block w-full mt-1 border rounded-md bg-white text-black p-2"
                       >
                         <option value="">Pilih Provinsi</option>
                         {provinces.map((prov) => (
@@ -267,7 +267,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="city"
                         value={selectedCity}
                         onChange={handleCityChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
+                        className="block w-full mt-1 border rounded-md bg-white text-black p-2"
                       >
                         <option value="">Pilih Kota/Kabupaten</option>
                         {cities.map((city) => (
@@ -288,7 +288,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="district"
                         value={selectedDistrict}
                         onChange={handleDistrictChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
+                        className="block w-full mt-1 border rounded-md bg-white text-black p-2"
                       >
                         <option value="">Pilih Kecamatan</option>
                         {districts.map((district) => (
@@ -308,7 +308,7 @@ export const SearchBar = ({ onSearch, onReset }) => {
                         id="village"
                         value={selectedVillage}
                         onChange={handleVillageChange}
-                        className="block w-full mt-1 border rounded-md p-2 text-white bg-gray-900"
+                        className="block w-full mt-1 border rounded-md p-2 bg-white text-black"
                       >
                         <option value="">Pilih Kelurahan</option>
                         {villages.map((village) => (
