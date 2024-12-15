@@ -457,7 +457,24 @@ const ManageLaporanUser = () => {
           />
         )}
         {selectedItem && popupType === "detail" && (
-          <Popup item={selectedItem} onClose={handleClosePopup} />
+          <Popup
+            title="Detail Laporan"
+            item={{
+              images: selectedItem.images,
+              name: selectedItem.name,
+              description: selectedItem.description,
+              phone_number: selectedItem.phone_number,
+              province: selectedItem.province,
+              city: selectedItem.city,
+              subdistrict: selectedItem.subdistrict,
+              village: selectedItem.village,
+              postal_code: selectedItem.postal_code,
+              type: selectedItem.type,
+              status: true,
+              is_approved: selectedItem.is_approved,
+            }}
+            onClose={handleClosePopup}
+          />
         )}
       </div>
     </div>

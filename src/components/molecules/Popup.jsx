@@ -81,7 +81,8 @@ const Popup = ({ title, item, onClose }) => {
             {`${item.village}, ${item.subdistrict}, ${item.city}, ${item.province}, ${item.postal_code}`}
           </p>
           <p className={item.type ? "" : "hidden"}>
-            <strong>Tipe:</strong> {item.type}
+            <strong>Tipe:</strong>{" "}
+            {item.type === "lost" ? "Kehilangan" : "Penemuan"}
           </p>
         </div>
       </div>
