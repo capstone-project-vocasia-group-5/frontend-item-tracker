@@ -3,6 +3,8 @@ import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
 import KamiCard from "../components/molecules/kami-card.jsx";
+import "./css/contact-us.css";
+import { Link } from "react-router-dom";
 
 const TentangKami = () => {
   const members = [
@@ -96,10 +98,10 @@ const TentangKami = () => {
       </main>
       <div className="m-4">
         <section className="bg-gray-200 py-10">
-          <div className="container mx-auto px-6 flex flex-col lg:flex-row justify-between items-start  text-left">
+          <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center  ">
             {/* Kolom Kiri */}
 
-            <div className="lg:w-1/3 mb-10 lg:mb-0">
+            <div className="lg:w-1/3 mb-10 lg:mb-0 text-left">
               <h2 className="text-4xl font-bold text-gray-800 mb-4 ">
                 Pintu kami selalu terbuka!
               </h2>
@@ -107,6 +109,28 @@ const TentangKami = () => {
               <p className="text-gray-600 text-lg">
                 Jangan ragu untuk mengirimkan pertanyaan atau pesan kepada kami.
               </p>
+            </div>
+
+            <div className="flex items-center">
+              <Link to="/contact">
+                <button class="contactButton">
+                  Hubungi
+                  <div class="iconButton">
+                    <svg
+                      height="24"
+                      width="24"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+              </Link>
             </div>
 
             {/* Kolom Kanan */}

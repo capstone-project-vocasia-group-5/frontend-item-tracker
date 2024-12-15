@@ -3,7 +3,6 @@ import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import { toast } from "sonner";
 import { donate } from "../api/api";
-import BackButton from "../components/organisms/back-button.jsx";
 
 const DonationForm = () => {
   const [amount, setAmount] = useState("");
@@ -51,25 +50,18 @@ const DonationForm = () => {
     }
   };
 
-  const handleClickBack = () => {
-    window.history.back();
-  };
-
   return (
     <div>
       <Navbar></Navbar>
-      <div className="flex flex-col justify-center items-center max-w-screen-md mx-auto px-4">
+      <div className="flex flex-col justify-center items-center max-w-screen-lg mx-auto px-4">
         <div className="w-full md:mt-6 mt-4 mb-10">
-          <div>
-            <BackButton handleClickBack={handleClickBack} />
-            <h1 className="text-2xl font-bold text-center mb-6">
-              Donasi Sekarang
-            </h1>
-          </div>
+          <h1 className="text-2xl font-bold text-center mb-6">
+            Donasi Sekarang
+          </h1>
           <div className="bg-black w-full mx-auto text-white p-5 rounded-lg shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block mb-2 text-sm font-semibold">
+                <label className="block mb-2 text-base font-semibold">
                   Masukkan Nominal Donasi
                 </label>
                 <div className="grid grid-cols-3 gap-2 text-black">
@@ -82,7 +74,7 @@ const DonationForm = () => {
                       key={value}
                       type="button"
                       onClick={() => setAmount(value)}
-                      className={`w-full px-3 py-2 rounded-lg text-sm ${
+                      className={`w-full px-3 py-2 rounded-lg text-base ${
                         amount === value
                           ? "bg-white ring-2 ring-blue-500"
                           : "bg-white hover:bg-gray-100"
@@ -97,7 +89,7 @@ const DonationForm = () => {
               <div>
                 <label
                   htmlFor="customAmount"
-                  className="block mb-2 text-sm font-semibold"
+                  className="block mb-2 text-base font-semibold"
                 >
                   Nominal donasi lainnya
                 </label>
@@ -108,9 +100,9 @@ const DonationForm = () => {
                   min="10000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-sm"
+                  className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-base"
                 />
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-md text-gray-400 mt-1">
                   Minimal donasi sebesar Rp10.000
                 </p>
               </div>
@@ -118,7 +110,7 @@ const DonationForm = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-semibold"
+                  className="block mb-2 text-base font-semibold"
                 >
                   Nama
                 </label>
@@ -126,7 +118,7 @@ const DonationForm = () => {
                   id="name"
                   type="text"
                   placeholder="Masukkan Nama Akun Anda"
-                  className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-sm"
+                  className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-base"
                   required
                   onChange={(e) => setName(e.target.value)}
                   value={name}
@@ -136,7 +128,7 @@ const DonationForm = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-semibold"
+                  className="block mb-2 text-base font-semibold"
                 >
                   Email
                 </label>
@@ -144,7 +136,7 @@ const DonationForm = () => {
                   id="email"
                   type="email"
                   placeholder="Masukkan Email Anda"
-                  className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-sm"
+                  className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-base"
                   required
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
@@ -159,7 +151,7 @@ const DonationForm = () => {
                   onChange={() => setIsAnonymous(!isAnonymous)}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-                <label htmlFor="anonymous" className="ml-2 text-xs">
+                <label htmlFor="anonymous" className="ml-2 text-md">
                   Sembunyikan nama saya
                 </label>
               </div>
@@ -168,7 +160,7 @@ const DonationForm = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full py-3 text-sm text-black font-semibold rounded-lg ${
+                  className={`w-full py-3 text-base text-black font-semibold rounded-lg ${
                     loading ? "bg-gray-300" : "bg-white hover:bg-gray-100"
                   }`}
                 >
