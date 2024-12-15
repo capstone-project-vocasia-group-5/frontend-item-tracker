@@ -37,6 +37,7 @@ export const updateMatchedStatus = (id) =>
   api.patch(`/items/${id}`, { matched_status: true });
 export const deleteItemByUser = (id) => api.delete(`/items/${id}`);
 export const deleteItemByAdmin = (id) => api.delete(`/admin/items/${id}`);
+export const getAllMatchedStatus = (params) => api.get("/items", { params });
 export const getAllItemsByUser = (params) => api.get("/items", { params });
 export const getAllItemsByAdmin = (params) =>
   api.get("/admin/items", { params });

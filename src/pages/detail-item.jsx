@@ -265,8 +265,8 @@ const DetailItem = () => {
               {comments?.length > 0 ? (
                 comments.map((comment, index) => (
                   <div key={index}>
-                    <div className="comments flex gap-4 items-center justify-between">
-                      <div className="comment-container ">
+                    <div className="comments w-full flex gap-4 items-center justify-between">
+                      <div className="comment-container w-full">
                         <div className="user">
                           <div className="user-pic w-10 h-10 relative flex items-center justify-center bg-gray-200 rounded-full">
                             <img

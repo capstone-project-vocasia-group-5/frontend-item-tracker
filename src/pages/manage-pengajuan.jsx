@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Popup from "../components/molecules/Popup";
 import Preloader from "../components/templates/preloader/preloader";
 import { useAuth } from "../context/auth-context";
+import { PaginationDisplay } from "../components/molecules/pagination.jsx";
 
 const ManagePengajuan = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,6 +24,10 @@ const ManagePengajuan = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [currentClaimId, setCurrentClaimId] = useState(null);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Set the number of items per page
 
   const openModal = (claimId) => {
     setCurrentClaimId(claimId);
@@ -152,7 +157,7 @@ const ManagePengajuan = () => {
   const handleFilterChange = (type) => {
     setFilter(type);
   };
-
+  // Filtered data based on the selected filter
   const getFilteredData = (data) => {
     return data.filter(
       (item) =>
@@ -165,6 +170,19 @@ const ManagePengajuan = () => {
     filter === "saya"
       ? getFilteredData(pengajuanSaya)
       : getFilteredData(pengajuanOrangLain);
+
+  // Calculate total items based on filtered data
+  const totalItems = dataToDisplay.length;
+
+  // Calculate the current items to display based on pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = dataToDisplay.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
@@ -551,6 +569,15 @@ const ManagePengajuan = () => {
           </div>
         </div>
       </div>
+
+      <PaginationDisplay
+        currentPage={currentPage}
+        totalItems={totalItems}
+        onPageChange={handlePageChange}
+        limit={itemsPerPage}
+        className="mt-6"
+      />
+
       {selectedClaim && (
         <Popup
           title="Detail Pengajuan"
