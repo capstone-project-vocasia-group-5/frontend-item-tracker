@@ -40,7 +40,6 @@ export const deleteItemByAdmin = (id) => api.delete(`/admin/items/${id}`);
 export const getAllItemsByUser = (params) => api.get("/items", { params });
 export const getAllItemsByAdmin = (params) =>
   api.get("/admin/items", { params });
-export const getTotalItemsByAdmin = () => api.get("/admin/items/total");
 export const getAllOwnItemsByUser = (params) =>
   api.get("/items/user", { params });
 export const getItemById = (id) => api.get(`/items/${id}`);
@@ -79,8 +78,6 @@ export const getCommentByItemId = (id) => api.get(`/item/comments/${id}`);
 // notifications
 export const getNotificationByUser = (params) =>
   api.get("/notifications", { params });
-export const getDetailNotificationById = (id) =>
-  api.get(`/notifications/${id}`);
 export const setNotificationIsRead = (id) => api.put(`/notifications/${id}`);
 export const getNotificationByAdmin = () => api.get("/admin/notifications");
 export const setAllNotificationIsRead = () =>
@@ -91,11 +88,6 @@ export const getUnreadNotification = () =>
 export const createReport = (data) => api.post("/items", data);
 
 // claims
-export const uploadBuktiPengajuan = (data) =>
-  api.post("/bukti-pengajuan", data);
-
-// claims
-
 export const getAllClaimsByUser = (params) => api.get("/claims", { params });
 export const getClaimById = (id) => api.get(`/claims/${id}`);
 export const approveClaimByUser = (id) => api.put(`/claims/${id}/approve`);
