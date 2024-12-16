@@ -111,24 +111,23 @@ const ReportPage = () => {
       }
       return true;
     });
-
+  
     if (files.length + newFiles.length > 5) {
       toast.error("Maksimal 5 gambar");
       return;
     }
-
+  
     setInputFiles((prevFiles) => [...prevFiles, ...newFiles]);
-
+  
     const newFileURLs = newFiles.map((file) => URL.createObjectURL(file));
     setFiles((prevFiles) => [...prevFiles, ...newFileURLs]);
-    if (!selectedImage && newFileURLs.length > 0) {
-      setSelectedImage(newFileURLs[0]);
-    }
-
-    if (!selectedImage && newFiles.length > 0) {
-      setSelectedImage(URL.createObjectURL(newFiles[0]));
+  
+    // Pilih gambar terakhir dari file yang diunggah
+    if (newFileURLs.length > 0) {
+      setSelectedImage(newFileURLs[newFileURLs.length - 1]);
     }
   };
+  
   const handleBack = () => {
     navigate(-1);
   };
@@ -151,15 +150,22 @@ const ReportPage = () => {
 
   const handleRemoveImage = (index) => {
     setFiles((prevFiles) => {
-      const updatedFiles = prevFiles.filter((index) => index !== index);
-      setSelectedImage(null);
+      const updatedFiles = prevFiles.filter((_, i) => i !== index);
+      
+      // Jika gambar yang dihapus adalah gambar yang sedang ditampilkan
+      if (selectedImage === prevFiles[index]) {
+        // Set ke gambar berikutnya atau null jika tidak ada gambar yang tersisa
+        setSelectedImage(updatedFiles[0] || null);
+      }
       return updatedFiles;
     });
+  
     setInputFiles((prevFiles) => {
-      const updatedFiles = prevFiles.filter((index) => index !== index);
+      const updatedFiles = prevFiles.filter((_, i) => i !== index);
       return updatedFiles;
     });
   };
+  
 
   const handlePhoneNumberChange = (event) => {
     const value = event.target.value;
@@ -293,82 +299,92 @@ const ReportPage = () => {
         </div>
         {/* Form Layout */}
         <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
-          {/* Upload Foto */}
-          <div className="flex flex-col items-center ">
-            <div
-              className="bg-gray-100 border-dashed border-2 border-gray-300 flex items-center justify-center h-[350px] w-[350px] sm:h-[500px] sm:w-[500px] rounded-lg relative"
-              onClick={() => document.getElementById("fileInput").click()}
-            >
-              {selectedImage ? (
-                <img
-                  src={selectedImage}
-                  alt="Uploaded"
-                  className="object-cover w-full h-full rounded-lg"
-                />
-              ) : (
-                <p className="text-gray-500">Klik untuk upload foto barang</p>
-              )}
-              <input
-                type="file"
-                id="fileInput"
-                className="hidden"
-                multiple
-                accept="image/*"
-                onChange={handleFileChange}
+          
+        {/* Upload Foto */}
+        <div className="flex flex-col items-center ">
+          <div
+            className="bg-gray-100 border-solid border-2 border-gray-300 flex items-center justify-center h-[350px] w-[350px] sm:h-[500px] sm:w-[500px] rounded-lg relative"
+            onClick={() => document.getElementById("fileInput").click()}
+          >
+            {selectedImage ? (
+              <img
+                src={selectedImage}
+                alt="Uploaded"
+                className="object-cover w-full h-full rounded-lg"
               />
-              {/* Icon Prev dan Next */}
-              {files.length > 1 && (
-                <>
-                  {/* Tombol Prev */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePrevImage();
-                    }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
-                  >
-                    ←
-                  </button>
-                  {/* Tombol Next */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleNextImage();
-                    }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
-                  >
-                    →
-                  </button>
-                </>
-              )}
-            </div>
-            {/* Thumbnail Preview */}
-            {files.length > 0 && (
-              <div className="mt-4 flex gap-2 overflow-x-auto">
-                {files.map((file, index) => (
-                  <div key={index} className="relative group">
-                    <img
-                      src={file}
-                      alt={`Thumbnail ${index}`}
-                      className={`w-20 h-20 object-cover rounded-lg cursor-pointer border ${
-                        selectedImage === file
-                          ? "border-black"
-                          : "border-gray-300"
-                      }`}
-                      onClick={() => handleSelectImage(file)}
-                    />
-                    {/* Icon Delete (x) */}
-                    <button
-                      className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md"
-                      onClick={() => handleRemoveImage(index)}
-                    >
-                      X
-                    </button>
-                  </div>
-                ))}
-              </div>
+            ) : (
+              <p className="text-gray-500">Foto Barang maksimal 5</p>
+            )}
+            <input
+              type="file"
+              id="fileInput"
+              className="hidden"
+              multiple
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+            {/* Icon Prev dan Next */}
+            {files.length > 1 && (
+              <>
+                {/* Tombol Prev */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevImage();
+                  }}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
+                >
+                  ←
+                </button>
+                {/* Tombol Next */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextImage();
+                  }}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all duration-200 hover:bg-gray-800 hover:scale-110 hover:shadow-lg"
+                >
+                  →
+                </button>
+              </>
             )}
           </div>
+
+          {/* Tombol Tambah Foto */}
+          <button
+            className="mt-4 bg-black text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-500 hover:border-gray-500 transition-all"
+            onClick={() => document.getElementById("fileInput").click()}
+          >
+            Tambah Foto
+          </button>
+
+          {/* Thumbnail Preview */}
+          {files.length > 0 && (
+            <div className="mt-4 flex gap-2 overflow-x-auto">
+              {files.map((file, index) => (
+                <div key={index} className="relative group">
+                  <img
+                    src={file}
+                    alt={`Thumbnail ${index}`}
+                    className={`w-20 h-20 object-cover rounded-lg cursor-pointer border ${
+                      selectedImage === file
+                        ? "border-black"
+                        : "border-gray-300"
+                    }`}
+                    onClick={() => handleSelectImage(file)}
+                  />
+                  {/* Icon Delete (x) */}
+                  <button
+                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white text-xs w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md"
+                    onClick={() => handleRemoveImage(index)}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
           {/* Form */}
           <div className="space-y-4 text-left w-full sm:w-[500px]">
