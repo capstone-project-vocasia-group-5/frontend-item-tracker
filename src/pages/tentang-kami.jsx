@@ -1,4 +1,5 @@
 import React from "react";
+import { Card } from "../components/ui/card.jsx";
 import { Navbar } from "../components/organisms/navbar.jsx";
 import { Footer } from "../components/organisms/footer.jsx";
 import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
@@ -70,13 +71,78 @@ const TentangKami = () => {
             </h1>
             <p className="text-lg leading-relaxed mb-6">
               Item Tracker adalah solusi digital yang membantu anda melacak
-              barang hilang dengan mudah. Misi kami adalah memberikan platform
-              inovatif untuk memastikan barang anda dapat ditemukan dengan cepat
-              dan efisien.
+              barang hilang dengan mudah.
             </p>
           </div>
         </div>
       </header>
+
+      <section className="container mx-auto px-6 max-w-full py-12">
+        <h2 className="text-4xl font-bold text-black mb-6 text-center">Visi, Misi & Tujuan</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          <div className="space-y-8 p-6 flex flex-col justify-between">
+            {/* Visi */}
+            <Card className="bg-black rounded-lg shadow-md border border-transparent transition-all duration-300 hover:border-white hover:shadow-2xl p-4 h-full">
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-2 h-12">Visi Kami</h3>
+                <p className="text-white leading-relaxed mb-2 p-2">
+                  Menjadi platform pelacakan barang terdepan yang dipercaya oleh masyarakat global.
+                </p>
+              </div>
+            </Card>
+
+            {/* Misi */}
+            <Card className="bg-black rounded-lg shadow-md border border-transparent transition-all duration-300 hover:border-white hover:shadow-2xl p-4 h-full">
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-2 h-12">Misi Kami</h3>
+                <p className="text-white leading-relaxed mb-2 p-2">
+                  Membantu setiap individu menemukan barang yang hilang dengan solusi teknologi yang sederhana, andal, dan efisien.
+                </p>
+              </div>
+            </Card>
+          </div>
+
+          {/* Kolom Tujuan */}
+          <div className="h-full p-6">
+            <Card className="bg-black rounded-lg shadow-md border border-transparent transition-all duration-300 hover:border-white hover:shadow-2xl h-full">
+              <div className="p-4 h-full">
+                <h3 className="text-2xl font-semibold text-white mb-4 p-2">Tujuan Kami</h3>
+                <ul className="text-white leading-relaxed space-y-4 text-left p-6">
+                  {/* Item 1 */}
+                  <li className="flex items-center md:items-start">
+                    <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black font-bold mr-4">
+                      1
+                    </button>
+                    <span className="flex-grow">
+                      Memberikan solusi pelacakan barang yang akurat dan terpercaya bagi semua pengguna.
+                    </span>
+                  </li>
+                  {/* Item 2 */}
+                  <li className="flex items-center md:items-start">
+                    <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black font-bold mr-4">
+                      2
+                    </button>
+                    <span className="flex-grow">
+                      Membangun komunitas yang mendukung kolaborasi dan berbagi informasi antar pengguna.
+                    </span>
+                  </li>
+                  {/* Item 3 */}
+                  <li className="flex items-center md:items-start">
+                    <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-black font-bold mr-4">
+                      3
+                    </button>
+                    <span className="flex-grow">
+                      Terus mengembangkan inovasi teknologi untuk memenuhi kebutuhan pengguna secara global.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+
       {/* Konten Utama */}
       <main className="container mx-auto min-h-screen max-w-full py-12 px-6">
         <section className="mb-12 max-w-screen-xl mx-auto">
