@@ -6,140 +6,116 @@
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/capstone-project-vocasia-group-5/frontend-item-tracker/blob/main/LICENSE)
 [![platform](https://img.shields.io/badge/platform-MERN-blue.svg)](https://mern.io/)
 
-**Item Tracker** adalah aplikasi website yang dirancang untuk mempermudah pengguna dalam melaporkan barang hilang, mencari barang yang ditemukan, dan berkomunikasi dengan pihak terkait. Proyek ini merupakan bagian dari **Project Akhir MSIB Batch 7 Vocasia Full Stack Web Development**.
+**Item Tracker** is a web application designed to facilitate users in reporting lost items, finding discovered items, and communicating with relevant parties. This project is part of the **Final Project MSIB Batch 7 Vocasia Full Stack Web Development**.
 
-Star ⭐ repository ini jika Anda menyukai apa yang Anda lihat 😉.
+Star ⭐ this repository if you like what you see 😉.
 
-![Item Tracker Preview](https://via.placeholder.com/800x400)
+![Item Tracker Preview](https://s3-alpha-sig.figma.com/img/f912/c15e/6626a499fb9fc152b84c0550291f7c2c?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=I2unOfzfx3yLVPYxYToqXuXyYzVu-qkf-ikyS4h1cuXjK-h6LTA0odHIjnyMD4UHno59ntn27C1ZT~KUvtXI7XcWN1VWUXOmTMIFaz9BTX4oJo466a8K-CuunsQiiCg-0POeKeUlCfjgu24iHie7Ee7-uqPiprr33uUxNrI9fi4NuRUz1zwemy~R2F-5igYyUdO7NcQKJccAbLHdk4uYTFxjL8UYhQxx4fgOzBEqBqMqIPD7i2Dq6YENeDxFwBDLDTwXFpNc5BlCYcT553I7Z6wR~z5EpIXZT-2f0T2nCm7bLgSaDnFFwObEeQCLMabRDxDRbNdZrMQq1QVy58pEaA__)
 
-## ✨ Tentang Item Tracker
+## ✨ About Item Tracker
 
-**Item Tracker** memberikan solusi cerdas untuk menemukan dan melacak barang Anda. Dengan fitur-fitur inovatif, aplikasi ini membantu pengguna melaporkan barang hilang, mencari barang yang ditemukan, dan berkomunikasi dengan mudah.
+**Item Tracker** provides a smart solution to find and track your belongings. With innovative features, this app helps users report lost items, search for found items, and communicate seamlessly.
 
-## 🏦 Fitur Utama
+## 🏦 Main Features
 
-### 🔐 Fitur Autentikasi
-Pastikan akun Anda aman dengan sistem autentikasi yang kuat.
+1. ### 🔐 Authentication Feature
 
-### 📃 Fitur Laporan Barang
-Laporkan barang hilang Anda dengan mudah.
+   Ensure your account security with a strong authentication system.
 
-### 🔍 Fitur Pencarian
-Cari barang hilang menggunakan sistem pencarian yang efisien.
+2. ### 📃 Item Report Feature
 
-### 💬 Fitur Komunikasi
-Hubungi penemu barang melalui fitur chat bawaan.
+   Easily report your lost items.
 
-### 🔧 Fitur Manajemen Akun
-Kelola profil dan informasi akun Anda dengan mudah.
+3. ### 🔍 Search Feature
 
-### 🙌 Fitur Donasi
-Bantu sesama dengan fitur donasi terpercaya.
+   Search for lost items using an efficient search system.
 
-### 🌐 Fitur Pengajuan Kepemilikan
-Ajukan kepemilikan barang yang ditemukan dengan sistem verifikasi.
+4. ### 💬 Communication Feature
 
-### 📊 Fitur Manajemen Laporan
-Pantau laporan barang hilang Anda melalui dashboard khusus.
+   Contact item finders through the built-in comment feature.
 
-### 🔟 Fitur Manajemen Kategori
-Kelola kategori barang hilang untuk pencarian lebih terarah.
+5. ### 🔧 Account Management Feature
 
-### 🔔 Fitur Notifikasi
-Dapatkan notifikasi real-time terkait laporan Anda.
+   Manage your profile and account information effortlessly.
 
-## 🛠️ Tech Stack
+6. ### 🙌 Donation Feature
 
-### Backend
-Berikut adalah teknologi yang digunakan di sisi backend:
-- **Node.js**: Server-side runtime.
-- **Express.js**: Framework untuk pengembangan backend.
-- **MongoDB**: Database NoSQL untuk menyimpan data.
-- **Dependencies:**
-```json
-{
-  "bcryptjs": "^2.4.3",
-  "body-parser": "^1.20.3",
-  "cloudinary": "^2.5.1",
-  "cors": "^2.8.5",
-  "dotenv": "^16.4.5",
-  "express": "^4.21.1",
-  "fs-extra": "^11.2.0",
-  "http-status-codes": "^2.3.0",
-  "joi": "^17.13.3",
-  "joi-objectid": "^4.0.2",
-  "jsonwebtoken": "^9.0.2",
-  "midtrans-client": "^1.4.2",
-  "mongoose": "^8.8.2",
-  "morgan": "^1.10.0",
-  "multer": "^1.4.5-lts.1",
-  "mustache": "^4.2.0",
-  "nodemailer": "^6.9.16",
-  "nodemon": "^3.1.7",
-  "swagger-jsdoc": "^6.2.8",
-  "swagger-ui-express": "^5.0.1",
-  "uuid": "^11.0.3"
-}
-```
+   Help others with a trusted donation feature.
 
-### Frontend
-Berikut adalah teknologi yang digunakan di sisi frontend:
-- **React.js**: Framework untuk pengembangan frontend.
-- **Tailwind CSS**: Untuk styling responsif dan modern.
-- **Dependencies:**
-```json
-{
-  "@fortawesome/fontawesome-svg-core": "^6.7.1",
-  "@fortawesome/free-brands-svg-icons": "^6.7.1",
-  "@fortawesome/free-solid-svg-icons": "^6.7.1",
-  "@fortawesome/react-fontawesome": "^0.2.2",
-  "axios": "^1.7.9",
-  "react": "^18.3.1",
-  "react-dom": "^18.3.1",
-  "react-hook-form": "^7.53.2",
-  "react-router-dom": "^7.0.1",
-  "react-toastify": "^10.0.6",
-  "tailwindcss-animate": "^1.0.7",
-  "zod": "^3.23.8"
-}
-```
+7. ### 🌐 Ownership Claim Feature
+
+   Submit ownership claims for found items with a verification system.
+
+8. ### 📊 Report Management Feature
+
+   Monitor your lost item reports through a dedicated dashboard.
+
+9. ### 🔟 Category Management Feature
+
+   Manage item categories for more targeted searches.
+
+10. ### 🔔 Notification Feature
+    Receive real-time notifications about your reports.
 
 ## Screenshots
 
-| | | |
-|:--:|:--:|:--:|
-| **Halaman Login** | **Dashboard Laporan** | **Halaman Chat** |
-| ![Halaman Login](images/login_screen.png) | ![Dashboard Laporan](images/dashboard_screen.png) | ![Halaman Chat](images/chat_screen.png) |
-| **Halaman Donasi** | **Pencarian Barang** | **Halaman Notifikasi** |
-| ![Halaman Donasi](images/donation_screen.png) | ![Pencarian Barang](images/search_screen.png) | ![Halaman Notifikasi](images/notification_screen.png) |
+|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                                                                                                                                                                                                         **Login Page**                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                       **Home Page**                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                              **Lost Page**                                                                                                                                                                                                                                                              |
+|       ![Login Page](https://s3-alpha-sig.figma.com/img/b156/9eaf/3cd3ef1f8eef1ad07719d5a29671bd05?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=a0RFuiUtX7WFGJqXPXn15ljUChu~uTDx6kPq20p7UKfbysUpafUpcC3~psin31z~aovnFLxk2Z-5fbDzN4-fS~seUznUh6TQoCfdfLq0yokWbtF841ghKGYTx2i-QmfCeJL67Pn~JYq3lj4ONsIHLXY3sofdfTf7vWB1mFpE5liOdzGxu2E-gMY7JWW3MmAzW-a5~OqFVbPxYko4xN0aGHsHx7srH-5hHydmP4JTFb5-P25H29segFxorwZfjGWmhOyphxSvcYacJ6UdlhDI8qyXPNVCmPzZxaJjzW~dnIuUeUFQREKlv1ftFQW0eVN6sdWExnPGierV-EjA8Yia-w__)       |     ![Home Page](https://s3-alpha-sig.figma.com/img/f912/c15e/6626a499fb9fc152b84c0550291f7c2c?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=I2unOfzfx3yLVPYxYToqXuXyYzVu-qkf-ikyS4h1cuXjK-h6LTA0odHIjnyMD4UHno59ntn27C1ZT~KUvtXI7XcWN1VWUXOmTMIFaz9BTX4oJo466a8K-CuunsQiiCg-0POeKeUlCfjgu24iHie7Ee7-uqPiprr33uUxNrI9fi4NuRUz1zwemy~R2F-5igYyUdO7NcQKJccAbLHdk4uYTFxjL8UYhQxx4fgOzBEqBqMqIPD7i2Dq6YENeDxFwBDLDTwXFpNc5BlCYcT553I7Z6wR~z5EpIXZT-2f0T2nCm7bLgSaDnFFwObEeQCLMabRDxDRbNdZrMQq1QVy58pEaA__)     |           ![Lost Page](https://s3-alpha-sig.figma.com/img/6d70/1a9f/4bf7b6c56dceb6fde95f1077879c3e71?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NZfdnBVc~72B4baLEYGg6-uTJMDMVVmHrR97l6vAf258UtRvIKlCzlrBlTGxUiF--B60ltKw0~sIslRgL75MF~X5Scrh08rhiCojJdlyQLY3G5wri~ZOUd4JCRa1gUCfvZhWsUqMYIRBjmRMHR1xrmVOcjuCg2LueBahX15-TJbB1qSUMLQYA9b76O7qWGoeSoZ6ZvqAc9W6ofmv803SdLo9RDKiz0qrP6LMWdXFPrkjAPPmeGyttXnzG97gNDdwiFgujLJ9PoGdq~o-xQowksPxu~dXh~P8nR9hX4OE8jxHYzoTb3JJZgnpgks6fAAbi7ZYJxauXkfo7XbzScp~JA__)            |
+|                                                                                                                                                                                                                                                         **Found Page**                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                   **Notification Page**                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                          **Item Display Page**                                                                                                                                                                                                                                                          |
+|       ![Found Page](https://s3-alpha-sig.figma.com/img/0ff8/da5e/bb33362d13c7d7a48aa0b67934cf9168?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XxKUIHkN99qab1eTNjs3HPAbZ9QAvov9dp9cF9T83SO2M5CaAmyepcvVV31Tc6kSoncUa6fdVccBiys3fmQFADvO5t~u-ctySLTvszRPxdhaF4NP4Pn3o7cGRLXlIgsNK2kN0MOcUTUUqM0sjOL-Bdy1iqajJw1Vv1ZX2ieD0talKX3yDGEIGlDKMsCswJDTgJHfdf7ygBfzS6oHBajbTUMc~NVnwB7-ZCDb7org~3Nn7PkWxGfXSXkWwP9yU4h-4mq43YTxHra66aZykFBVMdLKwAxwY6~8DEe4BCsMdbVKZ0tBBe2gm9-LvVDMYjPEjFZ630txC39qM6NBmXZ5Iw__)       | ![Notification Page](https://s3-alpha-sig.figma.com/img/e05e/dd33/d1b73831d04516c6363b6673403eecab?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nrvOuntBXmnmgU63uboiiOVCq71y8koYhg0lZQQBSL9zO37aMX-sNbpITbckLJeAXdkk~5mmzpMxeKJMmMXf4iodjTOwYwP1FCnMw9qvOswujYhGpk5aMA-t8hSgpNBCa4fBthoXxg923jtC2frTtkVR81LGSVBkqjPraAmjfURRNiQjWoy~ScaN-xfzMj73rVAtIOeh3mJrHcx3k2jYfacxSt~3RFquJnCYdpgOIJgJD-qG~69uLfYXaFZCCJUXpG8M0yzrV1KKUYi1CzUjQ6vr1EffjH-Z9fcUyRdBLXRjbPVvEiYC4~iCbX8jVd3131-xbGouIDRpZmpXf1e23g__) |       ![Item Display Page](https://s3-alpha-sig.figma.com/img/093d/253f/8ee9919535d3b42c1903af8c4974877b?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=l7PzgXkQTSNtd2WKMoayu5BV3O02Cwg24tHbLY5M-Zb35i-VWWpE9RT1XRSX1SkEgsb8miPTmSKVIiR0Xgr4oExwwM5OmfSJ7jl0mwfAIjTJsEu2gSnKx4-vvnDOAqZ0P70Z8Rkx-5CNlEYJlQBmoaHIhktOuRPmdyLYMFtWGUsYHUQ-~bB9neI65vJQd09sqG828cjvzaLxBJJesEKS04gAWJh4SE6b9~358OYSWqZMg~y~V7WtyyYXoDv5DV4UJqaGnQc4s6WwYM6PqwHpTBiVlXGhoR00FfF195sHyEQbKK7fiMWl808JTrD42OVFWSIKmpMNqqN6zuLXZM6g0g__)        |
+|                                                                                                                                                                                                                                                       **Comment Section**                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                      **Profile Menu**                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                       **Request Management Menu**                                                                                                                                                                                                                                                       |
+|    ![Comment Section](https://s3-alpha-sig.figma.com/img/3668/fb39/7217be6b5b1492a1960461111c1ae06d?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZVZX~~3RRcrkLrp6tccYKJMnGqQws6k2a~mDtWGs6kkcnL9AeriX-6YT~NbT74RDNM9e95IvlEb93X0Htc4oNaO40Ha3E3KJqqqZiY3uEYqbsLYUmuMH-w2KmZ538Honu3PKBDSBhRD7u89PfeCfLKw7OjHTdrLdZ-Qtl-rRLdOmLg1q~nxp8JLF0uCp6HMzfZF2Py-WOjcmNYBqxRVmZW1Elyr-ie9RPvFJOBWVzWjt3fEBXX79W-Afl1Mia5PJcsRNMAbHMrGRl4Bf3DGF-Y9~x7Zy~6pfaHknhEQ-WQIOJrrti9qUU0FZHVFpt8Mf2n6E378wz-gcgLN5xp7GRA__)     |   ![Profile Menu](https://s3-alpha-sig.figma.com/img/f1fd/7d1e/16d22c6bc0e3b344eaafce7c7cb02d24?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=A-fYDXT51gcTX2bkM3sMt-CjHbn3AFYmIBU2HOqok3Y0y6zzpIyZnzKcJiSnyHhxejiK79IP-3qaNnyr72je5UoU-ekXa9WW~OrGOIHpPejlFe1B12-XJ1hKVtyEcEREyfrVkpdON3a6xatU1L1dj2w-a0owasbS8mcOaK3ZBAQ2IwF8BNiMskVBHXcHV9R8mnPdZePcIfVIksUGIpRfNd62p1ai7mafj883CG4CG5EYCBgAknZZyxvAFR0C6~cUxlpItQsF9ViGBnxiALSJcymEJIcib5DM1V33zObivYHaLRHp-Y4KL61xuC6~8MjOe9aw2ACXC5dsOS3eOeqx0A__)    | ![Report Request Management Menu](https://s3-alpha-sig.figma.com/img/85ef/217f/4aa5cfd868865b068be7071a021327ec?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cApK-CGcoe2Np8j5PF5ImcZ~b9px1-ybeo0rJionGvomqLZFq~HK2o8m9mpYDkT6Rzv7HKLwBvmTxy1ghC5w4x0ww8z6lqxIq4gNZCEV45nN8Da3GNJEswIZhJAYfbpDOsfJ7hn8MnCI36muzAWZnv1ML8uVWz1IdpdNedPubCocUE-boL1Lvyivgg6zI~erQuQj8p3mbB466XRRDY5fV-1gbzqcgR4Jos~3vcUJCqo8KTkJ28dfs-qhgC8fpAJIjQC9QIM5leZKPOuxF0QF033RzuQaDIoOo1RcO05idme-UHOl4K2f0SCEy-zVIkklYCW9NHUzcalSvtvEZqJY8w__) |
+|                                                                                                                                                                                                                                                   **Report Management Menu**                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                     **Donation Page**                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                             **Donate Page**                                                                                                                                                                                                                                                             |
+| ![Report Management Menu](https://s3-alpha-sig.figma.com/img/f357/ae64/f3c516202d0529e47353a53e381c8622?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jgLr3Xm1Q5K6jdUsitwoNbtC2XUm2BgK3P26TdOH0LIZjLhI721ewVXYFNdIgVcvtVtgsd2NxfhzE7ALdEPgSuGyZ2jvaOwKI~uMdEYKoGk5wUWnG3bhbtyf92NhXnUlIgxywDNQGlmFYJMxCUV1-PF3zosP9DMheLaFclj0Np-7cMlbE2n0iVVVDtYwdO9Xfl2gK~t-XQ8F0MCOVrH06S~DYTRSHZAtKYZPRdiVL7rs9LNz2Mhr9Ylsp5jCw6wY~8XqDENs23kosGui~eC5gDzOu2121BvyoQQqlslFolkMNcMD5AsHTupRLVV6zhuwNcODAMRLfOBQnKIP4N5IXA__) |   ![Donation Page](https://s3-alpha-sig.figma.com/img/3add/041c/1237a2490ffebe8e5628d94cc7e6ad2d?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cnSboFFWD3BdMI02LI8tDJ-a5lpG79bd16mvaHS-IdQYqQkyk82zYzQ8YAN9f6qDFtsLUkAJQEMFq6Q4lW3CSxIYiK1oDArxPP6m~kRro~QGFxO7Vn~EzY5ikt3FIpCLQ7h57arfv-knWSYeKh9Nx~WG34AI8s5mbqafd18Q0SMQFHcKmsFhTyfQ8lhNtADJD72KoEmUED5GD6WQzSdHfopse58aF21v~0klIBIOjAB8Ou~tFwxL0EjEhnxyt~EgyixruNkbxx9eXbkZmg026soA-d7oH20xY1HPwnLRCR5-dDP0Fkj2HXxwSx7NHyjNDK57Hg0o827CtKStDiGrmQ__)   |          ![Donate Page](https://s3-alpha-sig.figma.com/img/1855/8958/f529de033048eadaf2a54ddc036d7b87?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qfUM18pBWGSH4wTd1puc0IcCyl1-1QqS88T0uFFtQa2zthcvkw5O-VS8-mKmNy2Ht7rz~-tfBmGytivoArDLX7yh1jjMwBUo3~XzbfpxeHL9~1loo6tyF2ux9RaMYIIo43aQMDuxAxHU9jv0YzKcOKKCevmyBVi~QoUhjG1rfJRIYc02IGYz8q0~6kt-kYvbZX-o1i4P0dfpBg5dt~r4zUlxfot7UlCHvL-4JcwlQo4WofERblT50t5avJxgoWw0wcObkQDO2m04T26nkbr3Wuoag0sKlQ8uFmuVFhzJMSMxyvGR9tDpDGN1t-Ac~KVokxV8QsddoOxIPEdhmT-G5A__)           |
+|                                                                                                                                                                                                                                                       **Contact Us Page**                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                     **About Us Page**                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                       **Terms & Condition Page**                                                                                                                                                                                                                                                        |
+|    ![Contact Us Page](https://s3-alpha-sig.figma.com/img/d80c/d4a2/362fc0910b81f76e4b9b36af66142b61?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e3o0nCi3iurXcbsSTt6WSx70hHgsT7-YpXLurx-~IXt6ahmxe0sw72a9XRYUI~cqu6CDQqN6wmmr0AuqZX-vvDdVO5PT7VnEHz~0lmNRjlWMWYEwWBjblT6PFoK1LnQe9AsQlrr3GBvzM1trlGiVv2Q-yHEvvUL~lSHpGFikO1fbz7LDAa6TgurttVK3cJYBH7fv2pgJG5gqiqCQWsSxh~qK44Hawwn9CfOg-whxHnbIg6AS9SGH62wNEtV9vAnOJFMmQni-bXECyAng3WQ8CpSU8j0dac5xySpcHF6oS3kbWJvWXbaZgbvuuwI8-DMjJL8SRe0GxKlF5KV13bPjvw__)     |   ![About Us Page](https://s3-alpha-sig.figma.com/img/7401/a90a/86a7a7339da5fefbf240ae40a05a21f9?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qDNRFe0IRLCDangz3D2-BQUVp6z9VcpuC4dTn~L89tMtT~OLYFPsW~hKPphEYVY4Mov84ziDOXCpHzVsFUacV~mnMTI4xcYcvNkYQ2nT99yo-1v7xFqKIzH~AeSApwC08PYPQ8US0PL90vpqBDEapHbXXR2uEI7cH1lNCAWwL-errMI83Dav6ZouZiAX9DOyjx5-09TUMVAGCNI8EtlmnXvxklQlamS1fWlMdDcmWkQpcnEmcgyz8~9mHK8TVM2VU5uP-PV5XlyguK2dEQSSUfm3PDOMvMN9V7AhviFocpw~uHBAL66QKxjbotHLRy8cM0DHXknYSprPPEQHI53zaQ__)   |     ![Terms & Condition Page](https://s3-alpha-sig.figma.com/img/15bf/38cb/25fa87722d681889cb0b55d62a85d62b?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TZqWkrUkWbWxgBDZbZiVc2al2~vXNWLCLX6aa0UCJ2WrLqzZeKIwUqWJ0kEzjAaf6Xh~6hsNhpHFekpWdNyjUWUo1NjBJ5YxGDTV7Z5FR8AKCAYoA9vw02iOLGhKYLKSSNp8ddfrh4zva7EDGj5SdUXU8sBdOjvwYFj8qFvZY1t87AYwHxlrqn2gAfLTKYd2fNlmyvpAqtxmWTqC5ikqK1QsSUexspVjuBEWg2MAlPBYaAPKPDtoha7syjdtIOIkVpHjy767-P-yUCmg45xgEtElOPFDK0~KzbZ7zBe6KEPA0MvyV3rYOqcw3bMd~VJAb-Pf1mnCTCnpMy9cL0EjVg__)     |
 
-## 🚀 Cara Menjalankan
+## 🛠️ Tech Stack
 
-### Backend
-1. Clone repository.
-2. Masuk ke direktori backend.
-3. Install dependencies: `npm install`.
-4. Buat file `.env` dan tambahkan konfigurasi berikut:
-   ```env
-   PORT=5000
-   MONGO_URI=your_mongo_connection_string
-   JWT_SECRET=your_jwt_secret
-   CLOUDINARY_NAME=your_cloudinary_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+| Feature            | Package                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Icons              | [@fortawesome/fontawesome-svg-core](https://fontawesome.com), [@lucide-react](https://lucide.dev/), [react-icons](https://react-icons.github.io/react-icons/) |
+| Hero Icons         | [@heroicons/react](https://heroicons.dev/)                                                                                                                    |
+| Form Validation    | [@hookform/resolvers](https://react-hook-form.com/)                                                                                                           |
+| UI Components      | [@shadcn-ui](https://ui.shadcn.com/), [@nextui-org/react](https://nextui.org/) , [@flowbite](https://flowbite.com/)                                           |
+| HTTP Requests      | [axios](https://axios-http.com)                                                                                                                               |
+| Image Compression  | [browser-image-compression](https://www.npmjs.com/package/browser-image-compression)                                                                          |
+| Class Management   | [clsx](https://www.npmjs.com/package/clsx)                                                                                                                    |
+| Date Utilities     | [date-fns](https://date-fns.org/)                                                                                                                             |
+| Email Integration  | [emailjs-com](https://www.emailjs.com/)                                                                                                                       |
+| Carousel           | [embla-carousel-react](https://www.embla-carousel.com/)                                                                                                       |
+| Animations         | [framer-motion](https://www.framer.com/motion/), [tailwindcss-animate](https://www.npmjs.com/package/tailwindcss-animate)                                     |
+| OTP Input          | [input-otp](https://www.npmjs.com/package/input-otp)                                                                                                          |
+| Cookies Management | [js-cookie](https://www.npmjs.com/package/js-cookie)                                                                                                          |
+| Theme Management   | [next-themes](https://www.npmjs.com/package/next-themes)                                                                                                      |
+| Day Picker         | [react-day-picker](https://react-day-picker.js.org/)                                                                                                          |
+| Panels             | [react-resizable-panels](https://www.npmjs.com/package/react-resizable-panels)                                                                                |
+| Spinners           | [react-spinners](https://www.npmjs.com/package/react-spinners)                                                                                                |
+| Notifications      | [react-toastify](https://fkhadra.github.io/react-toastify/)                                                                                                   |
+| Styled Components  | [styled-components](https://styled-components.com/)                                                                                                           |
+| Sliders            | [swiper](https://swiperjs.com/)                                                                                                                               |
+| CSS Utilities      | [tailwind-merge](https://www.npmjs.com/package/tailwind-merge)                                                                                                |
+| Schema Validation  | [zod](https://zod.dev/)                                                                                                                                       |
+
+## 🚀 How to Run
+
+1. Navigate to the frontend directory.
+
+2. Install dependencies:
+   ```bash
+   npm install
    ```
-5. Jalankan server: `npm start`.
+3. Start the application: .
+   ```bash
+     npm run dev
+   ```
 
-### Frontend
-1. Masuk ke direktori frontend.
-2. Install dependencies: `npm install`.
-3. Jalankan aplikasi: `npm run dev`.
+## 📚 License
 
-## 📚 Lisensi
-
-Proyek ini dilisensikan di bawah lisensi MIT. Lihat file [LICENSE](LICENSE) untuk informasi lebih lanjut.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ---
 
-Terima kasih telah menggunakan **Item Tracker**! Jika Anda memiliki pertanyaan, silakan buat isu di repository ini atau hubungi kami melalui email.
-
+Thank you for using **Item Tracker**! If you have any questions, please create an issue in this repository or contact us via email.
