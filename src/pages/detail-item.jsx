@@ -3,6 +3,7 @@ import { Footer } from "../components/organisms/footer.jsx";
 import React, { useState, useEffect, useRef } from "react";
 import { ScrollArea } from "../components/ui/scroll-area.jsx";
 import { Button } from "../components/ui/button.jsx";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   updateComment,
   deleteComment,
@@ -270,14 +271,23 @@ const DetailItem = () => {
                       <div className="comment-container w-full">
                         <div className="user">
                           <div className="user-pic w-10 h-10 relative flex items-center justify-center bg-gray-200 rounded-full">
-                            <img
+                            {/* <img
                               src={
                                 comment?.user_id?.image_url ||
                                 comment?.user_id?.name[0]
                               }
-                              alt="user"
+                              alt={comment?.user_id?.name[0]}
                               className="w-full h-full object-cover rounded-full"
-                            />
+                            /> */}
+                            <Avatar>
+                              <AvatarImage
+                                src={comment?.user_id?.image_url}
+                                alt={comment?.user_id?.name[0]}
+                              />
+                              <AvatarFallback className="text-black bg-white">
+                                {comment?.user_id?.name[0]}
+                              </AvatarFallback>
+                            </Avatar>
                           </div>
                           <div className="user-info">
                             <span className="text-black">
