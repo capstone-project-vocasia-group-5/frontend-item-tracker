@@ -37,6 +37,7 @@ const DetailItem = () => {
   const { user } = useAuth();
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const dropdownRefs = useRef({});
+  console.log(comments);
 
   const toggleDropdown = (commentId) => {
     setOpenDropdownId((prevId) => (prevId === commentId ? null : commentId));
@@ -281,9 +282,20 @@ const DetailItem = () => {
                           </div>
                           <div className="user-info">
                             <span className="text-black">
-                              {comment?.user_id
-                                ? comment?.user_id?.username
-                                : "Unknown User"}{" "}
+                              {comment?.user_id ? (
+                                <>
+                                  {comment?.user_id?.username}
+                                  {comment?.updated_at !==
+                                    comment?.created_at && (
+                                    <span className="!text-gray-500 !text-base">
+                                      {" "}
+                                      (diedit)
+                                    </span>
+                                  )}
+                                </>
+                              ) : (
+                                "Unknown User"
+                              )}
                             </span>
                             <p>{formatDateTimeComment(comment?.created_at)}</p>
                           </div>
