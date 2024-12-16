@@ -345,31 +345,34 @@ const DetailItem = () => {
 
                             {openDropdownId === comment.id && (
                               <div
-                                ref={(el) =>
-                                  (dropdownRefs.current[comment.id] = el)
-                                }
-                                className="absolute flex flex-col gap-1 right-0 mt-2 w-24 md:w-48 bg-white border rounded-md shadow-lg z-10"
-                                style={{ top: "-2rem" }}
+                              ref={(el) => (dropdownRefs.current[comment.id] = el)}
+                              className="absolute flex flex-col gap-1 right-0 mt-2 w-24 md:w-48 bg-white border rounded-md shadow-lg z-10"
+                              style={{ top: "-2rem" }}
                               >
                                 <button
-                                  onClick={() => {
+                                onClick={() => {
                                     setEditCommentId(comment.id);
                                     setEditCommentText(comment.comment_text);
-                                  }}
-                                  className="block w-full text-left px-4 py-2 bg-blue-500 hover:text-black text-white hover:bg-gray-100"
-                                >
+                                    setOpenDropdownId(null);
+                            
+                                }}
+                                className="block w-full text-left px-4 py-2 bg-blue-500 hover:text-black text-white hover:bg-gray-100"
+                              >
                                   Edit
                                 </button>
-                                <button
-                                  onClick={() =>
-                                    handleDeleteComment(comment.id)
-                                  }
-                                  className="block w-full text-left px-4 py-2 bg-red-500 hover:text-black text-white hover:bg-gray-100"
-                                >
+                              <button
+                                onClick={() => {
+                                    handleDeleteComment(comment.id);
+                                    setOpenDropdownId(null);
+                            
+                                }}
+                                className="block w-full text-left px-4 py-2 bg-red-500 hover:text-black text-white hover:bg-gray-100"
+                              >
                                   Hapus
                                 </button>
-                              </div>
-                            )}
+                            </div>
+                          )}
+
                           </div>
                         )}
                       </div>
