@@ -513,15 +513,15 @@ const ManagePengajuan = () => {
                                       )}
                                     </div>
                                   ) : (
-                                    <div className="flex flex-col gap-1">
+                                    <div className="flex flex-col gap-1 p-1 rounded-lg w-uto">
                                       <li>
                                         <button
-                                          className="block w-full px-4 py-2 hover:bg-gray-100 hover:text-black text-left"
+                                          className="block w-full px-4 py-2 hover:bg-gray-100 hover:text-black text-left bg-gray-800"
                                           onClick={() =>
                                             handleClickDetail(item)
                                           }
                                         >
-                                          Lihat
+                                          Lihat Detail
                                         </button>
                                       </li>
                                       {item.is_approved === null && (
