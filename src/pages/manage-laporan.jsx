@@ -471,7 +471,7 @@ const ManageLaporanUser = () => {
               postal_code: selectedItem.postal_code,
               type: selectedItem.type,
               status: true,
-              is_approved: selectedItem.is_approved,
+              approved: selectedItem.approved,
             }}
             onClose={handleClosePopup}
           />

@@ -63,11 +63,11 @@ const Popup = ({ title, item, onClose }) => {
           </p>
           <p className={item.status ? "" : "hidden"}>
             <strong>Status:</strong>{" "}
-            {item.is_approved === true
+            {item.approved === true
               ? "Disetujui"
-              : item.is_approved === false
+              : item.approved === false
               ? "Ditolak"
-              : "Belum Disetujui"}
+              : "Proses Verifikasi"}
           </p>
           <p className={item.reason ? "" : "hidden"}>
             <strong>Alasan: </strong>
