@@ -78,15 +78,20 @@ const TentangKami = () => {
       </header>
 
       <section className="container mx-auto px-6 max-w-full py-12">
-        <h2 className="text-4xl font-bold text-black mb-6 text-center">Visi, Misi & Tujuan</h2>
+        <h2 className="text-4xl font-bold text-black mb-6 text-center">
+          Visi, Misi & Tujuan
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           <div className="space-y-8 p-6 flex flex-col justify-between">
             {/* Visi */}
             <Card className="bg-black rounded-lg shadow-md border border-transparent transition-all duration-300 hover:border-white hover:shadow-2xl p-4 h-full">
               <div>
-                <h3 className="text-2xl font-semibold text-white mb-2 h-12">Visi Kami</h3>
+                <h3 className="text-2xl font-semibold text-white mb-2 h-12">
+                  Visi Kami
+                </h3>
                 <p className="text-white leading-relaxed mb-2 p-2">
-                  Menjadi platform pelacakan barang terdepan yang dipercaya oleh masyarakat global.
+                  Menjadi platform pelacakan barang terdepan yang dipercaya oleh
+                  masyarakat global.
                 </p>
               </div>
             </Card>
@@ -94,9 +99,12 @@ const TentangKami = () => {
             {/* Misi */}
             <Card className="bg-black rounded-lg shadow-md border border-transparent transition-all duration-300 hover:border-white hover:shadow-2xl p-4 h-full">
               <div>
-                <h3 className="text-2xl font-semibold text-white mb-2 h-12">Misi Kami</h3>
+                <h3 className="text-2xl font-semibold text-white mb-2 h-12">
+                  Misi Kami
+                </h3>
                 <p className="text-white leading-relaxed mb-2 p-2">
-                  Membantu setiap individu menemukan barang yang hilang dengan solusi teknologi yang sederhana, andal, dan efisien.
+                  Membantu setiap individu menemukan barang yang hilang dengan
+                  solusi teknologi yang sederhana, andal, dan efisien.
                 </p>
               </div>
             </Card>
@@ -106,7 +114,9 @@ const TentangKami = () => {
           <div className="h-full p-6">
             <Card className="bg-black rounded-lg shadow-md border border-transparent transition-all duration-300 hover:border-white hover:shadow-2xl h-full">
               <div className="p-4 h-full">
-                <h3 className="text-2xl font-semibold text-white mb-4 p-2">Tujuan Kami</h3>
+                <h3 className="text-2xl font-semibold text-white mb-4 p-2">
+                  Tujuan Kami
+                </h3>
                 <ul className="text-white leading-relaxed space-y-4 text-left p-6">
                   {/* Item 1 */}
                   <li className="flex items-center md:items-start">
@@ -114,7 +124,8 @@ const TentangKami = () => {
                       1
                     </button>
                     <span className="flex-grow">
-                      Memberikan solusi pelacakan barang yang akurat dan terpercaya bagi semua pengguna.
+                      Memberikan solusi pelacakan barang yang akurat dan
+                      terpercaya bagi semua pengguna.
                     </span>
                   </li>
                   {/* Item 2 */}
@@ -123,7 +134,8 @@ const TentangKami = () => {
                       2
                     </button>
                     <span className="flex-grow">
-                      Membangun komunitas yang mendukung kolaborasi dan berbagi informasi antar pengguna.
+                      Membangun komunitas yang mendukung kolaborasi dan berbagi
+                      informasi antar pengguna.
                     </span>
                   </li>
                   {/* Item 3 */}
@@ -132,7 +144,8 @@ const TentangKami = () => {
                       3
                     </button>
                     <span className="flex-grow">
-                      Terus mengembangkan inovasi teknologi untuk memenuhi kebutuhan pengguna secara global.
+                      Terus mengembangkan inovasi teknologi untuk memenuhi
+                      kebutuhan pengguna secara global.
                     </span>
                   </li>
                 </ul>
@@ -141,7 +154,6 @@ const TentangKami = () => {
           </div>
         </div>
       </section>
-
 
       {/* Konten Utama */}
       <main className="container mx-auto min-h-screen max-w-full py-12 px-6">
@@ -179,9 +191,9 @@ const TentangKami = () => {
 
             <div className="flex items-center">
               <Link to="/contact">
-                <button class="contactButton">
+                <button className="contactButton">
                   Hubungi
-                  <div class="iconButton">
+                  <div className="iconButton">
                     <svg
                       height="24"
                       width="24"

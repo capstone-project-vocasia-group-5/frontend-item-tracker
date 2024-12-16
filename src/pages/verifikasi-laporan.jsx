@@ -29,9 +29,15 @@ const VerifikasiLaporan = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await getAllItemsByAdmin({ approved: false });
-        setItems(response.data.data.items);
-        setTotalItems(response.data.data.total_items);
+        const response = await getAllItemsByAdmin({
+          approved: false,
+          limit: 100000000000000,
+        });
+        const listItems = response?.data?.data?.items.filter(
+          (item) => item.message === null
+        );
+        setItems(listItems);
+        setTotalItems(listItems.length);
       } catch (error) {
         toast.error("Error fetching data: ", error);
       } finally {
