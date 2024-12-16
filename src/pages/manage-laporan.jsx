@@ -288,7 +288,7 @@ const ManageLaporanUser = () => {
                                   ref={(el) =>
                                     (dropdownRefs.current[item._id] = el)
                                   }
-                                  className="p-1 absolute flex flex-col gap-1 right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10 text-sm"
+                                  className="p-1 absolute flex flex-col gap-1 right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10 text-sm"
                                   style={{ top: "-4rem" }}
                                 >
                                   <button
@@ -417,6 +417,7 @@ const ManageLaporanUser = () => {
                                     height="24"
                                     viewBox="0 0 24 24"
                                     fill="none"
+                                    className="w-5 h-5"
                                     xmlns="http://www.w3.org/2000/svg"
                                   >
                                     <path
