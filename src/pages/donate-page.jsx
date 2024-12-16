@@ -117,7 +117,7 @@ const DonationForm = () => {
                 <input
                   id="name"
                   type="text"
-                  placeholder="Masukkan Nama Akun Anda"
+                  placeholder="Masukkan Nama Anda"
                   className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 text-base"
                   required
                   onChange={(e) => setName(e.target.value)}
