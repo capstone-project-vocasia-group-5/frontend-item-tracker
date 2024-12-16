@@ -188,13 +188,20 @@ const ManagePengajuan = () => {
     <div>
       {isLoading && <Preloader />}
       <div className="min-h-screen flex flex-col">
-        <div className="p-4">
-          <header className="bg-white shadow-sm p-4 flex justify-between">
-            <h1 className="text-xl font-bold">Manajemen Pengajuan Barang</h1>
+        <div className="md:p-4">
+          <header className="bg-white shadow-sm p-4 justify-between text-left">
+            <h1 className="text-xl font-bold my-3">
+              Manajemen Pengajuan Barang
+            </h1>
+            <p className="text-gray-400">
+              Pantau pengajuan Anda terhadap barang hilang, serta lihat
+              pengajuan orang lain terhadap barang temuan yang telah Anda
+              laporkan.
+            </p>
           </header>
-          <div className="bg-white shadow-md rounded-md overflow-hidden">
+          <div className="bg-white shadow-md rounded-md overflow-hidden min-h-screen">
             {/* Search Bar */}
-            <form className="max-w-lg mx-auto mt-10">
+            <form className="max-w-lg mx-auto">
               <div className="p-5">
                 <div className="flex border rounded-md">
                   <input
@@ -248,7 +255,7 @@ const ManagePengajuan = () => {
             </div>
 
             {/* Table */}
-            <div className="px-4 md:px-9 overflow-x-auto">
+            <div className="px-4 md:px-9 overflow-hidden min-h-screen">
               <table className="w-full bg-white rounded-full">
                 <thead className="bg-black text-white rounded-full">
                   <tr>

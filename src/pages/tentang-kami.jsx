@@ -52,9 +52,9 @@ const TentangKami = () => {
 
       <Navbar />
       <header className="bg-black text-white">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-16">
+        <div className="container max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-16">
           {/* Gambar Header */}
-          <div className="w-full md:w-1/2">
+          <div className="md:w-1/2">
             <img
               src="/image/logo-3-white.svg"
               alt="ItemTrack Hero"

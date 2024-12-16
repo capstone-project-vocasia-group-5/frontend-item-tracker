@@ -108,7 +108,7 @@ const UpdateProfileUser = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 md:py-10">
           <form
             onSubmit={handleUpdate}
             className="w-full max-w-lg mx-auto bg-black p-6 rounded-md shadow-md"

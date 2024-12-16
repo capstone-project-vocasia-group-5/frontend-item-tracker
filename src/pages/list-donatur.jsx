@@ -13,26 +13,24 @@ const Donatur = () => {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-  
+
     const fetchDonations = async () => {
       try {
         const response = await getDonations();
         if (isMounted) {
           const donations = response.data.data.donations;
-  
+
           // Unique Name (Case insensitive)
           const uniqueInvestors = Array.from(
             new Set(
               donations
                 .filter((donation) => donation.amount >= 10000000)
-                .map((donation) => donation.name.toLowerCase()) 
+                .map((donation) => donation.name.toLowerCase())
             )
           ).map((name) =>
-            donations.find(
-              (donation) => donation.name.toLowerCase() === name 
-            )
+            donations.find((donation) => donation.name.toLowerCase() === name)
           );
-  
+
           const uniqueDonators = Array.from(
             new Set(
               donations
@@ -40,11 +38,9 @@ const Donatur = () => {
                 .map((donation) => donation.name.toLowerCase())
             )
           ).map((name) =>
-            donations.find(
-              (donation) => donation.name.toLowerCase() === name 
-            )
+            donations.find((donation) => donation.name.toLowerCase() === name)
           );
-  
+
           setInvestors(uniqueInvestors);
           setDonators(uniqueDonators);
         }
@@ -56,22 +52,22 @@ const Donatur = () => {
         }
       }
     };
-  
+
     fetchDonations();
-  
+
     return () => {
       isMounted = false;
     };
   }, []);
 
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col">
+    <div className="bg-gray-50 min-h-screen flex flex-col ">
       {loading && <Preloader />}
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <Navbar />
       </header>
 
-      <main className="flex-grow container mx-auto py-8 px-4 md:px-8">
+      <main className="flex-grow container mx-auto py-8 px-4 md:px-8 max-w-screen-xl ">
         <h1 className="text-center text-4xl font-bold mb-6 text-gray-800 mt-8">
           Donatur Kami
         </h1>
@@ -87,7 +83,9 @@ const Donatur = () => {
             {investors.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left text-gray-600">
                 {investors.map((investor, index) => (
-                  <p key={index} className="text-center">{investor.name}</p>
+                  <p key={index} className="text-center">
+                    {investor.name}
+                  </p>
                 ))}
               </div>
             ) : (
@@ -107,7 +105,9 @@ const Donatur = () => {
             {donators.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left text-gray-600">
                 {donators.map((donator, index) => (
-                  <p key={index} className="text-center">{donator.name}</p>
+                  <p key={index} className="text-center">
+                    {donator.name}
+                  </p>
                 ))}
               </div>
             ) : (
