@@ -61,13 +61,19 @@ const Popup = ({ title, item, onClose }) => {
           <p>
             <strong>Deskripsi:</strong> {item.description}
           </p>
-          <p className={item.status ? "" : "hidden"}>
-            <strong>Status:</strong>{" "}
+          <p className={item.status_verification ? "" : "hidden"}>
+            <strong>Status Verifikasi:</strong>{" "}
             {item.approved === true
               ? "Disetujui oleh Admin"
               : item.approved === false
               ? "Ditolak oleh Admin"
               : "Proses Verifikasi Admin"}
+          </p>
+          <p className={item.status_report ? "" : "hidden"}>
+            <strong>Status Laporan:</strong>{" "}
+            {item.matched_status === true
+              ? "Laporan Selesai"
+              : "Laporan Belum Selesai"}
           </p>
           <p className={item.reason ? "" : "hidden"}>
             <strong>Alasan: </strong>
