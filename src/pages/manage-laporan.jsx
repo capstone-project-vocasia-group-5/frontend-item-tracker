@@ -26,7 +26,6 @@ const ManageLaporanUser = () => {
   const itemsPerPage = 5;
   const [totalItems, setTotalItems] = useState(0);
 
-
   const handleOpenPopup = (item, type) => {
     setSelectedItem(item);
     setPopupType(type);
@@ -256,7 +255,7 @@ const ManageLaporanUser = () => {
                             item.matched_status === false &&
                             item.message !== null
                           ? "Ditolak Oleh Admin"
-                          : item.approved === null &&
+                          : item.approved === false &&
                             item.matched_status === false
                           ? "Sedang Verifikasi"
                           : item.approved === true &&
