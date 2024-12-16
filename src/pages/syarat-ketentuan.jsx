@@ -14,7 +14,9 @@ const SyaratKetentuan = () => {
         <ScrollArea className=" w-[400px] md:w-[550px] lg:w-[850px] h-[600px] bg-primaryBlack rounded-md border p-6 text-white text-justify">
           {" "}
           <div className="terms-container">
-            <h5 className="text-xl font-bold">Selamat Datang di ItemTrack!</h5>
+            <h5 className="text-xl font-bold">
+              Selamat Datang di Item Tracker!
+            </h5>
             <p>
               Dengan menggunakan aplikasi ini, Anda menyetujui Syarat dan
               Ketentuan berikut. Harap baca dengan saksama sebelum melanjutkan
@@ -36,7 +38,7 @@ const SyaratKetentuan = () => {
               {" "}
               3. {""}
               <b>Pengguna:</b> Setiap orang yang mengakses dan menggunakan
-              aplikasi ItemTrack. <br /> <br />
+              aplikasi Item Tracker. <br /> <br />
             </p>
 
             <h5 className="text-xl font-bold">Kewajiban Pengguna</h5>
@@ -61,15 +63,15 @@ const SyaratKetentuan = () => {
               atau melaporkan barang temuan.
             </p>
             <p>
-              ItemTrack berhak menangguhkan atau menghentikan akses pengguna
+              Item Tracker berhak menangguhkan atau menghentikan akses pengguna
               yang melanggar aturan.
               <br /> <br />
             </p>
 
             <h5 className="text-xl font-bold">Batasan Tanggung Jawab</h5>
             <p>
-              ItemTrack hanya menyediakan platform untuk menghubungkan pemilik
-              barang dan penemu. Kami tidak bertanggung jawab atas klaim
+              Item Tracker hanya menyediakan platform untuk menghubungkan
+              pemilik barang dan penemu. Kami tidak bertanggung jawab atas klaim
               kepemilikan yang salah atau kesalahpahaman antara pengguna. <br />{" "}
               <br />
             </p>
@@ -90,8 +92,10 @@ const SyaratKetentuan = () => {
             <h5 className="text-xl font-bold">Kontak</h5>
             <p>
               Jika ada pertanyaan atau keluhan, silakan hubungi kami di{" "}
-              <a href="mailto:ItemTrack@gmail.com">ItemTrack@gmail.com</a>.{" "}
-              <br />
+              <a href="mailto:itemtrackerteam@gmail.com">
+                itemtrackerteam@gmail.com
+              </a>
+              . <br />
             </p>
           </div>
         </ScrollArea>
