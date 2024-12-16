@@ -63,10 +63,10 @@ function ProfileBase() {
       {isLoading && <Preloader />}
       <Navbar />
 
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-xl mx-auto min-h-screen">
         {/* Layout utama */}
-        <div className="flex justify-center m-4 max-w-screen-xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow">
+        <div className="flex justify-center m-4 max-w-screen-xl ">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow min-h-screen">
             {/* Sidebar */}
             <div
               className={`w-full bg-white border border-gray-300 shadow rounded-lg ${
