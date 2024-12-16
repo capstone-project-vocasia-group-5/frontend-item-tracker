@@ -235,21 +235,22 @@ const DetailItem = () => {
             </div>
 
             <div className="mt-4 flex justify-start items-center">
-              {item?.item?.type === "found" ? (
-                <Button
-                  onClick={handleClickAjukan}
-                  className="mt-2 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  Ajukan Kepemilikan
-                </Button>
-              ) : (
-                <Button
-                  onClick={handleClickHubungi}
-                  className="mt-2 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  Hubungi Pemilik
-                </Button>
-              )}
+              {item?.item?.user_id !== user?.id &&
+                (item?.item?.type === "found" ? (
+                  <Button
+                    onClick={handleClickAjukan}
+                    className="mt-2 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Ajukan Kepemilikan
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleClickHubungi}
+                    className="mt-2 px-6 py-2 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Hubungi Pemilik
+                  </Button>
+                ))}
             </div>
           </div>
         </div>
