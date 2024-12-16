@@ -77,7 +77,7 @@ const TentangKami = () => {
         </div>
       </header>
 
-      <section className="container mx-auto px-6 max-w-full py-12">
+      <section className="container mx-auto px-6 max-w-screen-xl py-12">
         <h2 className="text-4xl font-bold text-black mb-6 text-center">
           Visi, Misi & Tujuan
         </h2>
