@@ -37,7 +37,6 @@ const DetailItem = () => {
   const { user } = useAuth();
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const dropdownRefs = useRef({});
-  console.log(comments);
 
   const toggleDropdown = (commentId) => {
     setOpenDropdownId((prevId) => (prevId === commentId ? null : commentId));

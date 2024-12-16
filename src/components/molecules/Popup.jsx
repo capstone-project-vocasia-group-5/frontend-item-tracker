@@ -65,8 +65,8 @@ const Popup = ({ title, item, onClose }) => {
             <strong>Status Verifikasi:</strong>{" "}
             {item.approved === true
               ? "Disetujui oleh Admin"
-              : item.approved === false
-              ? "Ditolak oleh Admin"
+              : item.approved === false && item.message !== null
+              ? `Ditolak oleh Admin dengan alasan: ${item.message}`
               : "Proses Verifikasi Admin"}
           </p>
           <p className={item.status_report ? "" : "hidden"}>

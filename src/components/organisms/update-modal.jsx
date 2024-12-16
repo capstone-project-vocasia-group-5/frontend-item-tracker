@@ -64,7 +64,6 @@ const UpdateModal = ({ item, onClose, onUpdate }) => {
         ? updatedFields.categories.map((category) => category.toString())
         : [updatedFields.categories.toString()];
     }
-    console.log(updatedFields);
     onUpdate(item._id, updatedFields);
     onClose();
   };

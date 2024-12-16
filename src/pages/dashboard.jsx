@@ -39,8 +39,6 @@ function Dashboard() {
         const response = await getAllMatchedStatus({ matched_status: true });
 
         setTotalMatched(response.data.data.total_items);
-        console.log(response.data.data.total_items);
-        console.log(response);
       } catch (error) {
         console.error("Failed to fetch items:", error.message);
       }
