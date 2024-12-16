@@ -178,11 +178,6 @@ function RegisterForm() {
             </div>
           </div>
 
-          {/* Error Message */}
-          {errorMessage && (
-            <p className="text-red-500 text-sm">{errorMessage}</p>
-          )}
-
           {/* Terms and Services Card */}
           {isFormValid() && password.length >= 6 && (
             <div style={{ marginTop: "20px" }}>
@@ -203,6 +198,11 @@ function RegisterForm() {
               Saya menyetujui Syarat dan Ketentuan
             </label>
           </div>
+
+          {/* Error Message */}
+          {errorMessage && (
+            <p className="text-red-500 text-sm">{errorMessage}</p>
+          )}
 
           {/* Submit */}
           <button
