@@ -16,7 +16,7 @@ const KebijakanPrivasi = () => {
           <div></div>
           Privasi Anda penting bagi kami. Kebijakan ini menjelaskan bagaimana
           kami mengumpulkan, menggunakan, dan melindungi data Anda saat
-          menggunakan aplikasi ItemTrack. <br /> <br />
+          menggunakan aplikasi Item Tracker. <br /> <br />
           <h5 className="text-xl font-bold">Data yang Dikumpulkan :</h5>{" "}
           <p>1. Informasi pribadi seperti nama, email, dan nomor telepon.</p>{" "}
           <p>
@@ -81,7 +81,10 @@ const KebijakanPrivasi = () => {
           <h5 className="text-xl font-bold ">Kontak</h5>{" "}
           <p>
             Untuk pertanyaan lebih lanjut terkait privasi, silakan hubungi kami
-            di [alamat email atau nomor telepon tim pengembang].
+            di {""}
+            <a href="mailto:itemtrackerteam@gmail.com">
+              itemtrackerteam@gmail.com
+            </a>
             <br />
             <br />
           </p>{" "}
