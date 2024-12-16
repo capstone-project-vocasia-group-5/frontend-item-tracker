@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { registerUser } from "../api/api";
 import LogoItemTracker from "../components/atoms/logo-item-tracker.jsx";
+import TermsAndServicesCard from "../components/organisms/terms-and-services";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -13,9 +14,13 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [termsAccepted, setTermsAccepted] = useState(false); // State untuk checkbox
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const navigate = useNavigate();
+
+  const isFormValid = () => {
+    return username && fullname && email && phoneNumber && password;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +66,6 @@ function RegisterForm() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-5">
       <div className="w-96 p-8 bg-black text-white rounded-lg shadow-lg">
-        {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
           <img
             src="/image/logo-3-white.svg"
@@ -71,9 +75,9 @@ function RegisterForm() {
           <LogoItemTracker className={`text-3xl`} />
         </div>
 
-        {/* Form */}
         <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-          {/* Username Input */}
+          {/* Input Fields */}
+          {/* Username */}
           <div>
             <label htmlFor="username" className="block text-sm mb-1 text-left">
               Username
@@ -88,7 +92,7 @@ function RegisterForm() {
             />
           </div>
 
-          {/* FullName Input */}
+          {/* FullName */}
           <div>
             <label htmlFor="fullname" className="block text-sm mb-1 text-left">
               Full Name
@@ -103,7 +107,7 @@ function RegisterForm() {
             />
           </div>
 
-          {/* Email Input */}
+          {/* Email */}
           <div>
             <label htmlFor="email" className="block text-sm mb-1 text-left">
               Email
@@ -118,7 +122,7 @@ function RegisterForm() {
             />
           </div>
 
-          {/* No. Telephone Input */}
+          {/* Phone Number */}
           <div>
             <label htmlFor="number" className="block text-sm mb-1 text-left">
               No. Telephone
@@ -145,7 +149,7 @@ function RegisterForm() {
             </div>
           </div>
 
-          {/* Password Input */}
+          {/* Password */}
           <div>
             <label htmlFor="password" className="block text-sm mb-1 text-left">
               Password
@@ -179,16 +183,14 @@ function RegisterForm() {
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            disabled={loading}
-          >
-            {loading ? "Mendaftar..." : "Daftar"}
-          </button>
+          {/* Terms and Services Card */}
+          {isFormValid() && password.length >= 6 && (
+            <div style={{ marginTop: "20px" }}>
+              <TermsAndServicesCard />
+            </div>
+          )}
 
-          {/* Checkbox Syarat & Ketentuan */}
+          {/* Checkbox */}
           <div className="flex items-center mt-2">
             <input
               type="checkbox"
@@ -198,17 +200,18 @@ function RegisterForm() {
               className="mr-2"
             />
             <label htmlFor="terms" className="text-sm">
-              Saya menyetujui{" "}
-              <a
-                href="/terms"
-                className="text-blue-400 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                syarat dan ketentuan
-              </a>
+              Saya menyetujui Syarat dan Ketentuan
             </label>
           </div>
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            disabled={loading}
+          >
+            {loading ? "Mendaftar..." : "Daftar"}
+          </button>
         </form>
 
         {/* Footer */}
