@@ -48,7 +48,7 @@ function LoginAdmin() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-5">
-      <div className="w-full max-w-sm lg:max-w-md p-6 sm:p-8 bg-black text-white rounded-lg shadow-lg">
+      <div className="w-full max-w-md p-6 sm:p-8 bg-black text-white rounded-lg shadow-lg">
         {/* Logo */}
         <div className="flex items-center justify-center mb-6 space-x-3">
           <img

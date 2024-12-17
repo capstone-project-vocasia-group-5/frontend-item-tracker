@@ -65,7 +65,7 @@ function RegisterForm() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-5">
-      <div className="w-96 p-8 bg-black text-white rounded-lg shadow-lg">
+      <div className="w-full max-w-xl p-8 bg-black text-white rounded-lg shadow-lg">
         <div className="flex items-center justify-center mb-6 space-x-3">
           <img
             src="/image/logo-3-white.svg"
@@ -101,7 +101,7 @@ function RegisterForm() {
               type="text"
               id="fullname"
               className="w-full bg-white px-4 py-2 rounded-md border text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Full Name"
+              placeholder="Nama Lengkap"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
             />
@@ -125,7 +125,7 @@ function RegisterForm() {
           {/* Phone Number */}
           <div>
             <label htmlFor="number" className="block text-sm mb-1 text-left">
-              No. Telephone
+              Nomor Telpon
             </label>
             <div className="flex items-center">
               <span className="bg-white text-black px-4 py-2 rounded-l-md border border-r-0">
@@ -137,7 +137,7 @@ function RegisterForm() {
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full bg-white px-2 py-2 rounded-r-md border text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="No. Telephone"
+                placeholder="No. Telpon"
                 pattern="[0-9]*"
                 inputMode="numeric"
                 onKeyPress={(e) => {
