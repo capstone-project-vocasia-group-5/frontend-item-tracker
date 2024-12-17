@@ -16,7 +16,7 @@ const TentangKami = () => {
       instagram: "https://www.instagram.com/agusheryanto182/",
       linkedin: "https://www.linkedin.com/in/agus-heryanto-b34561284/",
       photo:
-        "https://s3-alpha-sig.figma.com/img/5e24/f81d/b91f5061028f4737046bbc134c9800f1?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=pi94nsqa8agSGni25UMo97At-sRD1-58KYgbd33lUEdzvv5X5izHHeJEyD-w~tARTmqOHX2CTBcRNyUohVvBYdoodwa3fYYZEqJa8WDBUedcIttItxJSBj2hDNulFS9PUwrBSTWzP~kzzHzE9qjoViNgd9SbwV-VkqyPSGlsAD~5geCgb~LnRnHfp2u03rLBmw4RwjshJ9z2YG4rgMdKlgCsvpjunyNn6~sJqDT5VyDAHTUvYF0qdGGykatzbh~MxmxJ5BMS8OpBCCljDgssqquD-skE2ksJPgmJPRNDxHRu-s1~M084ndvr-axpzgIW5wrhoOjliU3sbOmvniP9XA__",
+        "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449259/profile_1_1_sl7bra.png",
     },
     {
       name: `Aisyah Lailia Sari`,
@@ -25,7 +25,7 @@ const TentangKami = () => {
       instagram: "https://www.instagram.com/aisyahlailia/",
       linkedin: "https://www.linkedin.com/in/aisyahlailia/",
       photo:
-        "https://s3-alpha-sig.figma.com/img/c94f/405d/3329b48656723464fa39a225d0f78be9?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=CV3wRyLDDm98tr6m17ZstCUl-RCYrczIHDDyWWi~Aem~koUk3wtTyZvU1O8XkMTa-p5~IEj2Jepe0V6Dhn2--5Up1UvhPTumSphFZNHFzfTvmduK5MnDP0CT~GfLk~LfhoFCsjRMe8fGzTeQ49eAfR~g40ECEoET7gpvcrwMQcKlH1PRElsDFUEogRjJJnm5T3O9WZ6m-VCiTAovaSEDNcW6bn4V6X7ebBEXC9c9ol~UFLq3r~OVLykXo23uRwRSiOR7dqXiDLhSWnbq1FJuKmB0mW20lchUPWqepUY4NNHNg0a0i0B3l97BgZWtmqXKYy3BAx2h3olgFZAfP2MP-g__",
+        "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449257/IMG-20241212-WA0016_1_2_1_cplz33.png",
     },
     {
       name: "Anisa Ayu Yandani",
@@ -34,7 +34,7 @@ const TentangKami = () => {
       instagram: "https://www.instagram.com/annissaa_ay/",
       linkedin: "https://www.linkedin.com/in/anisa-ayu-yandani-79334b263/",
       photo:
-        "https://s3-alpha-sig.figma.com/img/5991/0bce/699cbbbe9c32ddff55dcd16af7446b93?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Q0tgyhaxwdiG62IISOrMo~F-s4FxiflckPhsixDbiDpzhmHevYML1ZbEol5P9ZlZW1f3S1uBi05FY40kAs~kQ2WU8OU2OonLoilU0CwxCf5-S3cFCLxN4GpZjLGfiIsEW9yN9d7YeWWFXKA-tWCCaau54vokArauf11IrwBpAzHtfq4a9C3BhNovbsyRg6ih26ANsyrANzibWawi2G3beH8EE59TMjldDCDRu8ng32gxIewMHVUaZUQnZCqgazc-4u7maOJtHhIllp3yNAIjMLNp0sfNqHWY8ehB3sfJI0NXUnG29sPrwColkQflKIp2UYSuV3W-h7Zkimdug8vrQA__",
+        "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449258/removal.ai__ebca4e0d-4600-4bd3-b628-f731cca0af80-whatsapp-image-2024-12-12-at-17-16-13-1_1_1_fujl9s.png",
     },
     {
       name: "M. Ade Irawan",
@@ -43,7 +43,7 @@ const TentangKami = () => {
       instagram: "https://www.instagram.com/adeeirawan._/",
       linkedin: "https://www.linkedin.com/in/adeirawann/",
       photo:
-        "https://s3-alpha-sig.figma.com/img/46b2/c194/2eb3402c3ef01fde5fde08e0ee047600?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Sr3BMu5wmlEODiLvH70JuFJx3Re16I4d8h-X2AC0~G37bXpPCeRM4BvDD~QmCZYilOlIMd6L1JZVN2oqLbuok6KVE5Wg1bQd1-XBXNB6RLVNxBjwy0nSTmohcC9WGGaiO6S6rErzthcmq4H3vtfrlnUx9mI6x6wFIwcI5Zl06gLXK~2hfwQbkkYY~whvx6vyOpSHeewAy3xOgg-IlHKQhfPKDLKVplXocJzXd0fxR8urIPIdpgnFo1St6uTg3ViYW~315j3M-hVlIW6ibZrhUTrdVdVmNJuEqVe6fgAmWWnEPPtZ3nWtUSQOntwc7EbSZmIvG8eQ2LD0dxzjuS0jqw__",
+        "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449257/removal.ai__d6275a54-0057-4751-ac16-0623a46e5792-whatsapp-image-2024-12-12-at-17-18-59_1_ww8i56.png",
     },
   ];
 
