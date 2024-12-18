@@ -117,24 +117,35 @@ Star ⭐ this repository if you like what you see 😉.
 
 ## 🚀 How to Run
 
-1. Navigate to the frontend directory.
-2. Copy the `.env.example` file to `.env` and update the necessary environment variables.
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/capstone-project-vocasia-group-5/frontend-item-tracker.git
+   ```
+
+2. Navigate to the project directory
+
+   ```bash
+   cd frontend-item-tracker
+   ```
+
+3. Copy the `.env.example` file to `.env` and update the necessary environment variables.
 
    ```bash
    cp .env.example .env
    ```
 
-3. Setting environment variable on .env
+4. Setting environment variable on .env
 
    ```bash
    VITE_API_BASE_URL=your-url/api/v1
    ```
 
-4. Install dependencies:
+5. Install dependencies:
    ```bash
    npm install
    ```
-5. Start the application development: .
+6. Start the application development: .
    ```bash
    npm run dev
    ```
