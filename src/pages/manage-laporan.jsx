@@ -248,19 +248,30 @@ const ManageLaporanUser = () => {
                       </td>
                       <td className="p-4">{item.name}</td>
                       <td className="p-4 hidden my-8 md:block">
-                        {item.approved === true && item.matched_status === false
-                          ? "Disetujui Oleh Admin"
-                          : item.approved === false &&
-                            item.matched_status === false &&
-                            item.message !== null
-                          ? "Ditolak Oleh Admin"
-                          : item.approved === false &&
-                            item.matched_status === false
-                          ? "Sedang Verifikasi"
-                          : item.approved === true &&
-                            item.matched_status === true
-                          ? "Laporan Selesai"
-                          : ""}
+                        {item.approved === true &&
+                        item.matched_status === false ? (
+                          <span className="text-green-500">
+                            Disetujui Oleh Admin
+                          </span>
+                        ) : item.approved === false &&
+                          item.matched_status === false &&
+                          item.message !== null ? (
+                          <span className="text-red-500">
+                            Ditolak Oleh Admin
+                          </span>
+                        ) : item.approved === false &&
+                          item.matched_status === false ? (
+                          <span className="text-yellow-500">
+                            Sedang Verifikasi
+                          </span>
+                        ) : item.approved === true &&
+                          item.matched_status === true ? (
+                          <span className="text-green-500">
+                            Laporan Selesai
+                          </span>
+                        ) : (
+                          ""
+                        )}
                       </td>
 
                       <td className="px-4 sm:px-15 py-4">
