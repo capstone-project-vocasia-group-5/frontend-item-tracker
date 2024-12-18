@@ -11,53 +11,30 @@ const Donatur = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let isMounted = true;
     setLoading(true);
 
     const fetchDonations = async () => {
       try {
         const response = await getDonations();
-        if (isMounted) {
-          const donations = response.data.data.donations;
+        const donations = response.data.data.donations;
 
-          // Unique Name (Case insensitive)
-          const uniqueInvestors = Array.from(
-            new Set(
-              donations
-                .filter((donation) => donation.amount >= 10000000)
-                .map((donation) => donation.name.toLowerCase())
-            )
-          ).map((name) =>
-            donations.find((donation) => donation.name.toLowerCase() === name)
-          );
+        const investors = donations.filter(
+          (donation) => donation.amount >= 10000000
+        );
+        const donators = donations.filter(
+          (donation) => donation.amount < 10000000
+        );
 
-          const uniqueDonators = Array.from(
-            new Set(
-              donations
-                .filter((donation) => donation.amount < 10000000)
-                .map((donation) => donation.name.toLowerCase())
-            )
-          ).map((name) =>
-            donations.find((donation) => donation.name.toLowerCase() === name)
-          );
-
-          setInvestors(uniqueInvestors);
-          setDonators(uniqueDonators);
-        }
+        setInvestors(investors);
+        setDonators(donators);
       } catch (error) {
         console.error("Error fetching donations:", error);
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
 
     fetchDonations();
-
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   return (
