@@ -261,9 +261,7 @@ const ManagePengajuan = () => {
                   <tr>
                     <th className="p-4 text-center">Nama</th>
                     <th className="p-4  text-center">Nama Barang</th>
-                    <th className="p-4 hidden md:block text-center">
-                      Deskripsi
-                    </th>
+                    <th className="p-4 hidden md:block text-center">Status</th>
                     <th className="p-4 text-center">Aksi</th>
                   </tr>
                 </thead>
@@ -277,7 +275,13 @@ const ManagePengajuan = () => {
                       </td>
                       <td className="p-4 ">{item?.item_id?.name}</td>
                       <td className="p-4 hidden md:block ">
-                        {item.claim_text}
+                        {item?.is_approved === null ? (
+                          <span className="text-yellow-500">Menunggu</span>
+                        ) : item?.is_approved ? (
+                          <span className="text-green-500">Disetujui</span>
+                        ) : (
+                          <span className="text-red-500">Ditolak</span>
+                        )}
                       </td>
                       <td className="p-4">
                         <div className="flex justify-center items-center space-x-2">
