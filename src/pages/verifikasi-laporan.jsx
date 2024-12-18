@@ -31,7 +31,6 @@ const VerifikasiLaporan = () => {
       try {
         const response = await getAllItemsByAdmin({
           approved: false,
-          limit: 100000000000000,
         });
         const listItems = response?.data?.data?.items.filter(
           (item) => item.message === null
