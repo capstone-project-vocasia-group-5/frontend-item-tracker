@@ -40,7 +40,6 @@ const ManageLaporanUser = () => {
     try {
       const response = await getAllOwnItemsByUser({
         own: true,
-        limit: 10000000000000000,
       });
       setData(response.data.data.items);
       setFilteredData(response.data.data.items);
