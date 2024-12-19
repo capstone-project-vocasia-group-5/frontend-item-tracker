@@ -10,8 +10,17 @@ import { Link } from "react-router-dom";
 const TentangKami = () => {
   const members = [
     {
+      name: "M. Ade Irawan",
+      role: "Co-Founder, CEO (Chief Executive Officer), Project Coordinator",
+      github: "https://github.com/adeirawan18",
+      instagram: "https://www.instagram.com/adeeirawan._/",
+      linkedin: "https://www.linkedin.com/in/adeirawann/",
+      photo:
+        "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449257/removal.ai__d6275a54-0057-4751-ac16-0623a46e5792-whatsapp-image-2024-12-12-at-17-18-59_1_ww8i56.png",
+    },
+    {
       name: "Agus Heryanto",
-      role: "FullStack Web Developer",
+      role: "Co-Founder, CFO (Chief Financial Officer), Backend Development Lead",
       github: "https://github.com/agusheryanto182",
       instagram: "https://www.instagram.com/agusheryanto182/",
       linkedin: "https://www.linkedin.com/in/agus-heryanto-b34561284/",
@@ -20,7 +29,7 @@ const TentangKami = () => {
     },
     {
       name: `Aisyah Lailia Sari`,
-      role: "FullStack Web Developer",
+      role: "Co-Founder, COO (Chief Operating Officer), UI/UX Lead",
       github: "https://github.com/aisyahbelajar",
       instagram: "https://www.instagram.com/aisyahlailia/",
       linkedin: "https://www.linkedin.com/in/aisyahlailia/",
@@ -29,21 +38,12 @@ const TentangKami = () => {
     },
     {
       name: "Anisa Ayu Yandani",
-      role: "FullStack Web Developer",
+      role: "Co-Founder, CTO (Chief Technology Officer), Frontend Development Lead",
       github: "https://github.com/NisaayU",
       instagram: "https://www.instagram.com/annissaa_ay/",
       linkedin: "https://www.linkedin.com/in/anisa-ayu-yandani-79334b263/",
       photo:
         "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449258/removal.ai__ebca4e0d-4600-4bd3-b628-f731cca0af80-whatsapp-image-2024-12-12-at-17-16-13-1_1_1_fujl9s.png",
-    },
-    {
-      name: "M. Ade Irawan",
-      role: "FullStack Web Developer",
-      github: "https://github.com/adeirawan18",
-      instagram: "https://www.instagram.com/adeeirawan._/",
-      linkedin: "https://www.linkedin.com/in/adeirawann/",
-      photo:
-        "https://res.cloudinary.com/dukylmpmy/image/upload/v1734449257/removal.ai__d6275a54-0057-4751-ac16-0623a46e5792-whatsapp-image-2024-12-12-at-17-18-59_1_ww8i56.png",
     },
   ];
 
